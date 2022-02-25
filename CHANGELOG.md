@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.0](https://www.github.com/looker-open-source/sdk-codegen/compare/sdk-codegen-all-v2.1.0...sdk-codegen-all-v2.2.0) (2022-02-25)
+
+
+### Features
+
+* python rtl optional config ApiSettings init parameter ([#996](https://www.github.com/looker-open-source/sdk-codegen/issues/996)) ([3ae42cd](https://www.github.com/looker-open-source/sdk-codegen/commit/3ae42cd97f974322b77d58941ac72b88be3f8b97))
+
 ## [2.1.0](https://www.github.com/looker-open-source/sdk-codegen/compare/sdk-codegen-all-v2.0.0...sdk-codegen-all-v2.1.0) (2022-02-18)
 
 
