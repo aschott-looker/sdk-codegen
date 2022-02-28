@@ -295,6 +295,17 @@ class GoFormatter extends BaseFormatter {
   }
 }
 
+// TODO should just use w/e language formatter we end up using for CLI.
+class CliFormatter extends BaseFormatter {
+  constructor() {
+    super('CLI')
+  }
+
+  versionStamp() {
+    return warn('Skipping SDK version updating - not implemented for CLI.')
+  }
+}
+
 type IFormatFiles = { [key: string]: string[] }
 
 type IFormatters = { [key: string]: IReformat }
@@ -306,6 +317,7 @@ const fileFormatters: IFormatters = {
   '.swift': new SwiftFormatter(),
   '.ts': new TypescriptFormatter(),
   '.go': new GoFormatter(),
+  '.cli': new CliFormatter(),
 }
 
 export class FilesFormatter {

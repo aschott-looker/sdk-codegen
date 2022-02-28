@@ -26,6 +26,7 @@
 
 import type { ApiModel } from './sdkModels'
 import type { ICodeGen, IVersionInfo } from './codeGen'
+import { CliGen } from './cli.gen'
 import { CSharpGen } from './csharp.gen'
 import { KotlinGen } from './kotlin.gen'
 import { SwiftGen } from './swift.gen'
@@ -100,6 +101,13 @@ export const Generators: Array<IGeneratorSpec> = [
     legacy: 'php',
     options: '-papiPackage=Looker -ppackageName=looker',
     extension: /\.php/gi,
+  },
+  {
+    factory: (api: ApiModel, versions?: IVersionInfo) =>
+      new CliGen(api, versions),
+    language: 'CLI',
+    options: '-papiPackage=Looker -ppackageName=looker',
+    extension: /\.cli/gi,
   },
   // {
   //   language: 'R',
