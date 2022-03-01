@@ -1,834 +1,841 @@
-// MIT License
-//
-// Copyright (c) 2021 Looker Data Sciences, Inc.
-//
-// Permission is hereby granted, free of charge, to any person obtaining a copy
-// of this software and associated documentation files (the "Software"), to deal
-// in the Software without restriction, including without limitation the rights
-// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-// copies of the Software, and to permit persons to whom the Software is
-// furnished to do so, subject to the following conditions:
-//
-// The above copyright notice and this permission notice shall be included in all
-// copies or substantial portions of the Software.
-//
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-// SOFTWARE.
-//
+/**
 
-// 378 API methods
+ MIT License
+
+ Copyright (c) 2021 Looker Data Sciences, Inc.
+
+ Permission is hereby granted, free of charge, to any person obtaining a copy
+ of this software and associated documentation files (the "Software"), to deal
+ in the Software without restriction, including without limitation the rights
+ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ copies of the Software, and to permit persons to whom the Software is
+ furnished to do so, subject to the following conditions:
+
+ The above copyright notice and this permission notice shall be included in all
+ copies or substantial portions of the Software.
+
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ SOFTWARE.
+
+ */
+
+/**
+ * 378 API methods
+ */
 
   #region ApiAuth: API Authentication
 
+  login
 
+  login_user
 
-
-
-
+  logout
 
   #endregion ApiAuth: API Authentication
 
   #region Auth: Manage User Authentication Configuration
 
+  create_sso_embed_url
 
+  ldap_config
 
+  update_ldap_config
 
+  test_ldap_config_connection
 
+  test_ldap_config_auth
 
+  test_ldap_config_user_info
 
+  test_ldap_config_user_auth
 
+  oidc_config
 
+  update_oidc_config
 
+  oidc_test_config
 
+  delete_oidc_test_config
 
+  create_oidc_test_config
 
+  password_config
 
+  update_password_config
 
+  force_password_reset_at_next_login_for_all_users
 
+  saml_config
 
+  update_saml_config
 
+  saml_test_config
 
+  delete_saml_test_config
 
+  create_saml_test_config
 
+  parse_saml_idp_metadata
 
+  fetch_and_parse_saml_idp_metadata
 
+  session_config
 
+  update_session_config
 
+  all_user_login_lockouts
 
+  search_user_login_lockouts
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  delete_user_login_lockout
 
   #endregion Auth: Manage User Authentication Configuration
 
   #region ColorCollection: Manage Color Collections
 
+  all_color_collections
 
+  create_color_collection
 
+  color_collections_custom
 
+  color_collections_standard
 
+  default_color_collection
 
+  set_default_color_collection
 
+  color_collection
 
+  update_color_collection
 
-
-
-
-
-
-
-
-
-
+  delete_color_collection
 
   #endregion ColorCollection: Manage Color Collections
 
   #region Config: Manage General Configuration
 
+  backup_configuration
 
+  update_backup_configuration
 
+  cloud_storage_configuration
 
+  update_cloud_storage_configuration
 
+  custom_welcome_email
 
+  update_custom_welcome_email
 
+  update_custom_welcome_email_test
 
+  digest_emails_enabled
 
+  update_digest_emails_enabled
 
+  create_digest_email_send
 
+  internal_help_resources_content
 
+  update_internal_help_resources_content
 
+  internal_help_resources
 
+  update_internal_help_resources
 
+  all_legacy_features
 
+  legacy_feature
 
+  update_legacy_feature
 
+  all_locales
 
+  all_timezones
 
+  versions
 
+  whitelabel_configuration
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  update_whitelabel_configuration
 
   #endregion Config: Manage General Configuration
 
   #region Connection: Manage Database Connections
 
+  all_connections
 
+  create_connection
 
+  connection
 
+  update_connection
 
+  delete_connection
 
+  delete_connection_override
 
+  test_connection
 
+  test_connection_config
 
-
-
-
-
-
-
-
-
-
+  all_dialect_infos
 
   #endregion Connection: Manage Database Connections
 
   #region Content: Manage Content
 
+  search_content_favorites
 
+  content_favorite
 
+  delete_content_favorite
 
+  create_content_favorite
 
+  all_content_metadatas
 
+  content_metadata
 
+  update_content_metadata
 
+  all_content_metadata_accesses
 
+  create_content_metadata_access
 
+  update_content_metadata_access
 
+  delete_content_metadata_access
 
+  content_thumbnail
 
+  content_validation
 
+  search_content_views
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  vector_thumbnail
 
   #endregion Content: Manage Content
 
   #region Dashboard: Manage Dashboards
 
+  all_dashboards
 
+  create_dashboard
 
+  search_dashboards
 
+  import_lookml_dashboard
 
+  sync_lookml_dashboard
 
+  dashboard
 
+  update_dashboard
 
+  delete_dashboard
 
+  dashboard_aggregate_table_lookml
 
+  dashboard_lookml
 
+  search_dashboard_elements
 
+  dashboard_element
 
+  update_dashboard_element
 
+  delete_dashboard_element
 
+  dashboard_dashboard_elements
 
+  create_dashboard_element
 
+  dashboard_filter
 
+  update_dashboard_filter
 
+  delete_dashboard_filter
 
+  dashboard_dashboard_filters
 
+  create_dashboard_filter
 
+  dashboard_layout_component
 
+  update_dashboard_layout_component
 
+  dashboard_layout_dashboard_layout_components
 
+  dashboard_layout
 
+  update_dashboard_layout
 
+  delete_dashboard_layout
 
+  dashboard_dashboard_layouts
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  create_dashboard_layout
 
   #endregion Dashboard: Manage Dashboards
 
   #region DataAction: Run Data Actions
 
+  perform_data_action
 
-
-
+  fetch_remote_data_action_form
 
   #endregion DataAction: Run Data Actions
 
   #region Datagroup: Manage Datagroups
 
+  all_datagroups
 
+  datagroup
 
-
-
-
+  update_datagroup
 
   #endregion Datagroup: Manage Datagroups
 
   #region DerivedTable: View Derived Table graphs
 
+  graph_derived_tables_for_model
 
-
-
+  graph_derived_tables_for_view
 
   #endregion DerivedTable: View Derived Table graphs
 
   #region Folder: Manage Folders
 
+  search_folders
 
+  folder
 
+  update_folder
 
+  delete_folder
 
+  all_folders
 
+  create_folder
 
+  folder_children
 
+  folder_children_search
 
+  folder_parent
 
+  folder_ancestors
 
+  folder_looks
 
-
-
-
-
-
-
-
-
-
-
-
-
+  folder_dashboards
 
   #endregion Folder: Manage Folders
 
   #region Group: Manage Groups
 
+  all_groups
 
+  create_group
 
+  search_groups
 
+  group
 
+  update_group
 
+  delete_group
 
+  all_group_groups
 
+  add_group_group
 
+  all_group_users
 
+  add_group_user
 
+  delete_group_user
 
+  delete_group_from_group
 
+  update_user_attribute_group_value
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  delete_user_attribute_group_value
 
   #endregion Group: Manage Groups
 
   #region Homepage: Manage Homepage
 
+  all_homepages
 
+  create_homepage
 
+  search_homepages
 
+  homepage
 
+  update_homepage
 
+  delete_homepage
 
+  all_homepage_items
 
+  create_homepage_item
 
+  homepage_item
 
+  update_homepage_item
 
+  delete_homepage_item
 
+  all_homepage_sections
 
+  create_homepage_section
 
+  homepage_section
 
+  update_homepage_section
 
+  delete_homepage_section
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  all_primary_homepage_sections
 
   #endregion Homepage: Manage Homepage
 
   #region Integration: Manage Integrations
 
+  all_integration_hubs
 
+  create_integration_hub
 
+  integration_hub
 
+  update_integration_hub
 
+  delete_integration_hub
 
+  accept_integration_hub_legal_agreement
 
+  all_integrations
 
+  integration
 
+  update_integration
 
+  fetch_integration_form
 
-
-
-
-
-
-
-
-
-
-
-
+  test_integration
 
   #endregion Integration: Manage Integrations
 
   #region Look: Run and Manage Looks
 
+  all_looks
 
+  create_look
 
+  search_looks
 
+  look
 
+  update_look
 
+  delete_look
 
-
-
-
-
-
-
-
+  run_look
 
   #endregion Look: Run and Manage Looks
 
   #region LookmlModel: Manage LookML Models
 
+  all_lookml_models
 
+  create_lookml_model
 
+  lookml_model
 
+  update_lookml_model
 
+  delete_lookml_model
 
-
-
-
-
-
-
+  lookml_model_explore
 
   #endregion LookmlModel: Manage LookML Models
 
   #region Project: Manage Projects
 
+  all_git_branches
 
+  git_branch
 
+  update_git_branch
 
+  create_git_branch
 
+  find_git_branch
 
+  delete_git_branch
 
+  deploy_ref_to_production
 
+  deploy_to_production
 
+  reset_project_to_production
 
+  reset_project_to_remote
 
+  all_projects
 
+  create_project
 
+  project
 
+  update_project
 
+  manifest
 
+  git_deploy_key
 
+  create_git_deploy_key
 
+  project_validation_results
 
+  validate_project
 
+  project_workspace
 
+  all_project_files
 
+  project_file
 
+  all_git_connection_tests
 
+  run_git_connection_test
 
+  all_lookml_tests
 
+  run_lookml_test
 
+  tag_ref
 
+  update_repository_credential
 
+  delete_repository_credential
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  get_all_repository_credentials
 
   #endregion Project: Manage Projects
 
   #region Query: Run and Manage Queries
 
+  create_query_task
 
+  query_task_multi_results
 
+  query_task
 
+  query_task_results
 
+  query
 
+  query_for_slug
 
+  create_query
 
+  run_query
 
+  run_inline_query
 
+  run_url_encoded_query
 
+  merge_query
 
+  create_merge_query
 
+  all_running_queries
 
+  kill_query
 
+  sql_query
 
+  create_sql_query
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  run_sql_query
 
   #endregion Query: Run and Manage Queries
 
   #region RenderTask: Manage Render Tasks
 
+  create_lookml_dashboard_render_task
 
+  create_look_render_task
 
+  create_query_render_task
 
+  create_dashboard_render_task
 
+  render_task
 
-
-
-
-
-
-
+  render_task_results
 
   #endregion RenderTask: Manage Render Tasks
 
   #region Role: Manage Roles
 
+  search_model_sets
 
+  model_set
 
+  update_model_set
 
+  delete_model_set
 
+  all_model_sets
 
+  create_model_set
 
+  all_permissions
 
+  search_permission_sets
 
+  permission_set
 
+  update_permission_set
 
+  delete_permission_set
 
+  all_permission_sets
 
+  create_permission_set
 
+  all_roles
 
+  create_role
 
+  search_roles
 
+  role
 
+  update_role
 
+  delete_role
 
+  role_groups
 
+  set_role_groups
 
+  role_users
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  set_role_users
 
   #endregion Role: Manage Roles
 
   #region ScheduledPlan: Manage Scheduled Plans
 
+  scheduled_plans_for_space
 
+  scheduled_plan
 
+  update_scheduled_plan
 
+  delete_scheduled_plan
 
+  all_scheduled_plans
 
+  create_scheduled_plan
 
+  scheduled_plan_run_once
 
+  scheduled_plans_for_look
 
+  scheduled_plans_for_dashboard
 
+  scheduled_plans_for_lookml_dashboard
 
-
-
-
-
-
-
-
-
-
-
-
+  scheduled_plan_run_once_by_id
 
   #endregion ScheduledPlan: Manage Scheduled Plans
 
   #region Session: Session Information
 
+  session
 
-
-
+  update_session
 
   #endregion Session: Session Information
 
   #region Space: Manage Spaces
 
+  search_spaces
 
+  space
 
+  update_space
 
+  delete_space
 
+  all_spaces
 
+  create_space
 
+  space_children
 
+  space_children_search
 
+  space_parent
 
+  space_ancestors
 
+  space_looks
 
-
-
-
-
-
-
-
-
-
-
-
-
+  space_dashboards
 
   #endregion Space: Manage Spaces
 
   #region Theme: Manage Themes
 
+  all_themes
 
+  create_theme
 
+  search_themes
 
+  default_theme
 
+  set_default_theme
 
+  active_themes
 
+  theme_or_default
 
+  validate_theme
 
+  theme
 
+  update_theme
 
-
-
-
-
-
-
-
-
-
-
-
+  delete_theme
 
   #endregion Theme: Manage Themes
 
   #region User: Manage Users
 
+  me
 
+  all_users
 
+  create_user
 
+  search_users
 
+  search_users_names
 
+  user
 
+  update_user
 
+  delete_user
 
+  user_for_credential
 
+  user_credentials_email
 
+  create_user_credentials_email
 
+  update_user_credentials_email
 
+  delete_user_credentials_email
 
+  user_credentials_totp
 
+  create_user_credentials_totp
 
+  delete_user_credentials_totp
 
+  user_credentials_ldap
 
+  delete_user_credentials_ldap
 
+  user_credentials_google
 
+  delete_user_credentials_google
 
+  user_credentials_saml
 
+  delete_user_credentials_saml
 
+  user_credentials_oidc
 
+  delete_user_credentials_oidc
 
+  user_credentials_api3
 
+  delete_user_credentials_api3
 
+  all_user_credentials_api3s
 
+  create_user_credentials_api3
 
+  user_credentials_embed
 
+  delete_user_credentials_embed
 
+  all_user_credentials_embeds
 
+  user_credentials_looker_openid
 
+  delete_user_credentials_looker_openid
 
+  user_session
 
+  delete_user_session
 
+  all_user_sessions
 
+  create_user_credentials_email_password_reset
 
+  user_roles
 
+  set_user_roles
 
+  user_attribute_user_values
 
+  set_user_attribute_user_value
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  delete_user_attribute_user_value
 
   #endregion User: Manage Users
 
   #region UserAttribute: Manage User Attributes
 
+  all_user_attributes
 
+  create_user_attribute
 
+  user_attribute
 
+  update_user_attribute
 
+  delete_user_attribute
 
+  all_user_attribute_group_values
 
-
-
-
-
-
-
-
+  set_user_attribute_group_values
 
   #endregion UserAttribute: Manage User Attributes
 
   #region Workspace: Manage Workspaces
 
+  all_workspaces
 
-
-
+  workspace
 
   #endregion Workspace: Manage Workspaces
+
+}

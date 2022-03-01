@@ -25,7 +25,7 @@
  */
 
 import type { IVersionInfo } from './codeGen'
-import { CodeGen } from './codeGen'
+import { CodeGen, commentBlock } from './codeGen'
 import type {
   ApiModel,
   IMethod,
@@ -63,58 +63,73 @@ export class CliGen extends CodeGen {
     this.apiVersion = this.packageName
   }
 
-  // @ts-ignore
   declareMethod(indent: string, method: IMethod) {
-    return ''
+    return `${indent}${method.name}`
   }
 
-  // @ts-ignore
   declareParameter(indent: string, method: IMethod, param: IParameter) {
-    return ''
+    const mapped = this.paramMappedType(param, method)
+    return `${indent}${param.name}: ${mapped.name}`
   }
 
-  // @ts-ignore
   declareProperty(indent: string, property: IProperty) {
-    return ''
+    const type = this.typeMap(property.type)
+    return `${indent}var ${property.name}: ${type.name}`
   }
 
-  // @ts-ignore
   encodePathParams(indent: string, method: IMethod) {
-    return ''
+    let encodings = ''
+    if (method.pathParams.length > 0) {
+      for (const param of method.pathParams) {
+        encodings += `${indent}val path_${param.name} = encodeParam(${param.name})\n`
+      }
+    }
+    return encodings
   }
 
-  // @ts-ignore
   methodSignature(indent: string, method: IMethod) {
+    return this.declareMethod(indent, method)
+  }
+
+  methodsEpilogue(_indent: string) {
+    return '\n}'
+  }
+
+  methodsPrologue(_indent: string) {
     return ''
   }
 
-  // @ts-ignore
-  methodsEpilogue(indent: string) {
+  modelsEpilogue(_indent: string) {
     return ''
   }
 
-  // @ts-ignore
-  methodsPrologue(indent: string) {
+  modelsPrologue(_indent: string) {
     return ''
   }
 
-  // @ts-ignore
-  modelsEpilogue(indent: string) {
-    return ''
-  }
-
-  // @ts-ignore
-  modelsPrologue(indent: string) {
-    return ''
-  }
-
-  // @ts-ignore
   summary(indent: string, text: string) {
-    return ''
+    return this.commentHeader(indent, text)
   }
 
-  // @ts-ignore
+  commentHeader(indent: string, text: string | undefined, commentStr = ' * ') {
+    if (commentStr === ' ') {
+      return `${indent}/**\n\n${commentBlock(
+        text,
+        indent,
+        commentStr
+      )}\n${indent} */\n`
+    }
+    return `${indent}/**\n${commentBlock(
+      text,
+      indent,
+      commentStr
+    )}\n${indent} */\n`
+  }
+
   typeSignature(indent: string, type: IType) {
-    return ''
+    return `
+${this.commentHeader(indent, type.description).trim()}
+${indent}data class ${type.name} (
+`.trim()
   }
 }

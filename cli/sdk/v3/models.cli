@@ -1,1310 +1,1732 @@
-// MIT License
-//
-// Copyright (c) 2021 Looker Data Sciences, Inc.
-//
-// Permission is hereby granted, free of charge, to any person obtaining a copy
-// of this software and associated documentation files (the "Software"), to deal
-// in the Software without restriction, including without limitation the rights
-// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-// copies of the Software, and to permit persons to whom the Software is
-// furnished to do so, subject to the following conditions:
-//
-// The above copyright notice and this permission notice shall be included in all
-// copies or substantial portions of the Software.
-//
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-// SOFTWARE.
-//
+/**
 
-// 188 API models: 188 Spec, 0 Request, 0 Write, 0 Enum
+ MIT License
 
+ Copyright (c) 2021 Looker Data Sciences, Inc.
 
+ Permission is hereby granted, free of charge, to any person obtaining a copy
+ of this software and associated documentation files (the "Software"), to deal
+ in the Software without restriction, including without limitation the rights
+ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ copies of the Software, and to permit persons to whom the Software is
+ furnished to do so, subject to the following conditions:
 
-}
+ The above copyright notice and this permission notice shall be included in all
+ copies or substantial portions of the Software.
 
-  left = "left"
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ SOFTWARE.
+
+ */
+
+/**
+ * 210 API models: 188 Spec, 0 Request, 12 Write, 10 Enum
+ */
+
+/**
+
+ */
+data class AccessToken (  var access_token: string
+  var token_type: string
+  var expires_in: int64}
+
+/**
+ * The appropriate horizontal text alignment the values of this field should be displayed in. Valid values are: "left", "right". (Enum defined in LookmlModelExploreField)
+ */
+data class Align (  left = "left"
   right = "right"}
 
+/**
 
+ */
+data class ApiSession (  var can: Hash[boolean]
+  var workspace_id: string
+  var sudo_user_id: int64}
 
-}
+/**
 
+ */
+data class ApiVersion (  var looker_release_version: string
+  var current_version: ApiVersionElement
+  var supported_versions: ApiVersionElement[]
+  var api_server_url: string
+  var web_server_url: string}
 
+/**
 
+ */
+data class ApiVersionElement (  var version: string
+  var full_version: string
+  var status: string
+  var swagger_url: uri}
 
+/**
 
-}
+ */
+data class BackupConfiguration (  var can: Hash[boolean]
+  var type: string
+  var custom_s3_bucket: string
+  var custom_s3_bucket_region: string
+  var custom_s3_key: string
+  var custom_s3_secret: string
+  var url: uri}
 
-
-
-
-}
-
-
-
-
-
-
-
-}
-
-  parameter = "parameter"
+/**
+ * Field category Valid values are: "parameter", "filter", "measure", "dimension". (Enum defined in LookmlModelExploreField)
+ */
+data class Category (  parameter = "parameter"
   filter = "filter"
   measure = "measure"
   dimension = "dimension"}
 
-
-
-
-
-}
-
-
-}
-
-
-
-
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-}
-
-
-
-
-
-
-}
-
-
-
-
-
-
-
-
-}
-
-
-
-
-}
-
-
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
-
-
-
-
-
-
-
-
-
-}
-
-
-
-
-
-}
-
-
-}
-
-
-
-
-
-}
-
-
-
-
-}
-
-
-}
-
-
-
-}
-
-
-}
-
-
-
-
-
-
-
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-}
-
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
-
-
-}
-
-
-}
-
-
-
-
-
-
-
-}
-
-
-}
-
-
-
-
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-}
-
-
-
-
-
-
-
-
-
-}
-
-
-
-
-
-
-
-
-
-}
-
-
-
-
-
-
-
-
-
-}
-
-
-
-
-
-
-
-
-
-}
-
-
-
-
-
-
-
-
-}
-
-
-
-
-
-
-
-
-}
-
-
-
-
-
-
-}
-
-
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
-
-
-}
-
-
-
-
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-}
-
-
-}
-
-
-}
-
-
-
-
-
-
-
-
-
-}
-
-
-}
-
-
-}
-
-
-
-
-
-}
-
-
-}
-
-
-
-
-
-
-
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
-
-
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-}
-
-
-
-
-
-}
-
-
-
-
-}
-
-}
-
-  lock_optional = "lock_optional"
+/**
+
+ */
+data class ColorCollection (  var id: string
+  var label: string
+  var categoricalPalettes: DiscretePalette[]
+  var sequentialPalettes: ContinuousPalette[]
+  var divergingPalettes: ContinuousPalette[]}
+
+/**
+
+ */
+data class ColorStop (  var color: string
+  var offset: int64}
+
+/**
+
+ */
+data class ContentFavorite (  var id: int64
+  var user_id: int64
+  var content_metadata_id: int64
+  var look_id: int64
+  var dashboard_id: int64
+  var look: LookBasic
+  var dashboard: DashboardBase}
+
+/**
+
+ */
+data class ContentMeta (  var can: Hash[boolean]
+  var id: int64
+  var name: string
+  var parent_id: int64
+  var dashboard_id: string
+  var look_id: int64
+  var folder_id: string
+  var content_type: string
+  var inherits: boolean
+  var inheriting_id: int64
+  var slug: string
+  var space_id: string}
+
+/**
+ * WARNING: no writeable properties found for POST, PUT, or PATCH
+ */
+data class ContentMetaGroupUser (  var can: Hash[boolean]
+  var id: string
+  var content_metadata_id: string
+  var permission_type: PermissionType
+  var group_id: int64
+  var user_id: int64}
+
+/**
+
+ */
+data class ContentValidation (  var content_with_errors: ContentValidatorError[]
+  var computation_time: float
+  var total_looks_validated: int64
+  var total_dashboard_elements_validated: int64
+  var total_dashboard_filters_validated: int64
+  var total_scheduled_plans_validated: int64
+  var total_alerts_validated: int64
+  var total_explores_validated: int64}
+
+/**
+
+ */
+data class ContentValidationAlert (  var id: int64
+  var lookml_dashboard_id: string
+  var lookml_link_id: string
+  var custom_title: string}
+
+/**
+
+ */
+data class ContentValidationDashboard (  var description: string
+  var id: string
+  var folder: ContentValidationFolder
+  var title: string
+  var space: ContentValidationSpace}
+
+/**
+
+ */
+data class ContentValidationDashboardElement (  var body_text: string
+  var dashboard_id: string
+  var id: string
+  var look_id: string
+  var note_display: string
+  var note_state: string
+  var note_text: string
+  var note_text_as_html: string
+  var query_id: int64
+  var subtitle_text: string
+  var title: string
+  var title_hidden: boolean
+  var title_text: string
+  var type: string}
+
+/**
+
+ */
+data class ContentValidationDashboardFilter (  var id: string
+  var dashboard_id: string
+  var name: string
+  var title: string
+  var type: string
+  var default_value: string
+  var model: string
+  var explore: string
+  var dimension: string}
+
+/**
+
+ */
+data class ContentValidationError (  var message: string
+  var field_name: string
+  var model_name: string
+  var explore_name: string
+  var removable: boolean}
+
+/**
+
+ */
+data class ContentValidationFolder (  var name: string
+  var id: string}
+
+/**
+
+ */
+data class ContentValidationLook (  var id: int64
+  var title: string
+  var short_url: string
+  var folder: ContentValidationFolder
+  var space: ContentValidationSpace}
+
+/**
+
+ */
+data class ContentValidationLookMLDashboard (  var id: string
+  var title: string
+  var space_id: string
+  var space: SpaceBase}
+
+/**
+
+ */
+data class ContentValidationLookMLDashboardElement (  var lookml_link_id: string
+  var title: string}
+
+/**
+
+ */
+data class ContentValidationScheduledPlan (  var name: string
+  var look_id: int64
+  var id: int64}
+
+/**
+
+ */
+data class ContentValidationSpace (  var name: string
+  var id: string}
+
+/**
+
+ */
+data class ContentValidatorError (  var look: ContentValidationLook
+  var dashboard: ContentValidationDashboard
+  var dashboard_element: ContentValidationDashboardElement
+  var dashboard_filter: ContentValidationDashboardFilter
+  var scheduled_plan: ContentValidationScheduledPlan
+  var alert: ContentValidationAlert
+  var lookml_dashboard: ContentValidationLookMLDashboard
+  var lookml_dashboard_element: ContentValidationLookMLDashboardElement
+  var errors: ContentValidationError[]
+  var id: string}
+
+/**
+
+ */
+data class ContentView (  var can: Hash[boolean]
+  var id: int64
+  var look_id: int64
+  var dashboard_id: int64
+  var title: string
+  var content_metadata_id: int64
+  var user_id: int64
+  var group_id: int64
+  var view_count: int64
+  var favorite_count: int64
+  var last_viewed_at: string
+  var start_of_week_date: string}
+
+/**
+
+ */
+data class ContinuousPalette (  var id: string
+  var label: string
+  var type: string
+  var stops: ColorStop[]}
+
+/**
+
+ */
+data class CreateDashboardFilter (  var id: string
+  var dashboard_id: string
+  var name: string
+  var title: string
+  var type: string
+  var default_value: string
+  var model: string
+  var explore: string
+  var dimension: string
+  var field: Hash[any]
+  var row: int64
+  var listens_to_filters: string[]
+  var allow_multiple_values: boolean
+  var required: boolean
+  var ui_config: Hash[any]}
+
+/**
+
+ */
+data class CreateDashboardRenderTask (  var dashboard_filters: string
+  var dashboard_style: string}
+
+/**
+
+ */
+data class CreateFolder (  var name: string
+  var parent_id: string}
+
+/**
+
+ */
+data class CreateQueryTask (  var can: Hash[boolean]
+  var query_id: int64
+  var result_format: ResultFormat
+  var source: string
+  var deferred: boolean
+  var look_id: int64
+  var dashboard_id: string}
+
+/**
+
+ */
+data class CreateSpace (  var name: string
+  var parent_id: string}
+
+/**
+ * WARNING: no writeable properties found for POST, PUT, or PATCH
+ */
+data class CredentialsApi3 (  var can: Hash[boolean]
+  var id: int64
+  var client_id: string
+  var created_at: string
+  var is_disabled: boolean
+  var type: string
+  var url: uri}
+
+/**
+
+ */
+data class CredentialsEmail (  var can: Hash[boolean]
+  var created_at: string
+  var email: string
+  var forced_password_reset_at_next_login: boolean
+  var is_disabled: boolean
+  var logged_in_at: string
+  var password_reset_url: string
+  var type: string
+  var url: uri
+  var user_url: uri}
+
+/**
+
+ */
+data class CredentialsEmbed (  var can: Hash[boolean]
+  var created_at: string
+  var external_group_id: string
+  var external_user_id: string
+  var id: int64
+  var is_disabled: boolean
+  var logged_in_at: string
+  var type: string
+  var url: uri}
+
+/**
+
+ */
+data class CredentialsGoogle (  var can: Hash[boolean]
+  var created_at: string
+  var domain: string
+  var email: string
+  var google_user_id: string
+  var is_disabled: boolean
+  var logged_in_at: string
+  var type: string
+  var url: uri}
+
+/**
+
+ */
+data class CredentialsLDAP (  var can: Hash[boolean]
+  var created_at: string
+  var email: string
+  var is_disabled: boolean
+  var ldap_dn: string
+  var ldap_id: string
+  var logged_in_at: string
+  var type: string
+  var url: uri}
+
+/**
+
+ */
+data class CredentialsLookerOpenid (  var can: Hash[boolean]
+  var created_at: string
+  var email: string
+  var is_disabled: boolean
+  var logged_in_at: string
+  var logged_in_ip: string
+  var type: string
+  var url: uri
+  var user_url: uri}
+
+/**
+
+ */
+data class CredentialsOIDC (  var can: Hash[boolean]
+  var created_at: string
+  var email: string
+  var is_disabled: boolean
+  var logged_in_at: string
+  var oidc_user_id: string
+  var type: string
+  var url: uri}
+
+/**
+
+ */
+data class CredentialsSaml (  var can: Hash[boolean]
+  var created_at: string
+  var email: string
+  var is_disabled: boolean
+  var logged_in_at: string
+  var saml_user_id: string
+  var type: string
+  var url: uri}
+
+/**
+ * WARNING: no writeable properties found for POST, PUT, or PATCH
+ */
+data class CredentialsTotp (  var can: Hash[boolean]
+  var created_at: string
+  var is_disabled: boolean
+  var type: string
+  var verified: boolean
+  var url: uri}
+
+/**
+
+ */
+data class CustomWelcomeEmail (  var can: Hash[boolean]
+  var enabled: boolean
+  var content: string
+  var subject: string
+  var header: string}
+
+/**
+
+ */
+data class Dashboard (  var can: Hash[boolean]
+  var content_favorite_id: int64
+  var content_metadata_id: int64
+  var description: string
+  var hidden: boolean
+  var id: string
+  var model: LookModel
+  var query_timezone: string
+  var readonly: boolean
+  var refresh_interval: string
+  var refresh_interval_to_i: int64
+  var folder: FolderBase
+  var title: string
+  var user_id: int64
+  var slug: string
+  var preferred_viewer: string
+  var space: SpaceBase
+  var alert_sync_with_dashboard_filter_enabled: boolean
+  var background_color: string
+  var created_at: datetime
+  var crossfilter_enabled: boolean
+  var dashboard_elements: DashboardElement[]
+  var dashboard_filters: DashboardFilter[]
+  var dashboard_layouts: DashboardLayout[]
+  var deleted: boolean
+  var deleted_at: datetime
+  var deleter_id: int64
+  var edit_uri: uri
+  var favorite_count: int64
+  var filters_bar_collapsed: boolean
+  var last_accessed_at: datetime
+  var last_viewed_at: datetime
+  var updated_at: datetime
+  var last_updater_id: int64
+  var last_updater_name: string
+  var user_name: string
+  var load_configuration: string
+  var lookml_link_id: string
+  var show_filters_bar: boolean
+  var show_title: boolean
+  var space_id: string
+  var folder_id: string
+  var text_tile_text_color: string
+  var tile_background_color: string
+  var tile_text_color: string
+  var title_color: string
+  var view_count: int64
+  var appearance: DashboardAppearance}
+
+/**
+
+ */
+data class DashboardAggregateTableLookml (  var dashboard_id: string
+  var aggregate_table_lookml: string}
+
+/**
+
+ */
+data class DashboardAppearance (  var page_side_margins: int64
+  var page_background_color: string
+  var tile_title_alignment: string
+  var tile_space_between: int64
+  var tile_background_color: string
+  var tile_shadow: boolean
+  var key_color: string}
+
+/**
+
+ */
+data class DashboardBase (  var can: Hash[boolean]
+  var content_favorite_id: int64
+  var content_metadata_id: int64
+  var description: string
+  var hidden: boolean
+  var id: string
+  var model: LookModel
+  var query_timezone: string
+  var readonly: boolean
+  var refresh_interval: string
+  var refresh_interval_to_i: int64
+  var folder: FolderBase
+  var title: string
+  var user_id: int64
+  var slug: string
+  var preferred_viewer: string
+  var space: SpaceBase}
+
+/**
+
+ */
+data class DashboardElement (  var can: Hash[boolean]
+  var body_text: string
+  var body_text_as_html: string
+  var dashboard_id: string
+  var edit_uri: uri
+  var id: string
+  var look: LookWithQuery
+  var look_id: string
+  var lookml_link_id: string
+  var merge_result_id: string
+  var note_display: string
+  var note_state: string
+  var note_text: string
+  var note_text_as_html: string
+  var query: Query
+  var query_id: int64
+  var refresh_interval: string
+  var refresh_interval_to_i: int64
+  var result_maker: ResultMakerWithIdVisConfigAndDynamicFields
+  var result_maker_id: int64
+  var subtitle_text: string
+  var title: string
+  var title_hidden: boolean
+  var title_text: string
+  var type: string
+  var alert_count: int64
+  var title_text_as_html: string
+  var subtitle_text_as_html: string}
+
+/**
+
+ */
+data class DashboardFilter (  var can: Hash[boolean]
+  var id: string
+  var dashboard_id: string
+  var name: string
+  var title: string
+  var type: string
+  var default_value: string
+  var model: string
+  var explore: string
+  var dimension: string
+  var field: Hash[any]
+  var row: int64
+  var listens_to_filters: string[]
+  var allow_multiple_values: boolean
+  var required: boolean
+  var ui_config: Hash[any]}
+
+/**
+
+ */
+data class DashboardLayout (  var can: Hash[boolean]
+  var id: string
+  var dashboard_id: string
+  var type: string
+  var active: boolean
+  var column_width: int64
+  var width: int64
+  var deleted: boolean
+  var dashboard_title: string
+  var dashboard_layout_components: DashboardLayoutComponent[]}
+
+/**
+
+ */
+data class DashboardLayoutComponent (  var can: Hash[boolean]
+  var id: string
+  var dashboard_layout_id: string
+  var dashboard_element_id: string
+  var row: int64
+  var column: int64
+  var width: int64
+  var height: int64
+  var deleted: boolean
+  var element_title: string
+  var element_title_hidden: boolean
+  var vis_type: string}
+
+/**
+
+ */
+data class DashboardLookml (  var dashboard_id: string
+  var lookml: string}
+
+/**
+
+ */
+data class DataActionForm (  var state: DataActionUserState
+  var fields: DataActionFormField[]}
+
+/**
+
+ */
+data class DataActionFormField (  var name: string
+  var label: string
+  var description: string
+  var type: string
+  var default: string
+  var oauth_url: string
+  var interactive: boolean
+  var required: boolean
+  var options: DataActionFormSelectOption[]}
+
+/**
+
+ */
+data class DataActionFormSelectOption (  var name: string
+  var label: string}
+
+/**
+
+ */
+data class DataActionRequest (  var action: Hash[any]
+  var form_values: Hash[string]}
+
+/**
+
+ */
+data class DataActionResponse (  var webhook_id: string
+  var success: boolean
+  var refresh_query: boolean
+  var validation_errors: ValidationError
+  var message: string}
+
+/**
+
+ */
+data class DataActionUserState (  var data: string
+  var refresh_time: int64}
+
+/**
+
+ */
+data class Datagroup (  var can: Hash[boolean]
+  var created_at: int64
+  var id: string
+  var model_name: string
+  var name: string
+  var stale_before: int64
+  var trigger_check_at: int64
+  var trigger_error: string
+  var trigger_value: string
+  var triggered_at: int64}
+
+/**
+
+ */
+data class DBConnection (  var can: Hash[boolean]
+  var name: string
+  var dialect: Dialect
+  var snippets: Snippet[]
+  var pdts_enabled: boolean
+  var host: string
+  var port: string
+  var username: string
+  var password: string
+  var uses_oauth: boolean
+  var certificate: string
+  var file_type: string
+  var database: string
+  var db_timezone: string
+  var query_timezone: string
+  var schema: string
+  var max_connections: int64
+  var max_billing_gigabytes: string
+  var ssl: boolean
+  var verify_ssl: boolean
+  var tmp_db_name: string
+  var jdbc_additional_params: string
+  var pool_timeout: int64
+  var dialect_name: string
+  var created_at: string
+  var user_id: string
+  var example: boolean
+  var user_db_credentials: boolean
+  var user_attribute_fields: string[]
+  var maintenance_cron: string
+  var last_regen_at: string
+  var last_reap_at: string
+  var sql_runner_precache_tables: boolean
+  var sql_writing_with_info_schema: boolean
+  var after_connect_statements: string
+  var pdt_context_override: DBConnectionOverride
+  var managed: boolean}
+
+/**
+
+ */
+data class DBConnectionBase (  var can: Hash[boolean]
+  var name: string
+  var dialect: Dialect
+  var snippets: Snippet[]
+  var pdts_enabled: boolean}
+
+/**
+
+ */
+data class DBConnectionOverride (  var context: string
+  var host: string
+  var port: string
+  var username: string
+  var password: string
+  var has_password: boolean
+  var certificate: string
+  var file_type: string
+  var database: string
+  var schema: string
+  var jdbc_additional_params: string
+  var after_connect_statements: string}
+
+/**
+
+ */
+data class DBConnectionTestResult (  var can: Hash[boolean]
+  var connection_string: string
+  var message: string
+  var name: string
+  var status: string}
+
+/**
+
+ */
+data class DelegateOauthTest (  var name: string
+  var installation_target_id: string
+  var installation_id: int64
+  var success: boolean}
+
+/**
+
+ */
+data class DependencyGraph (  var graph_text: string}
+
+/**
+ * Status of the dependencies in your project. Valid values are: "lock_optional", "lock_required", "lock_error", "install_none". (Enum defined in ProjectWorkspace)
+ */
+data class DependencyStatus (  lock_optional = "lock_optional"
   lock_required = "lock_required"
   lock_error = "lock_error"
   install_none = "install_none"}
 
+/**
 
+ */
+data class Dialect (  var name: string
+  var label: string
+  var supports_cost_estimate: boolean
+  var persistent_table_indexes: string
+  var persistent_table_sortkeys: string
+  var persistent_table_distkey: string
+  var supports_streaming: boolean
+  var automatically_run_sql_runner_snippets: boolean
+  var connection_tests: string[]
+  var supports_inducer: boolean
+  var supports_multiple_databases: boolean
+  var supports_persistent_derived_tables: boolean
+  var has_ssl_support: boolean}
 
+/**
 
+ */
+data class DialectInfo (  var can: Hash[boolean]
+  var default_max_connections: string
+  var default_port: string
+  var installed: boolean
+  var label: string
+  var label_for_database_equivalent: string
+  var name: string
+  var supported_options: DialectInfoOptions}
 
+/**
 
+ */
+data class DialectInfoOptions (  var additional_params: boolean
+  var auth: boolean
+  var host: boolean
+  var oauth_credentials: boolean
+  var project_name: boolean
+  var schema: boolean
+  var ssl: boolean
+  var timezone: boolean
+  var tmp_table: boolean
+  var username_required: boolean
+  var can: Hash[boolean]}
 
+/**
 
+ */
+data class DigestEmails (  var is_enabled: boolean}
 
+/**
 
+ */
+data class DigestEmailSend (  var configuration_delivered: boolean}
 
+/**
 
+ */
+data class DiscretePalette (  var id: string
+  var label: string
+  var type: string
+  var colors: string[]}
 
-}
+/**
 
+ */
+data class EmbedSsoParams (  var target_url: uri
+  var session_length: int64
+  var force_logout_login: boolean
+  var external_user_id: string
+  var first_name: string
+  var last_name: string
+  var user_timezone: string
+  var permissions: string[]
+  var models: string[]
+  var group_ids: int64[]
+  var external_group_id: string
+  var user_attributes: Hash[any]
+  var secret_id: int64}
 
+/**
 
+ */
+data class EmbedUrlResponse (  var url: string}
 
+/**
 
+ */
+data class Error (  var message: string
+  var documentation_url: uri}
 
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-}
-
-}
-
-}
-
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
-
-}
-
-
-}
-
-  enumeration = "enumeration"
+/**
+ * The style of dimension fill that is possible for this field. Null if no dimension fill is possible. Valid values are: "enumeration", "range". (Enum defined in LookmlModelExploreField)
+ */
+data class FillStyle (  enumeration = "enumeration"
   range = "range"}
 
+/**
 
+ */
+data class Folder (  var name: string
+  var parent_id: string
+  var id: string
+  var content_metadata_id: int64
+  var created_at: datetime
+  var creator_id: int64
+  var child_count: int64
+  var external_id: string
+  var is_embed: boolean
+  var is_embed_shared_root: boolean
+  var is_embed_users_root: boolean
+  var is_personal: boolean
+  var is_personal_descendant: boolean
+  var is_shared_root: boolean
+  var is_users_root: boolean
+  var can: Hash[boolean]
+  var dashboards: DashboardBase[]
+  var looks: LookWithDashboards[]}
 
+/**
 
+ */
+data class FolderBase (  var name: string
+  var parent_id: string
+  var id: string
+  var content_metadata_id: int64
+  var created_at: datetime
+  var creator_id: int64
+  var child_count: int64
+  var external_id: string
+  var is_embed: boolean
+  var is_embed_shared_root: boolean
+  var is_embed_users_root: boolean
+  var is_personal: boolean
+  var is_personal_descendant: boolean
+  var is_shared_root: boolean
+  var is_users_root: boolean
+  var can: Hash[boolean]}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
-
-  topojson = "topojson"
+/**
+ * Specifies the data format of the region information. Valid values are: "topojson", "vector_tile_region". (Enum defined in LookmlModelExploreFieldMapLayer)
+ */
+data class Format (  topojson = "topojson"
   vector_tile_region = "vector_tile_region"}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
-
-
-
-}
-
-
-
-
-}
-
-
-
-
-
-}
-
-
-
-
-
-
-
-
-
-}
-
-}
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
-
-
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-}
-
-
-
-}
-
-
-
-}
-
-
-}
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
-
-
-
-}
-
-
-
-
-
-
-
-}
-
-
-
-
-
-
-}
-
-
-
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-}
-
-
-
-
-}
-
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
-
-
-
-}
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
-
-
-
-
-}
-
-
-
-
-
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
-
-
-}
-
-
-}
-
-
-}
-
-
-}
-
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
-
-
-}
-
-
-
-
-
-
-
-
-
-
-}
-
-
-}
-
-
-
-
-}
-
-
-}
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
-
-
-}
-
-
-}
-
-
-
-
-
-
-}
-
-
-
-
-
-
-
-}
-
-
-
-
-
-
-
-
-}
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
-
-
-
-
-}
-
-
-}
-
-
-
-
-
-
-
-
-
-
-}
-
-
-
-}
-
-
-
-
-
-
-
-}
-
-
-}
-
-  day = "day"
+/**
+
+ */
+data class GitBranch (  var can: Hash[boolean]
+  var name: string
+  var remote: string
+  var remote_name: string
+  var error: string
+  var message: string
+  var owner_name: string
+  var readonly: boolean
+  var personal: boolean
+  var is_local: boolean
+  var is_remote: boolean
+  var is_production: boolean
+  var ahead_count: int64
+  var behind_count: int64
+  var commit_at: int64
+  var ref: string
+  var remote_ref: string}
+
+/**
+
+ */
+data class GitConnectionTest (  var can: Hash[boolean]
+  var description: string
+  var id: string}
+
+/**
+
+ */
+data class GitConnectionTestResult (  var can: Hash[boolean]
+  var id: string
+  var message: string
+  var status: string}
+
+/**
+
+ */
+data class GitStatus (  var action: string
+  var conflict: boolean
+  var revertable: boolean
+  var text: string
+  var can: Hash[boolean]}
+
+/**
+
+ */
+data class Group (  var can: Hash[boolean]
+  var can_add_to_content_metadata: boolean
+  var contains_current_user: boolean
+  var external_group_id: string
+  var externally_managed: boolean
+  var id: int64
+  var include_by_default: boolean
+  var name: string
+  var user_count: int64}
+
+/**
+ * WARNING: no writeable properties found for POST, PUT, or PATCH
+ */
+data class GroupIdForGroupInclusion (  var group_id: int64}
+
+/**
+ * WARNING: no writeable properties found for POST, PUT, or PATCH
+ */
+data class GroupIdForGroupUserInclusion (  var user_id: int64}
+
+/**
+
+ */
+data class Homepage (  var can: Hash[boolean]
+  var content_metadata_id: int64
+  var created_at: datetime
+  var deleted_at: datetime
+  var description: string
+  var homepage_sections: HomepageSection[]
+  var id: string
+  var section_order: int64[]
+  var title: string
+  var updated_at: datetime
+  var user_id: int64
+  var primary_homepage: boolean}
+
+/**
+
+ */
+data class HomepageItem (  var can: Hash[boolean]
+  var content_created_by: string
+  var content_favorite_id: int64
+  var content_metadata_id: int64
+  var content_updated_at: string
+  var custom_description: string
+  var custom_image_data_base64: string
+  var custom_image_url: string
+  var custom_title: string
+  var custom_url: string
+  var dashboard_id: int64
+  var description: string
+  var favorite_count: int64
+  var homepage_section_id: string
+  var id: string
+  var image_url: string
+  var location: string
+  var look_id: int64
+  var lookml_dashboard_id: string
+  var order: int64
+  var section_fetch_time: float
+  var title: string
+  var url: string
+  var use_custom_description: boolean
+  var use_custom_image: boolean
+  var use_custom_title: boolean
+  var use_custom_url: boolean
+  var view_count: int64}
+
+/**
+
+ */
+data class HomepageSection (  var can: Hash[boolean]
+  var created_at: datetime
+  var deleted_at: datetime
+  var detail_url: string
+  var homepage_id: int64
+  var homepage_items: HomepageItem[]
+  var id: string
+  var is_header: boolean
+  var item_order: int64[]
+  var title: string
+  var updated_at: datetime
+  var description: string
+  var visible_item_order: int64[]}
+
+/**
+
+ */
+data class ImportedProject (  var name: string
+  var url: string
+  var ref: string
+  var is_remote: boolean
+  var can: Hash[boolean]}
+
+/**
+
+ */
+data class Integration (  var can: Hash[boolean]
+  var id: string
+  var integration_hub_id: int64
+  var label: string
+  var description: string
+  var enabled: boolean
+  var params: IntegrationParam[]
+  var supported_formats: SupportedFormats[]
+  var supported_action_types: SupportedActionTypes[]
+  var supported_formattings: SupportedFormattings[]
+  var supported_visualization_formattings: SupportedVisualizationFormattings[]
+  var supported_download_settings: SupportedDownloadSettings[]
+  var icon_url: string
+  var uses_oauth: boolean
+  var required_fields: IntegrationRequiredField[]
+  var delegate_oauth: boolean
+  var installed_delegate_oauth_targets: int64[]}
+
+/**
+
+ */
+data class IntegrationHub (  var can: Hash[boolean]
+  var id: int64
+  var url: string
+  var label: string
+  var official: boolean
+  var fetch_error_message: string
+  var authorization_token: string
+  var has_authorization_token: boolean
+  var legal_agreement_signed: boolean
+  var legal_agreement_required: boolean
+  var legal_agreement_text: string}
+
+/**
+
+ */
+data class IntegrationParam (  var name: string
+  var label: string
+  var description: string
+  var required: boolean
+  var has_value: boolean
+  var value: string
+  var user_attribute_name: string
+  var sensitive: boolean
+  var per_user: boolean
+  var delegate_oauth_url: string}
+
+/**
+
+ */
+data class IntegrationRequiredField (  var tag: string
+  var any_tag: string[]
+  var all_tags: string[]}
+
+/**
+
+ */
+data class IntegrationTestResult (  var success: boolean
+  var message: string
+  var delegate_oauth_result: DelegateOauthTest[]}
+
+/**
+
+ */
+data class InternalHelpResources (  var can: Hash[boolean]
+  var enabled: boolean}
+
+/**
+
+ */
+data class InternalHelpResourcesContent (  var can: Hash[boolean]
+  var organization_name: string
+  var markdown_content: string}
+
+/**
+
+ */
+data class LDAPConfig (  var can: Hash[boolean]
+  var alternate_email_login_allowed: boolean
+  var auth_password: string
+  var auth_requires_role: boolean
+  var auth_username: string
+  var connection_host: string
+  var connection_port: string
+  var connection_tls: boolean
+  var connection_tls_no_verify: boolean
+  var default_new_user_group_ids: int64[]
+  var default_new_user_groups: Group[]
+  var default_new_user_role_ids: int64[]
+  var default_new_user_roles: Role[]
+  var enabled: boolean
+  var force_no_page: boolean
+  var groups: LDAPGroupRead[]
+  var groups_base_dn: string
+  var groups_finder_type: string
+  var groups_member_attribute: string
+  var groups_objectclasses: string
+  var groups_user_attribute: string
+  var groups_with_role_ids: LDAPGroupWrite[]
+  var has_auth_password: boolean
+  var merge_new_users_by_email: boolean
+  var modified_at: string
+  var modified_by: string
+  var set_roles_from_groups: boolean
+  var test_ldap_password: string
+  var test_ldap_user: string
+  var user_attribute_map_email: string
+  var user_attribute_map_first_name: string
+  var user_attribute_map_last_name: string
+  var user_attribute_map_ldap_id: string
+  var user_attributes: LDAPUserAttributeRead[]
+  var user_attributes_with_ids: LDAPUserAttributeWrite[]
+  var user_bind_base_dn: string
+  var user_custom_filter: string
+  var user_id_attribute_names: string
+  var user_objectclass: string
+  var allow_normal_group_membership: boolean
+  var allow_roles_from_normal_groups: boolean
+  var allow_direct_roles: boolean
+  var url: uri}
+
+/**
+
+ */
+data class LDAPConfigTestIssue (  var severity: string
+  var message: string
+  var can: Hash[boolean]}
+
+/**
+
+ */
+data class LDAPConfigTestResult (  var details: string
+  var issues: LDAPConfigTestIssue[]
+  var message: string
+  var status: string
+  var trace: string
+  var user: LDAPUser
+  var url: uri}
+
+/**
+
+ */
+data class LDAPGroupRead (  var id: int64
+  var looker_group_id: int64
+  var looker_group_name: string
+  var name: string
+  var roles: Role[]
+  var url: uri}
+
+/**
+
+ */
+data class LDAPGroupWrite (  var id: int64
+  var looker_group_id: int64
+  var looker_group_name: string
+  var name: string
+  var role_ids: int64[]
+  var url: uri}
+
+/**
+
+ */
+data class LDAPUser (  var all_emails: string[]
+  var attributes: Hash[string]
+  var email: string
+  var first_name: string
+  var groups: string[]
+  var last_name: string
+  var ldap_dn: string
+  var ldap_id: string
+  var roles: string[]
+  var can: Hash[boolean]
+  var url: uri}
+
+/**
+
+ */
+data class LDAPUserAttributeRead (  var name: string
+  var required: boolean
+  var user_attributes: UserAttribute[]
+  var url: uri}
+
+/**
+
+ */
+data class LDAPUserAttributeWrite (  var name: string
+  var required: boolean
+  var user_attribute_ids: int64[]
+  var url: uri}
+
+/**
+
+ */
+data class LegacyFeature (  var can: Hash[boolean]
+  var id: string
+  var name: string
+  var description: string
+  var enabled_locally: boolean
+  var enabled: boolean
+  var disallowed_as_of_version: string
+  var disable_on_upgrade_to_version: string
+  var end_of_life_version: string
+  var documentation_url: string
+  var approximate_disable_date: datetime
+  var approximate_end_of_life_date: datetime
+  var has_disabled_on_upgrade: boolean}
+
+/**
+
+ */
+data class Locale (  var code: string
+  var native_name: string
+  var english_name: string}
+
+/**
+
+ */
+data class LocalizationSettings (  var default_locale: string
+  var localization_level: string
+  var can: Hash[boolean]}
+
+/**
+
+ */
+data class Look (  var can: Hash[boolean]
+  var content_metadata_id: int64
+  var id: int64
+  var title: string
+  var content_favorite_id: int64
+  var created_at: datetime
+  var deleted: boolean
+  var deleted_at: datetime
+  var deleter_id: int64
+  var description: string
+  var embed_url: string
+  var excel_file_url: string
+  var favorite_count: int64
+  var google_spreadsheet_formula: string
+  var image_embed_url: string
+  var is_run_on_load: boolean
+  var last_accessed_at: datetime
+  var last_updater_id: int64
+  var last_viewed_at: datetime
+  var model: LookModel
+  var public: boolean
+  var public_slug: string
+  var public_url: string
+  var query_id: int64
+  var short_url: string
+  var folder: FolderBase
+  var folder_id: string
+  var updated_at: datetime
+  var user_id: int64
+  var view_count: int64
+  var user: UserIdOnly
+  var space_id: string
+  var space: SpaceBase}
+
+/**
+
+ */
+data class LookBasic (  var can: Hash[boolean]
+  var content_metadata_id: int64
+  var id: int64
+  var title: string}
+
+/**
+
+ */
+data class LookmlModel (  var can: Hash[boolean]
+  var allowed_db_connection_names: string[]
+  var explores: LookmlModelNavExplore[]
+  var has_content: boolean
+  var label: string
+  var name: string
+  var project_name: string
+  var unlimited_db_connections: boolean}
+
+/**
+
+ */
+data class LookmlModelExplore (  var id: string
+  var name: string
+  var description: string
+  var label: string
+  var scopes: string[]
+  var can_total: boolean
+  var can_save: boolean
+  var can_explain: boolean
+  var can_pivot_in_db: boolean
+  var can_subtotal: boolean
+  var has_timezone_support: boolean
+  var supports_cost_estimate: boolean
+  var connection_name: string
+  var null_sort_treatment: string
+  var files: string[]
+  var source_file: string
+  var project_name: string
+  var model_name: string
+  var view_name: string
+  var hidden: boolean
+  var sql_table_name: string
+  var access_filter_fields: string[]
+  var access_filters: LookmlModelExploreAccessFilter[]
+  var aliases: LookmlModelExploreAlias[]
+  var always_filter: LookmlModelExploreAlwaysFilter[]
+  var conditionally_filter: LookmlModelExploreConditionallyFilter[]
+  var index_fields: string[]
+  var sets: LookmlModelExploreSet[]
+  var tags: string[]
+  var errors: LookmlModelExploreError[]
+  var fields: LookmlModelExploreFieldset
+  var joins: LookmlModelExploreJoins[]
+  var group_label: string
+  var supported_measure_types: LookmlModelExploreSupportedMeasureType[]}
+
+/**
+
+ */
+data class LookmlModelExploreAccessFilter (  var field: string
+  var user_attribute: string}
+
+/**
+
+ */
+data class LookmlModelExploreAlias (  var name: string
+  var value: string}
+
+/**
+
+ */
+data class LookmlModelExploreAlwaysFilter (  var name: string
+  var value: string}
+
+/**
+
+ */
+data class LookmlModelExploreConditionallyFilter (  var name: string
+  var value: string}
+
+/**
+
+ */
+data class LookmlModelExploreError (  var message: string
+  var details: any
+  var error_pos: string
+  var field_error: boolean}
+
+/**
+
+ */
+data class LookmlModelExploreField (  var align: Align
+  var can_filter: boolean
+  var category: Category
+  var default_filter_value: string
+  var description: string
+  var dimension_group: string
+  var enumerations: LookmlModelExploreFieldEnumeration[]
+  var error: string
+  var field_group_label: string
+  var field_group_variant: string
+  var fill_style: FillStyle
+  var fiscal_month_offset: int64
+  var has_allowed_values: boolean
+  var hidden: boolean
+  var is_filter: boolean
+  var is_fiscal: boolean
+  var is_numeric: boolean
+  var is_timeframe: boolean
+  var can_time_filter: boolean
+  var time_interval: LookmlModelExploreFieldTimeInterval
+  var label: string
+  var label_from_parameter: string
+  var label_short: string
+  var lookml_link: string
+  var map_layer: LookmlModelExploreFieldMapLayer
+  var measure: boolean
+  var name: string
+  var strict_value_format: boolean
+  var parameter: boolean
+  var permanent: boolean
+  var primary_key: boolean
+  var project_name: string
+  var requires_refresh_on_sort: boolean
+  var scope: string
+  var sortable: boolean
+  var source_file: string
+  var source_file_path: string
+  var sql: string
+  var sql_case: LookmlModelExploreFieldSqlCase[]
+  var filters: LookmlModelExploreFieldMeasureFilters[]
+  var suggest_dimension: string
+  var suggest_explore: string
+  var suggestable: boolean
+  var suggestions: string[]
+  var tags: string[]
+  var type: string
+  var user_attribute_filter_types: UserAttributeFilterTypes[]
+  var value_format: string
+  var view: string
+  var view_label: string
+  var dynamic: boolean
+  var week_start_day: WeekStartDay}
+
+/**
+
+ */
+data class LookmlModelExploreFieldEnumeration (  var label: string
+  var value: any}
+
+/**
+
+ */
+data class LookmlModelExploreFieldMapLayer (  var url: string
+  var name: string
+  var feature_key: string
+  var property_key: string
+  var property_label_key: string
+  var projection: string
+  var format: Format
+  var extents_json_url: string
+  var max_zoom_level: int64
+  var min_zoom_level: int64}
+
+/**
+
+ */
+data class LookmlModelExploreFieldMeasureFilters (  var field: string
+  var condition: string}
+
+/**
+
+ */
+data class LookmlModelExploreFieldset (  var dimensions: LookmlModelExploreField[]
+  var measures: LookmlModelExploreField[]
+  var filters: LookmlModelExploreField[]
+  var parameters: LookmlModelExploreField[]}
+
+/**
+
+ */
+data class LookmlModelExploreFieldSqlCase (  var value: string
+  var condition: string}
+
+/**
+
+ */
+data class LookmlModelExploreFieldTimeInterval (  var name: Name
+  var count: int64}
+
+/**
+
+ */
+data class LookmlModelExploreJoins (  var name: string
+  var dependent_fields: string[]
+  var fields: string[]
+  var foreign_key: string
+  var from: string
+  var outer_only: boolean
+  var relationship: string
+  var required_joins: string[]
+  var sql_foreign_key: string
+  var sql_on: string
+  var sql_table_name: string
+  var type: string
+  var view_label: string}
+
+/**
+
+ */
+data class LookmlModelExploreSet (  var name: string
+  var value: string[]}
+
+/**
+
+ */
+data class LookmlModelExploreSupportedMeasureType (  var dimension_type: string
+  var measure_types: string[]}
+
+/**
+
+ */
+data class LookmlModelNavExplore (  var name: string
+  var description: string
+  var label: string
+  var hidden: boolean
+  var group_label: string
+  var can: Hash[boolean]}
+
+/**
+
+ */
+data class LookmlTest (  var can: Hash[boolean]
+  var model_name: string
+  var name: string
+  var explore_name: string
+  var query_url_params: string
+  var file: string
+  var line: int64}
+
+/**
+
+ */
+data class LookmlTestResult (  var can: Hash[boolean]
+  var model_name: string
+  var test_name: string
+  var assertions_count: int64
+  var assertions_failed: int64
+  var errors: ProjectError[]
+  var warnings: ProjectError[]
+  var success: boolean}
+
+/**
+
+ */
+data class LookModel (  var id: string
+  var label: string}
+
+/**
+
+ */
+data class LookWithDashboards (  var can: Hash[boolean]
+  var content_metadata_id: int64
+  var id: int64
+  var title: string
+  var content_favorite_id: int64
+  var created_at: datetime
+  var deleted: boolean
+  var deleted_at: datetime
+  var deleter_id: int64
+  var description: string
+  var embed_url: string
+  var excel_file_url: string
+  var favorite_count: int64
+  var google_spreadsheet_formula: string
+  var image_embed_url: string
+  var is_run_on_load: boolean
+  var last_accessed_at: datetime
+  var last_updater_id: int64
+  var last_viewed_at: datetime
+  var model: LookModel
+  var public: boolean
+  var public_slug: string
+  var public_url: string
+  var query_id: int64
+  var short_url: string
+  var folder: FolderBase
+  var folder_id: string
+  var updated_at: datetime
+  var user_id: int64
+  var view_count: int64
+  var user: UserIdOnly
+  var space_id: string
+  var space: SpaceBase
+  var dashboards: DashboardBase[]}
+
+/**
+
+ */
+data class LookWithQuery (  var can: Hash[boolean]
+  var content_metadata_id: int64
+  var id: int64
+  var title: string
+  var content_favorite_id: int64
+  var created_at: datetime
+  var deleted: boolean
+  var deleted_at: datetime
+  var deleter_id: int64
+  var description: string
+  var embed_url: string
+  var excel_file_url: string
+  var favorite_count: int64
+  var google_spreadsheet_formula: string
+  var image_embed_url: string
+  var is_run_on_load: boolean
+  var last_accessed_at: datetime
+  var last_updater_id: int64
+  var last_viewed_at: datetime
+  var model: LookModel
+  var public: boolean
+  var public_slug: string
+  var public_url: string
+  var query_id: int64
+  var short_url: string
+  var folder: FolderBase
+  var folder_id: string
+  var updated_at: datetime
+  var user_id: int64
+  var view_count: int64
+  var user: UserIdOnly
+  var space_id: string
+  var space: SpaceBase
+  var query: Query
+  var url: string}
+
+/**
+
+ */
+data class Manifest (  var can: Hash[boolean]
+  var name: string
+  var imports: ImportedProject[]
+  var localization_settings: LocalizationSettings}
+
+/**
+
+ */
+data class MergeFields (  var field_name: string
+  var source_field_name: string}
+
+/**
+
+ */
+data class MergeQuery (  var can: Hash[boolean]
+  var column_limit: string
+  var dynamic_fields: string
+  var id: string
+  var pivots: string[]
+  var result_maker_id: int64
+  var sorts: string[]
+  var source_queries: MergeQuerySourceQuery[]
+  var total: boolean
+  var vis_config: Hash[string]}
+
+/**
+
+ */
+data class MergeQuerySourceQuery (  var merge_fields: MergeFields[]
+  var name: string
+  var query_id: int64}
+
+/**
+
+ */
+data class ModelSet (  var can: Hash[boolean]
+  var all_access: boolean
+  var built_in: boolean
+  var id: int64
+  var models: string[]
+  var name: string
+  var url: uri}
+
+/**
+
+ */
+data class ModelsNotValidated (  var name: string
+  var project_file_id: string}
+
+/**
+ * The type of time interval this field represents a grouping of. Valid values are: "day", "hour", "minute", "second", "millisecond", "microsecond", "week", "month", "quarter", "year". (Enum defined in LookmlModelExploreFieldTimeInterval)
+ */
+data class Name (  day = "day"
   hour = "hour"
   minute = "minute"
   second = "second"
@@ -1315,620 +1737,827 @@
   quarter = "quarter"
   year = "year"}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
-
-
-
-
-
-}
-
-
-
-
-
-
-}
-
-
-
-}
-
-
-
-
-}
-
-
-
-
-
-}
-
-
-
-
-}
-
-
-
-
-
-
-
-}
-
-  view = "view"
+/**
+
+ */
+data class OIDCConfig (  var can: Hash[boolean]
+  var alternate_email_login_allowed: boolean
+  var audience: string
+  var auth_requires_role: boolean
+  var authorization_endpoint: uri
+  var default_new_user_group_ids: int64[]
+  var default_new_user_groups: Group[]
+  var default_new_user_role_ids: int64[]
+  var default_new_user_roles: Role[]
+  var enabled: boolean
+  var groups: OIDCGroupRead[]
+  var groups_attribute: string
+  var groups_with_role_ids: OIDCGroupWrite[]
+  var identifier: string
+  var issuer: string
+  var modified_at: datetime
+  var modified_by: int64
+  var new_user_migration_types: string
+  var scopes: string[]
+  var secret: string
+  var set_roles_from_groups: boolean
+  var test_slug: string
+  var token_endpoint: string
+  var user_attribute_map_email: string
+  var user_attribute_map_first_name: string
+  var user_attribute_map_last_name: string
+  var user_attributes: OIDCUserAttributeRead[]
+  var user_attributes_with_ids: OIDCUserAttributeWrite[]
+  var userinfo_endpoint: uri
+  var allow_normal_group_membership: boolean
+  var allow_roles_from_normal_groups: boolean
+  var allow_direct_roles: boolean
+  var url: uri}
+
+/**
+
+ */
+data class OIDCGroupRead (  var id: int64
+  var looker_group_id: int64
+  var looker_group_name: string
+  var name: string
+  var roles: Role[]}
+
+/**
+
+ */
+data class OIDCGroupWrite (  var id: int64
+  var looker_group_id: int64
+  var looker_group_name: string
+  var name: string
+  var role_ids: int64[]
+  var can: Hash[boolean]}
+
+/**
+
+ */
+data class OIDCUserAttributeRead (  var name: string
+  var required: boolean
+  var user_attributes: UserAttribute[]}
+
+/**
+
+ */
+data class OIDCUserAttributeWrite (  var name: string
+  var required: boolean
+  var user_attribute_ids: int64[]
+  var can: Hash[boolean]}
+
+/**
+
+ */
+data class PasswordConfig (  var can: Hash[boolean]
+  var min_length: int64
+  var require_numeric: boolean
+  var require_upperlower: boolean
+  var require_special: boolean}
+
+/**
+
+ */
+data class Permission (  var can: Hash[boolean]
+  var permission: string
+  var parent: string
+  var description: string}
+
+/**
+
+ */
+data class PermissionSet (  var can: Hash[boolean]
+  var all_access: boolean
+  var built_in: boolean
+  var id: int64
+  var name: string
+  var permissions: string[]
+  var url: uri}
+
+/**
+ * Type of permission: "view" or "edit" Valid values are: "view", "edit". (Enum defined in ContentMetaGroupUser)
+ */
+data class PermissionType (  view = "view"
   edit = "edit"}
 
+/**
 
+ */
+data class Project (  var can: Hash[boolean]
+  var id: string
+  var name: string
+  var uses_git: boolean
+  var git_remote_url: string
+  var git_username: string
+  var git_password: string
+  var git_production_branch_name: string
+  var use_git_cookie_auth: boolean
+  var git_username_user_attribute: string
+  var git_password_user_attribute: string
+  var git_service_name: string
+  var git_application_server_http_port: int64
+  var git_application_server_http_scheme: string
+  var deploy_secret: string
+  var unset_deploy_secret: boolean
+  var pull_request_mode: PullRequestMode
+  var validation_required: boolean
+  var git_release_mgmt_enabled: boolean
+  var allow_warnings: boolean
+  var is_example: boolean}
 
+/**
 
+ */
+data class ProjectError (  var code: string
+  var severity: string
+  var kind: string
+  var message: string
+  var field_name: string
+  var file_path: string
+  var line_number: int64
+  var model_id: string
+  var explore: string
+  var help_url: string
+  var params: Hash[string]
+  var sanitized_message: string}
 
+/**
 
+ */
+data class ProjectFile (  var can: Hash[boolean]
+  var id: string
+  var path: string
+  var title: string
+  var type: string
+  var extension: string
+  var mime_type: string
+  var editable: boolean
+  var git_status: GitStatus}
 
+/**
 
+ */
+data class ProjectValidation (  var errors: ProjectError[]
+  var project_digest: string
+  var models_not_validated: ModelsNotValidated[]
+  var computation_time: float}
 
+/**
 
+ */
+data class ProjectValidationCache (  var errors: ProjectError[]
+  var project_digest: string
+  var models_not_validated: ModelsNotValidated[]
+  var computation_time: float
+  var stale: boolean}
 
+/**
 
+ */
+data class ProjectWorkspace (  var can: Hash[boolean]
+  var project_id: string
+  var workspace_id: string
+  var git_status: string
+  var git_head: string
+  var dependency_status: DependencyStatus
+  var git_branch: GitBranch
+  var lookml_type: string}
 
-
-
-
-
-
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-}
-
-
-
-
-
-
-
-
-
-}
-
-
-
-
-}
-
-
-
-
-
-}
-
-
-
-
-
-
-
-
-}
-
-  off = "off"
+/**
+ * The git pull request policy for this project. Valid values are: "off", "links", "recommended", "required". (Enum defined in Project)
+ */
+data class PullRequestMode (  off = "off"
   links = "links"
   recommended = "recommended"
   required = "required"}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
-
-
-
-
-
-
-
-
-}
-
-
-
-}
-
-
-
-
-
-
-
-}
-
-
-
-
-
-}
-
-
-
-}
-
-
-}
-
-
-}
-
-
-}
-
-
-
-}
-
-
-
-
-
-}
-
-
-
-
-
-
-}
-
-
-
-
-
-
-
-
-}
-
-
-
-
-
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
-
-
-
-}
-
-
-
-}
-
-
-
-
-
-}
-
-
-
-
-}
-
-
-
-}
-
-
-
-}
-
-
-}
-
-
-
-}
-
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
-
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
-
-
-
-
-}
-
-
-
-
-}
-
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
-
-
-
-
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
-
-
-
-
-
-
-
-
-
-}
-
-
-
-
-
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-}
-
-
-
-
-
-
-
-
-
-}
-
-
-
-
-
-
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-}
-
-
-
-
-
-}
-
-
-
-
-}
-
-
-
-
-
-}
-
-
-
-
-
-}
-
-
-
-}
-
-  inline_json = "inline_json"
+/**
+
+ */
+data class Query (  var can: Hash[boolean]
+  var id: int64
+  var model: string
+  var view: string
+  var fields: string[]
+  var pivots: string[]
+  var fill_fields: string[]
+  var filters: Hash[string]
+  var filter_expression: string
+  var sorts: string[]
+  var limit: string
+  var column_limit: string
+  var total: boolean
+  var row_total: string
+  var subtotals: string[]
+  var vis_config: Hash[any]
+  var filter_config: Hash[any]
+  var visible_ui_sections: string
+  var slug: string
+  var dynamic_fields: string
+  var client_id: string
+  var share_url: string
+  var expanded_share_url: string
+  var url: string
+  var query_timezone: string
+  var has_table_calculations: boolean
+  var runtime: double}
+
+/**
+
+ */
+data class QueryTask (  var can: Hash[boolean]
+  var id: string
+  var query_id: int64
+  var query: Query
+  var generate_links: boolean
+  var force_production: boolean
+  var path_prefix: string
+  var cache: boolean
+  var server_table_calcs: boolean
+  var cache_only: boolean
+  var cache_key: string
+  var status: string
+  var source: string
+  var runtime: float
+  var rebuild_pdts: boolean
+  var result_source: string
+  var look_id: int64
+  var dashboard_id: string
+  var result_format: string}
+
+/**
+
+ */
+data class RenderTask (  var can: Hash[boolean]
+  var created_at: string
+  var dashboard_filters: string
+  var dashboard_id: int64
+  var dashboard_style: string
+  var finalized_at: string
+  var height: int64
+  var id: string
+  var look_id: int64
+  var lookml_dashboard_id: string
+  var query_id: int64
+  var dashboard_element_id: string
+  var query_runtime: double
+  var render_runtime: double
+  var result_format: string
+  var runtime: double
+  var status: string
+  var status_detail: string
+  var user_id: int64
+  var width: int64}
+
+/**
+
+ */
+data class RepositoryCredential (  var can: Hash[boolean]
+  var id: string
+  var root_project_id: string
+  var remote_url: string
+  var git_username: string
+  var git_password: string
+  var ssh_public_key: string
+  var is_configured: boolean}
+
+/**
+ * Dynamically generated request type for active_themes
+ */
+data class RequestActiveThemes (  var name: string
+  var ts: datetime
+  var fields: string}
+
+/**
+ * Dynamically generated request type for all_groups
+ */
+data class RequestAllGroups (  var fields: string
+  var page: int64
+  var per_page: int64
+  var sorts: string
+  var ids: DelimArray<int64>
+  var content_metadata_id: int64
+  var can_add_to_content_metadata: boolean}
+
+/**
+ * Dynamically generated request type for all_group_users
+ */
+data class RequestAllGroupUsers (  var group_id: int64
+  var fields: string
+  var page: int64
+  var per_page: int64
+  var sorts: string}
+
+/**
+ * Dynamically generated request type for all_homepage_items
+ */
+data class RequestAllHomepageItems (  var fields: string
+  var sorts: string
+  var homepage_section_id: string}
+
+/**
+ * Dynamically generated request type for all_homepage_sections
+ */
+data class RequestAllHomepageSections (  var fields: string
+  var sorts: string}
+
+/**
+ * Dynamically generated request type for all_integrations
+ */
+data class RequestAllIntegrations (  var fields: string
+  var integration_hub_id: string}
+
+/**
+ * Dynamically generated request type for all_roles
+ */
+data class RequestAllRoles (  var fields: string
+  var ids: DelimArray<int64>}
+
+/**
+ * Dynamically generated request type for all_scheduled_plans
+ */
+data class RequestAllScheduledPlans (  var user_id: int64
+  var fields: string
+  var all_users: boolean}
+
+/**
+ * Dynamically generated request type for all_users
+ */
+data class RequestAllUsers (  var fields: string
+  var page: int64
+  var per_page: int64
+  var sorts: string
+  var ids: DelimArray<int64>}
+
+/**
+ * Dynamically generated request type for content_thumbnail
+ */
+data class RequestContentThumbnail (  var type: string
+  var resource_id: string
+  var reload: string
+  var format: string
+  var width: int64
+  var height: int64}
+
+/**
+ * Dynamically generated request type for create_dashboard_render_task
+ */
+data class RequestCreateDashboardRenderTask (  var dashboard_id: int64
+  var result_format: string
+  var body: CreateDashboardRenderTask
+  var width: int64
+  var height: int64
+  var fields: string
+  var pdf_paper_size: string
+  var pdf_landscape: boolean}
+
+/**
+ * Dynamically generated request type for create_lookml_dashboard_render_task
+ */
+data class RequestCreateLookmlDashboardRenderTask (  var dashboard_id: string
+  var result_format: string
+  var body: CreateDashboardRenderTask
+  var width: int64
+  var height: int64
+  var fields: string
+  var pdf_paper_size: string
+  var pdf_landscape: boolean}
+
+/**
+ * Dynamically generated request type for create_query_task
+ */
+data class RequestCreateQueryTask (  var body: WriteCreateQueryTask
+  var limit: int64
+  var apply_formatting: boolean
+  var apply_vis: boolean
+  var cache: boolean
+  var image_width: int64
+  var image_height: int64
+  var generate_drill_links: boolean
+  var force_production: boolean
+  var cache_only: boolean
+  var path_prefix: string
+  var rebuild_pdts: boolean
+  var server_table_calcs: boolean
+  var fields: string}
+
+/**
+ * Dynamically generated request type for create_user_credentials_email_password_reset
+ */
+data class RequestCreateUserCredentialsEmailPasswordReset (  var user_id: int64
+  var expires: boolean
+  var fields: string}
+
+/**
+ * Dynamically generated request type for deploy_ref_to_production
+ */
+data class RequestDeployRefToProduction (  var project_id: string
+  var branch: string
+  var ref: string}
+
+/**
+ * Dynamically generated request type for folder_children
+ */
+data class RequestFolderChildren (  var folder_id: string
+  var fields: string
+  var page: int64
+  var per_page: int64
+  var sorts: string}
+
+/**
+ * Dynamically generated request type for folder_children_search
+ */
+data class RequestFolderChildrenSearch (  var folder_id: string
+  var fields: string
+  var sorts: string
+  var name: string}
+
+/**
+ * Dynamically generated request type for graph_derived_tables_for_model
+ */
+data class RequestGraphDerivedTablesForModel (  var model: string
+  var format: string
+  var color: string}
+
+/**
+ * Dynamically generated request type for graph_derived_tables_for_view
+ */
+data class RequestGraphDerivedTablesForView (  var view: string
+  var models: string
+  var workspace: string}
+
+/**
+ * Dynamically generated request type for login
+ */
+data class RequestLogin (  var client_id: string
+  var client_secret: string}
+
+/**
+ * Dynamically generated request type for role_users
+ */
+data class RequestRoleUsers (  var role_id: int64
+  var fields: string
+  var direct_association_only: boolean}
+
+/**
+ * Dynamically generated request type for run_git_connection_test
+ */
+data class RequestRunGitConnectionTest (  var project_id: string
+  var test_id: string
+  var remote_url: string
+  var use_production: string}
+
+/**
+ * Dynamically generated request type for run_inline_query
+ */
+data class RequestRunInlineQuery (  var result_format: string
+  var body: WriteQuery
+  var limit: int64
+  var apply_formatting: boolean
+  var apply_vis: boolean
+  var cache: boolean
+  var image_width: int64
+  var image_height: int64
+  var generate_drill_links: boolean
+  var force_production: boolean
+  var cache_only: boolean
+  var path_prefix: string
+  var rebuild_pdts: boolean
+  var server_table_calcs: boolean}
+
+/**
+ * Dynamically generated request type for run_look
+ */
+data class RequestRunLook (  var look_id: int64
+  var result_format: string
+  var limit: int64
+  var apply_formatting: boolean
+  var apply_vis: boolean
+  var cache: boolean
+  var image_width: int64
+  var image_height: int64
+  var generate_drill_links: boolean
+  var force_production: boolean
+  var cache_only: boolean
+  var path_prefix: string
+  var rebuild_pdts: boolean
+  var server_table_calcs: boolean}
+
+/**
+ * Dynamically generated request type for run_lookml_test
+ */
+data class RequestRunLookmlTest (  var project_id: string
+  var file_id: string
+  var test: string
+  var model: string}
+
+/**
+ * Dynamically generated request type for run_query
+ */
+data class RequestRunQuery (  var query_id: int64
+  var result_format: string
+  var limit: int64
+  var apply_formatting: boolean
+  var apply_vis: boolean
+  var cache: boolean
+  var image_width: int64
+  var image_height: int64
+  var generate_drill_links: boolean
+  var force_production: boolean
+  var cache_only: boolean
+  var path_prefix: string
+  var rebuild_pdts: boolean
+  var server_table_calcs: boolean}
+
+/**
+ * Dynamically generated request type for scheduled_plans_for_dashboard
+ */
+data class RequestScheduledPlansForDashboard (  var dashboard_id: int64
+  var user_id: int64
+  var all_users: boolean
+  var fields: string}
+
+/**
+ * Dynamically generated request type for scheduled_plans_for_look
+ */
+data class RequestScheduledPlansForLook (  var look_id: int64
+  var user_id: int64
+  var fields: string
+  var all_users: boolean}
+
+/**
+ * Dynamically generated request type for scheduled_plans_for_lookml_dashboard
+ */
+data class RequestScheduledPlansForLookmlDashboard (  var lookml_dashboard_id: string
+  var user_id: int64
+  var fields: string
+  var all_users: boolean}
+
+/**
+ * Dynamically generated request type for search_content_favorites
+ */
+data class RequestSearchContentFavorites (  var id: int64
+  var user_id: int64
+  var content_metadata_id: int64
+  var dashboard_id: int64
+  var look_id: int64
+  var limit: int64
+  var offset: int64
+  var sorts: string
+  var fields: string
+  var filter_or: boolean}
+
+/**
+ * Dynamically generated request type for search_content_views
+ */
+data class RequestSearchContentViews (  var view_count: int64
+  var group_id: int64
+  var look_id: string
+  var dashboard_id: string
+  var content_metadata_id: int64
+  var start_of_week_date: string
+  var all_time: boolean
+  var user_id: int64
+  var fields: string
+  var limit: int64
+  var offset: int64
+  var sorts: string
+  var filter_or: boolean}
+
+/**
+ * Dynamically generated request type for search_dashboard_elements
+ */
+data class RequestSearchDashboardElements (  var dashboard_id: int64
+  var look_id: int64
+  var title: string
+  var deleted: boolean
+  var fields: string
+  var filter_or: boolean
+  var sorts: string}
+
+/**
+ * Dynamically generated request type for search_dashboards
+ */
+data class RequestSearchDashboards (  var id: int64
+  var slug: string
+  var title: string
+  var description: string
+  var content_favorite_id: int64
+  var space_id: string
+  var folder_id: string
+  var deleted: string
+  var user_id: string
+  var view_count: string
+  var content_metadata_id: int64
+  var curate: boolean
+  var fields: string
+  var page: int64
+  var per_page: int64
+  var limit: int64
+  var offset: int64
+  var sorts: string
+  var filter_or: boolean}
+
+/**
+ * Dynamically generated request type for search_groups
+ */
+data class RequestSearchGroups (  var fields: string
+  var limit: int64
+  var offset: int64
+  var sorts: string
+  var filter_or: boolean
+  var id: int64
+  var name: string
+  var external_group_id: string
+  var externally_managed: boolean
+  var externally_orphaned: boolean}
+
+/**
+ * Dynamically generated request type for search_homepages
+ */
+data class RequestSearchHomepages (  var title: string
+  var created_at: string
+  var first_name: string
+  var last_name: string
+  var fields: string
+  var favorited: boolean
+  var creator_id: string
+  var page: int64
+  var per_page: int64
+  var offset: int64
+  var limit: int64
+  var sorts: string
+  var filter_or: boolean}
+
+/**
+ * Dynamically generated request type for search_looks
+ */
+data class RequestSearchLooks (  var id: string
+  var title: string
+  var description: string
+  var content_favorite_id: int64
+  var space_id: string
+  var user_id: string
+  var view_count: string
+  var deleted: boolean
+  var query_id: int64
+  var curate: boolean
+  var fields: string
+  var page: int64
+  var per_page: int64
+  var limit: int64
+  var offset: int64
+  var sorts: string
+  var filter_or: boolean}
+
+/**
+ * Dynamically generated request type for search_model_sets
+ */
+data class RequestSearchModelSets (  var fields: string
+  var limit: int64
+  var offset: int64
+  var sorts: string
+  var id: int64
+  var name: string
+  var all_access: boolean
+  var built_in: boolean
+  var filter_or: boolean}
+
+/**
+ * Dynamically generated request type for search_roles
+ */
+data class RequestSearchRoles (  var fields: string
+  var limit: int64
+  var offset: int64
+  var sorts: string
+  var id: int64
+  var name: string
+  var built_in: boolean
+  var filter_or: boolean}
+
+/**
+ * Dynamically generated request type for search_spaces
+ */
+data class RequestSearchSpaces (  var fields: string
+  var page: int64
+  var per_page: int64
+  var limit: int64
+  var offset: int64
+  var sorts: string
+  var name: string
+  var id: int64
+  var parent_id: string
+  var creator_id: string
+  var filter_or: boolean
+  var is_shared_root: boolean}
+
+/**
+ * Dynamically generated request type for search_themes
+ */
+data class RequestSearchThemes (  var id: int64
+  var name: string
+  var begin_at: datetime
+  var end_at: datetime
+  var limit: int64
+  var offset: int64
+  var sorts: string
+  var fields: string
+  var filter_or: boolean}
+
+/**
+ * Dynamically generated request type for search_user_login_lockouts
+ */
+data class RequestSearchUserLoginLockouts (  var fields: string
+  var page: int64
+  var per_page: int64
+  var sorts: string
+  var auth_type: string
+  var full_name: string
+  var email: string
+  var remote_id: string
+  var filter_or: boolean}
+
+/**
+ * Dynamically generated request type for search_users
+ */
+data class RequestSearchUsers (  var fields: string
+  var page: int64
+  var per_page: int64
+  var sorts: string
+  var id: int64
+  var first_name: string
+  var last_name: string
+  var verified_looker_employee: boolean
+  var embed_user: boolean
+  var email: string
+  var is_disabled: boolean
+  var filter_or: boolean
+  var content_metadata_id: int64
+  var group_id: int64}
+
+/**
+ * Dynamically generated request type for search_users_names
+ */
+data class RequestSearchUsersNames (  var pattern: string
+  var fields: string
+  var page: int64
+  var per_page: int64
+  var sorts: string
+  var id: int64
+  var first_name: string
+  var last_name: string
+  var verified_looker_employee: boolean
+  var email: string
+  var is_disabled: boolean}
+
+/**
+ * Dynamically generated request type for space_children
+ */
+data class RequestSpaceChildren (  var space_id: string
+  var fields: string
+  var page: int64
+  var per_page: int64
+  var sorts: string}
+
+/**
+ * Dynamically generated request type for space_children_search
+ */
+data class RequestSpaceChildrenSearch (  var space_id: string
+  var fields: string
+  var sorts: string
+  var name: string}
+
+/**
+ * Dynamically generated request type for tag_ref
+ */
+data class RequestTagRef (  var project_id: string
+  var body: WriteProject
+  var commit_sha: string
+  var tag_name: string
+  var tag_message: string}
+
+/**
+ * Dynamically generated request type for user_attribute_user_values
+ */
+data class RequestUserAttributeUserValues (  var user_id: int64
+  var fields: string
+  var user_attribute_ids: DelimArray<int64>
+  var all_values: boolean
+  var include_unset: boolean}
+
+/**
+ * Dynamically generated request type for user_roles
+ */
+data class RequestUserRoles (  var user_id: int64
+  var fields: string
+  var direct_association_only: boolean}
+
+/**
+ * Desired async query result format. Valid values are: "inline_json", "json", "json_detail", "json_fe", "csv", "html", "md", "txt", "xlsx", "gsxml". (Enum defined in CreateQueryTask)
+ */
+data class ResultFormat (  inline_json = "inline_json"
   json = "json"
   json_detail = "json_detail"
   json_fe = "json_fe"
@@ -1939,260 +2568,329 @@
   xlsx = "xlsx"
   gsxml = "gsxml"}
 
-
-
-
-}
-
-
-}
-
-
-
-
-
-
-
-
-
-
-}
-
-
-
-
-
-
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
-
-
-
-
-
-
-}
-
-
-
-
-
-
-}
-
-
-
-
-}
-
-
-
-
-}
-
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
-
-
-
-
-
-
-}
-
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
-
-
-
-
-
-}
-
-  cell = "cell"
+/**
+
+ */
+data class ResultMakerFilterables (  var model: string
+  var view: string
+  var name: string
+  var listen: ResultMakerFilterablesListen[]}
+
+/**
+
+ */
+data class ResultMakerFilterablesListen (  var dashboard_filter_name: string
+  var field: string}
+
+/**
+
+ */
+data class ResultMakerWithIdVisConfigAndDynamicFields (  var id: int64
+  var dynamic_fields: string
+  var filterables: ResultMakerFilterables[]
+  var sorts: string[]
+  var merge_result_id: string
+  var total: boolean
+  var query_id: int64
+  var sql_query_id: string
+  var query: Query
+  var vis_config: Hash[string]}
+
+/**
+
+ */
+data class Role (  var can: Hash[boolean]
+  var id: int64
+  var name: string
+  var permission_set: PermissionSet
+  var permission_set_id: int64
+  var model_set: ModelSet
+  var model_set_id: int64
+  var url: uri
+  var users_url: uri}
+
+/**
+
+ */
+data class RunningQueries (  var can: Hash[boolean]
+  var id: int64
+  var user: UserPublic
+  var query: Query
+  var sql_query: SqlQuery
+  var look: LookBasic
+  var created_at: string
+  var completed_at: string
+  var query_id: string
+  var source: string
+  var node_id: string
+  var slug: string
+  var query_task_id: string
+  var cache_key: string
+  var connection_name: string
+  var dialect: string
+  var connection_id: string
+  var message: string
+  var status: string
+  var runtime: double
+  var sql: string}
+
+/**
+
+ */
+data class SamlConfig (  var can: Hash[boolean]
+  var enabled: boolean
+  var idp_cert: string
+  var idp_url: string
+  var idp_issuer: string
+  var idp_audience: string
+  var allowed_clock_drift: int64
+  var user_attribute_map_email: string
+  var user_attribute_map_first_name: string
+  var user_attribute_map_last_name: string
+  var new_user_migration_types: string
+  var alternate_email_login_allowed: boolean
+  var test_slug: string
+  var modified_at: string
+  var modified_by: string
+  var default_new_user_roles: Role[]
+  var default_new_user_groups: Group[]
+  var default_new_user_role_ids: int64[]
+  var default_new_user_group_ids: int64[]
+  var set_roles_from_groups: boolean
+  var groups_attribute: string
+  var groups: SamlGroupRead[]
+  var groups_with_role_ids: SamlGroupWrite[]
+  var auth_requires_role: boolean
+  var user_attributes: SamlUserAttributeRead[]
+  var user_attributes_with_ids: SamlUserAttributeWrite[]
+  var groups_finder_type: string
+  var groups_member_value: string
+  var bypass_login_page: boolean
+  var allow_normal_group_membership: boolean
+  var allow_roles_from_normal_groups: boolean
+  var allow_direct_roles: boolean
+  var url: uri}
+
+/**
+
+ */
+data class SamlGroupRead (  var id: int64
+  var looker_group_id: int64
+  var looker_group_name: string
+  var name: string
+  var roles: Role[]
+  var url: uri}
+
+/**
+
+ */
+data class SamlGroupWrite (  var id: int64
+  var looker_group_id: int64
+  var looker_group_name: string
+  var name: string
+  var role_ids: int64[]
+  var url: uri}
+
+/**
+
+ */
+data class SamlMetadataParseResult (  var can: Hash[boolean]
+  var idp_issuer: string
+  var idp_url: string
+  var idp_cert: string}
+
+/**
+
+ */
+data class SamlUserAttributeRead (  var name: string
+  var required: boolean
+  var user_attributes: UserAttribute[]
+  var url: uri}
+
+/**
+
+ */
+data class SamlUserAttributeWrite (  var name: string
+  var required: boolean
+  var user_attribute_ids: int64[]
+  var url: uri}
+
+/**
+
+ */
+data class ScheduledPlan (  var name: string
+  var user_id: int64
+  var run_as_recipient: boolean
+  var enabled: boolean
+  var look_id: int64
+  var dashboard_id: int64
+  var lookml_dashboard_id: string
+  var filters_string: string
+  var dashboard_filters: string
+  var require_results: boolean
+  var require_no_results: boolean
+  var require_change: boolean
+  var send_all_results: boolean
+  var crontab: string
+  var datagroup: string
+  var timezone: string
+  var query_id: string
+  var scheduled_plan_destination: ScheduledPlanDestination[]
+  var run_once: boolean
+  var include_links: boolean
+  var pdf_paper_size: string
+  var pdf_landscape: boolean
+  var embed: boolean
+  var color_theme: string
+  var long_tables: boolean
+  var inline_table_width: int64
+  var id: int64
+  var created_at: datetime
+  var updated_at: datetime
+  var title: string
+  var user: UserPublic
+  var next_run_at: datetime
+  var last_run_at: datetime
+  var can: Hash[boolean]}
+
+/**
+
+ */
+data class ScheduledPlanDestination (  var id: int64
+  var scheduled_plan_id: int64
+  var format: string
+  var apply_formatting: boolean
+  var apply_vis: boolean
+  var address: string
+  var looker_recipient: boolean
+  var type: string
+  var parameters: string
+  var secret_parameters: string
+  var message: string}
+
+/**
+
+ */
+data class Session (  var can: Hash[boolean]
+  var id: int64
+  var ip_address: string
+  var browser: string
+  var operating_system: string
+  var city: string
+  var state: string
+  var country: string
+  var credentials_type: string
+  var extended_at: string
+  var extended_count: int64
+  var sudo_user_id: int64
+  var created_at: string
+  var expires_at: string
+  var url: uri}
+
+/**
+
+ */
+data class SessionConfig (  var can: Hash[boolean]
+  var allow_persistent_sessions: boolean
+  var session_minutes: int64
+  var unlimited_sessions_per_user: boolean
+  var use_inactivity_based_logout: boolean
+  var track_session_location: boolean}
+
+/**
+
+ */
+data class Snippet (  var name: string
+  var label: string
+  var sql: string
+  var can: Hash[boolean]}
+
+/**
+
+ */
+data class Space (  var name: string
+  var parent_id: string
+  var id: string
+  var content_metadata_id: int64
+  var created_at: datetime
+  var creator_id: int64
+  var child_count: int64
+  var external_id: string
+  var is_embed: boolean
+  var is_embed_shared_root: boolean
+  var is_embed_users_root: boolean
+  var is_personal: boolean
+  var is_personal_descendant: boolean
+  var is_shared_root: boolean
+  var is_users_root: boolean
+  var can: Hash[boolean]
+  var dashboards: DashboardBase[]
+  var looks: LookWithDashboards[]}
+
+/**
+
+ */
+data class SpaceBase (  var name: string
+  var parent_id: string
+  var id: string
+  var content_metadata_id: int64
+  var created_at: datetime
+  var creator_id: int64
+  var child_count: int64
+  var external_id: string
+  var is_embed: boolean
+  var is_embed_shared_root: boolean
+  var is_embed_users_root: boolean
+  var is_personal: boolean
+  var is_personal_descendant: boolean
+  var is_shared_root: boolean
+  var is_users_root: boolean
+  var can: Hash[boolean]}
+
+/**
+
+ */
+data class SqlQuery (  var can: Hash[boolean]
+  var slug: string
+  var last_runtime: float
+  var run_count: int64
+  var browser_limit: int64
+  var sql: string
+  var last_run_at: string
+  var connection: DBConnectionBase
+  var model_name: string
+  var creator: UserPublic
+  var explore_url: string
+  var plaintext: boolean
+  var vis_config: Hash[any]
+  var result_maker_id: int64}
+
+/**
+
+ */
+data class SqlQueryCreate (  var connection_name: string
+  var connection_id: string
+  var model_name: string
+  var sql: string
+  var vis_config: Hash[any]}
+
+/**
+ * A list of action types the integration supports. Valid values are: "cell", "query", "dashboard". (Enum defined in Integration)
+ */
+data class SupportedActionTypes (  cell = "cell"
   query = "query"
   dashboard = "dashboard"}
 
-  push = "push"
+/**
+ * A list of all the download mechanisms the integration supports. The order of values is not significant: Looker will select the most appropriate supported download mechanism for a given query. The integration must ensure it can handle any of the mechanisms it claims to support. If unspecified, this defaults to all download setting values. Valid values are: "push", "url". (Enum defined in Integration)
+ */
+data class SupportedDownloadSettings (  push = "push"
   url = "url"}
 
-  txt = "txt"
+/**
+ * A list of data formats the integration supports. If unspecified, the default is all data formats. Valid values are: "txt", "csv", "inline_json", "json", "json_label", "json_detail", "json_detail_lite_stream", "xlsx", "html", "wysiwyg_pdf", "assembled_pdf", "wysiwyg_png", "csv_zip". (Enum defined in Integration)
+ */
+data class SupportedFormats (  txt = "txt"
   csv = "csv"
   inline_json = "inline_json"
   json = "json"
@@ -2206,99 +2904,129 @@
   wysiwyg_png = "wysiwyg_png"
   csv_zip = "csv_zip"}
 
-  formatted = "formatted"
+/**
+ * A list of formatting options the integration supports. If unspecified, defaults to all formats. Valid values are: "formatted", "unformatted". (Enum defined in Integration)
+ */
+data class SupportedFormattings (  formatted = "formatted"
   unformatted = "unformatted"}
 
-  apply = "apply"
+/**
+ * A list of visualization formatting options the integration supports. If unspecified, defaults to all formats. Valid values are: "apply", "noapply". (Enum defined in Integration)
+ */
+data class SupportedVisualizationFormattings (  apply = "apply"
   noapply = "noapply"}
 
-
-
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
-
-
-
-}
-
-
-}
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-}
-
-  advanced_filter_string = "advanced_filter_string"
+/**
+
+ */
+data class Theme (  var can: Hash[boolean]
+  var begin_at: datetime
+  var end_at: datetime
+  var id: int64
+  var name: string
+  var settings: ThemeSettings}
+
+/**
+
+ */
+data class ThemeSettings (  var background_color: string
+  var base_font_size: string
+  var color_collection_id: string
+  var font_color: string
+  var font_family: string
+  var font_source: string
+  var info_button_color: string
+  var primary_button_color: string
+  var show_filters_bar: boolean
+  var show_title: boolean
+  var text_tile_text_color: string
+  var tile_background_color: string
+  var tile_text_color: string
+  var title_color: string
+  var warn_button_color: string
+  var tile_title_alignment: string
+  var tile_shadow: boolean}
+
+/**
+
+ */
+data class Timezone (  var value: string
+  var label: string
+  var group: string}
+
+/**
+
+ */
+data class UpdateFolder (  var name: string
+  var parent_id: string}
+
+/**
+
+ */
+data class UpdateSpace (  var name: string
+  var parent_id: string}
+
+/**
+
+ */
+data class User (  var can: Hash[boolean]
+  var avatar_url: uri
+  var avatar_url_without_sizing: uri
+  var credentials_api3: CredentialsApi3[]
+  var credentials_email: CredentialsEmail
+  var credentials_embed: CredentialsEmbed[]
+  var credentials_google: CredentialsGoogle
+  var credentials_ldap: CredentialsLDAP
+  var credentials_looker_openid: CredentialsLookerOpenid
+  var credentials_oidc: CredentialsOIDC
+  var credentials_saml: CredentialsSaml
+  var credentials_totp: CredentialsTotp
+  var display_name: string
+  var email: string
+  var embed_group_space_id: int64
+  var first_name: string
+  var group_ids: int64[]
+  var home_space_id: string
+  var home_folder_id: string
+  var id: int64
+  var is_disabled: boolean
+  var last_name: string
+  var locale: string
+  var looker_versions: string[]
+  var models_dir_validated: boolean
+  var personal_space_id: int64
+  var personal_folder_id: int64
+  var presumed_looker_employee: boolean
+  var role_ids: int64[]
+  var sessions: Session[]
+  var ui_state: Hash[string]
+  var verified_looker_employee: boolean
+  var roles_externally_managed: boolean
+  var allow_direct_roles: boolean
+  var allow_normal_group_membership: boolean
+  var allow_roles_from_normal_groups: boolean
+  var url: uri}
+
+/**
+
+ */
+data class UserAttribute (  var can: Hash[boolean]
+  var id: int64
+  var name: string
+  var label: string
+  var type: string
+  var default_value: string
+  var is_system: boolean
+  var is_permanent: boolean
+  var value_is_hidden: boolean
+  var user_can_view: boolean
+  var user_can_edit: boolean
+  var hidden_value_domain_whitelist: string}
+
+/**
+ * An array of user attribute types that are allowed to be used in filters on this field. Valid values are: "advanced_filter_string", "advanced_filter_number", "advanced_filter_datetime", "string", "number", "datetime", "relative_url", "yesno", "zipcode". (Enum defined in LookmlModelExploreField)
+ */
+data class UserAttributeFilterTypes (  advanced_filter_string = "advanced_filter_string"
   advanced_filter_number = "advanced_filter_number"
   advanced_filter_datetime = "advanced_filter_datetime"
   string = "string"
@@ -2308,57 +3036,81 @@
   yesno = "yesno"
   zipcode = "zipcode"}
 
+/**
+ * WARNING: no writeable properties found for POST, PUT, or PATCH
+ */
+data class UserAttributeGroupValue (  var can: Hash[boolean]
+  var id: int64
+  var group_id: int64
+  var user_attribute_id: int64
+  var value_is_hidden: boolean
+  var rank: int64
+  var value: string}
 
+/**
 
+ */
+data class UserAttributeWithValue (  var can: Hash[boolean]
+  var name: string
+  var label: string
+  var rank: int64
+  var value: string
+  var user_id: int64
+  var user_can_edit: boolean
+  var value_is_hidden: boolean
+  var user_attribute_id: int64
+  var source: string
+  var hidden_value_domain_whitelist: string}
 
+/**
 
+ */
+data class UserIdOnly (  var id: int64}
 
+/**
 
-}
+ */
+data class UserLoginLockout (  var can: Hash[boolean]
+  var key: string
+  var auth_type: string
+  var ip: string
+  var user_id: int64
+  var remote_id: string
+  var full_name: string
+  var email: string
+  var fail_count: int64
+  var lockout_at: datetime}
 
+/**
 
+ */
+data class UserPublic (  var can: Hash[boolean]
+  var id: int64
+  var first_name: string
+  var last_name: string
+  var display_name: string
+  var avatar_url: uri
+  var url: uri}
 
+/**
 
+ */
+data class ValidationError (  var message: string
+  var errors: ValidationErrorDetail[]
+  var documentation_url: uri}
 
+/**
 
+ */
+data class ValidationErrorDetail (  var field: string
+  var code: string
+  var message: string
+  var documentation_url: uri}
 
-
-
-
-
-}
-
-}
-
-
-
-
-
-
-
-
-
-
-}
-
-
-
-
-
-
-
-}
-
-
-
-}
-
-
-
-
-}
-
-  monday = "monday"
+/**
+ * The name of the starting day of the week. Valid values are: "monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday". (Enum defined in LookmlModelExploreField)
+ */
+data class WeekStartDay (  monday = "monday"
   tuesday = "tuesday"
   wednesday = "wednesday"
   thursday = "thursday"
@@ -2366,488 +3118,701 @@
   saturday = "saturday"
   sunday = "sunday"}
 
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
-
-
-
-}
-
-}
-
-
-
-
-
-}
-
-
-
-
-}
-
-
-
-}
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
-
-
-
-
-
-
-}
-
-
-}
-
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-}
-
-
-
-
-
-}
-
-
-
-
-
-
-}
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-}
-
-
-}
-
-
-}
-
-
-}
-
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
-
-
-
-
-
-}
-
-
-
-}
-
-
-}
-
-}
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
-
-}
-
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-}
-
-
-
-
-
-
-
-}
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
-
-
-
-
-}
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
-
-
-
-}
-
-}
-
-
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
-
-
-
-
-
-}
-
-
-}
-
-
-
-
-}
-
-
-
-
-
-
-
-
-
-}
-
-
-
-
-
-
-
-
-}
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
+/**
+
+ */
+data class WelcomeEmailTest (  var content: string
+  var subject: string
+  var header: string}
+
+/**
+
+ */
+data class WhitelabelConfiguration (  var id: int64
+  var logo_file: string
+  var logo_url: string
+  var favicon_file: string
+  var favicon_url: string
+  var default_title: string
+  var show_help_menu: boolean
+  var show_docs: boolean
+  var show_email_sub_options: boolean
+  var allow_looker_mentions: boolean
+  var allow_looker_links: boolean
+  var custom_welcome_email_advanced: boolean
+  var setup_mentions: boolean
+  var alerts_logo: boolean
+  var alerts_links: boolean
+  var folders_mentions: boolean}
+
+/**
+
+ */
+data class Workspace (  var can: Hash[boolean]
+  var id: string
+  var projects: Project[]}
+
+/**
+ * Dynamic writeable type for ApiSession removes:
+ * can, sudo_user_id
+ */
+data class WriteApiSession (  var workspace_id: string}
+
+/**
+ * Dynamic writeable type for BackupConfiguration removes:
+ * can, url
+ */
+data class WriteBackupConfiguration (  var type: string
+  var custom_s3_bucket: string
+  var custom_s3_bucket_region: string
+  var custom_s3_key: string
+  var custom_s3_secret: string}
+
+/**
+ * Dynamic writeable type for ColorCollection removes:
+ * id
+ */
+data class WriteColorCollection (  var label: string
+  var categoricalPalettes: DiscretePalette[]
+  var sequentialPalettes: ContinuousPalette[]
+  var divergingPalettes: ContinuousPalette[]}
+
+/**
+ * Dynamic writeable type for ContentFavorite removes:
+ * id, look_id, dashboard_id, look
+ */
+data class WriteContentFavorite (  var user_id: int64
+  var content_metadata_id: int64
+  var dashboard: WriteDashboardBase}
+
+/**
+ * Dynamic writeable type for ContentMeta removes:
+ * can, id, name, parent_id, dashboard_id, look_id, folder_id, content_type, inheriting_id, slug, space_id
+ */
+data class WriteContentMeta (  var inherits: boolean}
+
+/**
+ * Dynamic writeable type for CreateDashboardFilter removes:
+ * id, field
+ */
+data class WriteCreateDashboardFilter (  var dashboard_id: string
+  var name: string
+  var title: string
+  var type: string
+  var default_value: string
+  var model: string
+  var explore: string
+  var dimension: string
+  var row: int64
+  var listens_to_filters: string[]
+  var allow_multiple_values: boolean
+  var required: boolean
+  var ui_config: Hash[any]}
+
+/**
+ * Dynamic writeable type for CreateQueryTask removes:
+ * can
+ */
+data class WriteCreateQueryTask (  var query_id: int64
+  var result_format: ResultFormat
+  var source: string
+  var deferred: boolean
+  var look_id: int64
+  var dashboard_id: string}
+
+/**
+ * Dynamic writeable type for CredentialsEmail removes:
+ * can, created_at, is_disabled, logged_in_at, password_reset_url, type, url, user_url
+ */
+data class WriteCredentialsEmail (  var email: string
+  var forced_password_reset_at_next_login: boolean}
+
+/**
+ * Dynamic writeable type for CustomWelcomeEmail removes:
+ * can
+ */
+data class WriteCustomWelcomeEmail (  var enabled: boolean
+  var content: string
+  var subject: string
+  var header: string}
+
+/**
+ * Dynamic writeable type for Dashboard removes:
+ * can, content_favorite_id, content_metadata_id, id, model, readonly, refresh_interval_to_i, user_id, created_at, dashboard_elements, dashboard_filters, dashboard_layouts, deleted_at, deleter_id, edit_uri, favorite_count, last_accessed_at, last_viewed_at, updated_at, last_updater_id, last_updater_name, user_name, view_count
+ */
+data class WriteDashboard (  var description: string
+  var hidden: boolean
+  var query_timezone: string
+  var refresh_interval: string
+  var folder: WriteFolderBase
+  var title: string
+  var slug: string
+  var preferred_viewer: string
+  var space: WriteSpaceBase
+  var alert_sync_with_dashboard_filter_enabled: boolean
+  var background_color: string
+  var crossfilter_enabled: boolean
+  var deleted: boolean
+  var filters_bar_collapsed: boolean
+  var load_configuration: string
+  var lookml_link_id: string
+  var show_filters_bar: boolean
+  var show_title: boolean
+  var space_id: string
+  var folder_id: string
+  var text_tile_text_color: string
+  var tile_background_color: string
+  var tile_text_color: string
+  var title_color: string
+  var appearance: DashboardAppearance}
+
+/**
+ * Dynamic writeable type for DashboardBase removes:
+ * can, content_favorite_id, content_metadata_id, description, hidden, id, model, query_timezone, readonly, refresh_interval, refresh_interval_to_i, title, user_id, slug, preferred_viewer
+ */
+data class WriteDashboardBase (  var folder: WriteFolderBase
+  var space: WriteSpaceBase}
+
+/**
+ * Dynamic writeable type for DashboardElement removes:
+ * can, body_text_as_html, edit_uri, id, lookml_link_id, note_text_as_html, refresh_interval_to_i, alert_count, title_text_as_html, subtitle_text_as_html
+ */
+data class WriteDashboardElement (  var body_text: string
+  var dashboard_id: string
+  var look: WriteLookWithQuery
+  var look_id: string
+  var merge_result_id: string
+  var note_display: string
+  var note_state: string
+  var note_text: string
+  var query: WriteQuery
+  var query_id: int64
+  var refresh_interval: string
+  var result_maker: WriteResultMakerWithIdVisConfigAndDynamicFields
+  var result_maker_id: int64
+  var subtitle_text: string
+  var title: string
+  var title_hidden: boolean
+  var title_text: string
+  var type: string}
+
+/**
+ * Dynamic writeable type for DashboardFilter removes:
+ * can, id, dashboard_id, field
+ */
+data class WriteDashboardFilter (  var name: string
+  var title: string
+  var type: string
+  var default_value: string
+  var model: string
+  var explore: string
+  var dimension: string
+  var row: int64
+  var listens_to_filters: string[]
+  var allow_multiple_values: boolean
+  var required: boolean
+  var ui_config: Hash[any]}
+
+/**
+ * Dynamic writeable type for DashboardLayout removes:
+ * can, id, deleted, dashboard_title, dashboard_layout_components
+ */
+data class WriteDashboardLayout (  var dashboard_id: string
+  var type: string
+  var active: boolean
+  var column_width: int64
+  var width: int64}
+
+/**
+ * Dynamic writeable type for DashboardLayoutComponent removes:
+ * can, id, deleted, element_title, element_title_hidden, vis_type
+ */
+data class WriteDashboardLayoutComponent (  var dashboard_layout_id: string
+  var dashboard_element_id: string
+  var row: int64
+  var column: int64
+  var width: int64
+  var height: int64}
+
+/**
+ * Dynamic writeable type for Datagroup removes:
+ * can, created_at, id, model_name, name, trigger_check_at, trigger_error, trigger_value
+ */
+data class WriteDatagroup (  var stale_before: int64
+  var triggered_at: int64}
+
+/**
+ * Dynamic writeable type for DBConnection removes:
+ * can, dialect, snippets, pdts_enabled, uses_oauth, created_at, user_id, example, last_regen_at, last_reap_at, managed
+ */
+data class WriteDBConnection (  var name: string
+  var host: string
+  var port: string
+  var username: string
+  var password: string
+  var certificate: string
+  var file_type: string
+  var database: string
+  var db_timezone: string
+  var query_timezone: string
+  var schema: string
+  var max_connections: int64
+  var max_billing_gigabytes: string
+  var ssl: boolean
+  var verify_ssl: boolean
+  var tmp_db_name: string
+  var jdbc_additional_params: string
+  var pool_timeout: int64
+  var dialect_name: string
+  var user_db_credentials: boolean
+  var user_attribute_fields: string[]
+  var maintenance_cron: string
+  var sql_runner_precache_tables: boolean
+  var sql_writing_with_info_schema: boolean
+  var after_connect_statements: string
+  var pdt_context_override: WriteDBConnectionOverride}
+
+/**
+ * Dynamic writeable type for DBConnectionOverride removes:
+ * has_password
+ */
+data class WriteDBConnectionOverride (  var context: string
+  var host: string
+  var port: string
+  var username: string
+  var password: string
+  var certificate: string
+  var file_type: string
+  var database: string
+  var schema: string
+  var jdbc_additional_params: string
+  var after_connect_statements: string}
+
+/**
+ * Dynamic writeable type for FolderBase removes:
+ * id, content_metadata_id, created_at, creator_id, child_count, external_id, is_embed, is_embed_shared_root, is_embed_users_root, is_personal, is_personal_descendant, is_shared_root, is_users_root, can
+ */
+data class WriteFolderBase (  var name: string
+  var parent_id: string}
+
+/**
+ * Dynamic writeable type for GitBranch removes:
+ * can, remote, remote_name, error, message, owner_name, readonly, personal, is_local, is_remote, is_production, ahead_count, behind_count, commit_at, remote_ref
+ */
+data class WriteGitBranch (  var name: string
+  var ref: string}
+
+/**
+ * Dynamic writeable type for Group removes:
+ * can, contains_current_user, external_group_id, externally_managed, id, include_by_default, user_count
+ */
+data class WriteGroup (  var can_add_to_content_metadata: boolean
+  var name: string}
+
+/**
+ * Dynamic writeable type for Homepage removes:
+ * can, content_metadata_id, created_at, homepage_sections, id, updated_at, user_id, primary_homepage
+ */
+data class WriteHomepage (  var deleted_at: datetime
+  var description: string
+  var section_order: int64[]
+  var title: string}
+
+/**
+ * Dynamic writeable type for HomepageItem removes:
+ * can, content_created_by, content_favorite_id, content_metadata_id, content_updated_at, custom_image_url, description, favorite_count, id, image_url, location, section_fetch_time, title, url, view_count
+ */
+data class WriteHomepageItem (  var custom_description: string
+  var custom_image_data_base64: string
+  var custom_title: string
+  var custom_url: string
+  var dashboard_id: int64
+  var homepage_section_id: string
+  var look_id: int64
+  var lookml_dashboard_id: string
+  var order: int64
+  var use_custom_description: boolean
+  var use_custom_image: boolean
+  var use_custom_title: boolean
+  var use_custom_url: boolean}
+
+/**
+ * Dynamic writeable type for HomepageSection removes:
+ * can, created_at, detail_url, homepage_items, id, is_header, updated_at, visible_item_order
+ */
+data class WriteHomepageSection (  var deleted_at: datetime
+  var homepage_id: int64
+  var item_order: int64[]
+  var title: string
+  var description: string}
+
+/**
+ * Dynamic writeable type for Integration removes:
+ * can, id, integration_hub_id, label, description, supported_formats, supported_action_types, supported_formattings, supported_visualization_formattings, supported_download_settings, icon_url, uses_oauth, required_fields, delegate_oauth
+ */
+data class WriteIntegration (  var enabled: boolean
+  var params: IntegrationParam[]
+  var installed_delegate_oauth_targets: int64[]}
+
+/**
+ * Dynamic writeable type for IntegrationHub removes:
+ * can, id, label, official, fetch_error_message, has_authorization_token, legal_agreement_signed, legal_agreement_required, legal_agreement_text
+ */
+data class WriteIntegrationHub (  var url: string
+  var authorization_token: string}
+
+/**
+ * Dynamic writeable type for InternalHelpResources removes:
+ * can
+ */
+data class WriteInternalHelpResources (  var enabled: boolean}
+
+/**
+ * Dynamic writeable type for InternalHelpResourcesContent removes:
+ * can
+ */
+data class WriteInternalHelpResourcesContent (  var organization_name: string
+  var markdown_content: string}
+
+/**
+ * Dynamic writeable type for LDAPConfig removes:
+ * can, default_new_user_groups, default_new_user_roles, groups, has_auth_password, modified_at, modified_by, user_attributes, url
+ */
+data class WriteLDAPConfig (  var alternate_email_login_allowed: boolean
+  var auth_password: string
+  var auth_requires_role: boolean
+  var auth_username: string
+  var connection_host: string
+  var connection_port: string
+  var connection_tls: boolean
+  var connection_tls_no_verify: boolean
+  var default_new_user_group_ids: int64[]
+  var default_new_user_role_ids: int64[]
+  var enabled: boolean
+  var force_no_page: boolean
+  var groups_base_dn: string
+  var groups_finder_type: string
+  var groups_member_attribute: string
+  var groups_objectclasses: string
+  var groups_user_attribute: string
+  var groups_with_role_ids: LDAPGroupWrite[]
+  var merge_new_users_by_email: boolean
+  var set_roles_from_groups: boolean
+  var test_ldap_password: string
+  var test_ldap_user: string
+  var user_attribute_map_email: string
+  var user_attribute_map_first_name: string
+  var user_attribute_map_last_name: string
+  var user_attribute_map_ldap_id: string
+  var user_attributes_with_ids: LDAPUserAttributeWrite[]
+  var user_bind_base_dn: string
+  var user_custom_filter: string
+  var user_id_attribute_names: string
+  var user_objectclass: string
+  var allow_normal_group_membership: boolean
+  var allow_roles_from_normal_groups: boolean
+  var allow_direct_roles: boolean}
+
+/**
+ * Dynamic writeable type for LegacyFeature removes:
+ * can, id, name, description, enabled, disallowed_as_of_version, disable_on_upgrade_to_version, end_of_life_version, documentation_url, approximate_disable_date, approximate_end_of_life_date, has_disabled_on_upgrade
+ */
+data class WriteLegacyFeature (  var enabled_locally: boolean}
+
+/**
+ * Dynamic writeable type for LookmlModel removes:
+ * can, explores, has_content, label
+ */
+data class WriteLookmlModel (  var allowed_db_connection_names: string[]
+  var name: string
+  var project_name: string
+  var unlimited_db_connections: boolean}
+
+/**
+ * Dynamic writeable type for LookWithQuery removes:
+ * can, content_metadata_id, id, content_favorite_id, created_at, deleted_at, deleter_id, embed_url, excel_file_url, favorite_count, google_spreadsheet_formula, image_embed_url, last_accessed_at, last_updater_id, last_viewed_at, model, public_slug, public_url, short_url, updated_at, view_count, user, url
+ */
+data class WriteLookWithQuery (  var title: string
+  var deleted: boolean
+  var description: string
+  var is_run_on_load: boolean
+  var public: boolean
+  var query_id: int64
+  var folder: WriteFolderBase
+  var folder_id: string
+  var user_id: int64
+  var space_id: string
+  var space: WriteSpaceBase
+  var query: WriteQuery}
+
+/**
+ * Dynamic writeable type for MergeQuery removes:
+ * can, id, result_maker_id
+ */
+data class WriteMergeQuery (  var column_limit: string
+  var dynamic_fields: string
+  var pivots: string[]
+  var sorts: string[]
+  var source_queries: MergeQuerySourceQuery[]
+  var total: boolean
+  var vis_config: Hash[string]}
+
+/**
+ * Dynamic writeable type for ModelSet removes:
+ * can, all_access, built_in, id, url
+ */
+data class WriteModelSet (  var models: string[]
+  var name: string}
+
+/**
+ * Dynamic writeable type for OIDCConfig removes:
+ * can, default_new_user_groups, default_new_user_roles, groups, modified_at, modified_by, test_slug, user_attributes, url
+ */
+data class WriteOIDCConfig (  var alternate_email_login_allowed: boolean
+  var audience: string
+  var auth_requires_role: boolean
+  var authorization_endpoint: uri
+  var default_new_user_group_ids: int64[]
+  var default_new_user_role_ids: int64[]
+  var enabled: boolean
+  var groups_attribute: string
+  var groups_with_role_ids: OIDCGroupWrite[]
+  var identifier: string
+  var issuer: string
+  var new_user_migration_types: string
+  var scopes: string[]
+  var secret: string
+  var set_roles_from_groups: boolean
+  var token_endpoint: string
+  var user_attribute_map_email: string
+  var user_attribute_map_first_name: string
+  var user_attribute_map_last_name: string
+  var user_attributes_with_ids: OIDCUserAttributeWrite[]
+  var userinfo_endpoint: uri
+  var allow_normal_group_membership: boolean
+  var allow_roles_from_normal_groups: boolean
+  var allow_direct_roles: boolean}
+
+/**
+ * Dynamic writeable type for PasswordConfig removes:
+ * can
+ */
+data class WritePasswordConfig (  var min_length: int64
+  var require_numeric: boolean
+  var require_upperlower: boolean
+  var require_special: boolean}
+
+/**
+ * Dynamic writeable type for PermissionSet removes:
+ * can, all_access, built_in, id, url
+ */
+data class WritePermissionSet (  var name: string
+  var permissions: string[]}
+
+/**
+ * Dynamic writeable type for Project removes:
+ * can, id, uses_git, is_example
+ */
+data class WriteProject (  var name: string
+  var git_remote_url: string
+  var git_username: string
+  var git_password: string
+  var git_production_branch_name: string
+  var use_git_cookie_auth: boolean
+  var git_username_user_attribute: string
+  var git_password_user_attribute: string
+  var git_service_name: string
+  var git_application_server_http_port: int64
+  var git_application_server_http_scheme: string
+  var deploy_secret: string
+  var unset_deploy_secret: boolean
+  var pull_request_mode: PullRequestMode
+  var validation_required: boolean
+  var git_release_mgmt_enabled: boolean
+  var allow_warnings: boolean}
+
+/**
+ * Dynamic writeable type for Query removes:
+ * can, id, slug, share_url, expanded_share_url, url, has_table_calculations
+ */
+data class WriteQuery (  var model: string
+  var view: string
+  var fields: string[]
+  var pivots: string[]
+  var fill_fields: string[]
+  var filters: Hash[string]
+  var filter_expression: string
+  var sorts: string[]
+  var limit: string
+  var column_limit: string
+  var total: boolean
+  var row_total: string
+  var subtotals: string[]
+  var vis_config: Hash[any]
+  var filter_config: Hash[any]
+  var visible_ui_sections: string
+  var dynamic_fields: string
+  var client_id: string
+  var query_timezone: string
+  var runtime: double}
+
+/**
+ * Dynamic writeable type for RepositoryCredential removes:
+ * can, id, root_project_id, remote_url, is_configured
+ */
+data class WriteRepositoryCredential (  var git_username: string
+  var git_password: string
+  var ssh_public_key: string}
+
+/**
+ * Dynamic writeable type for ResultMakerWithIdVisConfigAndDynamicFields removes:
+ * id, dynamic_fields, filterables, sorts, merge_result_id, total, query_id, sql_query_id, vis_config
+ */
+data class WriteResultMakerWithIdVisConfigAndDynamicFields (  var query: WriteQuery}
+
+/**
+ * Dynamic writeable type for Role removes:
+ * can, id, url, users_url
+ */
+data class WriteRole (  var name: string
+  var permission_set: WritePermissionSet
+  var permission_set_id: int64
+  var model_set: WriteModelSet
+  var model_set_id: int64}
+
+/**
+ * Dynamic writeable type for SamlConfig removes:
+ * can, test_slug, modified_at, modified_by, default_new_user_roles, default_new_user_groups, groups, user_attributes, url
+ */
+data class WriteSamlConfig (  var enabled: boolean
+  var idp_cert: string
+  var idp_url: string
+  var idp_issuer: string
+  var idp_audience: string
+  var allowed_clock_drift: int64
+  var user_attribute_map_email: string
+  var user_attribute_map_first_name: string
+  var user_attribute_map_last_name: string
+  var new_user_migration_types: string
+  var alternate_email_login_allowed: boolean
+  var default_new_user_role_ids: int64[]
+  var default_new_user_group_ids: int64[]
+  var set_roles_from_groups: boolean
+  var groups_attribute: string
+  var groups_with_role_ids: SamlGroupWrite[]
+  var auth_requires_role: boolean
+  var user_attributes_with_ids: SamlUserAttributeWrite[]
+  var groups_finder_type: string
+  var groups_member_value: string
+  var bypass_login_page: boolean
+  var allow_normal_group_membership: boolean
+  var allow_roles_from_normal_groups: boolean
+  var allow_direct_roles: boolean}
+
+/**
+ * Dynamic writeable type for ScheduledPlan removes:
+ * id, created_at, updated_at, title, user, next_run_at, last_run_at, can
+ */
+data class WriteScheduledPlan (  var name: string
+  var user_id: int64
+  var run_as_recipient: boolean
+  var enabled: boolean
+  var look_id: int64
+  var dashboard_id: int64
+  var lookml_dashboard_id: string
+  var filters_string: string
+  var dashboard_filters: string
+  var require_results: boolean
+  var require_no_results: boolean
+  var require_change: boolean
+  var send_all_results: boolean
+  var crontab: string
+  var datagroup: string
+  var timezone: string
+  var query_id: string
+  var scheduled_plan_destination: ScheduledPlanDestination[]
+  var run_once: boolean
+  var include_links: boolean
+  var pdf_paper_size: string
+  var pdf_landscape: boolean
+  var embed: boolean
+  var color_theme: string
+  var long_tables: boolean
+  var inline_table_width: int64}
+
+/**
+ * Dynamic writeable type for SessionConfig removes:
+ * can
+ */
+data class WriteSessionConfig (  var allow_persistent_sessions: boolean
+  var session_minutes: int64
+  var unlimited_sessions_per_user: boolean
+  var use_inactivity_based_logout: boolean
+  var track_session_location: boolean}
+
+/**
+ * Dynamic writeable type for SpaceBase removes:
+ * id, content_metadata_id, created_at, creator_id, child_count, external_id, is_embed, is_embed_shared_root, is_embed_users_root, is_personal, is_personal_descendant, is_shared_root, is_users_root, can
+ */
+data class WriteSpaceBase (  var name: string
+  var parent_id: string}
+
+/**
+ * Dynamic writeable type for Theme removes:
+ * can, id
+ */
+data class WriteTheme (  var begin_at: datetime
+  var end_at: datetime
+  var name: string
+  var settings: ThemeSettings}
+
+/**
+ * Dynamic writeable type for User removes:
+ * can, avatar_url, avatar_url_without_sizing, credentials_api3, credentials_embed, credentials_google, credentials_ldap, credentials_looker_openid, credentials_oidc, credentials_saml, credentials_totp, display_name, email, embed_group_space_id, group_ids, id, looker_versions, personal_space_id, personal_folder_id, presumed_looker_employee, role_ids, sessions, verified_looker_employee, roles_externally_managed, allow_direct_roles, allow_normal_group_membership, allow_roles_from_normal_groups, url
+ */
+data class WriteUser (  var credentials_email: WriteCredentialsEmail
+  var first_name: string
+  var home_space_id: string
+  var home_folder_id: string
+  var is_disabled: boolean
+  var last_name: string
+  var locale: string
+  var models_dir_validated: boolean
+  var ui_state: Hash[string]}
+
+/**
+ * Dynamic writeable type for UserAttribute removes:
+ * can, id, is_system, is_permanent
+ */
+data class WriteUserAttribute (  var name: string
+  var label: string
+  var type: string
+  var default_value: string
+  var value_is_hidden: boolean
+  var user_can_view: boolean
+  var user_can_edit: boolean
+  var hidden_value_domain_whitelist: string}
+
+/**
+ * Dynamic writeable type for UserAttributeWithValue removes:
+ * can, name, label, rank, user_id, user_can_edit, value_is_hidden, user_attribute_id, source, hidden_value_domain_whitelist
+ */
+data class WriteUserAttributeWithValue (  var value: string}
+
+/**
+ * Dynamic writeable type for WhitelabelConfiguration removes:
+ * id, logo_url, favicon_url
+ */
+data class WriteWhitelabelConfiguration (  var logo_file: string
+  var favicon_file: string
+  var default_title: string
+  var show_help_menu: boolean
+  var show_docs: boolean
+  var show_email_sub_options: boolean
+  var allow_looker_mentions: boolean
+  var allow_looker_links: boolean
+  var custom_welcome_email_advanced: boolean
+  var setup_mentions: boolean
+  var alerts_logo: boolean
+  var alerts_links: boolean
+  var folders_mentions: boolean}
