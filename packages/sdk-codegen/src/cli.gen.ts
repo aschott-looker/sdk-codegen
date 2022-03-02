@@ -91,6 +91,35 @@ var ${this.currentRegion} = &cobra.Command{
     return ''
   }
 
+  getMappedType(type: IType): string {
+    switch (type.name) {
+      case 'boolean': {
+        return 'Bool'
+      }
+      case 'double': {
+        return 'Float64'
+      }
+      case 'float': {
+        return 'Float32'
+      }
+      case 'int32': {
+        return 'Int32'
+      }
+      case 'int64': {
+        return 'Int64'
+      }
+      case 'integer': {
+        return 'Int'
+      }
+      case 'number': {
+        return 'Float64'
+      }
+      default: {
+        return 'String'
+      }
+    }
+  }
+
   declareMethod(_indent: string, method: IMethod) {
     let commandName = method.name
     const underScoreIndexes = this.getAllIndexes(commandName, '_')
@@ -108,22 +137,45 @@ var ${this.currentRegion} = &cobra.Command{
     }
     this.commands.add(commandName)
     const subCommands = this.regionToSubCommands.get(this.currentRegion)
+    const flagObjs = method.allParams.map((param) =>
+      this.generateFlagObj(param)
+    )
+    const subCommand = new SubCommand(commandName, flagObjs)
     if (subCommands !== undefined) {
-      subCommands.push(new SubCommand(commandName))
+      subCommands.push(subCommand)
     } else {
-      this.regionToSubCommands.set(this.currentRegion, [
-        new SubCommand(commandName),
-      ])
+      this.regionToSubCommands.set(this.currentRegion, [subCommand])
     }
+    const flags = method.allParams
+      .map((param) => this.generateFlag(param))
+      .join('\n')
     return `
 var ${commandName} = &cobra.Command{
   Use:   "${use}",
   Short: "${method.summary}",
   Long: \`${this.replaceAll(method.description, '`', "'")}\`,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("${method.name} called")
+    fmt.Println("${use} called")
+    ${flags}
   },
 }`
+  }
+
+  generateFlag(param: IParameter) {
+    return `
+    ${param.name}, _ := cmd.Flags().Get${this.getMappedType(param.type)}("${
+      param.name
+    }")
+    fmt.Println("${param.name} set to ", ${param.name})`
+  }
+
+  generateFlagObj(param: IParameter) {
+    return new Flag(
+      param.name,
+      param.description,
+      param.required,
+      this.getMappedType(param.type)
+    )
   }
 
   replaceAll(str: string, find: string, replace: string) {
@@ -163,17 +215,34 @@ var ${commandName} = &cobra.Command{
 
   methodsEpilogue(indent: string) {
     const addCommands = Array.from(this.regionToSubCommands)
-      .map(([key, values]) => {
+      .map(([key, subCommands]) => {
         const mainCommand = key
-        const subCommands = values.map((value) => value.name)
         const subCommandsString = subCommands
           .map((subCommand) => {
-            return `${indent}${mainCommand}.AddCommand(${subCommand})`
+            const flags = subCommand.flags
+              .map((flag) => {
+                let requiredText = ''
+                if (flag.required) {
+                  requiredText = `cobra.MarkFlagRequired(${subCommand.name}.Flags(), "${flag.name}")`
+                }
+                return `
+              ${subCommand.name}.Flags().${flag.type}("${flag.name}", "${
+                  flag.shortName
+                }", ${flag.defaultValue()}, "${flag.description}")
+              ${requiredText}
+              `
+              })
+              .join('\n')
+            return `
+            ${indent}${mainCommand}.AddCommand(${subCommand.name})
+            ${flags}
+            `
           })
           .join('\n')
         return `\n${subCommandsString}\n${indent}rootCmd.AddCommand(${mainCommand})`
       })
       .join('')
+
     return `
 func init() {
 ${addCommands}
@@ -218,8 +287,48 @@ import (
 
 class SubCommand {
   name = ''
+  flags = new Array<Flag>()
 
-  constructor(name: string) {
+  constructor(name: string, flags: Array<Flag>) {
     this.name = name
+    this.flags = flags
+  }
+}
+
+class Flag {
+  name = ''
+  shortName = ''
+  description = ''
+  required = false
+  type = ''
+
+  constructor(
+    name: string,
+    description: string,
+    required: boolean,
+    type: string
+  ) {
+    this.name = name
+    this.shortName = name
+      .split('_')
+      .map((part) => part.charAt(0))
+      .join('')
+    this.description = description
+    this.required = required
+    if (type === 'Bool') {
+      this.type = 'BoolP'
+    } else {
+      this.type = type
+    }
+  }
+
+  defaultValue() {
+    if (this.type === 'BoolP') {
+      return false
+    } else if (this.type === 'Int64') {
+      return 0
+    } else {
+      return '""'
+    }
   }
 }
