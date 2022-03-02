@@ -54,7 +54,7 @@ export class CliGen extends CodeGen {
 
   keywords = new Set<string>([])
 
-  regionToSubCommands = new Map<string, string>()
+  regionToSubCommands = new Map<string, Array<SubCommand>>()
   currentRegion = ''
   commands = new Set<string>([])
 
@@ -107,14 +107,13 @@ var ${this.currentRegion} = &cobra.Command{
       commandName = `${commandName}${this.getRandomInt(10000)}`
     }
     this.commands.add(commandName)
-    if (this.regionToSubCommands.has(this.currentRegion)) {
-      const subCommands = this.regionToSubCommands.get(this.currentRegion)
-      this.regionToSubCommands.set(
-        this.currentRegion,
-        `${subCommands},${commandName}`
-      )
+    const subCommands = this.regionToSubCommands.get(this.currentRegion)
+    if (subCommands !== undefined) {
+      subCommands.push(new SubCommand(commandName))
     } else {
-      this.regionToSubCommands.set(this.currentRegion, commandName)
+      this.regionToSubCommands.set(this.currentRegion, [
+        new SubCommand(commandName),
+      ])
     }
     return `
 var ${commandName} = &cobra.Command{
@@ -164,9 +163,9 @@ var ${commandName} = &cobra.Command{
 
   methodsEpilogue(indent: string) {
     const addCommands = Array.from(this.regionToSubCommands)
-      .map(([key, value]) => {
+      .map(([key, values]) => {
         const mainCommand = key
-        const subCommands = value.split(',')
+        const subCommands = values.map((value) => value.name)
         const subCommandsString = subCommands
           .map((subCommand) => {
             return `${indent}${mainCommand}.AddCommand(${subCommand})`
@@ -214,5 +213,13 @@ import (
 
   typeSignature(_indent: string, _type: IType) {
     return ''
+  }
+}
+
+class SubCommand {
+  name = ''
+
+  constructor(name: string) {
+    this.name = name
   }
 }

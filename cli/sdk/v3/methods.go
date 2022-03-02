@@ -11,9 +11,6 @@ var apiAuthCmd = &cobra.Command{
   Use:   "ApiAuth",
   Short: "API Authentication",
   Long: "API Authentication",
-  Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("ApiAuth called")
-  },
 }
 
 
@@ -98,9 +95,6 @@ var authCmd = &cobra.Command{
   Use:   "Auth",
   Short: "Manage User Authentication Configuration",
   Long: "Manage User Authentication Configuration",
-  Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("Auth called")
-  },
 }
 
 
@@ -560,9 +554,6 @@ var colorCollectionCmd = &cobra.Command{
   Use:   "ColorCollection",
   Short: "Manage Color Collections",
   Long: "Manage Color Collections",
-  Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("ColorCollection called")
-  },
 }
 
 
@@ -669,7 +660,7 @@ Returns the new specified default Color Collection object.
 }
 
 
-var colorCollectionCmd5691 = &cobra.Command{
+var colorCollectionCmd8259 = &cobra.Command{
   Use:   "colorCollection",
   Short: "Get Color Collection by ID",
   Long: `### Get a Color Collection by ID
@@ -728,9 +719,6 @@ var configCmd = &cobra.Command{
   Use:   "Config",
   Short: "Manage General Configuration",
   Long: "Manage General Configuration",
-  Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("Config called")
-  },
 }
 
 
@@ -984,9 +972,6 @@ var connectionCmd = &cobra.Command{
   Use:   "Connection",
   Short: "Manage Database Connections",
   Long: "Manage Database Connections",
-  Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("Connection called")
-  },
 }
 
 
@@ -1012,7 +997,7 @@ var createConnectionCmd = &cobra.Command{
 }
 
 
-var connectionCmd6726 = &cobra.Command{
+var connectionCmd8300 = &cobra.Command{
   Use:   "connection",
   Short: "Get Connection",
   Long: `### Get information about a connection.
@@ -1109,9 +1094,6 @@ var contentCmd = &cobra.Command{
   Use:   "Content",
   Short: "Manage Content",
   Long: "Manage Content",
-  Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("Content called")
-  },
 }
 
 
@@ -1338,9 +1320,6 @@ var dashboardCmd = &cobra.Command{
   Use:   "Dashboard",
   Short: "Manage Dashboards",
   Long: "Manage Dashboards",
-  Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("Dashboard called")
-  },
 }
 
 
@@ -1465,7 +1444,7 @@ To **link** or **unlink** a UDD set the 'lookml_link_id' property with [update_d
 }
 
 
-var dashboardCmd2726 = &cobra.Command{
+var dashboardCmd2620 = &cobra.Command{
   Use:   "dashboard",
   Short: "Get Dashboard",
   Long: `### Get information about a dashboard
@@ -1768,9 +1747,6 @@ var dataActionCmd = &cobra.Command{
   Use:   "DataAction",
   Short: "Run Data Actions",
   Long: "Run Data Actions",
-  Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("DataAction called")
-  },
 }
 
 
@@ -1800,9 +1776,6 @@ var datagroupCmd = &cobra.Command{
   Use:   "Datagroup",
   Short: "Manage Datagroups",
   Long: "Manage Datagroups",
-  Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("Datagroup called")
-  },
 }
 
 
@@ -1817,7 +1790,7 @@ var allDatagroupsCmd = &cobra.Command{
 }
 
 
-var datagroupCmd7809 = &cobra.Command{
+var datagroupCmd7329 = &cobra.Command{
   Use:   "datagroup",
   Short: "Get Datagroup",
   Long: `### Get information about a datagroup.
@@ -1845,9 +1818,6 @@ var derivedTableCmd = &cobra.Command{
   Use:   "DerivedTable",
   Short: "View Derived Table graphs",
   Long: "View Derived Table graphs",
-  Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("DerivedTable called")
-  },
 }
 
 
@@ -1879,9 +1849,6 @@ var folderCmd = &cobra.Command{
   Use:   "Folder",
   Short: "Manage Folders",
   Long: "Manage Folders",
-  Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("Folder called")
-  },
 }
 
 
@@ -1895,7 +1862,7 @@ var searchFoldersCmd = &cobra.Command{
 }
 
 
-var folderCmd7578 = &cobra.Command{
+var folderCmd9907 = &cobra.Command{
   Use:   "folder",
   Short: "Get Folder",
   Long: `### Get information about the folder with a specific id.`,
@@ -2025,9 +1992,6 @@ var groupCmd = &cobra.Command{
   Use:   "Group",
   Short: "Manage Groups",
   Long: "Manage Groups",
-  Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("Group called")
-  },
 }
 
 
@@ -2088,7 +2052,7 @@ Boolean search params accept only "true" and "false" as values.
 }
 
 
-var groupCmd2770 = &cobra.Command{
+var groupCmd339 = &cobra.Command{
   Use:   "group",
   Short: "Get Group",
   Long: `### Get information about a group.
@@ -2216,9 +2180,6 @@ var homepageCmd = &cobra.Command{
   Use:   "Homepage",
   Short: "Manage Homepage",
   Long: "Manage Homepage",
-  Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("Homepage called")
-  },
 }
 
 
@@ -2277,7 +2238,7 @@ Boolean search params accept only "true" and "false" as values.
 }
 
 
-var homepageCmd7622 = &cobra.Command{
+var homepageCmd7845 = &cobra.Command{
   Use:   "homepage",
   Short: "Get Homepage",
   Long: `### Get information about a homepage.
@@ -2437,9 +2398,6 @@ var integrationCmd = &cobra.Command{
   Use:   "Integration",
   Short: "Manage Integrations",
   Long: "Manage Integrations",
-  Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("Integration called")
-  },
 }
 
 
@@ -2523,7 +2481,7 @@ var allIntegrationsCmd = &cobra.Command{
 }
 
 
-var integrationCmd5380 = &cobra.Command{
+var integrationCmd5156 = &cobra.Command{
   Use:   "integration",
   Short: "Get Integration",
   Long: `### Get information about a Integration.
@@ -2571,9 +2529,6 @@ var lookCmd = &cobra.Command{
   Use:   "Look",
   Short: "Run and Manage Looks",
   Long: "Run and Manage Looks",
-  Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("Look called")
-  },
 }
 
 
@@ -2648,7 +2603,7 @@ Get a **single look** by id with [look(id)](#!/Look/look)
 }
 
 
-var lookCmd4947 = &cobra.Command{
+var lookCmd5352 = &cobra.Command{
   Use:   "look",
   Short: "Get Look",
   Long: `### Get a Look.
@@ -2745,9 +2700,6 @@ var lookmlModelCmd = &cobra.Command{
   Use:   "LookmlModel",
   Short: "Manage LookML Models",
   Long: "Manage LookML Models",
-  Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("LookmlModel called")
-  },
 }
 
 
@@ -2773,7 +2725,7 @@ var createLookmlModelCmd = &cobra.Command{
 }
 
 
-var lookmlModelCmd4483 = &cobra.Command{
+var lookmlModelCmd5995 = &cobra.Command{
   Use:   "lookmlModel",
   Short: "Get LookML Model",
   Long: `### Get information about a lookml model.
@@ -2823,9 +2775,6 @@ var projectCmd = &cobra.Command{
   Use:   "Project",
   Short: "Manage Projects",
   Long: "Manage Projects",
-  Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("Project called")
-  },
 }
 
 
@@ -3020,7 +2969,7 @@ dev mode required.
 }
 
 
-var projectCmd1937 = &cobra.Command{
+var projectCmd2306 = &cobra.Command{
   Use:   "project",
   Short: "Get Project",
   Long: `### Get A Project
@@ -3321,9 +3270,6 @@ var queryCmd = &cobra.Command{
   Use:   "Query",
   Short: "Run and Manage Queries",
   Long: "Run and Manage Queries",
-  Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("Query called")
-  },
 }
 
 
@@ -3410,7 +3356,7 @@ These data formats can only carry row data, and error info is not row data.
 }
 
 
-var queryCmd1943 = &cobra.Command{
+var queryCmd7609 = &cobra.Command{
   Use:   "query",
   Short: "Get Query",
   Long: `### Get a previously created query by id.
@@ -3744,9 +3690,6 @@ var renderTaskCmd = &cobra.Command{
   Use:   "RenderTask",
   Short: "Manage Render Tasks",
   Long: "Manage Render Tasks",
-  Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("RenderTask called")
-  },
 }
 
 
@@ -3816,7 +3759,7 @@ Once the render task is complete, you can download the resulting document or ima
 }
 
 
-var renderTaskCmd904 = &cobra.Command{
+var renderTaskCmd2216 = &cobra.Command{
   Use:   "renderTask",
   Short: "Get Render Task",
   Long: `### Get information about a render task.
@@ -3865,9 +3808,6 @@ var roleCmd = &cobra.Command{
   Use:   "Role",
   Short: "Manage Roles",
   Long: "Manage Roles",
-  Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("Role called")
-  },
 }
 
 
@@ -4115,7 +4055,7 @@ Boolean search params accept only "true" and "false" as values.
 }
 
 
-var roleCmd4221 = &cobra.Command{
+var roleCmd6246 = &cobra.Command{
   Use:   "role",
   Short: "Get Role",
   Long: `### Get information about the role with a specific id.
@@ -4198,9 +4138,6 @@ var scheduledPlanCmd = &cobra.Command{
   Use:   "ScheduledPlan",
   Short: "Manage Scheduled Plans",
   Long: "Manage Scheduled Plans",
-  Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("ScheduledPlan called")
-  },
 }
 
 
@@ -4217,7 +4154,7 @@ Returns scheduled plans owned by the caller for a given space id.
 }
 
 
-var scheduledPlanCmd1560 = &cobra.Command{
+var scheduledPlanCmd341 = &cobra.Command{
   Use:   "scheduledPlan",
   Short: "Get Scheduled Plan",
   Long: `### Get Information About a Scheduled Plan
@@ -4574,13 +4511,10 @@ var sessionCmd = &cobra.Command{
   Use:   "Session",
   Short: "Session Information",
   Long: "Session Information",
-  Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("Session called")
-  },
 }
 
 
-var sessionCmd4805 = &cobra.Command{
+var sessionCmd9085 = &cobra.Command{
   Use:   "session",
   Short: "Get Session",
   Long: `### Get API Session
@@ -4629,9 +4563,6 @@ var spaceCmd = &cobra.Command{
   Use:   "Space",
   Short: "Manage Spaces",
   Long: "Manage Spaces",
-  Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("Space called")
-  },
 }
 
 
@@ -4674,7 +4605,7 @@ Boolean search params accept only "true" and "false" as values.
 }
 
 
-var spaceCmd4664 = &cobra.Command{
+var spaceCmd744 = &cobra.Command{
   Use:   "space",
   Short: "Get Space",
   Long: `### Get information about the space with a specific id.`,
@@ -4804,9 +4735,6 @@ var themeCmd = &cobra.Command{
   Use:   "Theme",
   Short: "Manage Themes",
   Long: "Manage Themes",
-  Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("Theme called")
-  },
 }
 
 
@@ -4998,7 +4926,7 @@ See [Create Theme](#!/Theme/create_theme) for constraints
 }
 
 
-var themeCmd805 = &cobra.Command{
+var themeCmd2638 = &cobra.Command{
   Use:   "theme",
   Short: "Get Theme",
   Long: `### Get a theme by ID
@@ -5054,9 +4982,6 @@ var userCmd = &cobra.Command{
   Use:   "User",
   Short: "Manage Users",
   Long: "Manage Users",
-  Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("User called")
-  },
 }
 
 
@@ -5150,7 +5075,7 @@ Any additional search params will be combined into a logical AND expression.
 }
 
 
-var userCmd4004 = &cobra.Command{
+var userCmd4650 = &cobra.Command{
   Use:   "user",
   Short: "Get User by Id",
   Long: `### Get information about the user with a specific id.
@@ -5600,9 +5525,6 @@ var userAttributeCmd = &cobra.Command{
   Use:   "UserAttribute",
   Short: "Manage User Attributes",
   Long: "Manage User Attributes",
-  Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("UserAttribute called")
-  },
 }
 
 
@@ -5637,7 +5559,7 @@ user attribute will fail with a 422 error.
 }
 
 
-var userAttributeCmd2694 = &cobra.Command{
+var userAttributeCmd9639 = &cobra.Command{
   Use:   "userAttribute",
   Short: "Get User Attribute",
   Long: `### Get information about a user attribute.
@@ -5723,9 +5645,6 @@ var workspaceCmd = &cobra.Command{
   Use:   "Workspace",
   Short: "Manage Workspaces",
   Long: "Manage Workspaces",
-  Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("Workspace called")
-  },
 }
 
 
@@ -5742,7 +5661,7 @@ Returns all workspaces available to the calling user.
 }
 
 
-var workspaceCmd9059 = &cobra.Command{
+var workspaceCmd6381 = &cobra.Command{
   Use:   "workspace",
   Short: "Get Workspace",
   Long: `### Get A Workspace
@@ -5822,7 +5741,7 @@ func init() {
   colorCollectionCmd.AddCommand(colorCollectionsStandardCmd)
   colorCollectionCmd.AddCommand(defaultColorCollectionCmd)
   colorCollectionCmd.AddCommand(setDefaultColorCollectionCmd)
-  colorCollectionCmd.AddCommand(colorCollectionCmd5691)
+  colorCollectionCmd.AddCommand(colorCollectionCmd8259)
   colorCollectionCmd.AddCommand(updateColorCollectionCmd)
   colorCollectionCmd.AddCommand(deleteColorCollectionCmd)
   rootCmd.AddCommand(colorCollectionCmd)
@@ -5851,7 +5770,7 @@ func init() {
   rootCmd.AddCommand(configCmd)
   connectionCmd.AddCommand(allConnectionsCmd)
   connectionCmd.AddCommand(createConnectionCmd)
-  connectionCmd.AddCommand(connectionCmd6726)
+  connectionCmd.AddCommand(connectionCmd8300)
   connectionCmd.AddCommand(updateConnectionCmd)
   connectionCmd.AddCommand(deleteConnectionCmd)
   connectionCmd.AddCommand(deleteConnectionOverrideCmd)
@@ -5880,7 +5799,7 @@ func init() {
   dashboardCmd.AddCommand(searchDashboardsCmd)
   dashboardCmd.AddCommand(importLookmlDashboardCmd)
   dashboardCmd.AddCommand(syncLookmlDashboardCmd)
-  dashboardCmd.AddCommand(dashboardCmd2726)
+  dashboardCmd.AddCommand(dashboardCmd2620)
   dashboardCmd.AddCommand(updateDashboardCmd)
   dashboardCmd.AddCommand(deleteDashboardCmd)
   dashboardCmd.AddCommand(dashboardAggregateTableLookmlCmd)
@@ -5909,14 +5828,14 @@ func init() {
   dataActionCmd.AddCommand(fetchRemoteDataActionFormCmd)
   rootCmd.AddCommand(dataActionCmd)
   datagroupCmd.AddCommand(allDatagroupsCmd)
-  datagroupCmd.AddCommand(datagroupCmd7809)
+  datagroupCmd.AddCommand(datagroupCmd7329)
   datagroupCmd.AddCommand(updateDatagroupCmd)
   rootCmd.AddCommand(datagroupCmd)
   derivedTableCmd.AddCommand(graphDerivedTablesForModelCmd)
   derivedTableCmd.AddCommand(graphDerivedTablesForViewCmd)
   rootCmd.AddCommand(derivedTableCmd)
   folderCmd.AddCommand(searchFoldersCmd)
-  folderCmd.AddCommand(folderCmd7578)
+  folderCmd.AddCommand(folderCmd9907)
   folderCmd.AddCommand(updateFolderCmd)
   folderCmd.AddCommand(deleteFolderCmd)
   folderCmd.AddCommand(allFoldersCmd)
@@ -5931,7 +5850,7 @@ func init() {
   groupCmd.AddCommand(allGroupsCmd)
   groupCmd.AddCommand(createGroupCmd)
   groupCmd.AddCommand(searchGroupsCmd)
-  groupCmd.AddCommand(groupCmd2770)
+  groupCmd.AddCommand(groupCmd339)
   groupCmd.AddCommand(updateGroupCmd)
   groupCmd.AddCommand(deleteGroupCmd)
   groupCmd.AddCommand(allGroupGroupsCmd)
@@ -5946,7 +5865,7 @@ func init() {
   homepageCmd.AddCommand(allHomepagesCmd)
   homepageCmd.AddCommand(createHomepageCmd)
   homepageCmd.AddCommand(searchHomepagesCmd)
-  homepageCmd.AddCommand(homepageCmd7622)
+  homepageCmd.AddCommand(homepageCmd7845)
   homepageCmd.AddCommand(updateHomepageCmd)
   homepageCmd.AddCommand(deleteHomepageCmd)
   homepageCmd.AddCommand(allHomepageItemsCmd)
@@ -5968,7 +5887,7 @@ func init() {
   integrationCmd.AddCommand(deleteIntegrationHubCmd)
   integrationCmd.AddCommand(acceptIntegrationHubLegalAgreementCmd)
   integrationCmd.AddCommand(allIntegrationsCmd)
-  integrationCmd.AddCommand(integrationCmd5380)
+  integrationCmd.AddCommand(integrationCmd5156)
   integrationCmd.AddCommand(updateIntegrationCmd)
   integrationCmd.AddCommand(fetchIntegrationFormCmd)
   integrationCmd.AddCommand(testIntegrationCmd)
@@ -5976,14 +5895,14 @@ func init() {
   lookCmd.AddCommand(allLooksCmd)
   lookCmd.AddCommand(createLookCmd)
   lookCmd.AddCommand(searchLooksCmd)
-  lookCmd.AddCommand(lookCmd4947)
+  lookCmd.AddCommand(lookCmd5352)
   lookCmd.AddCommand(updateLookCmd)
   lookCmd.AddCommand(deleteLookCmd)
   lookCmd.AddCommand(runLookCmd)
   rootCmd.AddCommand(lookCmd)
   lookmlModelCmd.AddCommand(allLookmlModelsCmd)
   lookmlModelCmd.AddCommand(createLookmlModelCmd)
-  lookmlModelCmd.AddCommand(lookmlModelCmd4483)
+  lookmlModelCmd.AddCommand(lookmlModelCmd5995)
   lookmlModelCmd.AddCommand(updateLookmlModelCmd)
   lookmlModelCmd.AddCommand(deleteLookmlModelCmd)
   lookmlModelCmd.AddCommand(lookmlModelExploreCmd)
@@ -6000,7 +5919,7 @@ func init() {
   projectCmd.AddCommand(resetProjectToRemoteCmd)
   projectCmd.AddCommand(allProjectsCmd)
   projectCmd.AddCommand(createProjectCmd)
-  projectCmd.AddCommand(projectCmd1937)
+  projectCmd.AddCommand(projectCmd2306)
   projectCmd.AddCommand(updateProjectCmd)
   projectCmd.AddCommand(manifestCmd)
   projectCmd.AddCommand(gitDeployKeyCmd)
@@ -6023,7 +5942,7 @@ func init() {
   queryCmd.AddCommand(queryTaskMultiResultsCmd)
   queryCmd.AddCommand(queryTaskCmd)
   queryCmd.AddCommand(queryTaskResultsCmd)
-  queryCmd.AddCommand(queryCmd1943)
+  queryCmd.AddCommand(queryCmd7609)
   queryCmd.AddCommand(queryForSlugCmd)
   queryCmd.AddCommand(createQueryCmd)
   queryCmd.AddCommand(runQueryCmd)
@@ -6041,7 +5960,7 @@ func init() {
   renderTaskCmd.AddCommand(createLookRenderTaskCmd)
   renderTaskCmd.AddCommand(createQueryRenderTaskCmd)
   renderTaskCmd.AddCommand(createDashboardRenderTaskCmd)
-  renderTaskCmd.AddCommand(renderTaskCmd904)
+  renderTaskCmd.AddCommand(renderTaskCmd2216)
   renderTaskCmd.AddCommand(renderTaskResultsCmd)
   rootCmd.AddCommand(renderTaskCmd)
   roleCmd.AddCommand(searchModelSetsCmd)
@@ -6060,7 +5979,7 @@ func init() {
   roleCmd.AddCommand(allRolesCmd)
   roleCmd.AddCommand(createRoleCmd)
   roleCmd.AddCommand(searchRolesCmd)
-  roleCmd.AddCommand(roleCmd4221)
+  roleCmd.AddCommand(roleCmd6246)
   roleCmd.AddCommand(updateRoleCmd)
   roleCmd.AddCommand(deleteRoleCmd)
   roleCmd.AddCommand(roleGroupsCmd)
@@ -6069,7 +5988,7 @@ func init() {
   roleCmd.AddCommand(setRoleUsersCmd)
   rootCmd.AddCommand(roleCmd)
   scheduledPlanCmd.AddCommand(scheduledPlansForSpaceCmd)
-  scheduledPlanCmd.AddCommand(scheduledPlanCmd1560)
+  scheduledPlanCmd.AddCommand(scheduledPlanCmd341)
   scheduledPlanCmd.AddCommand(updateScheduledPlanCmd)
   scheduledPlanCmd.AddCommand(deleteScheduledPlanCmd)
   scheduledPlanCmd.AddCommand(allScheduledPlansCmd)
@@ -6080,11 +5999,11 @@ func init() {
   scheduledPlanCmd.AddCommand(scheduledPlansForLookmlDashboardCmd)
   scheduledPlanCmd.AddCommand(scheduledPlanRunOnceByIdCmd)
   rootCmd.AddCommand(scheduledPlanCmd)
-  sessionCmd.AddCommand(sessionCmd4805)
+  sessionCmd.AddCommand(sessionCmd9085)
   sessionCmd.AddCommand(updateSessionCmd)
   rootCmd.AddCommand(sessionCmd)
   spaceCmd.AddCommand(searchSpacesCmd)
-  spaceCmd.AddCommand(spaceCmd4664)
+  spaceCmd.AddCommand(spaceCmd744)
   spaceCmd.AddCommand(updateSpaceCmd)
   spaceCmd.AddCommand(deleteSpaceCmd)
   spaceCmd.AddCommand(allSpacesCmd)
@@ -6104,7 +6023,7 @@ func init() {
   themeCmd.AddCommand(activeThemesCmd)
   themeCmd.AddCommand(themeOrDefaultCmd)
   themeCmd.AddCommand(validateThemeCmd)
-  themeCmd.AddCommand(themeCmd805)
+  themeCmd.AddCommand(themeCmd2638)
   themeCmd.AddCommand(updateThemeCmd)
   themeCmd.AddCommand(deleteThemeCmd)
   rootCmd.AddCommand(themeCmd)
@@ -6113,7 +6032,7 @@ func init() {
   userCmd.AddCommand(createUserCmd)
   userCmd.AddCommand(searchUsersCmd)
   userCmd.AddCommand(searchUsersNamesCmd)
-  userCmd.AddCommand(userCmd4004)
+  userCmd.AddCommand(userCmd4650)
   userCmd.AddCommand(updateUserCmd)
   userCmd.AddCommand(deleteUserCmd)
   userCmd.AddCommand(userForCredentialCmd)
@@ -6153,13 +6072,13 @@ func init() {
   rootCmd.AddCommand(userCmd)
   userAttributeCmd.AddCommand(allUserAttributesCmd)
   userAttributeCmd.AddCommand(createUserAttributeCmd)
-  userAttributeCmd.AddCommand(userAttributeCmd2694)
+  userAttributeCmd.AddCommand(userAttributeCmd9639)
   userAttributeCmd.AddCommand(updateUserAttributeCmd)
   userAttributeCmd.AddCommand(deleteUserAttributeCmd)
   userAttributeCmd.AddCommand(allUserAttributeGroupValuesCmd)
   userAttributeCmd.AddCommand(setUserAttributeGroupValuesCmd)
   rootCmd.AddCommand(userAttributeCmd)
   workspaceCmd.AddCommand(allWorkspacesCmd)
-  workspaceCmd.AddCommand(workspaceCmd9059)
+  workspaceCmd.AddCommand(workspaceCmd6381)
   rootCmd.AddCommand(workspaceCmd)
 }
