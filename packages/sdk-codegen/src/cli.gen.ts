@@ -163,10 +163,10 @@ var ${commandName} = &cobra.Command{
 
   generateFlag(param: IParameter) {
     return `
-    ${param.name}, _ := cmd.Flags().Get${this.getMappedType(param.type)}("${
+    _${param.name}, _ := cmd.Flags().Get${this.getMappedType(param.type)}("${
       param.name
     }")
-    fmt.Println("${param.name} set to ", ${param.name})`
+    fmt.Println("${param.name} set to", _${param.name})`
   }
 
   generateFlagObj(param: IParameter) {
@@ -226,8 +226,8 @@ var ${commandName} = &cobra.Command{
                   requiredText = `cobra.MarkFlagRequired(${subCommand.name}.Flags(), "${flag.name}")`
                 }
                 return `
-              ${subCommand.name}.Flags().${flag.type}("${flag.name}", "${
-                  flag.shortName
+              ${subCommand.name}.Flags().${flag.type}("${
+                  flag.name
                 }", ${flag.defaultValue()}, "${flag.description}")
               ${requiredText}
               `
@@ -297,7 +297,6 @@ class SubCommand {
 
 class Flag {
   name = ''
-  shortName = ''
   description = ''
   required = false
   type = ''
@@ -309,21 +308,17 @@ class Flag {
     type: string
   ) {
     this.name = name
-    this.shortName = name
-      .split('_')
-      .map((part) => part.charAt(0))
-      .join('')
-    this.description = description
+    this.description = this.replaceAll(description, '"', '\\"')
     this.required = required
-    if (type === 'Bool') {
-      this.type = 'BoolP'
-    } else {
-      this.type = type
-    }
+    this.type = type
+  }
+
+  replaceAll(str: string, find: string, replace: string) {
+    return str.replace(new RegExp(find, 'g'), replace)
   }
 
   defaultValue() {
-    if (this.type === 'BoolP') {
+    if (this.type === 'Bool') {
       return false
     } else if (this.type === 'Int64') {
       return 0
