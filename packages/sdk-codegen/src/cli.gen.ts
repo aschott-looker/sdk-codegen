@@ -80,9 +80,6 @@ var ${this.currentRegion} = &cobra.Command{
   Use:   "${name}",
   Short: "${desc}",
   Long: "${desc}",
-  Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("${name} called")
-  },
 }`
   }
 
