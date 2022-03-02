@@ -56,6 +56,7 @@ export class CliGen extends CodeGen {
 
   regionToSubCommands = new Map<string, string>()
   currentRegion = ''
+  commands = new Set<string>([])
 
   constructor(public api: ApiModel, public versions?: IVersionInfo) {
     super(api, versions)
@@ -70,6 +71,10 @@ export class CliGen extends CodeGen {
     const [name, desc] = description.split(':').map((str) => str.trim())
     const camelCaseName = name.charAt(0).toLowerCase() + name.slice(1)
     this.currentRegion = `${camelCaseName}Cmd`
+    if (this.commands.has(this.currentRegion)) {
+      this.currentRegion = `${this.currentRegion}${this.getRandomInt(10000)}`
+    }
+    this.commands.add(this.currentRegion)
     return `
 var ${this.currentRegion} = &cobra.Command{
   Use:   "${name}",
@@ -81,14 +86,30 @@ var ${this.currentRegion} = &cobra.Command{
 }`
   }
 
+  getRandomInt(max: number) {
+    return Math.floor(Math.random() * max)
+  }
+
   endRegion(_indent: string, _description: string): string {
     return ''
   }
 
   declareMethod(_indent: string, method: IMethod) {
-    const commandName = `${
-      method.name.charAt(0).toLowerCase() + method.name.slice(1)
-    }Cmd`
+    let commandName = method.name
+    const underScoreIndexes = this.getAllIndexes(commandName, '_')
+    underScoreIndexes.forEach((index) => {
+      commandName = this.replaceAt(
+        commandName,
+        index + 1,
+        commandName[index + 1].toUpperCase()
+      )
+    })
+    const use = this.replaceAll(commandName, '_', '')
+    commandName = `${use}Cmd`
+    if (this.commands.has(commandName)) {
+      commandName = `${commandName}${this.getRandomInt(10000)}`
+    }
+    this.commands.add(commandName)
     if (this.regionToSubCommands.has(this.currentRegion)) {
       const subCommands = this.regionToSubCommands.get(this.currentRegion)
       this.regionToSubCommands.set(
@@ -100,13 +121,32 @@ var ${this.currentRegion} = &cobra.Command{
     }
     return `
 var ${commandName} = &cobra.Command{
-  Use:   "${method.name}",
+  Use:   "${use}",
   Short: "${method.summary}",
-  Long: \`${method.description}\`,
+  Long: \`${this.replaceAll(method.description, '`', "'")}\`,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("${method.name} called")
   },
 }`
+  }
+
+  replaceAll(str: string, find: string, replace: string) {
+    return str.replace(new RegExp(find, 'g'), replace)
+  }
+
+  replaceAt(str: string, index: number, replacement: string) {
+    return (
+      str.substr(0, index) +
+      replacement +
+      str.substr(index + replacement.length)
+    )
+  }
+
+  getAllIndexes(str: string, val: string) {
+    const indexes = []
+    let i
+    for (i = 0; i < str.length; i++) if (str[i] === val) indexes.push(i)
+    return indexes
   }
 
   declareParameter(_indent: string, _method: IMethod, _param: IParameter) {

@@ -24,25 +24,25 @@ var loginCmd = &cobra.Command{
 
 Looker API implements the OAuth2 [Resource Owner Password Credentials Grant](https://looker.com/docs/r/api/outh2_resource_owner_pc) pattern.
 The client credentials required for this login must be obtained by creating an API3 key on a user account
-in the Looker Admin console. The API3 key consists of a public `client_id` and a private `client_secret`.
+in the Looker Admin console. The API3 key consists of a public 'client_id' and a private 'client_secret'.
 
-The access token returned by `login` must be used in the HTTP Authorization header of subsequent
+The access token returned by 'login' must be used in the HTTP Authorization header of subsequent
 API requests, like this:
-```
+'''
 Authorization: token 4QDkCyCtZzYgj4C2p2cj3csJH7zqS5RzKs2kTnG4
-```
-Replace "4QDkCy..." with the `access_token` value returned by `login`.
-The word `token` is a string literal and must be included exactly as shown.
+'''
+Replace "4QDkCy..." with the 'access_token' value returned by 'login'.
+The word 'token' is a string literal and must be included exactly as shown.
 
-This function can accept `client_id` and `client_secret` parameters as URL query params or as www-form-urlencoded params in the body of the HTTP request. Since there is a small risk that URL parameters may be visible to intermediate nodes on the network route (proxies, routers, etc), passing credentials in the body of the request is considered more secure than URL params.
+This function can accept 'client_id' and 'client_secret' parameters as URL query params or as www-form-urlencoded params in the body of the HTTP request. Since there is a small risk that URL parameters may be visible to intermediate nodes on the network route (proxies, routers, etc), passing credentials in the body of the request is considered more secure than URL params.
 
 Example of passing credentials in the HTTP request body:
-````
+''''
 POST HTTP /login
 Content-Type: application/x-www-form-urlencoded
 
 client_id=CGc9B7v7J48dQSJvxxx&client_secret=nNVS9cSS3xNpSC9JdsBvvvvv
-````
+''''
 
 ### Best Practice:
 Always pass credentials in body params. Pass credentials in URL query params **only** when you cannot pass body params due to application, tool, or other limitations.
@@ -55,8 +55,8 @@ For more information and detailed examples of Looker API authorization, see [How
 }
 
 
-var login_userCmd = &cobra.Command{
-  Use:   "login_user",
+var loginUserCmd = &cobra.Command{
+  Use:   "loginUser",
   Short: "Login user",
   Long: `### Create an access token that runs as a given user.
 
@@ -104,8 +104,8 @@ var authCmd = &cobra.Command{
 }
 
 
-var create_sso_embed_urlCmd = &cobra.Command{
-  Use:   "create_sso_embed_url",
+var createSsoEmbedUrlCmd = &cobra.Command{
+  Use:   "createSsoEmbedUrl",
   Short: "Create SSO Embed Url",
   Long: `### Create SSO Embed URL
 
@@ -118,10 +118,10 @@ A signed SSO embed URL can only be used once. After it has been used to request 
 Looker server, the URL is invalid. Future requests using the same URL will fail. This is to prevent
 'replay attacks'.
 
-The `target_url` property must be a complete URL of a Looker UI page - scheme, hostname, path and query params.
-To load a dashboard with id 56 and with a filter of `Date=1 years`, the looker URL would look like `https:/myname.looker.com/dashboards/56?Date=1%20years`.
+The 'target_url' property must be a complete URL of a Looker UI page - scheme, hostname, path and query params.
+To load a dashboard with id 56 and with a filter of 'Date=1 years', the looker URL would look like 'https:/myname.looker.com/dashboards/56?Date=1%20years'.
 The best way to obtain this target_url is to navigate to the desired Looker page in your web browser,
-copy the URL shown in the browser address bar and paste it into the `target_url` property as a quoted string value in this API request.
+copy the URL shown in the browser address bar and paste it into the 'target_url' property as a quoted string value in this API request.
 
 Permissions for the embed user are defined by the groups in which the embed user is a member (group_ids property)
 and the lists of models and permissions assigned to the embed user.
@@ -132,9 +132,9 @@ The embed user's access is the union of permissions granted by the group_ids, mo
 
 This function does not strictly require all group_ids, user attribute names, or model names to exist at the moment the
 SSO embed url is created. Unknown group_id, user attribute names or model names will be passed through to the output URL.
-To diagnose potential problems with an SSO embed URL, you can copy the signed URL into the Embed URI Validator text box in `<your looker instance>/admin/embed`.
+To diagnose potential problems with an SSO embed URL, you can copy the signed URL into the Embed URI Validator text box in '<your looker instance>/admin/embed'.
 
-The `secret_id` parameter is optional. If specified, its value must be the id of an active secret defined in the Looker instance.
+The 'secret_id' parameter is optional. If specified, its value must be the id of an active secret defined in the Looker instance.
 if not specified, the URL will be signed using the newest active secret defined in the Looker instance.
 
 #### Security Note
@@ -148,8 +148,8 @@ encrypted transport.
 }
 
 
-var ldap_configCmd = &cobra.Command{
-  Use:   "ldap_config",
+var ldapConfigCmd = &cobra.Command{
+  Use:   "ldapConfig",
   Short: "Get LDAP Configuration",
   Long: `### Get the LDAP configuration.
 
@@ -174,8 +174,8 @@ See the [Looker LDAP docs](https://www.looker.com/docs/r/api/ldap_setup) for add
 }
 
 
-var update_ldap_configCmd = &cobra.Command{
-  Use:   "update_ldap_config",
+var updateLdapConfigCmd = &cobra.Command{
+  Use:   "updateLdapConfig",
   Short: "Update LDAP Configuration",
   Long: `### Update the LDAP configuration.
 
@@ -195,8 +195,8 @@ See the [Looker LDAP docs](https://www.looker.com/docs/r/api/ldap_setup) for add
 }
 
 
-var test_ldap_config_connectionCmd = &cobra.Command{
-  Use:   "test_ldap_config_connection",
+var testLdapConfigConnectionCmd = &cobra.Command{
+  Use:   "testLdapConfigConnection",
   Short: "Test LDAP Connection",
   Long: `### Test the connection settings for an LDAP configuration.
 
@@ -205,13 +205,13 @@ This tests that the connection is possible given a connection_host and connectio
 **connection_host** and **connection_port** are required. **connection_tls** is optional.
 
 Example:
-```json
+'''json
 {
   "connection_host": "ldap.example.com",
   "connection_port": "636",
   "connection_tls": true
 }
-```
+'''
 
 No authentication to the LDAP server is attempted.
 
@@ -223,8 +223,8 @@ The active LDAP settings are not modified.
 }
 
 
-var test_ldap_config_authCmd = &cobra.Command{
-  Use:   "test_ldap_config_auth",
+var testLdapConfigAuthCmd = &cobra.Command{
+  Use:   "testLdapConfigAuth",
   Short: "Test LDAP Auth",
   Long: `### Test the connection authentication settings for an LDAP configuration.
 
@@ -233,7 +233,7 @@ This tests that the connection is possible and that a 'server' account to be use
 **connection_host**, **connection_port**, and **auth_username**, are required.       **connection_tls** and **auth_password** are optional.
 
 Example:
-```json
+'''json
 {
   "connection_host": "ldap.example.com",
   "connection_port": "636",
@@ -241,7 +241,7 @@ Example:
   "auth_username": "cn=looker,dc=example,dc=com",
   "auth_password": "secret"
 }
-```
+'''
 
 Looker will never return an **auth_password**. If this request omits the **auth_password** field, then       the **auth_password** value from the active config (if present) will be used for the test.
 
@@ -254,8 +254,8 @@ The active LDAP settings are not modified.
 }
 
 
-var test_ldap_config_user_infoCmd = &cobra.Command{
-  Use:   "test_ldap_config_user_info",
+var testLdapConfigUserInfoCmd = &cobra.Command{
+  Use:   "testLdapConfigUserInfo",
   Short: "Test LDAP User Info",
   Long: `### Test the user authentication settings for an LDAP configuration without authenticating the user.
 
@@ -274,8 +274,8 @@ The active LDAP settings are not modified.
 }
 
 
-var test_ldap_config_user_authCmd = &cobra.Command{
-  Use:   "test_ldap_config_user_auth",
+var testLdapConfigUserAuthCmd = &cobra.Command{
+  Use:   "testLdapConfigUserAuth",
   Short: "Test LDAP User Auth",
   Long: `### Test the user authentication settings for an LDAP configuration.
 
@@ -294,8 +294,8 @@ The active LDAP settings are not modified.
 }
 
 
-var oidc_configCmd = &cobra.Command{
-  Use:   "oidc_config",
+var oidcConfigCmd = &cobra.Command{
+  Use:   "oidcConfig",
   Short: "Get OIDC Configuration",
   Long: `### Get the OIDC configuration.
 
@@ -316,8 +316,8 @@ OIDC is enabled or disabled for Looker using the **enabled** field.
 }
 
 
-var update_oidc_configCmd = &cobra.Command{
-  Use:   "update_oidc_config",
+var updateOidcConfigCmd = &cobra.Command{
+  Use:   "updateOidcConfig",
   Short: "Update OIDC Configuration",
   Long: `### Update the OIDC configuration.
 
@@ -335,8 +335,8 @@ It is **highly** recommended that any OIDC setting changes be tested using the A
 }
 
 
-var oidc_test_configCmd = &cobra.Command{
-  Use:   "oidc_test_config",
+var oidcTestConfigCmd = &cobra.Command{
+  Use:   "oidcTestConfig",
   Short: "Get OIDC Test Configuration",
   Long: `### Get a OIDC test configuration by test_slug.
 `,
@@ -346,8 +346,8 @@ var oidc_test_configCmd = &cobra.Command{
 }
 
 
-var delete_oidc_test_configCmd = &cobra.Command{
-  Use:   "delete_oidc_test_config",
+var deleteOidcTestConfigCmd = &cobra.Command{
+  Use:   "deleteOidcTestConfig",
   Short: "Delete OIDC Test Configuration",
   Long: `### Delete a OIDC test configuration.
 `,
@@ -357,8 +357,8 @@ var delete_oidc_test_configCmd = &cobra.Command{
 }
 
 
-var create_oidc_test_configCmd = &cobra.Command{
-  Use:   "create_oidc_test_config",
+var createOidcTestConfigCmd = &cobra.Command{
+  Use:   "createOidcTestConfig",
   Short: "Create OIDC Test Configuration",
   Long: `### Create a OIDC test configuration.
 `,
@@ -368,8 +368,8 @@ var create_oidc_test_configCmd = &cobra.Command{
 }
 
 
-var password_configCmd = &cobra.Command{
-  Use:   "password_config",
+var passwordConfigCmd = &cobra.Command{
+  Use:   "passwordConfig",
   Short: "Get Password Config",
   Long: `### Get password config.
 `,
@@ -379,8 +379,8 @@ var password_configCmd = &cobra.Command{
 }
 
 
-var update_password_configCmd = &cobra.Command{
-  Use:   "update_password_config",
+var updatePasswordConfigCmd = &cobra.Command{
+  Use:   "updatePasswordConfig",
   Short: "Update Password Config",
   Long: `### Update password config.
 `,
@@ -390,8 +390,8 @@ var update_password_configCmd = &cobra.Command{
 }
 
 
-var force_password_reset_at_next_login_for_all_usersCmd = &cobra.Command{
-  Use:   "force_password_reset_at_next_login_for_all_users",
+var forcePasswordResetAtNextLoginForAllUsersCmd = &cobra.Command{
+  Use:   "forcePasswordResetAtNextLoginForAllUsers",
   Short: "Force password reset",
   Long: `### Force all credentials_email users to reset their login passwords upon their next login.
 `,
@@ -401,8 +401,8 @@ var force_password_reset_at_next_login_for_all_usersCmd = &cobra.Command{
 }
 
 
-var saml_configCmd = &cobra.Command{
-  Use:   "saml_config",
+var samlConfigCmd = &cobra.Command{
+  Use:   "samlConfig",
   Short: "Get SAML Configuration",
   Long: `### Get the SAML configuration.
 
@@ -423,8 +423,8 @@ SAML is enabled or disabled for Looker using the **enabled** field.
 }
 
 
-var update_saml_configCmd = &cobra.Command{
-  Use:   "update_saml_config",
+var updateSamlConfigCmd = &cobra.Command{
+  Use:   "updateSamlConfig",
   Short: "Update SAML Configuration",
   Long: `### Update the SAML configuration.
 
@@ -442,8 +442,8 @@ It is **highly** recommended that any SAML setting changes be tested using the A
 }
 
 
-var saml_test_configCmd = &cobra.Command{
-  Use:   "saml_test_config",
+var samlTestConfigCmd = &cobra.Command{
+  Use:   "samlTestConfig",
   Short: "Get SAML Test Configuration",
   Long: `### Get a SAML test configuration by test_slug.
 `,
@@ -453,8 +453,8 @@ var saml_test_configCmd = &cobra.Command{
 }
 
 
-var delete_saml_test_configCmd = &cobra.Command{
-  Use:   "delete_saml_test_config",
+var deleteSamlTestConfigCmd = &cobra.Command{
+  Use:   "deleteSamlTestConfig",
   Short: "Delete SAML Test Configuration",
   Long: `### Delete a SAML test configuration.
 `,
@@ -464,8 +464,8 @@ var delete_saml_test_configCmd = &cobra.Command{
 }
 
 
-var create_saml_test_configCmd = &cobra.Command{
-  Use:   "create_saml_test_config",
+var createSamlTestConfigCmd = &cobra.Command{
+  Use:   "createSamlTestConfig",
   Short: "Create SAML Test Configuration",
   Long: `### Create a SAML test configuration.
 `,
@@ -475,8 +475,8 @@ var create_saml_test_configCmd = &cobra.Command{
 }
 
 
-var parse_saml_idp_metadataCmd = &cobra.Command{
-  Use:   "parse_saml_idp_metadata",
+var parseSamlIdpMetadataCmd = &cobra.Command{
+  Use:   "parseSamlIdpMetadata",
   Short: "Parse SAML IdP XML",
   Long: `### Parse the given xml as a SAML IdP metadata document and return the result.
 `,
@@ -486,8 +486,8 @@ var parse_saml_idp_metadataCmd = &cobra.Command{
 }
 
 
-var fetch_and_parse_saml_idp_metadataCmd = &cobra.Command{
-  Use:   "fetch_and_parse_saml_idp_metadata",
+var fetchAndParseSamlIdpMetadataCmd = &cobra.Command{
+  Use:   "fetchAndParseSamlIdpMetadata",
   Short: "Parse SAML IdP Url",
   Long: `### Fetch the given url and parse it as a SAML IdP metadata document and return the result.
 Note that this requires that the url be public or at least at a location where the Looker instance
@@ -499,8 +499,8 @@ can fetch it without requiring any special authentication.
 }
 
 
-var session_configCmd = &cobra.Command{
-  Use:   "session_config",
+var sessionConfigCmd = &cobra.Command{
+  Use:   "sessionConfig",
   Short: "Get Session Config",
   Long: `### Get session config.
 `,
@@ -510,8 +510,8 @@ var session_configCmd = &cobra.Command{
 }
 
 
-var update_session_configCmd = &cobra.Command{
-  Use:   "update_session_config",
+var updateSessionConfigCmd = &cobra.Command{
+  Use:   "updateSessionConfig",
   Short: "Update Session Config",
   Long: `### Update session config.
 `,
@@ -521,8 +521,8 @@ var update_session_configCmd = &cobra.Command{
 }
 
 
-var all_user_login_lockoutsCmd = &cobra.Command{
-  Use:   "all_user_login_lockouts",
+var allUserLoginLockoutsCmd = &cobra.Command{
+  Use:   "allUserLoginLockouts",
   Short: "Get All User Login Lockouts",
   Long: `### Get currently locked-out users.
 `,
@@ -532,8 +532,8 @@ var all_user_login_lockoutsCmd = &cobra.Command{
 }
 
 
-var search_user_login_lockoutsCmd = &cobra.Command{
-  Use:   "search_user_login_lockouts",
+var searchUserLoginLockoutsCmd = &cobra.Command{
+  Use:   "searchUserLoginLockouts",
   Short: "Search User Login Lockouts",
   Long: `### Search currently locked-out users.
 `,
@@ -543,8 +543,8 @@ var search_user_login_lockoutsCmd = &cobra.Command{
 }
 
 
-var delete_user_login_lockoutCmd = &cobra.Command{
-  Use:   "delete_user_login_lockout",
+var deleteUserLoginLockoutCmd = &cobra.Command{
+  Use:   "deleteUserLoginLockout",
   Short: "Delete User Login Lockout",
   Long: `### Removes login lockout for the associated user.
 `,
@@ -566,8 +566,8 @@ var colorCollectionCmd = &cobra.Command{
 }
 
 
-var all_color_collectionsCmd = &cobra.Command{
-  Use:   "all_color_collections",
+var allColorCollectionsCmd = &cobra.Command{
+  Use:   "allColorCollections",
   Short: "Get all Color Collections",
   Long: `### Get an array of all existing Color Collections
 Get a **single** color collection by id with [ColorCollection](#!/ColorCollection/color_collection)
@@ -576,7 +576,7 @@ Get all **standard** color collections with [ColorCollection](#!/ColorCollection
 
 Get all **custom** color collections with [ColorCollection](#!/ColorCollection/color_collections_custom)
 
-**Note**: Only an API user with the Admin role can call this endpoint. Unauthorized requests will return `Not Found` (404) errors.
+**Note**: Only an API user with the Admin role can call this endpoint. Unauthorized requests will return 'Not Found' (404) errors.
 
 `,
   Run: func(cmd *cobra.Command, args []string) {
@@ -585,8 +585,8 @@ Get all **custom** color collections with [ColorCollection](#!/ColorCollection/c
 }
 
 
-var create_color_collectionCmd = &cobra.Command{
-  Use:   "create_color_collection",
+var createColorCollectionCmd = &cobra.Command{
+  Use:   "createColorCollection",
   Short: "Create ColorCollection",
   Long: `### Create a custom color collection with the specified information
 
@@ -596,7 +596,7 @@ Creates a new custom color collection object, returning the details, including t
 
 **Permanently delete** an existing custom color collection with [Delete Color Collection](#!/ColorCollection/delete_color_collection)
 
-**Note**: Only an API user with the Admin role can call this endpoint. Unauthorized requests will return `Not Found` (404) errors.
+**Note**: Only an API user with the Admin role can call this endpoint. Unauthorized requests will return 'Not Found' (404) errors.
 
 `,
   Run: func(cmd *cobra.Command, args []string) {
@@ -605,15 +605,15 @@ Creates a new custom color collection object, returning the details, including t
 }
 
 
-var color_collections_customCmd = &cobra.Command{
-  Use:   "color_collections_custom",
+var colorCollectionsCustomCmd = &cobra.Command{
+  Use:   "colorCollectionsCustom",
   Short: "Get all Custom Color Collections",
   Long: `### Get an array of all existing **Custom** Color Collections
 Get a **single** color collection by id with [ColorCollection](#!/ColorCollection/color_collection)
 
 Get all **standard** color collections with [ColorCollection](#!/ColorCollection/color_collections_standard)
 
-**Note**: Only an API user with the Admin role can call this endpoint. Unauthorized requests will return `Not Found` (404) errors.
+**Note**: Only an API user with the Admin role can call this endpoint. Unauthorized requests will return 'Not Found' (404) errors.
 
 `,
   Run: func(cmd *cobra.Command, args []string) {
@@ -622,15 +622,15 @@ Get all **standard** color collections with [ColorCollection](#!/ColorCollection
 }
 
 
-var color_collections_standardCmd = &cobra.Command{
-  Use:   "color_collections_standard",
+var colorCollectionsStandardCmd = &cobra.Command{
+  Use:   "colorCollectionsStandard",
   Short: "Get all Standard Color Collections",
   Long: `### Get an array of all existing **Standard** Color Collections
 Get a **single** color collection by id with [ColorCollection](#!/ColorCollection/color_collection)
 
 Get all **custom** color collections with [ColorCollection](#!/ColorCollection/color_collections_custom)
 
-**Note**: Only an API user with the Admin role can call this endpoint. Unauthorized requests will return `Not Found` (404) errors.
+**Note**: Only an API user with the Admin role can call this endpoint. Unauthorized requests will return 'Not Found' (404) errors.
 
 `,
   Run: func(cmd *cobra.Command, args []string) {
@@ -639,8 +639,8 @@ Get all **custom** color collections with [ColorCollection](#!/ColorCollection/c
 }
 
 
-var default_color_collectionCmd = &cobra.Command{
-  Use:   "default_color_collection",
+var defaultColorCollectionCmd = &cobra.Command{
+  Use:   "defaultColorCollection",
   Short: "Get Default Color Collection",
   Long: `### Get the default color collection
 
@@ -654,13 +654,13 @@ Set the default color collection with [ColorCollection](#!/ColorCollection/set_d
 }
 
 
-var set_default_color_collectionCmd = &cobra.Command{
-  Use:   "set_default_color_collection",
+var setDefaultColorCollectionCmd = &cobra.Command{
+  Use:   "setDefaultColorCollection",
   Short: "Set Default Color Collection",
   Long: `### Set the global default Color Collection by ID
 
 Returns the new specified default Color Collection object.
-**Note**: Only an API user with the Admin role can call this endpoint. Unauthorized requests will return `Not Found` (404) errors.
+**Note**: Only an API user with the Admin role can call this endpoint. Unauthorized requests will return 'Not Found' (404) errors.
 
 `,
   Run: func(cmd *cobra.Command, args []string) {
@@ -669,8 +669,8 @@ Returns the new specified default Color Collection object.
 }
 
 
-var color_collectionCmd = &cobra.Command{
-  Use:   "color_collection",
+var colorCollectionCmd5691 = &cobra.Command{
+  Use:   "colorCollection",
   Short: "Get Color Collection by ID",
   Long: `### Get a Color Collection by ID
 
@@ -681,7 +681,7 @@ Get all **standard** color collections with [ColorCollection](#!/ColorCollection
 
 Get all **custom** color collections with [ColorCollection](#!/ColorCollection/color_collections_custom)
 
-**Note**: Only an API user with the Admin role can call this endpoint. Unauthorized requests will return `Not Found` (404) errors.
+**Note**: Only an API user with the Admin role can call this endpoint. Unauthorized requests will return 'Not Found' (404) errors.
 
 `,
   Run: func(cmd *cobra.Command, args []string) {
@@ -690,11 +690,11 @@ Get all **custom** color collections with [ColorCollection](#!/ColorCollection/c
 }
 
 
-var update_color_collectionCmd = &cobra.Command{
-  Use:   "update_color_collection",
+var updateColorCollectionCmd = &cobra.Command{
+  Use:   "updateColorCollection",
   Short: "Update Custom Color collection",
   Long: `### Update a custom color collection by id.
-**Note**: Only an API user with the Admin role can call this endpoint. Unauthorized requests will return `Not Found` (404) errors.
+**Note**: Only an API user with the Admin role can call this endpoint. Unauthorized requests will return 'Not Found' (404) errors.
 
 `,
   Run: func(cmd *cobra.Command, args []string) {
@@ -703,8 +703,8 @@ var update_color_collectionCmd = &cobra.Command{
 }
 
 
-var delete_color_collectionCmd = &cobra.Command{
-  Use:   "delete_color_collection",
+var deleteColorCollectionCmd = &cobra.Command{
+  Use:   "deleteColorCollection",
   Short: "Delete ColorCollection",
   Long: `### Delete a custom color collection by id
 
@@ -713,7 +713,7 @@ This operation permanently deletes the identified **Custom** color collection.
 **Standard** color collections cannot be deleted
 
 Because multiple color collections can have the same label, they must be deleted by ID, not name.
-**Note**: Only an API user with the Admin role can call this endpoint. Unauthorized requests will return `Not Found` (404) errors.
+**Note**: Only an API user with the Admin role can call this endpoint. Unauthorized requests will return 'Not Found' (404) errors.
 
 `,
   Run: func(cmd *cobra.Command, args []string) {
@@ -734,8 +734,8 @@ var configCmd = &cobra.Command{
 }
 
 
-var backup_configurationCmd = &cobra.Command{
-  Use:   "backup_configuration",
+var backupConfigurationCmd = &cobra.Command{
+  Use:   "backupConfiguration",
   Short: "Get Backup Configuration",
   Long: `### WARNING: The Looker internal database backup function has been deprecated.
 `,
@@ -745,8 +745,8 @@ var backup_configurationCmd = &cobra.Command{
 }
 
 
-var update_backup_configurationCmd = &cobra.Command{
-  Use:   "update_backup_configuration",
+var updateBackupConfigurationCmd = &cobra.Command{
+  Use:   "updateBackupConfiguration",
   Short: "Update Backup Configuration",
   Long: `### WARNING: The Looker internal database backup function has been deprecated.
 `,
@@ -756,8 +756,8 @@ var update_backup_configurationCmd = &cobra.Command{
 }
 
 
-var cloud_storage_configurationCmd = &cobra.Command{
-  Use:   "cloud_storage_configuration",
+var cloudStorageConfigurationCmd = &cobra.Command{
+  Use:   "cloudStorageConfiguration",
   Short: "Get Cloud Storage",
   Long: `Get the current Cloud Storage Configuration.
 `,
@@ -767,8 +767,8 @@ var cloud_storage_configurationCmd = &cobra.Command{
 }
 
 
-var update_cloud_storage_configurationCmd = &cobra.Command{
-  Use:   "update_cloud_storage_configuration",
+var updateCloudStorageConfigurationCmd = &cobra.Command{
+  Use:   "updateCloudStorageConfiguration",
   Short: "Update Cloud Storage",
   Long: `Update the current Cloud Storage Configuration.
 `,
@@ -778,8 +778,8 @@ var update_cloud_storage_configurationCmd = &cobra.Command{
 }
 
 
-var custom_welcome_emailCmd = &cobra.Command{
-  Use:   "custom_welcome_email",
+var customWelcomeEmailCmd = &cobra.Command{
+  Use:   "customWelcomeEmail",
   Short: "Get Custom Welcome Email",
   Long: `### Get the current status and content of custom welcome emails
 `,
@@ -789,8 +789,8 @@ var custom_welcome_emailCmd = &cobra.Command{
 }
 
 
-var update_custom_welcome_emailCmd = &cobra.Command{
-  Use:   "update_custom_welcome_email",
+var updateCustomWelcomeEmailCmd = &cobra.Command{
+  Use:   "updateCustomWelcomeEmail",
   Short: "Update Custom Welcome Email Content",
   Long: `Update custom welcome email setting and values. Optionally send a test email with the new content to the currently logged in user.
 `,
@@ -800,8 +800,8 @@ var update_custom_welcome_emailCmd = &cobra.Command{
 }
 
 
-var update_custom_welcome_email_testCmd = &cobra.Command{
-  Use:   "update_custom_welcome_email_test",
+var updateCustomWelcomeEmailTestCmd = &cobra.Command{
+  Use:   "updateCustomWelcomeEmailTest",
   Short: "Send a test welcome email to the currently logged in user with the supplied content ",
   Long: `Requests to this endpoint will send a welcome email with the custom content provided in the body to the currently logged in user.
 `,
@@ -811,8 +811,8 @@ var update_custom_welcome_email_testCmd = &cobra.Command{
 }
 
 
-var digest_emails_enabledCmd = &cobra.Command{
-  Use:   "digest_emails_enabled",
+var digestEmailsEnabledCmd = &cobra.Command{
+  Use:   "digestEmailsEnabled",
   Short: "Get Digest_emails",
   Long: `### Retrieve the value for whether or not digest emails is enabled
 `,
@@ -822,8 +822,8 @@ var digest_emails_enabledCmd = &cobra.Command{
 }
 
 
-var update_digest_emails_enabledCmd = &cobra.Command{
-  Use:   "update_digest_emails_enabled",
+var updateDigestEmailsEnabledCmd = &cobra.Command{
+  Use:   "updateDigestEmailsEnabled",
   Short: "Update Digest_emails",
   Long: `### Update the setting for enabling/disabling digest emails
 `,
@@ -833,8 +833,8 @@ var update_digest_emails_enabledCmd = &cobra.Command{
 }
 
 
-var create_digest_email_sendCmd = &cobra.Command{
-  Use:   "create_digest_email_send",
+var createDigestEmailSendCmd = &cobra.Command{
+  Use:   "createDigestEmailSend",
   Short: "Deliver digest email contents",
   Long: `### Trigger the generation of digest email records and send them to Looker's internal system. This does not send
 any actual emails, it generates records containing content which may be of interest for users who have become inactive.
@@ -845,8 +845,8 @@ Emails will be sent at a later time from Looker's internal system if the Digest 
 }
 
 
-var internal_help_resources_contentCmd = &cobra.Command{
-  Use:   "internal_help_resources_content",
+var internalHelpResourcesContentCmd = &cobra.Command{
+  Use:   "internalHelpResourcesContent",
   Short: "Get Internal Help Resources Content",
   Long: `### Set the menu item name and content for internal help resources
 `,
@@ -856,8 +856,8 @@ var internal_help_resources_contentCmd = &cobra.Command{
 }
 
 
-var update_internal_help_resources_contentCmd = &cobra.Command{
-  Use:   "update_internal_help_resources_content",
+var updateInternalHelpResourcesContentCmd = &cobra.Command{
+  Use:   "updateInternalHelpResourcesContent",
   Short: "Update internal help resources content",
   Long: `Update internal help resources content
 `,
@@ -867,8 +867,8 @@ var update_internal_help_resources_contentCmd = &cobra.Command{
 }
 
 
-var internal_help_resourcesCmd = &cobra.Command{
-  Use:   "internal_help_resources",
+var internalHelpResourcesCmd = &cobra.Command{
+  Use:   "internalHelpResources",
   Short: "Get Internal Help Resources",
   Long: `### Get and set the options for internal help resources
 `,
@@ -878,8 +878,8 @@ var internal_help_resourcesCmd = &cobra.Command{
 }
 
 
-var update_internal_help_resourcesCmd = &cobra.Command{
-  Use:   "update_internal_help_resources",
+var updateInternalHelpResourcesCmd = &cobra.Command{
+  Use:   "updateInternalHelpResources",
   Short: "Update internal help resources configuration",
   Long: `Update internal help resources settings
 `,
@@ -889,8 +889,8 @@ var update_internal_help_resourcesCmd = &cobra.Command{
 }
 
 
-var all_legacy_featuresCmd = &cobra.Command{
-  Use:   "all_legacy_features",
+var allLegacyFeaturesCmd = &cobra.Command{
+  Use:   "allLegacyFeatures",
   Short: "Get All Legacy Features",
   Long: `### Get all legacy features.
 `,
@@ -900,8 +900,8 @@ var all_legacy_featuresCmd = &cobra.Command{
 }
 
 
-var legacy_featureCmd = &cobra.Command{
-  Use:   "legacy_feature",
+var legacyFeatureCmd = &cobra.Command{
+  Use:   "legacyFeature",
   Short: "Get Legacy Feature",
   Long: `### Get information about the legacy feature with a specific id.
 `,
@@ -911,8 +911,8 @@ var legacy_featureCmd = &cobra.Command{
 }
 
 
-var update_legacy_featureCmd = &cobra.Command{
-  Use:   "update_legacy_feature",
+var updateLegacyFeatureCmd = &cobra.Command{
+  Use:   "updateLegacyFeature",
   Short: "Update Legacy Feature",
   Long: `### Update information about the legacy feature with a specific id.
 `,
@@ -922,8 +922,8 @@ var update_legacy_featureCmd = &cobra.Command{
 }
 
 
-var all_localesCmd = &cobra.Command{
-  Use:   "all_locales",
+var allLocalesCmd = &cobra.Command{
+  Use:   "allLocales",
   Short: "Get All Locales",
   Long: `### Get a list of locales that Looker supports.
 `,
@@ -933,8 +933,8 @@ var all_localesCmd = &cobra.Command{
 }
 
 
-var all_timezonesCmd = &cobra.Command{
-  Use:   "all_timezones",
+var allTimezonesCmd = &cobra.Command{
+  Use:   "allTimezones",
   Short: "Get All Timezones",
   Long: `### Get a list of timezones that Looker supports (e.g. useful for scheduling tasks).
 `,
@@ -955,8 +955,8 @@ var versionsCmd = &cobra.Command{
 }
 
 
-var whitelabel_configurationCmd = &cobra.Command{
-  Use:   "whitelabel_configuration",
+var whitelabelConfigurationCmd = &cobra.Command{
+  Use:   "whitelabelConfiguration",
   Short: "Get Whitelabel configuration",
   Long: `### This feature is enabled only by special license.
 ### Gets the whitelabel configuration, which includes hiding documentation links, custom favicon uploading, etc.
@@ -967,8 +967,8 @@ var whitelabel_configurationCmd = &cobra.Command{
 }
 
 
-var update_whitelabel_configurationCmd = &cobra.Command{
-  Use:   "update_whitelabel_configuration",
+var updateWhitelabelConfigurationCmd = &cobra.Command{
+  Use:   "updateWhitelabelConfiguration",
   Short: "Update Whitelabel configuration",
   Long: `### Update the whitelabel configuration
 `,
@@ -990,8 +990,8 @@ var connectionCmd = &cobra.Command{
 }
 
 
-var all_connectionsCmd = &cobra.Command{
-  Use:   "all_connections",
+var allConnectionsCmd = &cobra.Command{
+  Use:   "allConnections",
   Short: "Get All Connections",
   Long: `### Get information about all connections.
 `,
@@ -1001,8 +1001,8 @@ var all_connectionsCmd = &cobra.Command{
 }
 
 
-var create_connectionCmd = &cobra.Command{
-  Use:   "create_connection",
+var createConnectionCmd = &cobra.Command{
+  Use:   "createConnection",
   Short: "Create Connection",
   Long: `### Create a connection using the specified configuration.
 `,
@@ -1012,7 +1012,7 @@ var create_connectionCmd = &cobra.Command{
 }
 
 
-var connectionCmd = &cobra.Command{
+var connectionCmd6726 = &cobra.Command{
   Use:   "connection",
   Short: "Get Connection",
   Long: `### Get information about a connection.
@@ -1023,8 +1023,8 @@ var connectionCmd = &cobra.Command{
 }
 
 
-var update_connectionCmd = &cobra.Command{
-  Use:   "update_connection",
+var updateConnectionCmd = &cobra.Command{
+  Use:   "updateConnection",
   Short: "Update Connection",
   Long: `### Update a connection using the specified configuration.
 `,
@@ -1034,8 +1034,8 @@ var update_connectionCmd = &cobra.Command{
 }
 
 
-var delete_connectionCmd = &cobra.Command{
-  Use:   "delete_connection",
+var deleteConnectionCmd = &cobra.Command{
+  Use:   "deleteConnection",
   Short: "Delete Connection",
   Long: `### Delete a connection.
 `,
@@ -1045,8 +1045,8 @@ var delete_connectionCmd = &cobra.Command{
 }
 
 
-var delete_connection_overrideCmd = &cobra.Command{
-  Use:   "delete_connection_override",
+var deleteConnectionOverrideCmd = &cobra.Command{
+  Use:   "deleteConnectionOverride",
   Short: "Delete Connection Override",
   Long: `### Delete a connection override.
 `,
@@ -1056,8 +1056,8 @@ var delete_connection_overrideCmd = &cobra.Command{
 }
 
 
-var test_connectionCmd = &cobra.Command{
-  Use:   "test_connection",
+var testConnectionCmd = &cobra.Command{
+  Use:   "testConnection",
   Short: "Test Connection",
   Long: `### Test an existing connection.
 
@@ -1074,8 +1074,8 @@ Unsupported tests in the request will be ignored.
 }
 
 
-var test_connection_configCmd = &cobra.Command{
-  Use:   "test_connection_config",
+var testConnectionConfigCmd = &cobra.Command{
+  Use:   "testConnectionConfig",
   Short: "Test Connection Configuration",
   Long: `### Test a connection configuration.
 
@@ -1092,8 +1092,8 @@ Unsupported tests in the request will be ignored.
 }
 
 
-var all_dialect_infosCmd = &cobra.Command{
-  Use:   "all_dialect_infos",
+var allDialectInfosCmd = &cobra.Command{
+  Use:   "allDialectInfos",
   Short: "Get All Dialect Infos",
   Long: `### Get information about all dialects.
 `,
@@ -1115,20 +1115,20 @@ var contentCmd = &cobra.Command{
 }
 
 
-var search_content_favoritesCmd = &cobra.Command{
-  Use:   "search_content_favorites",
+var searchContentFavoritesCmd = &cobra.Command{
+  Use:   "searchContentFavorites",
   Short: "Search Favorite Contents",
   Long: `### Search Favorite Content
 
-If multiple search params are given and `filter_or` is FALSE or not specified,
+If multiple search params are given and 'filter_or' is FALSE or not specified,
 search params are combined in a logical AND operation.
 Only rows that match *all* search param criteria will be returned.
 
-If `filter_or` is TRUE, multiple search params are combined in a logical OR operation.
+If 'filter_or' is TRUE, multiple search params are combined in a logical OR operation.
 Results will include rows that match **any** of the search criteria.
 
 String search params use case-insensitive matching.
-String search params can contain `%` and '_' as SQL LIKE pattern match wildcard expressions.
+String search params can contain '%' and '_' as SQL LIKE pattern match wildcard expressions.
 example="dan%" will match "danger" and "Danzig" but not "David"
 example="D_m%" will match "Damage" and "dump"
 
@@ -1148,8 +1148,8 @@ Boolean search params accept only "true" and "false" as values.
 }
 
 
-var content_favoriteCmd = &cobra.Command{
-  Use:   "content_favorite",
+var contentFavoriteCmd = &cobra.Command{
+  Use:   "contentFavorite",
   Short: "Get Favorite Content",
   Long: `### Get favorite content by its id`,
   Run: func(cmd *cobra.Command, args []string) {
@@ -1158,8 +1158,8 @@ var content_favoriteCmd = &cobra.Command{
 }
 
 
-var delete_content_favoriteCmd = &cobra.Command{
-  Use:   "delete_content_favorite",
+var deleteContentFavoriteCmd = &cobra.Command{
+  Use:   "deleteContentFavorite",
   Short: "Delete Favorite Content",
   Long: `### Delete favorite content`,
   Run: func(cmd *cobra.Command, args []string) {
@@ -1168,8 +1168,8 @@ var delete_content_favoriteCmd = &cobra.Command{
 }
 
 
-var create_content_favoriteCmd = &cobra.Command{
-  Use:   "create_content_favorite",
+var createContentFavoriteCmd = &cobra.Command{
+  Use:   "createContentFavorite",
   Short: "Create Favorite Content",
   Long: `### Create favorite content`,
   Run: func(cmd *cobra.Command, args []string) {
@@ -1178,8 +1178,8 @@ var create_content_favoriteCmd = &cobra.Command{
 }
 
 
-var all_content_metadatasCmd = &cobra.Command{
-  Use:   "all_content_metadatas",
+var allContentMetadatasCmd = &cobra.Command{
+  Use:   "allContentMetadatas",
   Short: "Get All Content Metadatas",
   Long: `### Get information about all content metadata in a space.
 `,
@@ -1189,8 +1189,8 @@ var all_content_metadatasCmd = &cobra.Command{
 }
 
 
-var content_metadataCmd = &cobra.Command{
-  Use:   "content_metadata",
+var contentMetadataCmd = &cobra.Command{
+  Use:   "contentMetadata",
   Short: "Get Content Metadata",
   Long: `### Get information about an individual content metadata record.
 `,
@@ -1200,8 +1200,8 @@ var content_metadataCmd = &cobra.Command{
 }
 
 
-var update_content_metadataCmd = &cobra.Command{
-  Use:   "update_content_metadata",
+var updateContentMetadataCmd = &cobra.Command{
+  Use:   "updateContentMetadata",
   Short: "Update Content Metadata",
   Long: `### Move a piece of content.
 `,
@@ -1211,8 +1211,8 @@ var update_content_metadataCmd = &cobra.Command{
 }
 
 
-var all_content_metadata_accessesCmd = &cobra.Command{
-  Use:   "all_content_metadata_accesses",
+var allContentMetadataAccessesCmd = &cobra.Command{
+  Use:   "allContentMetadataAccesses",
   Short: "Get All Content Metadata Accesses",
   Long: `### All content metadata access records for a content metadata item.
 `,
@@ -1222,8 +1222,8 @@ var all_content_metadata_accessesCmd = &cobra.Command{
 }
 
 
-var create_content_metadata_accessCmd = &cobra.Command{
-  Use:   "create_content_metadata_access",
+var createContentMetadataAccessCmd = &cobra.Command{
+  Use:   "createContentMetadataAccess",
   Short: "Create Content Metadata Access",
   Long: `### Create content metadata access.
 `,
@@ -1233,8 +1233,8 @@ var create_content_metadata_accessCmd = &cobra.Command{
 }
 
 
-var update_content_metadata_accessCmd = &cobra.Command{
-  Use:   "update_content_metadata_access",
+var updateContentMetadataAccessCmd = &cobra.Command{
+  Use:   "updateContentMetadataAccess",
   Short: "Update Content Metadata Access",
   Long: `### Update type of access for content metadata.
 `,
@@ -1244,8 +1244,8 @@ var update_content_metadata_accessCmd = &cobra.Command{
 }
 
 
-var delete_content_metadata_accessCmd = &cobra.Command{
-  Use:   "delete_content_metadata_access",
+var deleteContentMetadataAccessCmd = &cobra.Command{
+  Use:   "deleteContentMetadataAccess",
   Short: "Delete Content Metadata Access",
   Long: `### Remove content metadata access.
 `,
@@ -1255,8 +1255,8 @@ var delete_content_metadata_accessCmd = &cobra.Command{
 }
 
 
-var content_thumbnailCmd = &cobra.Command{
-  Use:   "content_thumbnail",
+var contentThumbnailCmd = &cobra.Command{
+  Use:   "contentThumbnail",
   Short: "Get Content Thumbnail",
   Long: `### Get an image representing the contents of a dashboard or look.
 
@@ -1269,8 +1269,8 @@ reflect the actual data displayed in the respective visualizations.
 }
 
 
-var content_validationCmd = &cobra.Command{
-  Use:   "content_validation",
+var contentValidationCmd = &cobra.Command{
+  Use:   "contentValidation",
   Short: "Validate Content",
   Long: `### Validate All Content
 
@@ -1283,20 +1283,20 @@ Returns a list of errors found as well as metadata about the content validation 
 }
 
 
-var search_content_viewsCmd = &cobra.Command{
-  Use:   "search_content_views",
+var searchContentViewsCmd = &cobra.Command{
+  Use:   "searchContentViews",
   Short: "Search Content Views",
   Long: `### Search Content Views
 
-If multiple search params are given and `filter_or` is FALSE or not specified,
+If multiple search params are given and 'filter_or' is FALSE or not specified,
 search params are combined in a logical AND operation.
 Only rows that match *all* search param criteria will be returned.
 
-If `filter_or` is TRUE, multiple search params are combined in a logical OR operation.
+If 'filter_or' is TRUE, multiple search params are combined in a logical OR operation.
 Results will include rows that match **any** of the search criteria.
 
 String search params use case-insensitive matching.
-String search params can contain `%` and '_' as SQL LIKE pattern match wildcard expressions.
+String search params can contain '%' and '_' as SQL LIKE pattern match wildcard expressions.
 example="dan%" will match "danger" and "Danzig" but not "David"
 example="D_m%" will match "Damage" and "dump"
 
@@ -1316,8 +1316,8 @@ Boolean search params accept only "true" and "false" as values.
 }
 
 
-var vector_thumbnailCmd = &cobra.Command{
-  Use:   "vector_thumbnail",
+var vectorThumbnailCmd = &cobra.Command{
+  Use:   "vectorThumbnail",
   Short: "Get Vector Thumbnail",
   Long: `### Get a vector image representing the contents of a dashboard or look.
 
@@ -1344,8 +1344,8 @@ var dashboardCmd = &cobra.Command{
 }
 
 
-var all_dashboardsCmd = &cobra.Command{
-  Use:   "all_dashboards",
+var allDashboardsCmd = &cobra.Command{
+  Use:   "allDashboards",
   Short: "Get All Dashboards",
   Long: `### Get information about all active dashboards.
 
@@ -1361,16 +1361,16 @@ Find **deleted dashboards** with [search_dashboards()](#!/Dashboard/search_dashb
 }
 
 
-var create_dashboardCmd = &cobra.Command{
-  Use:   "create_dashboard",
+var createDashboardCmd = &cobra.Command{
+  Use:   "createDashboard",
   Short: "Create Dashboard",
   Long: `### Create a new dashboard
 
 Creates a new dashboard object and returns the details of the newly created dashboard.
 
-`Title`, `user_id`, and `space_id` are all required fields.
-`Space_id` and `user_id` must contain the id of an existing space or user, respectively.
-A dashboard's `title` must be unique within the space in which it resides.
+'Title', 'user_id', and 'space_id' are all required fields.
+'Space_id' and 'user_id' must contain the id of an existing space or user, respectively.
+A dashboard's 'title' must be unique within the space in which it resides.
 
 If you receive a 422 error response when creating a dashboard, be sure to look at the
 response body for information about exactly which fields are missing or contain invalid data.
@@ -1385,22 +1385,22 @@ You can **permanently delete** an existing dashboard with [delete_dashboard()](#
 }
 
 
-var search_dashboardsCmd = &cobra.Command{
-  Use:   "search_dashboards",
+var searchDashboardsCmd = &cobra.Command{
+  Use:   "searchDashboards",
   Short: "Search Dashboards",
   Long: `### Search Dashboards
 
 Returns an **array of dashboard objects** that match the specified search criteria.
 
-If multiple search params are given and `filter_or` is FALSE or not specified,
+If multiple search params are given and 'filter_or' is FALSE or not specified,
 search params are combined in a logical AND operation.
 Only rows that match *all* search param criteria will be returned.
 
-If `filter_or` is TRUE, multiple search params are combined in a logical OR operation.
+If 'filter_or' is TRUE, multiple search params are combined in a logical OR operation.
 Results will include rows that match **any** of the search criteria.
 
 String search params use case-insensitive matching.
-String search params can contain `%` and '_' as SQL LIKE pattern match wildcard expressions.
+String search params can contain '%' and '_' as SQL LIKE pattern match wildcard expressions.
 example="dan%" will match "danger" and "Danzig" but not "David"
 example="D_m%" will match "Damage" and "dump"
 
@@ -1414,7 +1414,7 @@ or exclude (respectively) rows where the column is null.
 Boolean search params accept only "true" and "false" as values.
 
 
-The parameters `limit`, and `offset` are recommended for fetching results in page-size chunks.
+The parameters 'limit', and 'offset' are recommended for fetching results in page-size chunks.
 
 Get a **single dashboard** by id with [dashboard()](#!/Dashboard/dashboard)
 `,
@@ -1424,8 +1424,8 @@ Get a **single dashboard** by id with [dashboard()](#!/Dashboard/dashboard)
 }
 
 
-var import_lookml_dashboardCmd = &cobra.Command{
-  Use:   "import_lookml_dashboard",
+var importLookmlDashboardCmd = &cobra.Command{
+  Use:   "importLookmlDashboard",
   Short: "Import LookML Dashboard",
   Long: `### Import a LookML dashboard to a space as a UDD
 Creates a UDD (a dashboard which exists in the Looker database rather than as a LookML file) from the LookML dashboard
@@ -1446,18 +1446,18 @@ create content in the space the dashboard is being imported to.
 }
 
 
-var sync_lookml_dashboardCmd = &cobra.Command{
-  Use:   "sync_lookml_dashboard",
+var syncLookmlDashboardCmd = &cobra.Command{
+  Use:   "syncLookmlDashboard",
   Short: "Sync LookML Dashboard",
   Long: `### Update all linked dashboards to match the specified LookML dashboard.
 
-Any UDD (a dashboard which exists in the Looker database rather than as a LookML file) which has a `lookml_link_id`
+Any UDD (a dashboard which exists in the Looker database rather than as a LookML file) which has a 'lookml_link_id'
 property value referring to a LookML dashboard's id (model::dashboardname) will be updated so that it matches the current state of the LookML dashboard.
 
 For this operation to succeed the user must have permission to view the LookML dashboard, and only linked dashboards
 that the user has permission to update will be synced.
 
-To **link** or **unlink** a UDD set the `lookml_link_id` property with [update_dashboard()](#!/Dashboard/update_dashboard)
+To **link** or **unlink** a UDD set the 'lookml_link_id' property with [update_dashboard()](#!/Dashboard/update_dashboard)
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("sync_lookml_dashboard called")
@@ -1465,7 +1465,7 @@ To **link** or **unlink** a UDD set the `lookml_link_id` property with [update_d
 }
 
 
-var dashboardCmd = &cobra.Command{
+var dashboardCmd2726 = &cobra.Command{
   Use:   "dashboard",
   Short: "Get Dashboard",
   Long: `### Get information about a dashboard
@@ -1482,8 +1482,8 @@ You can **Search** for dashboards with [search_dashboards()](#!/Dashboard/search
 }
 
 
-var update_dashboardCmd = &cobra.Command{
-  Use:   "update_dashboard",
+var updateDashboardCmd = &cobra.Command{
+  Use:   "updateDashboard",
   Short: "Update Dashboard",
   Long: `### Update a dashboard
 
@@ -1502,14 +1502,14 @@ response body for information about exactly which fields are missing or contain 
 }
 
 
-var delete_dashboardCmd = &cobra.Command{
-  Use:   "delete_dashboard",
+var deleteDashboardCmd = &cobra.Command{
+  Use:   "deleteDashboard",
   Short: "Delete Dashboard",
   Long: `### Delete the dashboard with the specified id
 
 Permanently **deletes** a dashboard. (The dashboard cannot be recovered after this operation.)
 
-"Soft" delete or hide a dashboard by setting its `deleted` status to `True` with [update_dashboard()](#!/Dashboard/update_dashboard).
+"Soft" delete or hide a dashboard by setting its 'deleted' status to 'True' with [update_dashboard()](#!/Dashboard/update_dashboard).
 
 Note: When a dashboard is deleted in the UI, it is soft deleted. Use this API call to permanently remove it, if desired.
 `,
@@ -1519,8 +1519,8 @@ Note: When a dashboard is deleted in the UI, it is soft deleted. Use this API ca
 }
 
 
-var dashboard_aggregate_table_lookmlCmd = &cobra.Command{
-  Use:   "dashboard_aggregate_table_lookml",
+var dashboardAggregateTableLookmlCmd = &cobra.Command{
+  Use:   "dashboardAggregateTableLookml",
   Short: "Get Aggregate Table LookML for a dashboard",
   Long: `### Get Aggregate Table LookML for Each Query on a Dahboard
 
@@ -1533,8 +1533,8 @@ Returns a JSON object that contains the dashboard id and Aggregate Table lookml
 }
 
 
-var dashboard_lookmlCmd = &cobra.Command{
-  Use:   "dashboard_lookml",
+var dashboardLookmlCmd = &cobra.Command{
+  Use:   "dashboardLookml",
   Short: "Get lookml of a UDD",
   Long: `### Get lookml of a UDD
 
@@ -1547,22 +1547,22 @@ Returns a JSON object that contains the dashboard id and the full lookml
 }
 
 
-var search_dashboard_elementsCmd = &cobra.Command{
-  Use:   "search_dashboard_elements",
+var searchDashboardElementsCmd = &cobra.Command{
+  Use:   "searchDashboardElements",
   Short: "Search Dashboard Elements",
   Long: `### Search Dashboard Elements
 
 Returns an **array of DashboardElement objects** that match the specified search criteria.
 
-If multiple search params are given and `filter_or` is FALSE or not specified,
+If multiple search params are given and 'filter_or' is FALSE or not specified,
 search params are combined in a logical AND operation.
 Only rows that match *all* search param criteria will be returned.
 
-If `filter_or` is TRUE, multiple search params are combined in a logical OR operation.
+If 'filter_or' is TRUE, multiple search params are combined in a logical OR operation.
 Results will include rows that match **any** of the search criteria.
 
 String search params use case-insensitive matching.
-String search params can contain `%` and '_' as SQL LIKE pattern match wildcard expressions.
+String search params can contain '%' and '_' as SQL LIKE pattern match wildcard expressions.
 example="dan%" will match "danger" and "Danzig" but not "David"
 example="D_m%" will match "Damage" and "dump"
 
@@ -1582,8 +1582,8 @@ Boolean search params accept only "true" and "false" as values.
 }
 
 
-var dashboard_elementCmd = &cobra.Command{
-  Use:   "dashboard_element",
+var dashboardElementCmd = &cobra.Command{
+  Use:   "dashboardElement",
   Short: "Get DashboardElement",
   Long: `### Get information about the dashboard element with a specific id.`,
   Run: func(cmd *cobra.Command, args []string) {
@@ -1592,8 +1592,8 @@ var dashboard_elementCmd = &cobra.Command{
 }
 
 
-var update_dashboard_elementCmd = &cobra.Command{
-  Use:   "update_dashboard_element",
+var updateDashboardElementCmd = &cobra.Command{
+  Use:   "updateDashboardElement",
   Short: "Update DashboardElement",
   Long: `### Update the dashboard element with a specific id.`,
   Run: func(cmd *cobra.Command, args []string) {
@@ -1602,8 +1602,8 @@ var update_dashboard_elementCmd = &cobra.Command{
 }
 
 
-var delete_dashboard_elementCmd = &cobra.Command{
-  Use:   "delete_dashboard_element",
+var deleteDashboardElementCmd = &cobra.Command{
+  Use:   "deleteDashboardElement",
   Short: "Delete DashboardElement",
   Long: `### Delete a dashboard element with a specific id.`,
   Run: func(cmd *cobra.Command, args []string) {
@@ -1612,8 +1612,8 @@ var delete_dashboard_elementCmd = &cobra.Command{
 }
 
 
-var dashboard_dashboard_elementsCmd = &cobra.Command{
-  Use:   "dashboard_dashboard_elements",
+var dashboardDashboardElementsCmd = &cobra.Command{
+  Use:   "dashboardDashboardElements",
   Short: "Get All DashboardElements",
   Long: `### Get information about all the dashboard elements on a dashboard with a specific id.`,
   Run: func(cmd *cobra.Command, args []string) {
@@ -1622,8 +1622,8 @@ var dashboard_dashboard_elementsCmd = &cobra.Command{
 }
 
 
-var create_dashboard_elementCmd = &cobra.Command{
-  Use:   "create_dashboard_element",
+var createDashboardElementCmd = &cobra.Command{
+  Use:   "createDashboardElement",
   Short: "Create DashboardElement",
   Long: `### Create a dashboard element on the dashboard with a specific id.`,
   Run: func(cmd *cobra.Command, args []string) {
@@ -1632,8 +1632,8 @@ var create_dashboard_elementCmd = &cobra.Command{
 }
 
 
-var dashboard_filterCmd = &cobra.Command{
-  Use:   "dashboard_filter",
+var dashboardFilterCmd = &cobra.Command{
+  Use:   "dashboardFilter",
   Short: "Get Dashboard Filter",
   Long: `### Get information about the dashboard filters with a specific id.`,
   Run: func(cmd *cobra.Command, args []string) {
@@ -1642,8 +1642,8 @@ var dashboard_filterCmd = &cobra.Command{
 }
 
 
-var update_dashboard_filterCmd = &cobra.Command{
-  Use:   "update_dashboard_filter",
+var updateDashboardFilterCmd = &cobra.Command{
+  Use:   "updateDashboardFilter",
   Short: "Update Dashboard Filter",
   Long: `### Update the dashboard filter with a specific id.`,
   Run: func(cmd *cobra.Command, args []string) {
@@ -1652,8 +1652,8 @@ var update_dashboard_filterCmd = &cobra.Command{
 }
 
 
-var delete_dashboard_filterCmd = &cobra.Command{
-  Use:   "delete_dashboard_filter",
+var deleteDashboardFilterCmd = &cobra.Command{
+  Use:   "deleteDashboardFilter",
   Short: "Delete Dashboard Filter",
   Long: `### Delete a dashboard filter with a specific id.`,
   Run: func(cmd *cobra.Command, args []string) {
@@ -1662,8 +1662,8 @@ var delete_dashboard_filterCmd = &cobra.Command{
 }
 
 
-var dashboard_dashboard_filtersCmd = &cobra.Command{
-  Use:   "dashboard_dashboard_filters",
+var dashboardDashboardFiltersCmd = &cobra.Command{
+  Use:   "dashboardDashboardFilters",
   Short: "Get All Dashboard Filters",
   Long: `### Get information about all the dashboard filters on a dashboard with a specific id.`,
   Run: func(cmd *cobra.Command, args []string) {
@@ -1672,8 +1672,8 @@ var dashboard_dashboard_filtersCmd = &cobra.Command{
 }
 
 
-var create_dashboard_filterCmd = &cobra.Command{
-  Use:   "create_dashboard_filter",
+var createDashboardFilterCmd = &cobra.Command{
+  Use:   "createDashboardFilter",
   Short: "Create Dashboard Filter",
   Long: `### Create a dashboard filter on the dashboard with a specific id.`,
   Run: func(cmd *cobra.Command, args []string) {
@@ -1682,8 +1682,8 @@ var create_dashboard_filterCmd = &cobra.Command{
 }
 
 
-var dashboard_layout_componentCmd = &cobra.Command{
-  Use:   "dashboard_layout_component",
+var dashboardLayoutComponentCmd = &cobra.Command{
+  Use:   "dashboardLayoutComponent",
   Short: "Get DashboardLayoutComponent",
   Long: `### Get information about the dashboard elements with a specific id.`,
   Run: func(cmd *cobra.Command, args []string) {
@@ -1692,8 +1692,8 @@ var dashboard_layout_componentCmd = &cobra.Command{
 }
 
 
-var update_dashboard_layout_componentCmd = &cobra.Command{
-  Use:   "update_dashboard_layout_component",
+var updateDashboardLayoutComponentCmd = &cobra.Command{
+  Use:   "updateDashboardLayoutComponent",
   Short: "Update DashboardLayoutComponent",
   Long: `### Update the dashboard element with a specific id.`,
   Run: func(cmd *cobra.Command, args []string) {
@@ -1702,8 +1702,8 @@ var update_dashboard_layout_componentCmd = &cobra.Command{
 }
 
 
-var dashboard_layout_dashboard_layout_componentsCmd = &cobra.Command{
-  Use:   "dashboard_layout_dashboard_layout_components",
+var dashboardLayoutDashboardLayoutComponentsCmd = &cobra.Command{
+  Use:   "dashboardLayoutDashboardLayoutComponents",
   Short: "Get All DashboardLayoutComponents",
   Long: `### Get information about all the dashboard layout components for a dashboard layout with a specific id.`,
   Run: func(cmd *cobra.Command, args []string) {
@@ -1712,8 +1712,8 @@ var dashboard_layout_dashboard_layout_componentsCmd = &cobra.Command{
 }
 
 
-var dashboard_layoutCmd = &cobra.Command{
-  Use:   "dashboard_layout",
+var dashboardLayoutCmd = &cobra.Command{
+  Use:   "dashboardLayout",
   Short: "Get DashboardLayout",
   Long: `### Get information about the dashboard layouts with a specific id.`,
   Run: func(cmd *cobra.Command, args []string) {
@@ -1722,8 +1722,8 @@ var dashboard_layoutCmd = &cobra.Command{
 }
 
 
-var update_dashboard_layoutCmd = &cobra.Command{
-  Use:   "update_dashboard_layout",
+var updateDashboardLayoutCmd = &cobra.Command{
+  Use:   "updateDashboardLayout",
   Short: "Update DashboardLayout",
   Long: `### Update the dashboard layout with a specific id.`,
   Run: func(cmd *cobra.Command, args []string) {
@@ -1732,8 +1732,8 @@ var update_dashboard_layoutCmd = &cobra.Command{
 }
 
 
-var delete_dashboard_layoutCmd = &cobra.Command{
-  Use:   "delete_dashboard_layout",
+var deleteDashboardLayoutCmd = &cobra.Command{
+  Use:   "deleteDashboardLayout",
   Short: "Delete DashboardLayout",
   Long: `### Delete a dashboard layout with a specific id.`,
   Run: func(cmd *cobra.Command, args []string) {
@@ -1742,8 +1742,8 @@ var delete_dashboard_layoutCmd = &cobra.Command{
 }
 
 
-var dashboard_dashboard_layoutsCmd = &cobra.Command{
-  Use:   "dashboard_dashboard_layouts",
+var dashboardDashboardLayoutsCmd = &cobra.Command{
+  Use:   "dashboardDashboardLayouts",
   Short: "Get All DashboardLayouts",
   Long: `### Get information about all the dashboard elements on a dashboard with a specific id.`,
   Run: func(cmd *cobra.Command, args []string) {
@@ -1752,8 +1752,8 @@ var dashboard_dashboard_layoutsCmd = &cobra.Command{
 }
 
 
-var create_dashboard_layoutCmd = &cobra.Command{
-  Use:   "create_dashboard_layout",
+var createDashboardLayoutCmd = &cobra.Command{
+  Use:   "createDashboardLayout",
   Short: "Create DashboardLayout",
   Long: `### Create a dashboard layout on the dashboard with a specific id.`,
   Run: func(cmd *cobra.Command, args []string) {
@@ -1774,8 +1774,8 @@ var dataActionCmd = &cobra.Command{
 }
 
 
-var perform_data_actionCmd = &cobra.Command{
-  Use:   "perform_data_action",
+var performDataActionCmd = &cobra.Command{
+  Use:   "performDataAction",
   Short: "Send a Data Action",
   Long: `Perform a data action. The data action object can be obtained from query results, and used to perform an arbitrary action.`,
   Run: func(cmd *cobra.Command, args []string) {
@@ -1784,8 +1784,8 @@ var perform_data_actionCmd = &cobra.Command{
 }
 
 
-var fetch_remote_data_action_formCmd = &cobra.Command{
-  Use:   "fetch_remote_data_action_form",
+var fetchRemoteDataActionFormCmd = &cobra.Command{
+  Use:   "fetchRemoteDataActionForm",
   Short: "Fetch Remote Data Action Form",
   Long: `For some data actions, the remote server may supply a form requesting further user input. This endpoint takes a data action, asks the remote server to generate a form for it, and returns that form to you for presentation to the user.`,
   Run: func(cmd *cobra.Command, args []string) {
@@ -1806,8 +1806,8 @@ var datagroupCmd = &cobra.Command{
 }
 
 
-var all_datagroupsCmd = &cobra.Command{
-  Use:   "all_datagroups",
+var allDatagroupsCmd = &cobra.Command{
+  Use:   "allDatagroups",
   Short: "Get All Datagroups",
   Long: `### Get information about all datagroups.
 `,
@@ -1817,7 +1817,7 @@ var all_datagroupsCmd = &cobra.Command{
 }
 
 
-var datagroupCmd = &cobra.Command{
+var datagroupCmd7809 = &cobra.Command{
   Use:   "datagroup",
   Short: "Get Datagroup",
   Long: `### Get information about a datagroup.
@@ -1828,8 +1828,8 @@ var datagroupCmd = &cobra.Command{
 }
 
 
-var update_datagroupCmd = &cobra.Command{
-  Use:   "update_datagroup",
+var updateDatagroupCmd = &cobra.Command{
+  Use:   "updateDatagroup",
   Short: "Update Datagroup",
   Long: `### Update a datagroup using the specified params.
 `,
@@ -1851,8 +1851,8 @@ var derivedTableCmd = &cobra.Command{
 }
 
 
-var graph_derived_tables_for_modelCmd = &cobra.Command{
-  Use:   "graph_derived_tables_for_model",
+var graphDerivedTablesForModelCmd = &cobra.Command{
+  Use:   "graphDerivedTablesForModel",
   Short: "Get Derived Table graph for model",
   Long: `### Discover information about derived tables
 `,
@@ -1862,8 +1862,8 @@ var graph_derived_tables_for_modelCmd = &cobra.Command{
 }
 
 
-var graph_derived_tables_for_viewCmd = &cobra.Command{
-  Use:   "graph_derived_tables_for_view",
+var graphDerivedTablesForViewCmd = &cobra.Command{
+  Use:   "graphDerivedTablesForView",
   Short: "Get subgraph of derived table and dependencies",
   Long: `### Get the subgraph representing this derived table and its dependencies.
 `,
@@ -1885,8 +1885,8 @@ var folderCmd = &cobra.Command{
 }
 
 
-var search_foldersCmd = &cobra.Command{
-  Use:   "search_folders",
+var searchFoldersCmd = &cobra.Command{
+  Use:   "searchFolders",
   Short: "Search Folders",
   Long: `Search for folders by creator id, parent id, name, etc`,
   Run: func(cmd *cobra.Command, args []string) {
@@ -1895,7 +1895,7 @@ var search_foldersCmd = &cobra.Command{
 }
 
 
-var folderCmd = &cobra.Command{
+var folderCmd7578 = &cobra.Command{
   Use:   "folder",
   Short: "Get Folder",
   Long: `### Get information about the folder with a specific id.`,
@@ -1905,8 +1905,8 @@ var folderCmd = &cobra.Command{
 }
 
 
-var update_folderCmd = &cobra.Command{
-  Use:   "update_folder",
+var updateFolderCmd = &cobra.Command{
+  Use:   "updateFolder",
   Short: "Update Folder",
   Long: `### Update the folder with a specific id.`,
   Run: func(cmd *cobra.Command, args []string) {
@@ -1915,8 +1915,8 @@ var update_folderCmd = &cobra.Command{
 }
 
 
-var delete_folderCmd = &cobra.Command{
-  Use:   "delete_folder",
+var deleteFolderCmd = &cobra.Command{
+  Use:   "deleteFolder",
   Short: "Delete Folder",
   Long: `### Delete the folder with a specific id including any children folders.
 **DANGER** this will delete all looks and dashboards in the folder.
@@ -1927,8 +1927,8 @@ var delete_folderCmd = &cobra.Command{
 }
 
 
-var all_foldersCmd = &cobra.Command{
-  Use:   "all_folders",
+var allFoldersCmd = &cobra.Command{
+  Use:   "allFolders",
   Short: "Get All Folders",
   Long: `### Get information about all folders.
 
@@ -1942,8 +1942,8 @@ In API 4.0+, all personal folders will be returned.
 }
 
 
-var create_folderCmd = &cobra.Command{
-  Use:   "create_folder",
+var createFolderCmd = &cobra.Command{
+  Use:   "createFolder",
   Short: "Create Folder",
   Long: `### Create a folder with specified information.
 
@@ -1956,8 +1956,8 @@ returns 404 Not Found.
 }
 
 
-var folder_childrenCmd = &cobra.Command{
-  Use:   "folder_children",
+var folderChildrenCmd = &cobra.Command{
+  Use:   "folderChildren",
   Short: "Get Folder Children",
   Long: `### Get the children of a folder.`,
   Run: func(cmd *cobra.Command, args []string) {
@@ -1966,8 +1966,8 @@ var folder_childrenCmd = &cobra.Command{
 }
 
 
-var folder_children_searchCmd = &cobra.Command{
-  Use:   "folder_children_search",
+var folderChildrenSearchCmd = &cobra.Command{
+  Use:   "folderChildrenSearch",
   Short: "Search Folder Children",
   Long: `### Search the children of a folder`,
   Run: func(cmd *cobra.Command, args []string) {
@@ -1976,8 +1976,8 @@ var folder_children_searchCmd = &cobra.Command{
 }
 
 
-var folder_parentCmd = &cobra.Command{
-  Use:   "folder_parent",
+var folderParentCmd = &cobra.Command{
+  Use:   "folderParent",
   Short: "Get Folder Parent",
   Long: `### Get the parent of a folder`,
   Run: func(cmd *cobra.Command, args []string) {
@@ -1986,8 +1986,8 @@ var folder_parentCmd = &cobra.Command{
 }
 
 
-var folder_ancestorsCmd = &cobra.Command{
-  Use:   "folder_ancestors",
+var folderAncestorsCmd = &cobra.Command{
+  Use:   "folderAncestors",
   Short: "Get Folder Ancestors",
   Long: `### Get the ancestors of a folder`,
   Run: func(cmd *cobra.Command, args []string) {
@@ -1996,8 +1996,8 @@ var folder_ancestorsCmd = &cobra.Command{
 }
 
 
-var folder_looksCmd = &cobra.Command{
-  Use:   "folder_looks",
+var folderLooksCmd = &cobra.Command{
+  Use:   "folderLooks",
   Short: "Get Folder Looks",
   Long: `### Get all looks in a folder.
 In API 3.x, this will return all looks in a folder, including looks in the trash.
@@ -2009,8 +2009,8 @@ In API 4.0+, all looks in a folder will be returned, excluding looks in the tras
 }
 
 
-var folder_dashboardsCmd = &cobra.Command{
-  Use:   "folder_dashboards",
+var folderDashboardsCmd = &cobra.Command{
+  Use:   "folderDashboards",
   Short: "Get Folder Dashboards",
   Long: `### Get the dashboards in a folder`,
   Run: func(cmd *cobra.Command, args []string) {
@@ -2031,8 +2031,8 @@ var groupCmd = &cobra.Command{
 }
 
 
-var all_groupsCmd = &cobra.Command{
-  Use:   "all_groups",
+var allGroupsCmd = &cobra.Command{
+  Use:   "allGroups",
   Short: "Get All Groups",
   Long: `### Get information about all groups.
 `,
@@ -2042,8 +2042,8 @@ var all_groupsCmd = &cobra.Command{
 }
 
 
-var create_groupCmd = &cobra.Command{
-  Use:   "create_group",
+var createGroupCmd = &cobra.Command{
+  Use:   "createGroup",
   Short: "Create Group",
   Long: `### Creates a new group (admin only).
 `,
@@ -2053,22 +2053,22 @@ var create_groupCmd = &cobra.Command{
 }
 
 
-var search_groupsCmd = &cobra.Command{
-  Use:   "search_groups",
+var searchGroupsCmd = &cobra.Command{
+  Use:   "searchGroups",
   Short: "Search Groups",
   Long: `### Search groups
 
 Returns all group records that match the given search criteria.
 
-If multiple search params are given and `filter_or` is FALSE or not specified,
+If multiple search params are given and 'filter_or' is FALSE or not specified,
 search params are combined in a logical AND operation.
 Only rows that match *all* search param criteria will be returned.
 
-If `filter_or` is TRUE, multiple search params are combined in a logical OR operation.
+If 'filter_or' is TRUE, multiple search params are combined in a logical OR operation.
 Results will include rows that match **any** of the search criteria.
 
 String search params use case-insensitive matching.
-String search params can contain `%` and '_' as SQL LIKE pattern match wildcard expressions.
+String search params can contain '%' and '_' as SQL LIKE pattern match wildcard expressions.
 example="dan%" will match "danger" and "Danzig" but not "David"
 example="D_m%" will match "Damage" and "dump"
 
@@ -2088,7 +2088,7 @@ Boolean search params accept only "true" and "false" as values.
 }
 
 
-var groupCmd = &cobra.Command{
+var groupCmd2770 = &cobra.Command{
   Use:   "group",
   Short: "Get Group",
   Long: `### Get information about a group.
@@ -2099,8 +2099,8 @@ var groupCmd = &cobra.Command{
 }
 
 
-var update_groupCmd = &cobra.Command{
-  Use:   "update_group",
+var updateGroupCmd = &cobra.Command{
+  Use:   "updateGroup",
   Short: "Update Group",
   Long: `### Updates the a group (admin only).`,
   Run: func(cmd *cobra.Command, args []string) {
@@ -2109,8 +2109,8 @@ var update_groupCmd = &cobra.Command{
 }
 
 
-var delete_groupCmd = &cobra.Command{
-  Use:   "delete_group",
+var deleteGroupCmd = &cobra.Command{
+  Use:   "deleteGroup",
   Short: "Delete Group",
   Long: `### Deletes a group (admin only).
 `,
@@ -2120,8 +2120,8 @@ var delete_groupCmd = &cobra.Command{
 }
 
 
-var all_group_groupsCmd = &cobra.Command{
-  Use:   "all_group_groups",
+var allGroupGroupsCmd = &cobra.Command{
+  Use:   "allGroupGroups",
   Short: "Get All Groups in Group",
   Long: `### Get information about all the groups in a group
 `,
@@ -2131,8 +2131,8 @@ var all_group_groupsCmd = &cobra.Command{
 }
 
 
-var add_group_groupCmd = &cobra.Command{
-  Use:   "add_group_group",
+var addGroupGroupCmd = &cobra.Command{
+  Use:   "addGroupGroup",
   Short: "Add a Group to Group",
   Long: `### Adds a new group to a group.
 `,
@@ -2142,8 +2142,8 @@ var add_group_groupCmd = &cobra.Command{
 }
 
 
-var all_group_usersCmd = &cobra.Command{
-  Use:   "all_group_users",
+var allGroupUsersCmd = &cobra.Command{
+  Use:   "allGroupUsers",
   Short: "Get All Users in Group",
   Long: `### Get information about all the users directly included in a group.
 `,
@@ -2153,8 +2153,8 @@ var all_group_usersCmd = &cobra.Command{
 }
 
 
-var add_group_userCmd = &cobra.Command{
-  Use:   "add_group_user",
+var addGroupUserCmd = &cobra.Command{
+  Use:   "addGroupUser",
   Short: "Add a User to Group",
   Long: `### Adds a new user to a group.
 `,
@@ -2164,8 +2164,8 @@ var add_group_userCmd = &cobra.Command{
 }
 
 
-var delete_group_userCmd = &cobra.Command{
-  Use:   "delete_group_user",
+var deleteGroupUserCmd = &cobra.Command{
+  Use:   "deleteGroupUser",
   Short: "Remove a User from Group",
   Long: `### Removes a user from a group.
 `,
@@ -2175,8 +2175,8 @@ var delete_group_userCmd = &cobra.Command{
 }
 
 
-var delete_group_from_groupCmd = &cobra.Command{
-  Use:   "delete_group_from_group",
+var deleteGroupFromGroupCmd = &cobra.Command{
+  Use:   "deleteGroupFromGroup",
   Short: "Deletes a Group from Group",
   Long: `### Removes a group from a group.
 `,
@@ -2186,8 +2186,8 @@ var delete_group_from_groupCmd = &cobra.Command{
 }
 
 
-var update_user_attribute_group_valueCmd = &cobra.Command{
-  Use:   "update_user_attribute_group_value",
+var updateUserAttributeGroupValueCmd = &cobra.Command{
+  Use:   "updateUserAttributeGroupValue",
   Short: "Set User Attribute Group Value",
   Long: `### Set the value of a user attribute for a group.
 
@@ -2199,8 +2199,8 @@ For information about how user attribute values are calculated, see [Set User At
 }
 
 
-var delete_user_attribute_group_valueCmd = &cobra.Command{
-  Use:   "delete_user_attribute_group_value",
+var deleteUserAttributeGroupValueCmd = &cobra.Command{
+  Use:   "deleteUserAttributeGroupValue",
   Short: "Delete User Attribute Group Value",
   Long: `### Remove a user attribute value from a group.
 `,
@@ -2222,8 +2222,8 @@ var homepageCmd = &cobra.Command{
 }
 
 
-var all_homepagesCmd = &cobra.Command{
-  Use:   "all_homepages",
+var allHomepagesCmd = &cobra.Command{
+  Use:   "allHomepages",
   Short: "Get All Homepages",
   Long: `### Get information about all homepages.
 `,
@@ -2233,8 +2233,8 @@ var all_homepagesCmd = &cobra.Command{
 }
 
 
-var create_homepageCmd = &cobra.Command{
-  Use:   "create_homepage",
+var createHomepageCmd = &cobra.Command{
+  Use:   "createHomepage",
   Short: "Create Homepage",
   Long: `### Create a new homepage.
 `,
@@ -2244,20 +2244,20 @@ var create_homepageCmd = &cobra.Command{
 }
 
 
-var search_homepagesCmd = &cobra.Command{
-  Use:   "search_homepages",
+var searchHomepagesCmd = &cobra.Command{
+  Use:   "searchHomepages",
   Short: "Search Homepages",
   Long: `### Search Homepages
 
-If multiple search params are given and `filter_or` is FALSE or not specified,
+If multiple search params are given and 'filter_or' is FALSE or not specified,
 search params are combined in a logical AND operation.
 Only rows that match *all* search param criteria will be returned.
 
-If `filter_or` is TRUE, multiple search params are combined in a logical OR operation.
+If 'filter_or' is TRUE, multiple search params are combined in a logical OR operation.
 Results will include rows that match **any** of the search criteria.
 
 String search params use case-insensitive matching.
-String search params can contain `%` and '_' as SQL LIKE pattern match wildcard expressions.
+String search params can contain '%' and '_' as SQL LIKE pattern match wildcard expressions.
 example="dan%" will match "danger" and "Danzig" but not "David"
 example="D_m%" will match "Damage" and "dump"
 
@@ -2277,7 +2277,7 @@ Boolean search params accept only "true" and "false" as values.
 }
 
 
-var homepageCmd = &cobra.Command{
+var homepageCmd7622 = &cobra.Command{
   Use:   "homepage",
   Short: "Get Homepage",
   Long: `### Get information about a homepage.
@@ -2288,8 +2288,8 @@ var homepageCmd = &cobra.Command{
 }
 
 
-var update_homepageCmd = &cobra.Command{
-  Use:   "update_homepage",
+var updateHomepageCmd = &cobra.Command{
+  Use:   "updateHomepage",
   Short: "Update Homepage",
   Long: `### Update a homepage definition.
 `,
@@ -2299,8 +2299,8 @@ var update_homepageCmd = &cobra.Command{
 }
 
 
-var delete_homepageCmd = &cobra.Command{
-  Use:   "delete_homepage",
+var deleteHomepageCmd = &cobra.Command{
+  Use:   "deleteHomepage",
   Short: "Delete Homepage",
   Long: `### Delete a homepage.
 `,
@@ -2310,8 +2310,8 @@ var delete_homepageCmd = &cobra.Command{
 }
 
 
-var all_homepage_itemsCmd = &cobra.Command{
-  Use:   "all_homepage_items",
+var allHomepageItemsCmd = &cobra.Command{
+  Use:   "allHomepageItems",
   Short: "Get All Homepage Items",
   Long: `### Get information about all homepage items.
 `,
@@ -2321,8 +2321,8 @@ var all_homepage_itemsCmd = &cobra.Command{
 }
 
 
-var create_homepage_itemCmd = &cobra.Command{
-  Use:   "create_homepage_item",
+var createHomepageItemCmd = &cobra.Command{
+  Use:   "createHomepageItem",
   Short: "Create Homepage Item",
   Long: `### Create a new homepage item.
 `,
@@ -2332,8 +2332,8 @@ var create_homepage_itemCmd = &cobra.Command{
 }
 
 
-var homepage_itemCmd = &cobra.Command{
-  Use:   "homepage_item",
+var homepageItemCmd = &cobra.Command{
+  Use:   "homepageItem",
   Short: "Get Homepage Item",
   Long: `### Get information about a homepage item.
 `,
@@ -2343,8 +2343,8 @@ var homepage_itemCmd = &cobra.Command{
 }
 
 
-var update_homepage_itemCmd = &cobra.Command{
-  Use:   "update_homepage_item",
+var updateHomepageItemCmd = &cobra.Command{
+  Use:   "updateHomepageItem",
   Short: "Update Homepage Item",
   Long: `### Update a homepage item definition.
 `,
@@ -2354,8 +2354,8 @@ var update_homepage_itemCmd = &cobra.Command{
 }
 
 
-var delete_homepage_itemCmd = &cobra.Command{
-  Use:   "delete_homepage_item",
+var deleteHomepageItemCmd = &cobra.Command{
+  Use:   "deleteHomepageItem",
   Short: "Delete Homepage Item",
   Long: `### Delete a homepage item.
 `,
@@ -2365,8 +2365,8 @@ var delete_homepage_itemCmd = &cobra.Command{
 }
 
 
-var all_homepage_sectionsCmd = &cobra.Command{
-  Use:   "all_homepage_sections",
+var allHomepageSectionsCmd = &cobra.Command{
+  Use:   "allHomepageSections",
   Short: "Get All Homepage sections",
   Long: `### Get information about all homepage sections.
 `,
@@ -2376,8 +2376,8 @@ var all_homepage_sectionsCmd = &cobra.Command{
 }
 
 
-var create_homepage_sectionCmd = &cobra.Command{
-  Use:   "create_homepage_section",
+var createHomepageSectionCmd = &cobra.Command{
+  Use:   "createHomepageSection",
   Short: "Create Homepage section",
   Long: `### Create a new homepage section.
 `,
@@ -2387,8 +2387,8 @@ var create_homepage_sectionCmd = &cobra.Command{
 }
 
 
-var homepage_sectionCmd = &cobra.Command{
-  Use:   "homepage_section",
+var homepageSectionCmd = &cobra.Command{
+  Use:   "homepageSection",
   Short: "Get Homepage section",
   Long: `### Get information about a homepage section.
 `,
@@ -2398,8 +2398,8 @@ var homepage_sectionCmd = &cobra.Command{
 }
 
 
-var update_homepage_sectionCmd = &cobra.Command{
-  Use:   "update_homepage_section",
+var updateHomepageSectionCmd = &cobra.Command{
+  Use:   "updateHomepageSection",
   Short: "Update Homepage section",
   Long: `### Update a homepage section definition.
 `,
@@ -2409,8 +2409,8 @@ var update_homepage_sectionCmd = &cobra.Command{
 }
 
 
-var delete_homepage_sectionCmd = &cobra.Command{
-  Use:   "delete_homepage_section",
+var deleteHomepageSectionCmd = &cobra.Command{
+  Use:   "deleteHomepageSection",
   Short: "Delete Homepage section",
   Long: `### Delete a homepage section.
 `,
@@ -2420,8 +2420,8 @@ var delete_homepage_sectionCmd = &cobra.Command{
 }
 
 
-var all_primary_homepage_sectionsCmd = &cobra.Command{
-  Use:   "all_primary_homepage_sections",
+var allPrimaryHomepageSectionsCmd = &cobra.Command{
+  Use:   "allPrimaryHomepageSections",
   Short: "Get All Primary homepage sections",
   Long: `### Get information about the primary homepage's sections.
 `,
@@ -2443,8 +2443,8 @@ var integrationCmd = &cobra.Command{
 }
 
 
-var all_integration_hubsCmd = &cobra.Command{
-  Use:   "all_integration_hubs",
+var allIntegrationHubsCmd = &cobra.Command{
+  Use:   "allIntegrationHubs",
   Short: "Get All Integration Hubs",
   Long: `### Get information about all Integration Hubs.
 `,
@@ -2454,8 +2454,8 @@ var all_integration_hubsCmd = &cobra.Command{
 }
 
 
-var create_integration_hubCmd = &cobra.Command{
-  Use:   "create_integration_hub",
+var createIntegrationHubCmd = &cobra.Command{
+  Use:   "createIntegrationHub",
   Short: "Create Integration Hub",
   Long: `### Create a new Integration Hub.
 
@@ -2467,8 +2467,8 @@ This API is rate limited to prevent it from being used for SSRF attacks
 }
 
 
-var integration_hubCmd = &cobra.Command{
-  Use:   "integration_hub",
+var integrationHubCmd = &cobra.Command{
+  Use:   "integrationHub",
   Short: "Get Integration Hub",
   Long: `### Get information about a Integration Hub.
 `,
@@ -2478,8 +2478,8 @@ var integration_hubCmd = &cobra.Command{
 }
 
 
-var update_integration_hubCmd = &cobra.Command{
-  Use:   "update_integration_hub",
+var updateIntegrationHubCmd = &cobra.Command{
+  Use:   "updateIntegrationHub",
   Short: "Update Integration Hub",
   Long: `### Update a Integration Hub definition.
 
@@ -2491,8 +2491,8 @@ This API is rate limited to prevent it from being used for SSRF attacks
 }
 
 
-var delete_integration_hubCmd = &cobra.Command{
-  Use:   "delete_integration_hub",
+var deleteIntegrationHubCmd = &cobra.Command{
+  Use:   "deleteIntegrationHub",
   Short: "Delete Integration Hub",
   Long: `### Delete a Integration Hub.
 `,
@@ -2502,8 +2502,8 @@ var delete_integration_hubCmd = &cobra.Command{
 }
 
 
-var accept_integration_hub_legal_agreementCmd = &cobra.Command{
-  Use:   "accept_integration_hub_legal_agreement",
+var acceptIntegrationHubLegalAgreementCmd = &cobra.Command{
+  Use:   "acceptIntegrationHubLegalAgreement",
   Short: "Accept Integration Hub Legal Agreement",
   Long: `Accepts the legal agreement for a given integration hub. This only works for integration hubs that have legal_agreement_required set to true and legal_agreement_signed set to false.`,
   Run: func(cmd *cobra.Command, args []string) {
@@ -2512,8 +2512,8 @@ var accept_integration_hub_legal_agreementCmd = &cobra.Command{
 }
 
 
-var all_integrationsCmd = &cobra.Command{
-  Use:   "all_integrations",
+var allIntegrationsCmd = &cobra.Command{
+  Use:   "allIntegrations",
   Short: "Get All Integrations",
   Long: `### Get information about all Integrations.
 `,
@@ -2523,7 +2523,7 @@ var all_integrationsCmd = &cobra.Command{
 }
 
 
-var integrationCmd = &cobra.Command{
+var integrationCmd5380 = &cobra.Command{
   Use:   "integration",
   Short: "Get Integration",
   Long: `### Get information about a Integration.
@@ -2534,8 +2534,8 @@ var integrationCmd = &cobra.Command{
 }
 
 
-var update_integrationCmd = &cobra.Command{
-  Use:   "update_integration",
+var updateIntegrationCmd = &cobra.Command{
+  Use:   "updateIntegration",
   Short: "Update Integration",
   Long: `### Update parameters on a Integration.
 `,
@@ -2545,8 +2545,8 @@ var update_integrationCmd = &cobra.Command{
 }
 
 
-var fetch_integration_formCmd = &cobra.Command{
-  Use:   "fetch_integration_form",
+var fetchIntegrationFormCmd = &cobra.Command{
+  Use:   "fetchIntegrationForm",
   Short: "Fetch Remote Integration Form",
   Long: `Returns the Integration form for presentation to the user.`,
   Run: func(cmd *cobra.Command, args []string) {
@@ -2555,8 +2555,8 @@ var fetch_integration_formCmd = &cobra.Command{
 }
 
 
-var test_integrationCmd = &cobra.Command{
-  Use:   "test_integration",
+var testIntegrationCmd = &cobra.Command{
+  Use:   "testIntegration",
   Short: "Test integration",
   Long: `Tests the integration to make sure all the settings are working.`,
   Run: func(cmd *cobra.Command, args []string) {
@@ -2577,8 +2577,8 @@ var lookCmd = &cobra.Command{
 }
 
 
-var all_looksCmd = &cobra.Command{
-  Use:   "all_looks",
+var allLooksCmd = &cobra.Command{
+  Use:   "allLooks",
   Short: "Get All Looks",
   Long: `### Get information about all active Looks
 
@@ -2594,16 +2594,16 @@ Find **soft-deleted looks** with [search_looks()](#!/Look/search_looks)
 }
 
 
-var create_lookCmd = &cobra.Command{
-  Use:   "create_look",
+var createLookCmd = &cobra.Command{
+  Use:   "createLook",
   Short: "Create Look",
   Long: `### Create a Look
 
 To create a look to display query data, first create the query with [create_query()](#!/Query/create_query)
-then assign the query's id to the `query_id` property in the call to `create_look()`.
+then assign the query's id to the 'query_id' property in the call to 'create_look()'.
 
-To place the look into a particular space, assign the space's id to the `space_id` property
-in the call to `create_look()`.
+To place the look into a particular space, assign the space's id to the 'space_id' property
+in the call to 'create_look()'.
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("create_look called")
@@ -2611,22 +2611,22 @@ in the call to `create_look()`.
 }
 
 
-var search_looksCmd = &cobra.Command{
-  Use:   "search_looks",
+var searchLooksCmd = &cobra.Command{
+  Use:   "searchLooks",
   Short: "Search Looks",
   Long: `### Search Looks
 
 Returns an **array of Look objects** that match the specified search criteria.
 
-If multiple search params are given and `filter_or` is FALSE or not specified,
+If multiple search params are given and 'filter_or' is FALSE or not specified,
 search params are combined in a logical AND operation.
 Only rows that match *all* search param criteria will be returned.
 
-If `filter_or` is TRUE, multiple search params are combined in a logical OR operation.
+If 'filter_or' is TRUE, multiple search params are combined in a logical OR operation.
 Results will include rows that match **any** of the search criteria.
 
 String search params use case-insensitive matching.
-String search params can contain `%` and '_' as SQL LIKE pattern match wildcard expressions.
+String search params can contain '%' and '_' as SQL LIKE pattern match wildcard expressions.
 example="dan%" will match "danger" and "Danzig" but not "David"
 example="D_m%" will match "Damage" and "dump"
 
@@ -2648,7 +2648,7 @@ Get a **single look** by id with [look(id)](#!/Look/look)
 }
 
 
-var lookCmd = &cobra.Command{
+var lookCmd4947 = &cobra.Command{
   Use:   "look",
   Short: "Get Look",
   Long: `### Get a Look.
@@ -2662,29 +2662,29 @@ Returns detailed information about a Look and its associated Query.
 }
 
 
-var update_lookCmd = &cobra.Command{
-  Use:   "update_look",
+var updateLookCmd = &cobra.Command{
+  Use:   "updateLook",
   Short: "Update Look",
   Long: `### Modify a Look
 
-Use this function to modify parts of a look. Property values given in a call to `update_look` are
+Use this function to modify parts of a look. Property values given in a call to 'update_look' are
 applied to the existing look, so there's no need to include properties whose values are not changing.
 It's best to specify only the properties you want to change and leave everything else out
-of your `update_look` call. **Look properties marked 'read-only' will be ignored.**
+of your 'update_look' call. **Look properties marked 'read-only' will be ignored.**
 
 When a user deletes a look in the Looker UI, the look data remains in the database but is
 marked with a deleted flag ("soft-deleted"). Soft-deleted looks can be undeleted (by an admin)
 if the delete was in error.
 
-To soft-delete a look via the API, use [update_look()](#!/Look/update_look) to change the look's `deleted` property to `true`.
-You can undelete a look by calling `update_look` to change the look's `deleted` property to `false`.
+To soft-delete a look via the API, use [update_look()](#!/Look/update_look) to change the look's 'deleted' property to 'true'.
+You can undelete a look by calling 'update_look' to change the look's 'deleted' property to 'false'.
 
 Soft-deleted looks are excluded from the results of [all_looks()](#!/Look/all_looks) and [search_looks()](#!/Look/search_looks), so they
 essentially disappear from view even though they still reside in the db.
-In API 3.1 and later, you can pass `deleted: true` as a parameter to [search_looks()](#!/3.1/Look/search_looks) to list soft-deleted looks.
+In API 3.1 and later, you can pass 'deleted: true' as a parameter to [search_looks()](#!/3.1/Look/search_looks) to list soft-deleted looks.
 
 NOTE: [delete_look()](#!/Look/delete_look) performs a "hard delete" - the look data is removed from the Looker
-database and destroyed. There is no "undo" for `delete_look()`.
+database and destroyed. There is no "undo" for 'delete_look()'.
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("update_look called")
@@ -2692,8 +2692,8 @@ database and destroyed. There is no "undo" for `delete_look()`.
 }
 
 
-var delete_lookCmd = &cobra.Command{
-  Use:   "delete_look",
+var deleteLookCmd = &cobra.Command{
+  Use:   "deleteLook",
   Short: "Delete Look",
   Long: `### Permanently Delete a Look
 
@@ -2709,8 +2709,8 @@ For information about soft-delete (which can be undone) see [update_look()](#!/L
 }
 
 
-var run_lookCmd = &cobra.Command{
-  Use:   "run_look",
+var runLookCmd = &cobra.Command{
+  Use:   "runLook",
   Short: "Run Look",
   Long: `### Run a Look
 
@@ -2751,8 +2751,8 @@ var lookmlModelCmd = &cobra.Command{
 }
 
 
-var all_lookml_modelsCmd = &cobra.Command{
-  Use:   "all_lookml_models",
+var allLookmlModelsCmd = &cobra.Command{
+  Use:   "allLookmlModels",
   Short: "Get All LookML Models",
   Long: `### Get information about all lookml models.
 `,
@@ -2762,8 +2762,8 @@ var all_lookml_modelsCmd = &cobra.Command{
 }
 
 
-var create_lookml_modelCmd = &cobra.Command{
-  Use:   "create_lookml_model",
+var createLookmlModelCmd = &cobra.Command{
+  Use:   "createLookmlModel",
   Short: "Create LookML Model",
   Long: `### Create a lookml model using the specified configuration.
 `,
@@ -2773,8 +2773,8 @@ var create_lookml_modelCmd = &cobra.Command{
 }
 
 
-var lookml_modelCmd = &cobra.Command{
-  Use:   "lookml_model",
+var lookmlModelCmd4483 = &cobra.Command{
+  Use:   "lookmlModel",
   Short: "Get LookML Model",
   Long: `### Get information about a lookml model.
 `,
@@ -2784,8 +2784,8 @@ var lookml_modelCmd = &cobra.Command{
 }
 
 
-var update_lookml_modelCmd = &cobra.Command{
-  Use:   "update_lookml_model",
+var updateLookmlModelCmd = &cobra.Command{
+  Use:   "updateLookmlModel",
   Short: "Update LookML Model",
   Long: `### Update a lookml model using the specified configuration.
 `,
@@ -2795,8 +2795,8 @@ var update_lookml_modelCmd = &cobra.Command{
 }
 
 
-var delete_lookml_modelCmd = &cobra.Command{
-  Use:   "delete_lookml_model",
+var deleteLookmlModelCmd = &cobra.Command{
+  Use:   "deleteLookmlModel",
   Short: "Delete LookML Model",
   Long: `### Delete a lookml model.
 `,
@@ -2806,8 +2806,8 @@ var delete_lookml_modelCmd = &cobra.Command{
 }
 
 
-var lookml_model_exploreCmd = &cobra.Command{
-  Use:   "lookml_model_explore",
+var lookmlModelExploreCmd = &cobra.Command{
+  Use:   "lookmlModelExplore",
   Short: "Get LookML Model Explore",
   Long: `### Get information about a lookml model explore.
 `,
@@ -2829,8 +2829,8 @@ var projectCmd = &cobra.Command{
 }
 
 
-var all_git_branchesCmd = &cobra.Command{
-  Use:   "all_git_branches",
+var allGitBranchesCmd = &cobra.Command{
+  Use:   "allGitBranches",
   Short: "Get All Git Branches",
   Long: `### Get All Git Branches
 
@@ -2842,8 +2842,8 @@ Returns a list of git branches in the project repository
 }
 
 
-var git_branchCmd = &cobra.Command{
-  Use:   "git_branch",
+var gitBranchCmd = &cobra.Command{
+  Use:   "gitBranch",
   Short: "Get Active Git Branch",
   Long: `### Get the Current Git Branch
 
@@ -2855,13 +2855,13 @@ Returns the git branch currently checked out in the given project repository
 }
 
 
-var update_git_branchCmd = &cobra.Command{
-  Use:   "update_git_branch",
+var updateGitBranchCmd = &cobra.Command{
+  Use:   "updateGitBranch",
   Short: "Update Project Git Branch",
   Long: `### Checkout and/or reset --hard an existing Git Branch
 
 Only allowed in development mode
-  - Call `update_session` to select the 'dev' workspace.
+  - Call 'update_session' to select the 'dev' workspace.
 
 Checkout an existing branch if name field is different from the name of the currently checked out branch.
 
@@ -2875,14 +2875,14 @@ Optionally specify a branch name, tag name or commit SHA to which the branch sho
 }
 
 
-var create_git_branchCmd = &cobra.Command{
-  Use:   "create_git_branch",
+var createGitBranchCmd = &cobra.Command{
+  Use:   "createGitBranch",
   Short: "Checkout New Git Branch",
   Long: `### Create and Checkout a Git Branch
 
 Creates and checks out a new branch in the given project repository
 Only allowed in development mode
-  - Call `update_session` to select the 'dev' workspace.
+  - Call 'update_session' to select the 'dev' workspace.
 
 Optionally specify a branch name, tag name or commit SHA as the start point in the ref field.
   If no ref is specified, HEAD of the current branch will be used as the start point for the new branch.
@@ -2894,8 +2894,8 @@ Optionally specify a branch name, tag name or commit SHA as the start point in t
 }
 
 
-var find_git_branchCmd = &cobra.Command{
-  Use:   "find_git_branch",
+var findGitBranchCmd = &cobra.Command{
+  Use:   "findGitBranch",
   Short: "Find a Git Branch",
   Long: `### Get the specified Git Branch
 
@@ -2907,8 +2907,8 @@ Returns the git branch specified in branch_name path param if it exists in the g
 }
 
 
-var delete_git_branchCmd = &cobra.Command{
-  Use:   "delete_git_branch",
+var deleteGitBranchCmd = &cobra.Command{
+  Use:   "deleteGitBranch",
   Short: "Delete a Git Branch",
   Long: `### Delete the specified Git Branch
 
@@ -2920,8 +2920,8 @@ Delete git branch specified in branch_name path param from local and remote of s
 }
 
 
-var deploy_ref_to_productionCmd = &cobra.Command{
-  Use:   "deploy_ref_to_production",
+var deployRefToProductionCmd = &cobra.Command{
+  Use:   "deployRefToProduction",
   Short: "Deploy Remote Branch or Ref to Production",
   Long: `### Deploy a Remote Branch or Ref to Production
 
@@ -2940,8 +2940,8 @@ Can only specify either a branch or a ref.
 }
 
 
-var deploy_to_productionCmd = &cobra.Command{
-  Use:   "deploy_to_production",
+var deployToProductionCmd = &cobra.Command{
+  Use:   "deployToProduction",
   Short: "Deploy To Production",
   Long: `### Deploy LookML from this Development Mode Project to Production
 
@@ -2963,8 +2963,8 @@ Deploy is a two / three step process:
 }
 
 
-var reset_project_to_productionCmd = &cobra.Command{
-  Use:   "reset_project_to_production",
+var resetProjectToProductionCmd = &cobra.Command{
+  Use:   "resetProjectToProduction",
   Short: "Reset To Production",
   Long: `### Reset a project to the revision of the project that is in production.
 
@@ -2976,8 +2976,8 @@ var reset_project_to_productionCmd = &cobra.Command{
 }
 
 
-var reset_project_to_remoteCmd = &cobra.Command{
-  Use:   "reset_project_to_remote",
+var resetProjectToRemoteCmd = &cobra.Command{
+  Use:   "resetProjectToRemote",
   Short: "Reset To Remote",
   Long: `### Reset a project development branch to the revision of the project that is on the remote.
 
@@ -2989,8 +2989,8 @@ var reset_project_to_remoteCmd = &cobra.Command{
 }
 
 
-var all_projectsCmd = &cobra.Command{
-  Use:   "all_projects",
+var allProjectsCmd = &cobra.Command{
+  Use:   "allProjects",
   Short: "Get All Projects",
   Long: `### Get All Projects
 
@@ -3002,16 +3002,16 @@ Returns all projects visible to the current user
 }
 
 
-var create_projectCmd = &cobra.Command{
-  Use:   "create_project",
+var createProjectCmd = &cobra.Command{
+  Use:   "createProject",
   Short: "Create Project",
   Long: `### Create A Project
 
 dev mode required.
-- Call `update_session` to select the 'dev' workspace.
+- Call 'update_session' to select the 'dev' workspace.
 
-`name` is required.
-`git_remote_url` is not allowed. To configure Git for the newly created project, follow the instructions in `update_project`.
+'name' is required.
+'git_remote_url' is not allowed. To configure Git for the newly created project, follow the instructions in 'update_project'.
 
 `,
   Run: func(cmd *cobra.Command, args []string) {
@@ -3020,7 +3020,7 @@ dev mode required.
 }
 
 
-var projectCmd = &cobra.Command{
+var projectCmd1937 = &cobra.Command{
   Use:   "project",
   Short: "Get Project",
   Long: `### Get A Project
@@ -3033,8 +3033,8 @@ Returns the project with the given project id
 }
 
 
-var update_projectCmd = &cobra.Command{
-  Use:   "update_project",
+var updateProjectCmd = &cobra.Command{
+  Use:   "updateProject",
   Short: "Update Project",
   Long: `### Update Project Configuration
 
@@ -3045,19 +3045,19 @@ Apply changes to a project's configuration.
 
 To set up a Looker project with a remote git repository, follow these steps:
 
-1. Call `update_session` to select the 'dev' workspace.
-1. Call `create_git_deploy_key` to create a new deploy key for the project
+1. Call 'update_session' to select the 'dev' workspace.
+1. Call 'create_git_deploy_key' to create a new deploy key for the project
 1. Copy the deploy key text into the remote git repository's ssh key configuration
-1. Call `update_project` to set project's `git_remote_url` ()and `git_service_name`, if necessary).
+1. Call 'update_project' to set project's 'git_remote_url' ()and 'git_service_name', if necessary).
 
-When you modify a project's `git_remote_url`, Looker connects to the remote repository to fetch
+When you modify a project's 'git_remote_url', Looker connects to the remote repository to fetch
 metadata. The remote git repository MUST be configured with the Looker-generated deploy
-key for this project prior to setting the project's `git_remote_url`.
+key for this project prior to setting the project's 'git_remote_url'.
 
 To set up a Looker project with a git repository residing on the Looker server (a 'bare' git repo):
 
-1. Call `update_session` to select the 'dev' workspace.
-1. Call `update_project` setting `git_remote_url` to null and `git_service_name` to "bare".
+1. Call 'update_session' to select the 'dev' workspace.
+1. Call 'update_project' setting 'git_remote_url' to null and 'git_service_name' to "bare".
 
 `,
   Run: func(cmd *cobra.Command, args []string) {
@@ -3079,8 +3079,8 @@ Returns the project with the given project id
 }
 
 
-var git_deploy_keyCmd = &cobra.Command{
-  Use:   "git_deploy_key",
+var gitDeployKeyCmd = &cobra.Command{
+  Use:   "gitDeployKey",
   Short: "Git Deploy Key",
   Long: `### Git Deploy Key
 
@@ -3092,8 +3092,8 @@ Returns the ssh public key previously created for a project's git repository.
 }
 
 
-var create_git_deploy_keyCmd = &cobra.Command{
-  Use:   "create_git_deploy_key",
+var createGitDeployKeyCmd = &cobra.Command{
+  Use:   "createGitDeployKey",
   Short: "Create Deploy Key",
   Long: `### Create Git Deploy Key
 
@@ -3111,8 +3111,8 @@ validate and accept git requests from the Looker server.
 }
 
 
-var project_validation_resultsCmd = &cobra.Command{
-  Use:   "project_validation_results",
+var projectValidationResultsCmd = &cobra.Command{
+  Use:   "projectValidationResults",
   Short: "Cached Project Validation Results",
   Long: `### Get Cached Project Validation Results
 
@@ -3123,7 +3123,7 @@ Validating the content of all the files in a project can be computationally inte
 for large projects. Use this API to simply fetch the results of the most recent
 project validation rather than revalidating the entire project from scratch.
 
-A value of `"stale": true` in the response indicates that the project has changed since
+A value of '"stale": true' in the response indicates that the project has changed since
 the cached validation results were computed. The cached validation results may no longer
 reflect the current state of the project.
 `,
@@ -3133,8 +3133,8 @@ reflect the current state of the project.
 }
 
 
-var validate_projectCmd = &cobra.Command{
-  Use:   "validate_project",
+var validateProjectCmd = &cobra.Command{
+  Use:   "validateProject",
   Short: "Validate Project",
   Long: `### Validate Project
 
@@ -3142,9 +3142,9 @@ Performs lint validation of all lookml files in the project.
 Returns a list of errors found, if any.
 
 Validating the content of all the files in a project can be computationally intensive
-for large projects. For best performance, call `validate_project(project_id)` only
+for large projects. For best performance, call 'validate_project(project_id)' only
 when you really want to recompute project validation. To quickly display the results of
-the most recent project validation (without recomputing), use `project_validation_results(project_id)`
+the most recent project validation (without recomputing), use 'project_validation_results(project_id)'
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("validate_project called")
@@ -3152,8 +3152,8 @@ the most recent project validation (without recomputing), use `project_validatio
 }
 
 
-var project_workspaceCmd = &cobra.Command{
-  Use:   "project_workspace",
+var projectWorkspaceCmd = &cobra.Command{
+  Use:   "projectWorkspace",
   Short: "Get Project Workspace",
   Long: `### Get Project Workspace
 
@@ -3165,8 +3165,8 @@ Returns information about the state of the project files in the currently select
 }
 
 
-var all_project_filesCmd = &cobra.Command{
-  Use:   "all_project_files",
+var allProjectFilesCmd = &cobra.Command{
+  Use:   "allProjectFiles",
   Short: "Get All Project Files",
   Long: `### Get All Project Files
 
@@ -3178,8 +3178,8 @@ Returns a list of the files in the project
 }
 
 
-var project_fileCmd = &cobra.Command{
-  Use:   "project_file",
+var projectFileCmd = &cobra.Command{
+  Use:   "projectFile",
   Short: "Get Project File",
   Long: `### Get Project File Info
 
@@ -3191,13 +3191,13 @@ Returns information about a file in the project
 }
 
 
-var all_git_connection_testsCmd = &cobra.Command{
-  Use:   "all_git_connection_tests",
+var allGitConnectionTestsCmd = &cobra.Command{
+  Use:   "allGitConnectionTests",
   Short: "Get All Git Connection Tests",
   Long: `### Get All Git Connection Tests
 
 dev mode required.
-  - Call `update_session` to select the 'dev' workspace.
+  - Call 'update_session' to select the 'dev' workspace.
 
 Returns a list of tests which can be run against a project's (or the dependency project for the provided remote_url) git connection. Call [Run Git Connection Test](#!/Project/run_git_connection_test) to execute each test in sequence.
 
@@ -3211,8 +3211,8 @@ For example, a late-stage test for write access is meaningless if connecting to 
 }
 
 
-var run_git_connection_testCmd = &cobra.Command{
-  Use:   "run_git_connection_test",
+var runGitConnectionTestCmd = &cobra.Command{
+  Use:   "runGitConnectionTest",
   Short: "Run Git Connection Test",
   Long: `### Run a git connection test
 
@@ -3228,8 +3228,8 @@ Tests should be run in the order they are returned by [Get All Git Connection Te
 }
 
 
-var all_lookml_testsCmd = &cobra.Command{
-  Use:   "all_lookml_tests",
+var allLookmlTestsCmd = &cobra.Command{
+  Use:   "allLookmlTests",
   Short: "Get All LookML Tests",
   Long: `### Get All LookML Tests
 
@@ -3243,8 +3243,8 @@ Call [Run LookML Test](#!/Project/run_lookml_test) to execute tests.
 }
 
 
-var run_lookml_testCmd = &cobra.Command{
-  Use:   "run_lookml_test",
+var runLookmlTestCmd = &cobra.Command{
+  Use:   "runLookmlTest",
   Short: "Run LookML Test",
   Long: `### Run LookML Tests
 
@@ -3256,8 +3256,8 @@ Runs all tests in the project, optionally filtered by file, test, and/or model.
 }
 
 
-var tag_refCmd = &cobra.Command{
-  Use:   "tag_ref",
+var tagRefCmd = &cobra.Command{
+  Use:   "tagRef",
   Short: "Tag Ref",
   Long: `### Creates a tag for the most recent commit, or a specific ref is a SHA is provided
 
@@ -3269,15 +3269,15 @@ This is an internal-only, undocumented route.
 }
 
 
-var update_repository_credentialCmd = &cobra.Command{
-  Use:   "update_repository_credential",
+var updateRepositoryCredentialCmd = &cobra.Command{
+  Use:   "updateRepositoryCredential",
   Short: "Create Repository Credential",
   Long: `### Configure Repository Credential for a remote dependency
 
 Admin required.
 
-`root_project_id` is required.
-`credential_id` is required.
+'root_project_id' is required.
+'credential_id' is required.
 
 `,
   Run: func(cmd *cobra.Command, args []string) {
@@ -3286,15 +3286,15 @@ Admin required.
 }
 
 
-var delete_repository_credentialCmd = &cobra.Command{
-  Use:   "delete_repository_credential",
+var deleteRepositoryCredentialCmd = &cobra.Command{
+  Use:   "deleteRepositoryCredential",
   Short: "Delete Repository Credential",
   Long: `### Repository Credential for a remote dependency
 
 Admin required.
 
-`root_project_id` is required.
-`credential_id` is required.
+'root_project_id' is required.
+'credential_id' is required.
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("delete_repository_credential called")
@@ -3302,12 +3302,12 @@ Admin required.
 }
 
 
-var get_all_repository_credentialsCmd = &cobra.Command{
-  Use:   "get_all_repository_credentials",
+var getAllRepositoryCredentialsCmd = &cobra.Command{
+  Use:   "getAllRepositoryCredentials",
   Short: "Get All Repository Credentials",
   Long: `### Get all Repository Credentials for a project
 
-`root_project_id` is required.
+'root_project_id' is required.
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("get_all_repository_credentials called")
@@ -3327,8 +3327,8 @@ var queryCmd = &cobra.Command{
 }
 
 
-var create_query_taskCmd = &cobra.Command{
-  Use:   "create_query_task",
+var createQueryTaskCmd = &cobra.Command{
+  Use:   "createQueryTask",
   Short: "Run Query Async",
   Long: `### Create an async query task
 
@@ -3343,8 +3343,8 @@ After the query task status reaches "Complete", use [query_task_results(query_ta
 }
 
 
-var query_task_multi_resultsCmd = &cobra.Command{
-  Use:   "query_task_multi_results",
+var queryTaskMultiResultsCmd = &cobra.Command{
+  Use:   "queryTaskMultiResults",
   Short: "Get Multiple Async Query Results",
   Long: `### Fetch results of multiple async queries
 
@@ -3360,8 +3360,8 @@ If the user making the API request does not have sufficient privileges to view a
 }
 
 
-var query_taskCmd = &cobra.Command{
-  Use:   "query_task",
+var queryTaskCmd = &cobra.Command{
+  Use:   "queryTask",
   Short: "Get Async Query Info",
   Long: `### Get Query Task details
 
@@ -3377,8 +3377,8 @@ Use [create_query_task()](#!/Query/create_query_task) to create an async query t
 }
 
 
-var query_task_resultsCmd = &cobra.Command{
-  Use:   "query_task_results",
+var queryTaskResultsCmd = &cobra.Command{
+  Use:   "queryTaskResults",
   Short: "Get Async Query Results",
   Long: `### Get Async Query Results
 
@@ -3395,13 +3395,13 @@ You can also use [query_task_multi_results()](#!/Query/query_task_multi_results)
 results of multiple async query tasks at the same time.
 
 #### SQL Error Handling:
-If the query fails due to a SQL db error, how this is communicated depends on the result_format you requested in `create_query_task()`.
+If the query fails due to a SQL db error, how this is communicated depends on the result_format you requested in 'create_query_task()'.
 
-For `json_detail` result_format: `query_task_results()` will respond with HTTP status '200 OK' and db SQL error info
-will be in the `errors` property of the response object. The 'data' property will be empty.
+For 'json_detail' result_format: 'query_task_results()' will respond with HTTP status '200 OK' and db SQL error info
+will be in the 'errors' property of the response object. The 'data' property will be empty.
 
-For all other result formats: `query_task_results()` will respond with HTTP status `400 Bad Request` and some db SQL error info
-will be in the message of the 400 error response, but not as detailed as expressed in `json_detail.errors`.
+For all other result formats: 'query_task_results()' will respond with HTTP status '400 Bad Request' and some db SQL error info
+will be in the message of the 400 error response, but not as detailed as expressed in 'json_detail.errors'.
 These data formats can only carry row data, and error info is not row data.
 `,
   Run: func(cmd *cobra.Command, args []string) {
@@ -3410,7 +3410,7 @@ These data formats can only carry row data, and error info is not row data.
 }
 
 
-var queryCmd = &cobra.Command{
+var queryCmd1943 = &cobra.Command{
   Use:   "query",
   Short: "Get Query",
   Long: `### Get a previously created query by id.
@@ -3438,8 +3438,8 @@ creating new queries and can usually just be ignored.
 }
 
 
-var query_for_slugCmd = &cobra.Command{
-  Use:   "query_for_slug",
+var queryForSlugCmd = &cobra.Command{
+  Use:   "queryForSlug",
   Short: "Get Query for Slug",
   Long: `### Get the query for a given query slug.
 
@@ -3465,8 +3465,8 @@ This will also work with slugs from Looker explore urls like
 }
 
 
-var create_queryCmd = &cobra.Command{
-  Use:   "create_query",
+var createQueryCmd = &cobra.Command{
+  Use:   "createQuery",
   Short: "Create Query",
   Long: `### Create a query.
 
@@ -3484,8 +3484,8 @@ The query parameters are passed as json in the body of the request.
 }
 
 
-var run_queryCmd = &cobra.Command{
-  Use:   "run_query",
+var runQueryCmd = &cobra.Command{
+  Use:   "runQuery",
   Short: "Run Query",
   Long: `### Run a saved query.
 
@@ -3517,8 +3517,8 @@ Supported formats:
 }
 
 
-var run_inline_queryCmd = &cobra.Command{
-  Use:   "run_inline_query",
+var runInlineQueryCmd = &cobra.Command{
+  Use:   "runInlineQuery",
   Short: "Run Inline Query",
   Long: `### Run the query that is specified inline in the posted body.
 
@@ -3526,7 +3526,7 @@ This allows running a query as defined in json in the posted body. This combines
 the two actions of posting & running a query into one step.
 
 Here is an example body in json:
-```
+'''
 {
   "model":"thelook",
   "view":"inventory_items",
@@ -3536,10 +3536,10 @@ Here is an example body in json:
   "limit":"500",
   "query_timezone":"America/Los_Angeles"
 }
-```
+'''
 
 When using the Ruby SDK this would be passed as a Ruby hash like:
-```
+'''
 {
  :model=>"thelook",
  :view=>"inventory_items",
@@ -3552,7 +3552,7 @@ When using the Ruby SDK this would be passed as a Ruby hash like:
  :limit=>"500",
  :query_timezone=>"America/Los_Angeles",
 }
-```
+'''
 
 This will return the result of running the query in the format specified by the 'result_format' parameter.
 
@@ -3579,8 +3579,8 @@ Supported formats:
 }
 
 
-var run_url_encoded_queryCmd = &cobra.Command{
-  Use:   "run_url_encoded_query",
+var runUrlEncodedQueryCmd = &cobra.Command{
+  Use:   "runUrlEncodedQuery",
   Short: "Run Url Encoded Query",
   Long: `### Run an URL encoded query.
 
@@ -3598,13 +3598,13 @@ in this documentation page. But, this is callable when creating URLs manually or
 
 Here is an example inline query URL:
 
-```
+'''
 https://looker.mycompany.com:19999/api/3.0/queries/models/thelook/views/inventory_items/run/json?fields=category.name,inventory_items.days_in_inventory_tier,products.count&f[category.name]=socks&sorts=products.count+desc+0&limit=500&query_timezone=America/Los_Angeles
-```
+'''
 
 When invoking this endpoint with the Ruby SDK, pass the query parameter parts as a hash. The hash to match the above would look like:
 
-```ruby
+'''ruby
 query_params =
 {
   :fields => "category.name,inventory_items.days_in_inventory_tier,products.count",
@@ -3615,7 +3615,7 @@ query_params =
 }
 response = ruby_sdk.run_url_encoded_query('thelook','inventory_items','json', query_params)
 
-```
+'''
 
 Again, it is generally easier to use the variant of this method that passes the full query in the POST body.
 This method is available for cases where other alternatives won't fit the need.
@@ -3643,8 +3643,8 @@ Supported formats:
 }
 
 
-var merge_queryCmd = &cobra.Command{
-  Use:   "merge_query",
+var mergeQueryCmd = &cobra.Command{
+  Use:   "mergeQuery",
   Short: "Get Merge Query",
   Long: `### Get Merge Query
 
@@ -3656,8 +3656,8 @@ Returns a merge query object given its id.
 }
 
 
-var create_merge_queryCmd = &cobra.Command{
-  Use:   "create_merge_query",
+var createMergeQueryCmd = &cobra.Command{
+  Use:   "createMergeQuery",
   Short: "Create Merge Query",
   Long: `### Create Merge Query
 
@@ -3683,8 +3683,8 @@ change to the contents of a merge query will produce a new object with a new id.
 }
 
 
-var all_running_queriesCmd = &cobra.Command{
-  Use:   "all_running_queries",
+var allRunningQueriesCmd = &cobra.Command{
+  Use:   "allRunningQueries",
   Short: "Get All Running Queries",
   Long: `Get information about all running queries.
 `,
@@ -3694,8 +3694,8 @@ var all_running_queriesCmd = &cobra.Command{
 }
 
 
-var kill_queryCmd = &cobra.Command{
-  Use:   "kill_query",
+var killQueryCmd = &cobra.Command{
+  Use:   "killQuery",
   Short: "Kill Running Query",
   Long: `Kill a query with a specific query_task_id.
 `,
@@ -3705,8 +3705,8 @@ var kill_queryCmd = &cobra.Command{
 }
 
 
-var sql_queryCmd = &cobra.Command{
-  Use:   "sql_query",
+var sqlQueryCmd = &cobra.Command{
+  Use:   "sqlQuery",
   Short: "Get SQL Runner Query",
   Long: `Get a SQL Runner query.`,
   Run: func(cmd *cobra.Command, args []string) {
@@ -3715,12 +3715,12 @@ var sql_queryCmd = &cobra.Command{
 }
 
 
-var create_sql_queryCmd = &cobra.Command{
-  Use:   "create_sql_query",
+var createSqlQueryCmd = &cobra.Command{
+  Use:   "createSqlQuery",
   Short: "Create SQL Runner Query",
   Long: `### Create a SQL Runner Query
 
-Either the `connection_name` or `model_name` parameter MUST be provided.
+Either the 'connection_name' or 'model_name' parameter MUST be provided.
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("create_sql_query called")
@@ -3728,8 +3728,8 @@ Either the `connection_name` or `model_name` parameter MUST be provided.
 }
 
 
-var run_sql_queryCmd = &cobra.Command{
-  Use:   "run_sql_query",
+var runSqlQueryCmd = &cobra.Command{
+  Use:   "runSqlQuery",
   Short: "Run SQL Runner Query",
   Long: `Execute a SQL Runner query in a given result_format.`,
   Run: func(cmd *cobra.Command, args []string) {
@@ -3750,8 +3750,8 @@ var renderTaskCmd = &cobra.Command{
 }
 
 
-var create_lookml_dashboard_render_taskCmd = &cobra.Command{
-  Use:   "create_lookml_dashboard_render_task",
+var createLookmlDashboardRenderTaskCmd = &cobra.Command{
+  Use:   "createLookmlDashboardRenderTask",
   Short: "Create Lookml Dashboard Render Task",
   Long: `### Create a new task to render a lookml dashboard to a document or image.
 
@@ -3768,8 +3768,8 @@ Once the render task is complete, you can download the resulting document or ima
 }
 
 
-var create_look_render_taskCmd = &cobra.Command{
-  Use:   "create_look_render_task",
+var createLookRenderTaskCmd = &cobra.Command{
+  Use:   "createLookRenderTask",
   Short: "Create Look Render Task",
   Long: `### Create a new task to render a look to an image.
 
@@ -3784,8 +3784,8 @@ Once the render task is complete, you can download the resulting document or ima
 }
 
 
-var create_query_render_taskCmd = &cobra.Command{
-  Use:   "create_query_render_task",
+var createQueryRenderTaskCmd = &cobra.Command{
+  Use:   "createQueryRenderTask",
   Short: "Create Query Render Task",
   Long: `### Create a new task to render an existing query to an image.
 
@@ -3800,8 +3800,8 @@ Once the render task is complete, you can download the resulting document or ima
 }
 
 
-var create_dashboard_render_taskCmd = &cobra.Command{
-  Use:   "create_dashboard_render_task",
+var createDashboardRenderTaskCmd = &cobra.Command{
+  Use:   "createDashboardRenderTask",
   Short: "Create Dashboard Render Task",
   Long: `### Create a new task to render a dashboard to a document or image.
 
@@ -3816,8 +3816,8 @@ Once the render task is complete, you can download the resulting document or ima
 }
 
 
-var render_taskCmd = &cobra.Command{
-  Use:   "render_task",
+var renderTaskCmd904 = &cobra.Command{
+  Use:   "renderTask",
   Short: "Get Render Task",
   Long: `### Get information about a render task.
 
@@ -3832,8 +3832,8 @@ Once the render task is complete, you can download the resulting document or ima
 }
 
 
-var render_task_resultsCmd = &cobra.Command{
-  Use:   "render_task_results",
+var renderTaskResultsCmd = &cobra.Command{
+  Use:   "renderTaskResults",
   Short: "Render Task Results",
   Long: `### Get the document or image produced by a completed render task.
 
@@ -3871,20 +3871,20 @@ var roleCmd = &cobra.Command{
 }
 
 
-var search_model_setsCmd = &cobra.Command{
-  Use:   "search_model_sets",
+var searchModelSetsCmd = &cobra.Command{
+  Use:   "searchModelSets",
   Short: "Search Model Sets",
   Long: `### Search model sets
 Returns all model set records that match the given search criteria.
-If multiple search params are given and `filter_or` is FALSE or not specified,
+If multiple search params are given and 'filter_or' is FALSE or not specified,
 search params are combined in a logical AND operation.
 Only rows that match *all* search param criteria will be returned.
 
-If `filter_or` is TRUE, multiple search params are combined in a logical OR operation.
+If 'filter_or' is TRUE, multiple search params are combined in a logical OR operation.
 Results will include rows that match **any** of the search criteria.
 
 String search params use case-insensitive matching.
-String search params can contain `%` and '_' as SQL LIKE pattern match wildcard expressions.
+String search params can contain '%' and '_' as SQL LIKE pattern match wildcard expressions.
 example="dan%" will match "danger" and "Danzig" but not "David"
 example="D_m%" will match "Damage" and "dump"
 
@@ -3904,8 +3904,8 @@ Boolean search params accept only "true" and "false" as values.
 }
 
 
-var model_setCmd = &cobra.Command{
-  Use:   "model_set",
+var modelSetCmd = &cobra.Command{
+  Use:   "modelSet",
   Short: "Get Model Set",
   Long: `### Get information about the model set with a specific id.
 `,
@@ -3915,8 +3915,8 @@ var model_setCmd = &cobra.Command{
 }
 
 
-var update_model_setCmd = &cobra.Command{
-  Use:   "update_model_set",
+var updateModelSetCmd = &cobra.Command{
+  Use:   "updateModelSet",
   Short: "Update Model Set",
   Long: `### Update information about the model set with a specific id.
 `,
@@ -3926,8 +3926,8 @@ var update_model_setCmd = &cobra.Command{
 }
 
 
-var delete_model_setCmd = &cobra.Command{
-  Use:   "delete_model_set",
+var deleteModelSetCmd = &cobra.Command{
+  Use:   "deleteModelSet",
   Short: "Delete Model Set",
   Long: `### Delete the model set with a specific id.
 `,
@@ -3937,8 +3937,8 @@ var delete_model_setCmd = &cobra.Command{
 }
 
 
-var all_model_setsCmd = &cobra.Command{
-  Use:   "all_model_sets",
+var allModelSetsCmd = &cobra.Command{
+  Use:   "allModelSets",
   Short: "Get All Model Sets",
   Long: `### Get information about all model sets.
 `,
@@ -3948,8 +3948,8 @@ var all_model_setsCmd = &cobra.Command{
 }
 
 
-var create_model_setCmd = &cobra.Command{
-  Use:   "create_model_set",
+var createModelSetCmd = &cobra.Command{
+  Use:   "createModelSet",
   Short: "Create Model Set",
   Long: `### Create a model set with the specified information. Model sets are used by Roles.
 `,
@@ -3959,8 +3959,8 @@ var create_model_setCmd = &cobra.Command{
 }
 
 
-var all_permissionsCmd = &cobra.Command{
-  Use:   "all_permissions",
+var allPermissionsCmd = &cobra.Command{
+  Use:   "allPermissions",
   Short: "Get All Permissions",
   Long: `### Get all supported permissions.
 `,
@@ -3970,20 +3970,20 @@ var all_permissionsCmd = &cobra.Command{
 }
 
 
-var search_permission_setsCmd = &cobra.Command{
-  Use:   "search_permission_sets",
+var searchPermissionSetsCmd = &cobra.Command{
+  Use:   "searchPermissionSets",
   Short: "Search Permission Sets",
   Long: `### Search permission sets
 Returns all permission set records that match the given search criteria.
-If multiple search params are given and `filter_or` is FALSE or not specified,
+If multiple search params are given and 'filter_or' is FALSE or not specified,
 search params are combined in a logical AND operation.
 Only rows that match *all* search param criteria will be returned.
 
-If `filter_or` is TRUE, multiple search params are combined in a logical OR operation.
+If 'filter_or' is TRUE, multiple search params are combined in a logical OR operation.
 Results will include rows that match **any** of the search criteria.
 
 String search params use case-insensitive matching.
-String search params can contain `%` and '_' as SQL LIKE pattern match wildcard expressions.
+String search params can contain '%' and '_' as SQL LIKE pattern match wildcard expressions.
 example="dan%" will match "danger" and "Danzig" but not "David"
 example="D_m%" will match "Damage" and "dump"
 
@@ -4003,8 +4003,8 @@ Boolean search params accept only "true" and "false" as values.
 }
 
 
-var permission_setCmd = &cobra.Command{
-  Use:   "permission_set",
+var permissionSetCmd = &cobra.Command{
+  Use:   "permissionSet",
   Short: "Get Permission Set",
   Long: `### Get information about the permission set with a specific id.
 `,
@@ -4014,8 +4014,8 @@ var permission_setCmd = &cobra.Command{
 }
 
 
-var update_permission_setCmd = &cobra.Command{
-  Use:   "update_permission_set",
+var updatePermissionSetCmd = &cobra.Command{
+  Use:   "updatePermissionSet",
   Short: "Update Permission Set",
   Long: `### Update information about the permission set with a specific id.
 `,
@@ -4025,8 +4025,8 @@ var update_permission_setCmd = &cobra.Command{
 }
 
 
-var delete_permission_setCmd = &cobra.Command{
-  Use:   "delete_permission_set",
+var deletePermissionSetCmd = &cobra.Command{
+  Use:   "deletePermissionSet",
   Short: "Delete Permission Set",
   Long: `### Delete the permission set with a specific id.
 `,
@@ -4036,8 +4036,8 @@ var delete_permission_setCmd = &cobra.Command{
 }
 
 
-var all_permission_setsCmd = &cobra.Command{
-  Use:   "all_permission_sets",
+var allPermissionSetsCmd = &cobra.Command{
+  Use:   "allPermissionSets",
   Short: "Get All Permission Sets",
   Long: `### Get information about all permission sets.
 `,
@@ -4047,8 +4047,8 @@ var all_permission_setsCmd = &cobra.Command{
 }
 
 
-var create_permission_setCmd = &cobra.Command{
-  Use:   "create_permission_set",
+var createPermissionSetCmd = &cobra.Command{
+  Use:   "createPermissionSet",
   Short: "Create Permission Set",
   Long: `### Create a permission set with the specified information. Permission sets are used by Roles.
 `,
@@ -4058,8 +4058,8 @@ var create_permission_setCmd = &cobra.Command{
 }
 
 
-var all_rolesCmd = &cobra.Command{
-  Use:   "all_roles",
+var allRolesCmd = &cobra.Command{
+  Use:   "allRoles",
   Short: "Get All Roles",
   Long: `### Get information about all roles.
 `,
@@ -4069,8 +4069,8 @@ var all_rolesCmd = &cobra.Command{
 }
 
 
-var create_roleCmd = &cobra.Command{
-  Use:   "create_role",
+var createRoleCmd = &cobra.Command{
+  Use:   "createRole",
   Short: "Create Role",
   Long: `### Create a role with the specified information.
 `,
@@ -4080,22 +4080,22 @@ var create_roleCmd = &cobra.Command{
 }
 
 
-var search_rolesCmd = &cobra.Command{
-  Use:   "search_roles",
+var searchRolesCmd = &cobra.Command{
+  Use:   "searchRoles",
   Short: "Search Roles",
   Long: `### Search roles
 
 Returns all role records that match the given search criteria.
 
-If multiple search params are given and `filter_or` is FALSE or not specified,
+If multiple search params are given and 'filter_or' is FALSE or not specified,
 search params are combined in a logical AND operation.
 Only rows that match *all* search param criteria will be returned.
 
-If `filter_or` is TRUE, multiple search params are combined in a logical OR operation.
+If 'filter_or' is TRUE, multiple search params are combined in a logical OR operation.
 Results will include rows that match **any** of the search criteria.
 
 String search params use case-insensitive matching.
-String search params can contain `%` and '_' as SQL LIKE pattern match wildcard expressions.
+String search params can contain '%' and '_' as SQL LIKE pattern match wildcard expressions.
 example="dan%" will match "danger" and "Danzig" but not "David"
 example="D_m%" will match "Damage" and "dump"
 
@@ -4115,7 +4115,7 @@ Boolean search params accept only "true" and "false" as values.
 }
 
 
-var roleCmd = &cobra.Command{
+var roleCmd4221 = &cobra.Command{
   Use:   "role",
   Short: "Get Role",
   Long: `### Get information about the role with a specific id.
@@ -4126,8 +4126,8 @@ var roleCmd = &cobra.Command{
 }
 
 
-var update_roleCmd = &cobra.Command{
-  Use:   "update_role",
+var updateRoleCmd = &cobra.Command{
+  Use:   "updateRole",
   Short: "Update Role",
   Long: `### Update information about the role with a specific id.
 `,
@@ -4137,8 +4137,8 @@ var update_roleCmd = &cobra.Command{
 }
 
 
-var delete_roleCmd = &cobra.Command{
-  Use:   "delete_role",
+var deleteRoleCmd = &cobra.Command{
+  Use:   "deleteRole",
   Short: "Delete Role",
   Long: `### Delete the role with a specific id.
 `,
@@ -4148,8 +4148,8 @@ var delete_roleCmd = &cobra.Command{
 }
 
 
-var role_groupsCmd = &cobra.Command{
-  Use:   "role_groups",
+var roleGroupsCmd = &cobra.Command{
+  Use:   "roleGroups",
   Short: "Get Role Groups",
   Long: `### Get information about all the groups with the role that has a specific id.
 `,
@@ -4159,8 +4159,8 @@ var role_groupsCmd = &cobra.Command{
 }
 
 
-var set_role_groupsCmd = &cobra.Command{
-  Use:   "set_role_groups",
+var setRoleGroupsCmd = &cobra.Command{
+  Use:   "setRoleGroups",
   Short: "Update Role Groups",
   Long: `### Set all groups for a role, removing all existing group associations from that role.
 `,
@@ -4170,8 +4170,8 @@ var set_role_groupsCmd = &cobra.Command{
 }
 
 
-var role_usersCmd = &cobra.Command{
-  Use:   "role_users",
+var roleUsersCmd = &cobra.Command{
+  Use:   "roleUsers",
   Short: "Get Role Users",
   Long: `### Get information about all the users with the role that has a specific id.
 `,
@@ -4181,8 +4181,8 @@ var role_usersCmd = &cobra.Command{
 }
 
 
-var set_role_usersCmd = &cobra.Command{
-  Use:   "set_role_users",
+var setRoleUsersCmd = &cobra.Command{
+  Use:   "setRoleUsers",
   Short: "Update Role Users",
   Long: `### Set all the users of the role with a specific id.
 `,
@@ -4204,8 +4204,8 @@ var scheduledPlanCmd = &cobra.Command{
 }
 
 
-var scheduled_plans_for_spaceCmd = &cobra.Command{
-  Use:   "scheduled_plans_for_space",
+var scheduledPlansForSpaceCmd = &cobra.Command{
+  Use:   "scheduledPlansForSpace",
   Short: "Scheduled Plans for Space",
   Long: `### Get Scheduled Plans for a Space
 
@@ -4217,8 +4217,8 @@ Returns scheduled plans owned by the caller for a given space id.
 }
 
 
-var scheduled_planCmd = &cobra.Command{
-  Use:   "scheduled_plan",
+var scheduledPlanCmd1560 = &cobra.Command{
+  Use:   "scheduledPlan",
   Short: "Get Scheduled Plan",
   Long: `### Get Information About a Scheduled Plan
 
@@ -4230,8 +4230,8 @@ Admins can fetch information about other users' Scheduled Plans.
 }
 
 
-var update_scheduled_planCmd = &cobra.Command{
-  Use:   "update_scheduled_plan",
+var updateScheduledPlanCmd = &cobra.Command{
+  Use:   "updateScheduledPlan",
   Short: "Update Scheduled Plan",
   Long: `### Update a Scheduled Plan
 
@@ -4262,9 +4262,9 @@ Formats:
 
 | format | Description
 | :-----------: | :--- |
-| json | A JSON object containing a `data` property which contains an array of JSON objects, one per row. No metadata.
+| json | A JSON object containing a 'data' property which contains an array of JSON objects, one per row. No metadata.
 | json_detail | Row data plus metadata describing the fields, pivots, table calcs, and other aspects of the query
-| inline_json | Same as the JSON format, except that the `data` property is a string containing JSON-escaped row data. Additional properties describe the data operation. This format is primarily used to send data to web hooks so that the web hook doesn't have to re-encode the JSON row data in order to pass it on to its ultimate destination.
+| inline_json | Same as the JSON format, except that the 'data' property is a string containing JSON-escaped row data. Additional properties describe the data operation. This format is primarily used to send data to web hooks so that the web hook doesn't have to re-encode the JSON row data in order to pass it on to its ultimate destination.
 | csv | Comma separated values with a header
 | txt | Tab separated values with a header
 | html | Simple html
@@ -4274,7 +4274,7 @@ Formats:
 | wysiwyg_png | Dashboard rendered in a tiled layout to produce a PNG image
 ||
 
-Valid formats vary by destination type and source object. `wysiwyg_pdf` is only valid for dashboards, for example.
+Valid formats vary by destination type and source object. 'wysiwyg_pdf' is only valid for dashboards, for example.
 
 
 `,
@@ -4284,8 +4284,8 @@ Valid formats vary by destination type and source object. `wysiwyg_pdf` is only 
 }
 
 
-var delete_scheduled_planCmd = &cobra.Command{
-  Use:   "delete_scheduled_plan",
+var deleteScheduledPlanCmd = &cobra.Command{
+  Use:   "deleteScheduledPlan",
   Short: "Delete Scheduled Plan",
   Long: `### Delete a Scheduled Plan
 
@@ -4299,8 +4299,8 @@ This delete cannot be undone.
 }
 
 
-var all_scheduled_plansCmd = &cobra.Command{
-  Use:   "all_scheduled_plans",
+var allScheduledPlansCmd = &cobra.Command{
+  Use:   "allScheduledPlans",
   Short: "Get All Scheduled Plans",
   Long: `### List All Scheduled Plans
 
@@ -4309,10 +4309,10 @@ Returns all scheduled plans which belong to the caller or given user.
 If no user_id is provided, this function returns the scheduled plans owned by the caller.
 
 
-To list all schedules for all users, pass `all_users=true`.
+To list all schedules for all users, pass 'all_users=true'.
 
 
-The caller must have `see_schedules` permission to see other users' scheduled plans.
+The caller must have 'see_schedules' permission to see other users' scheduled plans.
 
 
 `,
@@ -4322,34 +4322,34 @@ The caller must have `see_schedules` permission to see other users' scheduled pl
 }
 
 
-var create_scheduled_planCmd = &cobra.Command{
-  Use:   "create_scheduled_plan",
+var createScheduledPlanCmd = &cobra.Command{
+  Use:   "createScheduledPlan",
   Short: "Create Scheduled Plan",
   Long: `### Create a Scheduled Plan
 
 Create a scheduled plan to render a Look or Dashboard on a recurring schedule.
 
 To create a scheduled plan, you MUST provide values for the following fields:
-`name`
+'name'
 and
-`look_id`, `dashboard_id`, `lookml_dashboard_id`, or `query_id`
+'look_id', 'dashboard_id', 'lookml_dashboard_id', or 'query_id'
 and
-`cron_tab` or `datagroup`
+'cron_tab' or 'datagroup'
 and
 at least one scheduled_plan_destination
 
 A scheduled plan MUST have at least one scheduled_plan_destination defined.
 
-When `look_id` is set, `require_no_results`, `require_results`, and `require_change` are all required.
+When 'look_id' is set, 'require_no_results', 'require_results', and 'require_change' are all required.
 
-If `create_scheduled_plan` fails with a 422 error, be sure to look at the error messages in the response which will explain exactly what fields are missing or values that are incompatible.
+If 'create_scheduled_plan' fails with a 422 error, be sure to look at the error messages in the response which will explain exactly what fields are missing or values that are incompatible.
 
 The queries that provide the data for the look or dashboard are run in the context of user account that owns the scheduled plan.
 
-When `run_as_recipient` is `false` or not specified, the queries that provide the data for the
+When 'run_as_recipient' is 'false' or not specified, the queries that provide the data for the
 look or dashboard are run in the context of user account that owns the scheduled plan.
 
-When `run_as_recipient` is `true` and all the email recipients are Looker user accounts, the
+When 'run_as_recipient' is 'true' and all the email recipients are Looker user accounts, the
 queries are run in the context of each recipient, so different recipients may see different
 data from the same scheduled render of a look or dashboard. For more details, see [Run As Recipient](https://looker.com/docs/r/admin/run-as-recipient).
 
@@ -4370,9 +4370,9 @@ Formats:
 
 | format | Description
 | :-----------: | :--- |
-| json | A JSON object containing a `data` property which contains an array of JSON objects, one per row. No metadata.
+| json | A JSON object containing a 'data' property which contains an array of JSON objects, one per row. No metadata.
 | json_detail | Row data plus metadata describing the fields, pivots, table calcs, and other aspects of the query
-| inline_json | Same as the JSON format, except that the `data` property is a string containing JSON-escaped row data. Additional properties describe the data operation. This format is primarily used to send data to web hooks so that the web hook doesn't have to re-encode the JSON row data in order to pass it on to its ultimate destination.
+| inline_json | Same as the JSON format, except that the 'data' property is a string containing JSON-escaped row data. Additional properties describe the data operation. This format is primarily used to send data to web hooks so that the web hook doesn't have to re-encode the JSON row data in order to pass it on to its ultimate destination.
 | csv | Comma separated values with a header
 | txt | Tab separated values with a header
 | html | Simple html
@@ -4382,7 +4382,7 @@ Formats:
 | wysiwyg_png | Dashboard rendered in a tiled layout to produce a PNG image
 ||
 
-Valid formats vary by destination type and source object. `wysiwyg_pdf` is only valid for dashboards, for example.
+Valid formats vary by destination type and source object. 'wysiwyg_pdf' is only valid for dashboards, for example.
 
 
 `,
@@ -4392,8 +4392,8 @@ Valid formats vary by destination type and source object. `wysiwyg_pdf` is only 
 }
 
 
-var scheduled_plan_run_onceCmd = &cobra.Command{
-  Use:   "scheduled_plan_run_once",
+var scheduledPlanRunOnceCmd = &cobra.Command{
+  Use:   "scheduledPlanRunOnce",
   Short: "Run Scheduled Plan Once",
   Long: `### Run a Scheduled Plan Immediately
 
@@ -4419,9 +4419,9 @@ Formats:
 
 | format | Description
 | :-----------: | :--- |
-| json | A JSON object containing a `data` property which contains an array of JSON objects, one per row. No metadata.
+| json | A JSON object containing a 'data' property which contains an array of JSON objects, one per row. No metadata.
 | json_detail | Row data plus metadata describing the fields, pivots, table calcs, and other aspects of the query
-| inline_json | Same as the JSON format, except that the `data` property is a string containing JSON-escaped row data. Additional properties describe the data operation. This format is primarily used to send data to web hooks so that the web hook doesn't have to re-encode the JSON row data in order to pass it on to its ultimate destination.
+| inline_json | Same as the JSON format, except that the 'data' property is a string containing JSON-escaped row data. Additional properties describe the data operation. This format is primarily used to send data to web hooks so that the web hook doesn't have to re-encode the JSON row data in order to pass it on to its ultimate destination.
 | csv | Comma separated values with a header
 | txt | Tab separated values with a header
 | html | Simple html
@@ -4431,7 +4431,7 @@ Formats:
 | wysiwyg_png | Dashboard rendered in a tiled layout to produce a PNG image
 ||
 
-Valid formats vary by destination type and source object. `wysiwyg_pdf` is only valid for dashboards, for example.
+Valid formats vary by destination type and source object. 'wysiwyg_pdf' is only valid for dashboards, for example.
 
 
 `,
@@ -4441,8 +4441,8 @@ Valid formats vary by destination type and source object. `wysiwyg_pdf` is only 
 }
 
 
-var scheduled_plans_for_lookCmd = &cobra.Command{
-  Use:   "scheduled_plans_for_look",
+var scheduledPlansForLookCmd = &cobra.Command{
+  Use:   "scheduledPlansForLook",
   Short: "Scheduled Plans for Look",
   Long: `### Get Scheduled Plans for a Look
 
@@ -4451,10 +4451,10 @@ Returns all scheduled plans for a look which belong to the caller or given user.
 If no user_id is provided, this function returns the scheduled plans owned by the caller.
 
 
-To list all schedules for all users, pass `all_users=true`.
+To list all schedules for all users, pass 'all_users=true'.
 
 
-The caller must have `see_schedules` permission to see other users' scheduled plans.
+The caller must have 'see_schedules' permission to see other users' scheduled plans.
 
 
 `,
@@ -4464,8 +4464,8 @@ The caller must have `see_schedules` permission to see other users' scheduled pl
 }
 
 
-var scheduled_plans_for_dashboardCmd = &cobra.Command{
-  Use:   "scheduled_plans_for_dashboard",
+var scheduledPlansForDashboardCmd = &cobra.Command{
+  Use:   "scheduledPlansForDashboard",
   Short: "Scheduled Plans for Dashboard",
   Long: `### Get Scheduled Plans for a Dashboard
 
@@ -4474,10 +4474,10 @@ Returns all scheduled plans for a dashboard which belong to the caller or given 
 If no user_id is provided, this function returns the scheduled plans owned by the caller.
 
 
-To list all schedules for all users, pass `all_users=true`.
+To list all schedules for all users, pass 'all_users=true'.
 
 
-The caller must have `see_schedules` permission to see other users' scheduled plans.
+The caller must have 'see_schedules' permission to see other users' scheduled plans.
 
 
 `,
@@ -4487,8 +4487,8 @@ The caller must have `see_schedules` permission to see other users' scheduled pl
 }
 
 
-var scheduled_plans_for_lookml_dashboardCmd = &cobra.Command{
-  Use:   "scheduled_plans_for_lookml_dashboard",
+var scheduledPlansForLookmlDashboardCmd = &cobra.Command{
+  Use:   "scheduledPlansForLookmlDashboard",
   Short: "Scheduled Plans for LookML Dashboard",
   Long: `### Get Scheduled Plans for a LookML Dashboard
 
@@ -4497,10 +4497,10 @@ Returns all scheduled plans for a LookML Dashboard which belong to the caller or
 If no user_id is provided, this function returns the scheduled plans owned by the caller.
 
 
-To list all schedules for all users, pass `all_users=true`.
+To list all schedules for all users, pass 'all_users=true'.
 
 
-The caller must have `see_schedules` permission to see other users' scheduled plans.
+The caller must have 'see_schedules' permission to see other users' scheduled plans.
 
 
 `,
@@ -4510,8 +4510,8 @@ The caller must have `see_schedules` permission to see other users' scheduled pl
 }
 
 
-var scheduled_plan_run_once_by_idCmd = &cobra.Command{
-  Use:   "scheduled_plan_run_once_by_id",
+var scheduledPlanRunOnceByIdCmd = &cobra.Command{
+  Use:   "scheduledPlanRunOnceById",
   Short: "Run Scheduled Plan Once by Id",
   Long: `### Run a Scheduled Plan By Id Immediately
 This function creates a run-once schedule plan based on an existing scheduled plan,
@@ -4543,9 +4543,9 @@ Formats:
 
 | format | Description
 | :-----------: | :--- |
-| json | A JSON object containing a `data` property which contains an array of JSON objects, one per row. No metadata.
+| json | A JSON object containing a 'data' property which contains an array of JSON objects, one per row. No metadata.
 | json_detail | Row data plus metadata describing the fields, pivots, table calcs, and other aspects of the query
-| inline_json | Same as the JSON format, except that the `data` property is a string containing JSON-escaped row data. Additional properties describe the data operation. This format is primarily used to send data to web hooks so that the web hook doesn't have to re-encode the JSON row data in order to pass it on to its ultimate destination.
+| inline_json | Same as the JSON format, except that the 'data' property is a string containing JSON-escaped row data. Additional properties describe the data operation. This format is primarily used to send data to web hooks so that the web hook doesn't have to re-encode the JSON row data in order to pass it on to its ultimate destination.
 | csv | Comma separated values with a header
 | txt | Tab separated values with a header
 | html | Simple html
@@ -4555,7 +4555,7 @@ Formats:
 | wysiwyg_png | Dashboard rendered in a tiled layout to produce a PNG image
 ||
 
-Valid formats vary by destination type and source object. `wysiwyg_pdf` is only valid for dashboards, for example.
+Valid formats vary by destination type and source object. 'wysiwyg_pdf' is only valid for dashboards, for example.
 
 
 
@@ -4580,7 +4580,7 @@ var sessionCmd = &cobra.Command{
 }
 
 
-var sessionCmd = &cobra.Command{
+var sessionCmd4805 = &cobra.Command{
   Use:   "session",
   Short: "Get Session",
   Long: `### Get API Session
@@ -4593,8 +4593,8 @@ Returns information about the current API session, such as which workspace is se
 }
 
 
-var update_sessionCmd = &cobra.Command{
-  Use:   "update_session",
+var updateSessionCmd = &cobra.Command{
+  Use:   "updateSession",
   Short: "Update Session",
   Long: `### Update API Session
 
@@ -4635,22 +4635,22 @@ var spaceCmd = &cobra.Command{
 }
 
 
-var search_spacesCmd = &cobra.Command{
-  Use:   "search_spaces",
+var searchSpacesCmd = &cobra.Command{
+  Use:   "searchSpaces",
   Short: "Search Spaces",
   Long: `### Search Spaces
 
   Returns an **array of space objects** that match the given search criteria.
 
-  If multiple search params are given and `filter_or` is FALSE or not specified,
+  If multiple search params are given and 'filter_or' is FALSE or not specified,
 search params are combined in a logical AND operation.
 Only rows that match *all* search param criteria will be returned.
 
-If `filter_or` is TRUE, multiple search params are combined in a logical OR operation.
+If 'filter_or' is TRUE, multiple search params are combined in a logical OR operation.
 Results will include rows that match **any** of the search criteria.
 
 String search params use case-insensitive matching.
-String search params can contain `%` and '_' as SQL LIKE pattern match wildcard expressions.
+String search params can contain '%' and '_' as SQL LIKE pattern match wildcard expressions.
 example="dan%" will match "danger" and "Danzig" but not "David"
 example="D_m%" will match "Damage" and "dump"
 
@@ -4664,7 +4664,7 @@ or exclude (respectively) rows where the column is null.
 Boolean search params accept only "true" and "false" as values.
 
 
-  The parameters `limit`, and `offset` are recommended for fetching results in page-size chunks.
+  The parameters 'limit', and 'offset' are recommended for fetching results in page-size chunks.
 
   Get a **single space** by id with [Space](#!/Space/space)
 `,
@@ -4674,7 +4674,7 @@ Boolean search params accept only "true" and "false" as values.
 }
 
 
-var spaceCmd = &cobra.Command{
+var spaceCmd4664 = &cobra.Command{
   Use:   "space",
   Short: "Get Space",
   Long: `### Get information about the space with a specific id.`,
@@ -4684,8 +4684,8 @@ var spaceCmd = &cobra.Command{
 }
 
 
-var update_spaceCmd = &cobra.Command{
-  Use:   "update_space",
+var updateSpaceCmd = &cobra.Command{
+  Use:   "updateSpace",
   Short: "Update Space",
   Long: `### Update the space with a specific id.`,
   Run: func(cmd *cobra.Command, args []string) {
@@ -4694,8 +4694,8 @@ var update_spaceCmd = &cobra.Command{
 }
 
 
-var delete_spaceCmd = &cobra.Command{
-  Use:   "delete_space",
+var deleteSpaceCmd = &cobra.Command{
+  Use:   "deleteSpace",
   Short: "Delete Space",
   Long: `### Delete the space with a specific id including any children spaces.
 **DANGER** this will delete all looks and dashboards in the space.
@@ -4706,8 +4706,8 @@ var delete_spaceCmd = &cobra.Command{
 }
 
 
-var all_spacesCmd = &cobra.Command{
-  Use:   "all_spaces",
+var allSpacesCmd = &cobra.Command{
+  Use:   "allSpaces",
   Short: "Get All Spaces",
   Long: `### Get information about all spaces.
 
@@ -4721,8 +4721,8 @@ In API 4.0+, all personal spaces will be returned.
 }
 
 
-var create_spaceCmd = &cobra.Command{
-  Use:   "create_space",
+var createSpaceCmd = &cobra.Command{
+  Use:   "createSpace",
   Short: "Create Space",
   Long: `### Create a space with specified information.
 
@@ -4735,8 +4735,8 @@ returns 404 Not Found.
 }
 
 
-var space_childrenCmd = &cobra.Command{
-  Use:   "space_children",
+var spaceChildrenCmd = &cobra.Command{
+  Use:   "spaceChildren",
   Short: "Get Space Children",
   Long: `### Get the children of a space.`,
   Run: func(cmd *cobra.Command, args []string) {
@@ -4745,8 +4745,8 @@ var space_childrenCmd = &cobra.Command{
 }
 
 
-var space_children_searchCmd = &cobra.Command{
-  Use:   "space_children_search",
+var spaceChildrenSearchCmd = &cobra.Command{
+  Use:   "spaceChildrenSearch",
   Short: "Search Space Children",
   Long: `### Search the children of a space`,
   Run: func(cmd *cobra.Command, args []string) {
@@ -4755,8 +4755,8 @@ var space_children_searchCmd = &cobra.Command{
 }
 
 
-var space_parentCmd = &cobra.Command{
-  Use:   "space_parent",
+var spaceParentCmd = &cobra.Command{
+  Use:   "spaceParent",
   Short: "Get Space Parent",
   Long: `### Get the parent of a space`,
   Run: func(cmd *cobra.Command, args []string) {
@@ -4765,8 +4765,8 @@ var space_parentCmd = &cobra.Command{
 }
 
 
-var space_ancestorsCmd = &cobra.Command{
-  Use:   "space_ancestors",
+var spaceAncestorsCmd = &cobra.Command{
+  Use:   "spaceAncestors",
   Short: "Get Space Ancestors",
   Long: `### Get the ancestors of a space`,
   Run: func(cmd *cobra.Command, args []string) {
@@ -4775,8 +4775,8 @@ var space_ancestorsCmd = &cobra.Command{
 }
 
 
-var space_looksCmd = &cobra.Command{
-  Use:   "space_looks",
+var spaceLooksCmd = &cobra.Command{
+  Use:   "spaceLooks",
   Short: "Get Space Looks",
   Long: `### Get all looks in a space.
 In API 3.x, this will return all looks in a space, including looks in the trash.
@@ -4788,8 +4788,8 @@ In API 4.0+, all looks in a space will be returned, excluding looks in the trash
 }
 
 
-var space_dashboardsCmd = &cobra.Command{
-  Use:   "space_dashboards",
+var spaceDashboardsCmd = &cobra.Command{
+  Use:   "spaceDashboards",
   Short: "Get Space Dashboards",
   Long: `### Get the dashboards in a space`,
   Run: func(cmd *cobra.Command, args []string) {
@@ -4810,8 +4810,8 @@ var themeCmd = &cobra.Command{
 }
 
 
-var all_themesCmd = &cobra.Command{
-  Use:   "all_themes",
+var allThemesCmd = &cobra.Command{
+  Use:   "allThemes",
   Short: "Get All Themes",
   Long: `### Get an array of all existing themes
 
@@ -4828,16 +4828,16 @@ This method returns an array of all existing themes. The active time for the the
 }
 
 
-var create_themeCmd = &cobra.Command{
-  Use:   "create_theme",
+var createThemeCmd = &cobra.Command{
+  Use:   "createTheme",
   Short: "Create Theme",
   Long: `### Create a theme
 
 Creates a new theme object, returning the theme details, including the created id.
 
-If `settings` are not specified, the default theme settings will be copied into the new theme.
+If 'settings' are not specified, the default theme settings will be copied into the new theme.
 
-The theme `name` can only contain alphanumeric characters or underscores. Theme names should not contain any confidential information, such as customer names.
+The theme 'name' can only contain alphanumeric characters or underscores. Theme names should not contain any confidential information, such as customer names.
 
 **Update** an existing theme with [Update Theme](#!/Theme/update_theme)
 
@@ -4854,8 +4854,8 @@ For more information, see [Creating and Applying Themes](https://looker.com/docs
 }
 
 
-var search_themesCmd = &cobra.Command{
-  Use:   "search_themes",
+var searchThemesCmd = &cobra.Command{
+  Use:   "searchThemes",
   Short: "Search Themes",
   Long: `### Search all themes for matching criteria.
 
@@ -4863,22 +4863,22 @@ Returns an **array of theme objects** that match the specified search criteria.
 
 | Search Parameters | Description
 | :-------------------: | :------ |
-| `begin_at` only | Find themes active at or after `begin_at`
-| `end_at` only | Find themes active at or before `end_at`
-| both set | Find themes with an active inclusive period between `begin_at` and `end_at`
+| 'begin_at' only | Find themes active at or after 'begin_at'
+| 'end_at' only | Find themes active at or before 'end_at'
+| both set | Find themes with an active inclusive period between 'begin_at' and 'end_at'
 
 Note: Range matching requires boolean AND logic.
-When using `begin_at` and `end_at` together, do not use `filter_or`=TRUE
+When using 'begin_at' and 'end_at' together, do not use 'filter_or'=TRUE
 
-If multiple search params are given and `filter_or` is FALSE or not specified,
+If multiple search params are given and 'filter_or' is FALSE or not specified,
 search params are combined in a logical AND operation.
 Only rows that match *all* search param criteria will be returned.
 
-If `filter_or` is TRUE, multiple search params are combined in a logical OR operation.
+If 'filter_or' is TRUE, multiple search params are combined in a logical OR operation.
 Results will include rows that match **any** of the search criteria.
 
 String search params use case-insensitive matching.
-String search params can contain `%` and '_' as SQL LIKE pattern match wildcard expressions.
+String search params can contain '%' and '_' as SQL LIKE pattern match wildcard expressions.
 example="dan%" will match "danger" and "Danzig" but not "David"
 example="D_m%" will match "Damage" and "dump"
 
@@ -4903,8 +4903,8 @@ Get a **single theme** by id with [Theme](#!/Theme/theme)
 }
 
 
-var default_themeCmd = &cobra.Command{
-  Use:   "default_theme",
+var defaultThemeCmd = &cobra.Command{
+  Use:   "defaultTheme",
   Short: "Get Default Theme",
   Long: `### Get the default theme
 
@@ -4912,7 +4912,7 @@ Returns the active theme object set as the default.
 
 The **default** theme name can be set in the UI on the Admin|Theme UI page
 
-The optional `ts` parameter can specify a different timestamp than "now." If specified, it returns the default theme at the time indicated.
+The optional 'ts' parameter can specify a different timestamp than "now." If specified, it returns the default theme at the time indicated.
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("default_theme called")
@@ -4920,14 +4920,14 @@ The optional `ts` parameter can specify a different timestamp than "now." If spe
 }
 
 
-var set_default_themeCmd = &cobra.Command{
-  Use:   "set_default_theme",
+var setDefaultThemeCmd = &cobra.Command{
+  Use:   "setDefaultTheme",
   Short: "Set Default Theme",
   Long: `### Set the global default theme by theme name
 
 Only Admin users can call this function.
 
-Only an active theme with no expiration (`end_at` not set) can be assigned as the default theme. As long as a theme has an active record with no expiration, it can be set as the default.
+Only an active theme with no expiration ('end_at' not set) can be assigned as the default theme. As long as a theme has an active record with no expiration, it can be set as the default.
 
 [Create Theme](#!/Theme/create) has detailed information on rules for default and active themes
 
@@ -4942,16 +4942,16 @@ Returns the new specified default theme object.
 }
 
 
-var active_themesCmd = &cobra.Command{
-  Use:   "active_themes",
+var activeThemesCmd = &cobra.Command{
+  Use:   "activeThemes",
   Short: "Get Active Themes",
   Long: `### Get active themes
 
 Returns an array of active themes.
 
-If the `name` parameter is specified, it will return an array with one theme if it's active and found.
+If the 'name' parameter is specified, it will return an array with one theme if it's active and found.
 
-The optional `ts` parameter can specify a different timestamp than "now."
+The optional 'ts' parameter can specify a different timestamp than "now."
 
 **Note**: Custom themes needs to be enabled by Looker. Unless custom themes are enabled, only the automatically generated default theme can be used. Please contact your Account Manager or help.looker.com to update your license for this feature.
 
@@ -4963,13 +4963,13 @@ The optional `ts` parameter can specify a different timestamp than "now."
 }
 
 
-var theme_or_defaultCmd = &cobra.Command{
-  Use:   "theme_or_default",
+var themeOrDefaultCmd = &cobra.Command{
+  Use:   "themeOrDefault",
   Short: "Get Theme or Default",
   Long: `### Get the named theme if it's active. Otherwise, return the default theme
 
-The optional `ts` parameter can specify a different timestamp than "now."
-Note: API users with `show` ability can call this function
+The optional 'ts' parameter can specify a different timestamp than "now."
+Note: API users with 'show' ability can call this function
 
 **Note**: Custom themes needs to be enabled by Looker. Unless custom themes are enabled, only the automatically generated default theme can be used. Please contact your Account Manager or help.looker.com to update your license for this feature.
 
@@ -4980,8 +4980,8 @@ Note: API users with `show` ability can call this function
 }
 
 
-var validate_themeCmd = &cobra.Command{
-  Use:   "validate_theme",
+var validateThemeCmd = &cobra.Command{
+  Use:   "validateTheme",
   Short: "Validate Theme",
   Long: `### Validate a theme with the specified information
 
@@ -4998,7 +4998,7 @@ See [Create Theme](#!/Theme/create_theme) for constraints
 }
 
 
-var themeCmd = &cobra.Command{
+var themeCmd805 = &cobra.Command{
   Use:   "theme",
   Short: "Get Theme",
   Long: `### Get a theme by ID
@@ -5014,8 +5014,8 @@ Use this to retrieve a specific theme, whether or not it's currently active.
 }
 
 
-var update_themeCmd = &cobra.Command{
-  Use:   "update_theme",
+var updateThemeCmd = &cobra.Command{
+  Use:   "updateTheme",
   Short: "Update Theme",
   Long: `### Update the theme by id.
 
@@ -5028,8 +5028,8 @@ var update_themeCmd = &cobra.Command{
 }
 
 
-var delete_themeCmd = &cobra.Command{
-  Use:   "delete_theme",
+var deleteThemeCmd = &cobra.Command{
+  Use:   "deleteTheme",
   Short: "Delete Theme",
   Long: `### Delete a specific theme by id
 
@@ -5071,8 +5071,8 @@ var meCmd = &cobra.Command{
 }
 
 
-var all_usersCmd = &cobra.Command{
-  Use:   "all_users",
+var allUsersCmd = &cobra.Command{
+  Use:   "allUsers",
   Short: "Get All Users",
   Long: `### Get information about all users.
 `,
@@ -5082,8 +5082,8 @@ var all_usersCmd = &cobra.Command{
 }
 
 
-var create_userCmd = &cobra.Command{
-  Use:   "create_user",
+var createUserCmd = &cobra.Command{
+  Use:   "createUser",
   Short: "Create User",
   Long: `### Create a user with the specified information.
 `,
@@ -5093,22 +5093,22 @@ var create_userCmd = &cobra.Command{
 }
 
 
-var search_usersCmd = &cobra.Command{
-  Use:   "search_users",
+var searchUsersCmd = &cobra.Command{
+  Use:   "searchUsers",
   Short: "Search Users",
   Long: `### Search users
 
 Returns all<sup>*</sup> user records that match the given search criteria.
 
-If multiple search params are given and `filter_or` is FALSE or not specified,
+If multiple search params are given and 'filter_or' is FALSE or not specified,
 search params are combined in a logical AND operation.
 Only rows that match *all* search param criteria will be returned.
 
-If `filter_or` is TRUE, multiple search params are combined in a logical OR operation.
+If 'filter_or' is TRUE, multiple search params are combined in a logical OR operation.
 Results will include rows that match **any** of the search criteria.
 
 String search params use case-insensitive matching.
-String search params can contain `%` and '_' as SQL LIKE pattern match wildcard expressions.
+String search params can contain '%' and '_' as SQL LIKE pattern match wildcard expressions.
 example="dan%" will match "danger" and "Danzig" but not "David"
 example="D_m%" will match "Damage" and "dump"
 
@@ -5134,13 +5134,13 @@ names of other users who are members of the same group as the user.
 }
 
 
-var search_users_namesCmd = &cobra.Command{
-  Use:   "search_users_names",
+var searchUsersNamesCmd = &cobra.Command{
+  Use:   "searchUsersNames",
   Short: "Search User Names",
   Long: `### Search for user accounts by name
 
-Returns all user accounts where `first_name` OR `last_name` OR `email` field values match a pattern.
-The pattern can contain `%` and `_` wildcards as in SQL LIKE expressions.
+Returns all user accounts where 'first_name' OR 'last_name' OR 'email' field values match a pattern.
+The pattern can contain '%' and '_' wildcards as in SQL LIKE expressions.
 
 Any additional search params will be combined into a logical AND expression.
 `,
@@ -5150,7 +5150,7 @@ Any additional search params will be combined into a logical AND expression.
 }
 
 
-var userCmd = &cobra.Command{
+var userCmd4004 = &cobra.Command{
   Use:   "user",
   Short: "Get User by Id",
   Long: `### Get information about the user with a specific id.
@@ -5165,8 +5165,8 @@ The user name and avatar url, but no sensitive information.
 }
 
 
-var update_userCmd = &cobra.Command{
-  Use:   "update_user",
+var updateUserCmd = &cobra.Command{
+  Use:   "updateUser",
   Short: "Update User",
   Long: `### Update information about the user with a specific id.
 `,
@@ -5176,8 +5176,8 @@ var update_userCmd = &cobra.Command{
 }
 
 
-var delete_userCmd = &cobra.Command{
-  Use:   "delete_user",
+var deleteUserCmd = &cobra.Command{
+  Use:   "deleteUser",
   Short: "Delete User",
   Long: `### Delete the user with a specific id.
 
@@ -5189,8 +5189,8 @@ var delete_userCmd = &cobra.Command{
 }
 
 
-var user_for_credentialCmd = &cobra.Command{
-  Use:   "user_for_credential",
+var userForCredentialCmd = &cobra.Command{
+  Use:   "userForCredential",
   Short: "Get User by Credential Id",
   Long: `### Get information about the user with a credential of given type with specific id.
 
@@ -5201,7 +5201,7 @@ for the user and is specific to each type of credential.
 
 An example using the Ruby sdk might look like:
 
-`sdk.user_for_credential('embed', 'customer-4959425')`
+'sdk.user_for_credential('embed', 'customer-4959425')'
 
 This table shows the supported 'Credential Type' strings. The right column is for reference; it shows
 which field in the given credential type is actually searched when finding a user with the supplied
@@ -5228,8 +5228,8 @@ which field in the given credential type is actually searched when finding a use
 }
 
 
-var user_credentials_emailCmd = &cobra.Command{
-  Use:   "user_credentials_email",
+var userCredentialsEmailCmd = &cobra.Command{
+  Use:   "userCredentialsEmail",
   Short: "Get Email/Password Credential",
   Long: `### Email/password login information for the specified user.`,
   Run: func(cmd *cobra.Command, args []string) {
@@ -5238,8 +5238,8 @@ var user_credentials_emailCmd = &cobra.Command{
 }
 
 
-var create_user_credentials_emailCmd = &cobra.Command{
-  Use:   "create_user_credentials_email",
+var createUserCredentialsEmailCmd = &cobra.Command{
+  Use:   "createUserCredentialsEmail",
   Short: "Create Email/Password Credential",
   Long: `### Email/password login information for the specified user.`,
   Run: func(cmd *cobra.Command, args []string) {
@@ -5248,8 +5248,8 @@ var create_user_credentials_emailCmd = &cobra.Command{
 }
 
 
-var update_user_credentials_emailCmd = &cobra.Command{
-  Use:   "update_user_credentials_email",
+var updateUserCredentialsEmailCmd = &cobra.Command{
+  Use:   "updateUserCredentialsEmail",
   Short: "Update Email/Password Credential",
   Long: `### Email/password login information for the specified user.`,
   Run: func(cmd *cobra.Command, args []string) {
@@ -5258,8 +5258,8 @@ var update_user_credentials_emailCmd = &cobra.Command{
 }
 
 
-var delete_user_credentials_emailCmd = &cobra.Command{
-  Use:   "delete_user_credentials_email",
+var deleteUserCredentialsEmailCmd = &cobra.Command{
+  Use:   "deleteUserCredentialsEmail",
   Short: "Delete Email/Password Credential",
   Long: `### Email/password login information for the specified user.`,
   Run: func(cmd *cobra.Command, args []string) {
@@ -5268,8 +5268,8 @@ var delete_user_credentials_emailCmd = &cobra.Command{
 }
 
 
-var user_credentials_totpCmd = &cobra.Command{
-  Use:   "user_credentials_totp",
+var userCredentialsTotpCmd = &cobra.Command{
+  Use:   "userCredentialsTotp",
   Short: "Get Two-Factor Credential",
   Long: `### Two-factor login information for the specified user.`,
   Run: func(cmd *cobra.Command, args []string) {
@@ -5278,8 +5278,8 @@ var user_credentials_totpCmd = &cobra.Command{
 }
 
 
-var create_user_credentials_totpCmd = &cobra.Command{
-  Use:   "create_user_credentials_totp",
+var createUserCredentialsTotpCmd = &cobra.Command{
+  Use:   "createUserCredentialsTotp",
   Short: "Create Two-Factor Credential",
   Long: `### Two-factor login information for the specified user.`,
   Run: func(cmd *cobra.Command, args []string) {
@@ -5288,8 +5288,8 @@ var create_user_credentials_totpCmd = &cobra.Command{
 }
 
 
-var delete_user_credentials_totpCmd = &cobra.Command{
-  Use:   "delete_user_credentials_totp",
+var deleteUserCredentialsTotpCmd = &cobra.Command{
+  Use:   "deleteUserCredentialsTotp",
   Short: "Delete Two-Factor Credential",
   Long: `### Two-factor login information for the specified user.`,
   Run: func(cmd *cobra.Command, args []string) {
@@ -5298,8 +5298,8 @@ var delete_user_credentials_totpCmd = &cobra.Command{
 }
 
 
-var user_credentials_ldapCmd = &cobra.Command{
-  Use:   "user_credentials_ldap",
+var userCredentialsLdapCmd = &cobra.Command{
+  Use:   "userCredentialsLdap",
   Short: "Get LDAP Credential",
   Long: `### LDAP login information for the specified user.`,
   Run: func(cmd *cobra.Command, args []string) {
@@ -5308,8 +5308,8 @@ var user_credentials_ldapCmd = &cobra.Command{
 }
 
 
-var delete_user_credentials_ldapCmd = &cobra.Command{
-  Use:   "delete_user_credentials_ldap",
+var deleteUserCredentialsLdapCmd = &cobra.Command{
+  Use:   "deleteUserCredentialsLdap",
   Short: "Delete LDAP Credential",
   Long: `### LDAP login information for the specified user.`,
   Run: func(cmd *cobra.Command, args []string) {
@@ -5318,8 +5318,8 @@ var delete_user_credentials_ldapCmd = &cobra.Command{
 }
 
 
-var user_credentials_googleCmd = &cobra.Command{
-  Use:   "user_credentials_google",
+var userCredentialsGoogleCmd = &cobra.Command{
+  Use:   "userCredentialsGoogle",
   Short: "Get Google Auth Credential",
   Long: `### Google authentication login information for the specified user.`,
   Run: func(cmd *cobra.Command, args []string) {
@@ -5328,8 +5328,8 @@ var user_credentials_googleCmd = &cobra.Command{
 }
 
 
-var delete_user_credentials_googleCmd = &cobra.Command{
-  Use:   "delete_user_credentials_google",
+var deleteUserCredentialsGoogleCmd = &cobra.Command{
+  Use:   "deleteUserCredentialsGoogle",
   Short: "Delete Google Auth Credential",
   Long: `### Google authentication login information for the specified user.`,
   Run: func(cmd *cobra.Command, args []string) {
@@ -5338,8 +5338,8 @@ var delete_user_credentials_googleCmd = &cobra.Command{
 }
 
 
-var user_credentials_samlCmd = &cobra.Command{
-  Use:   "user_credentials_saml",
+var userCredentialsSamlCmd = &cobra.Command{
+  Use:   "userCredentialsSaml",
   Short: "Get Saml Auth Credential",
   Long: `### Saml authentication login information for the specified user.`,
   Run: func(cmd *cobra.Command, args []string) {
@@ -5348,8 +5348,8 @@ var user_credentials_samlCmd = &cobra.Command{
 }
 
 
-var delete_user_credentials_samlCmd = &cobra.Command{
-  Use:   "delete_user_credentials_saml",
+var deleteUserCredentialsSamlCmd = &cobra.Command{
+  Use:   "deleteUserCredentialsSaml",
   Short: "Delete Saml Auth Credential",
   Long: `### Saml authentication login information for the specified user.`,
   Run: func(cmd *cobra.Command, args []string) {
@@ -5358,8 +5358,8 @@ var delete_user_credentials_samlCmd = &cobra.Command{
 }
 
 
-var user_credentials_oidcCmd = &cobra.Command{
-  Use:   "user_credentials_oidc",
+var userCredentialsOidcCmd = &cobra.Command{
+  Use:   "userCredentialsOidc",
   Short: "Get OIDC Auth Credential",
   Long: `### OpenID Connect (OIDC) authentication login information for the specified user.`,
   Run: func(cmd *cobra.Command, args []string) {
@@ -5368,8 +5368,8 @@ var user_credentials_oidcCmd = &cobra.Command{
 }
 
 
-var delete_user_credentials_oidcCmd = &cobra.Command{
-  Use:   "delete_user_credentials_oidc",
+var deleteUserCredentialsOidcCmd = &cobra.Command{
+  Use:   "deleteUserCredentialsOidc",
   Short: "Delete OIDC Auth Credential",
   Long: `### OpenID Connect (OIDC) authentication login information for the specified user.`,
   Run: func(cmd *cobra.Command, args []string) {
@@ -5378,8 +5378,8 @@ var delete_user_credentials_oidcCmd = &cobra.Command{
 }
 
 
-var user_credentials_api3Cmd = &cobra.Command{
-  Use:   "user_credentials_api3",
+var userCredentialsApi3Cmd = &cobra.Command{
+  Use:   "userCredentialsApi3",
   Short: "Get API 3 Credential",
   Long: `### API 3 login information for the specified user. This is for the newer API keys that can be added for any user.`,
   Run: func(cmd *cobra.Command, args []string) {
@@ -5388,8 +5388,8 @@ var user_credentials_api3Cmd = &cobra.Command{
 }
 
 
-var delete_user_credentials_api3Cmd = &cobra.Command{
-  Use:   "delete_user_credentials_api3",
+var deleteUserCredentialsApi3Cmd = &cobra.Command{
+  Use:   "deleteUserCredentialsApi3",
   Short: "Delete API 3 Credential",
   Long: `### API 3 login information for the specified user. This is for the newer API keys that can be added for any user.`,
   Run: func(cmd *cobra.Command, args []string) {
@@ -5398,8 +5398,8 @@ var delete_user_credentials_api3Cmd = &cobra.Command{
 }
 
 
-var all_user_credentials_api3sCmd = &cobra.Command{
-  Use:   "all_user_credentials_api3s",
+var allUserCredentialsApi3sCmd = &cobra.Command{
+  Use:   "allUserCredentialsApi3s",
   Short: "Get All API 3 Credentials",
   Long: `### API 3 login information for the specified user. This is for the newer API keys that can be added for any user.`,
   Run: func(cmd *cobra.Command, args []string) {
@@ -5408,8 +5408,8 @@ var all_user_credentials_api3sCmd = &cobra.Command{
 }
 
 
-var create_user_credentials_api3Cmd = &cobra.Command{
-  Use:   "create_user_credentials_api3",
+var createUserCredentialsApi3Cmd = &cobra.Command{
+  Use:   "createUserCredentialsApi3",
   Short: "Create API 3 Credential",
   Long: `### API 3 login information for the specified user. This is for the newer API keys that can be added for any user.`,
   Run: func(cmd *cobra.Command, args []string) {
@@ -5418,8 +5418,8 @@ var create_user_credentials_api3Cmd = &cobra.Command{
 }
 
 
-var user_credentials_embedCmd = &cobra.Command{
-  Use:   "user_credentials_embed",
+var userCredentialsEmbedCmd = &cobra.Command{
+  Use:   "userCredentialsEmbed",
   Short: "Get Embedding Credential",
   Long: `### Embed login information for the specified user.`,
   Run: func(cmd *cobra.Command, args []string) {
@@ -5428,8 +5428,8 @@ var user_credentials_embedCmd = &cobra.Command{
 }
 
 
-var delete_user_credentials_embedCmd = &cobra.Command{
-  Use:   "delete_user_credentials_embed",
+var deleteUserCredentialsEmbedCmd = &cobra.Command{
+  Use:   "deleteUserCredentialsEmbed",
   Short: "Delete Embedding Credential",
   Long: `### Embed login information for the specified user.`,
   Run: func(cmd *cobra.Command, args []string) {
@@ -5438,8 +5438,8 @@ var delete_user_credentials_embedCmd = &cobra.Command{
 }
 
 
-var all_user_credentials_embedsCmd = &cobra.Command{
-  Use:   "all_user_credentials_embeds",
+var allUserCredentialsEmbedsCmd = &cobra.Command{
+  Use:   "allUserCredentialsEmbeds",
   Short: "Get All Embedding Credentials",
   Long: `### Embed login information for the specified user.`,
   Run: func(cmd *cobra.Command, args []string) {
@@ -5448,8 +5448,8 @@ var all_user_credentials_embedsCmd = &cobra.Command{
 }
 
 
-var user_credentials_looker_openidCmd = &cobra.Command{
-  Use:   "user_credentials_looker_openid",
+var userCredentialsLookerOpenidCmd = &cobra.Command{
+  Use:   "userCredentialsLookerOpenid",
   Short: "Get Looker OpenId Credential",
   Long: `### Looker Openid login information for the specified user. Used by Looker Analysts.`,
   Run: func(cmd *cobra.Command, args []string) {
@@ -5458,8 +5458,8 @@ var user_credentials_looker_openidCmd = &cobra.Command{
 }
 
 
-var delete_user_credentials_looker_openidCmd = &cobra.Command{
-  Use:   "delete_user_credentials_looker_openid",
+var deleteUserCredentialsLookerOpenidCmd = &cobra.Command{
+  Use:   "deleteUserCredentialsLookerOpenid",
   Short: "Delete Looker OpenId Credential",
   Long: `### Looker Openid login information for the specified user. Used by Looker Analysts.`,
   Run: func(cmd *cobra.Command, args []string) {
@@ -5468,8 +5468,8 @@ var delete_user_credentials_looker_openidCmd = &cobra.Command{
 }
 
 
-var user_sessionCmd = &cobra.Command{
-  Use:   "user_session",
+var userSessionCmd = &cobra.Command{
+  Use:   "userSession",
   Short: "Get Web Login Session",
   Long: `### Web login session for the specified user.`,
   Run: func(cmd *cobra.Command, args []string) {
@@ -5478,8 +5478,8 @@ var user_sessionCmd = &cobra.Command{
 }
 
 
-var delete_user_sessionCmd = &cobra.Command{
-  Use:   "delete_user_session",
+var deleteUserSessionCmd = &cobra.Command{
+  Use:   "deleteUserSession",
   Short: "Delete Web Login Session",
   Long: `### Web login session for the specified user.`,
   Run: func(cmd *cobra.Command, args []string) {
@@ -5488,8 +5488,8 @@ var delete_user_sessionCmd = &cobra.Command{
 }
 
 
-var all_user_sessionsCmd = &cobra.Command{
-  Use:   "all_user_sessions",
+var allUserSessionsCmd = &cobra.Command{
+  Use:   "allUserSessions",
   Short: "Get All Web Login Sessions",
   Long: `### Web login session for the specified user.`,
   Run: func(cmd *cobra.Command, args []string) {
@@ -5498,8 +5498,8 @@ var all_user_sessionsCmd = &cobra.Command{
 }
 
 
-var create_user_credentials_email_password_resetCmd = &cobra.Command{
-  Use:   "create_user_credentials_email_password_reset",
+var createUserCredentialsEmailPasswordResetCmd = &cobra.Command{
+  Use:   "createUserCredentialsEmailPasswordReset",
   Short: "Create Password Reset Token",
   Long: `### Create a password reset token.
 This will create a cryptographically secure random password reset token for the user.
@@ -5517,8 +5517,8 @@ This method can be called with an empty body.
 }
 
 
-var user_rolesCmd = &cobra.Command{
-  Use:   "user_roles",
+var userRolesCmd = &cobra.Command{
+  Use:   "userRoles",
   Short: "Get User Roles",
   Long: `### Get information about roles of a given user
 `,
@@ -5528,8 +5528,8 @@ var user_rolesCmd = &cobra.Command{
 }
 
 
-var set_user_rolesCmd = &cobra.Command{
-  Use:   "set_user_roles",
+var setUserRolesCmd = &cobra.Command{
+  Use:   "setUserRoles",
   Short: "Set User Roles",
   Long: `### Set roles of the user with a specific id.
 `,
@@ -5539,8 +5539,8 @@ var set_user_rolesCmd = &cobra.Command{
 }
 
 
-var user_attribute_user_valuesCmd = &cobra.Command{
-  Use:   "user_attribute_user_values",
+var userAttributeUserValuesCmd = &cobra.Command{
+  Use:   "userAttributeUserValues",
   Short: "Get User Attribute Values",
   Long: `### Get user attribute values for a given user.
 
@@ -5554,7 +5554,7 @@ A value for each user attribute is searched for in the following locations, in t
 
 If more than one group has a value defined for a user attribute, the group with the lowest rank wins.
 
-The response will only include user attributes for which values were found. Use `include_unset=true` to include
+The response will only include user attributes for which values were found. Use 'include_unset=true' to include
 empty records for user attributes with no value.
 
 The value of all hidden user attributes will be blank.
@@ -5565,8 +5565,8 @@ The value of all hidden user attributes will be blank.
 }
 
 
-var set_user_attribute_user_valueCmd = &cobra.Command{
-  Use:   "set_user_attribute_user_value",
+var setUserAttributeUserValueCmd = &cobra.Command{
+  Use:   "setUserAttributeUserValue",
   Short: "Set User Attribute User Value",
   Long: `### Store a custom value for a user attribute in a user's account settings.
 
@@ -5578,8 +5578,8 @@ Per-user user attribute values take precedence over group or default values.
 }
 
 
-var delete_user_attribute_user_valueCmd = &cobra.Command{
-  Use:   "delete_user_attribute_user_value",
+var deleteUserAttributeUserValueCmd = &cobra.Command{
+  Use:   "deleteUserAttributeUserValue",
   Short: "Delete User Attribute User Value",
   Long: `### Delete a user attribute value from a user's account settings.
 
@@ -5606,8 +5606,8 @@ var userAttributeCmd = &cobra.Command{
 }
 
 
-var all_user_attributesCmd = &cobra.Command{
-  Use:   "all_user_attributes",
+var allUserAttributesCmd = &cobra.Command{
+  Use:   "allUserAttributes",
   Short: "Get All User Attributes",
   Long: `### Get information about all user attributes.
 `,
@@ -5617,17 +5617,17 @@ var all_user_attributesCmd = &cobra.Command{
 }
 
 
-var create_user_attributeCmd = &cobra.Command{
-  Use:   "create_user_attribute",
+var createUserAttributeCmd = &cobra.Command{
+  Use:   "createUserAttribute",
   Short: "Create User Attribute",
   Long: `### Create a new user attribute
 
-Permission information for a user attribute is conveyed through the `can` and `user_can_edit` fields.
-The `user_can_edit` field indicates whether an attribute is user-editable _anywhere_ in the application.
-The `can` field gives more granular access information, with the `set_value` child field indicating whether
+Permission information for a user attribute is conveyed through the 'can' and 'user_can_edit' fields.
+The 'user_can_edit' field indicates whether an attribute is user-editable _anywhere_ in the application.
+The 'can' field gives more granular access information, with the 'set_value' child field indicating whether
 an attribute's value can be set by [Setting the User Attribute User Value](#!/User/set_user_attribute_user_value).
 
-Note: `name` and `label` fields must be unique across all user attributes in the Looker instance.
+Note: 'name' and 'label' fields must be unique across all user attributes in the Looker instance.
 Attempting to create a new user attribute with a name or label that duplicates an existing
 user attribute will fail with a 422 error.
 `,
@@ -5637,8 +5637,8 @@ user attribute will fail with a 422 error.
 }
 
 
-var user_attributeCmd = &cobra.Command{
-  Use:   "user_attribute",
+var userAttributeCmd2694 = &cobra.Command{
+  Use:   "userAttribute",
   Short: "Get User Attribute",
   Long: `### Get information about a user attribute.
 `,
@@ -5648,8 +5648,8 @@ var user_attributeCmd = &cobra.Command{
 }
 
 
-var update_user_attributeCmd = &cobra.Command{
-  Use:   "update_user_attribute",
+var updateUserAttributeCmd = &cobra.Command{
+  Use:   "updateUserAttribute",
   Short: "Update User Attribute",
   Long: `### Update a user attribute definition.
 `,
@@ -5659,8 +5659,8 @@ var update_user_attributeCmd = &cobra.Command{
 }
 
 
-var delete_user_attributeCmd = &cobra.Command{
-  Use:   "delete_user_attribute",
+var deleteUserAttributeCmd = &cobra.Command{
+  Use:   "deleteUserAttribute",
   Short: "Delete User Attribute",
   Long: `### Delete a user attribute (admin only).
 `,
@@ -5670,8 +5670,8 @@ var delete_user_attributeCmd = &cobra.Command{
 }
 
 
-var all_user_attribute_group_valuesCmd = &cobra.Command{
-  Use:   "all_user_attribute_group_values",
+var allUserAttributeGroupValuesCmd = &cobra.Command{
+  Use:   "allUserAttributeGroupValues",
   Short: "Get User Attribute Group Values",
   Long: `### Returns all values of a user attribute defined by user groups, in precedence order.
 
@@ -5687,8 +5687,8 @@ Results will only include groups that the caller's user account has permission t
 }
 
 
-var set_user_attribute_group_valuesCmd = &cobra.Command{
-  Use:   "set_user_attribute_group_values",
+var setUserAttributeGroupValuesCmd = &cobra.Command{
+  Use:   "setUserAttributeGroupValues",
   Short: "Set User Attribute Group Values",
   Long: `### Define values for a user attribute across a set of groups, in priority order.
 
@@ -5729,8 +5729,8 @@ var workspaceCmd = &cobra.Command{
 }
 
 
-var all_workspacesCmd = &cobra.Command{
-  Use:   "all_workspaces",
+var allWorkspacesCmd = &cobra.Command{
+  Use:   "allWorkspaces",
   Short: "Get All Workspaces",
   Long: `### Get All Workspaces
 
@@ -5742,7 +5742,7 @@ Returns all workspaces available to the calling user.
 }
 
 
-var workspaceCmd = &cobra.Command{
+var workspaceCmd9059 = &cobra.Command{
   Use:   "workspace",
   Short: "Get Workspace",
   Long: `### Get A Workspace
@@ -5785,381 +5785,381 @@ later and use update_session(workspace_id: "dev") to select the dev workspace fo
 func init() {
 
   apiAuthCmd.AddCommand(loginCmd)
-  apiAuthCmd.AddCommand(login_userCmd)
+  apiAuthCmd.AddCommand(loginUserCmd)
   apiAuthCmd.AddCommand(logoutCmd)
   rootCmd.AddCommand(apiAuthCmd)
-  authCmd.AddCommand(create_sso_embed_urlCmd)
-  authCmd.AddCommand(ldap_configCmd)
-  authCmd.AddCommand(update_ldap_configCmd)
-  authCmd.AddCommand(test_ldap_config_connectionCmd)
-  authCmd.AddCommand(test_ldap_config_authCmd)
-  authCmd.AddCommand(test_ldap_config_user_infoCmd)
-  authCmd.AddCommand(test_ldap_config_user_authCmd)
-  authCmd.AddCommand(oidc_configCmd)
-  authCmd.AddCommand(update_oidc_configCmd)
-  authCmd.AddCommand(oidc_test_configCmd)
-  authCmd.AddCommand(delete_oidc_test_configCmd)
-  authCmd.AddCommand(create_oidc_test_configCmd)
-  authCmd.AddCommand(password_configCmd)
-  authCmd.AddCommand(update_password_configCmd)
-  authCmd.AddCommand(force_password_reset_at_next_login_for_all_usersCmd)
-  authCmd.AddCommand(saml_configCmd)
-  authCmd.AddCommand(update_saml_configCmd)
-  authCmd.AddCommand(saml_test_configCmd)
-  authCmd.AddCommand(delete_saml_test_configCmd)
-  authCmd.AddCommand(create_saml_test_configCmd)
-  authCmd.AddCommand(parse_saml_idp_metadataCmd)
-  authCmd.AddCommand(fetch_and_parse_saml_idp_metadataCmd)
-  authCmd.AddCommand(session_configCmd)
-  authCmd.AddCommand(update_session_configCmd)
-  authCmd.AddCommand(all_user_login_lockoutsCmd)
-  authCmd.AddCommand(search_user_login_lockoutsCmd)
-  authCmd.AddCommand(delete_user_login_lockoutCmd)
+  authCmd.AddCommand(createSsoEmbedUrlCmd)
+  authCmd.AddCommand(ldapConfigCmd)
+  authCmd.AddCommand(updateLdapConfigCmd)
+  authCmd.AddCommand(testLdapConfigConnectionCmd)
+  authCmd.AddCommand(testLdapConfigAuthCmd)
+  authCmd.AddCommand(testLdapConfigUserInfoCmd)
+  authCmd.AddCommand(testLdapConfigUserAuthCmd)
+  authCmd.AddCommand(oidcConfigCmd)
+  authCmd.AddCommand(updateOidcConfigCmd)
+  authCmd.AddCommand(oidcTestConfigCmd)
+  authCmd.AddCommand(deleteOidcTestConfigCmd)
+  authCmd.AddCommand(createOidcTestConfigCmd)
+  authCmd.AddCommand(passwordConfigCmd)
+  authCmd.AddCommand(updatePasswordConfigCmd)
+  authCmd.AddCommand(forcePasswordResetAtNextLoginForAllUsersCmd)
+  authCmd.AddCommand(samlConfigCmd)
+  authCmd.AddCommand(updateSamlConfigCmd)
+  authCmd.AddCommand(samlTestConfigCmd)
+  authCmd.AddCommand(deleteSamlTestConfigCmd)
+  authCmd.AddCommand(createSamlTestConfigCmd)
+  authCmd.AddCommand(parseSamlIdpMetadataCmd)
+  authCmd.AddCommand(fetchAndParseSamlIdpMetadataCmd)
+  authCmd.AddCommand(sessionConfigCmd)
+  authCmd.AddCommand(updateSessionConfigCmd)
+  authCmd.AddCommand(allUserLoginLockoutsCmd)
+  authCmd.AddCommand(searchUserLoginLockoutsCmd)
+  authCmd.AddCommand(deleteUserLoginLockoutCmd)
   rootCmd.AddCommand(authCmd)
-  colorCollectionCmd.AddCommand(all_color_collectionsCmd)
-  colorCollectionCmd.AddCommand(create_color_collectionCmd)
-  colorCollectionCmd.AddCommand(color_collections_customCmd)
-  colorCollectionCmd.AddCommand(color_collections_standardCmd)
-  colorCollectionCmd.AddCommand(default_color_collectionCmd)
-  colorCollectionCmd.AddCommand(set_default_color_collectionCmd)
-  colorCollectionCmd.AddCommand(color_collectionCmd)
-  colorCollectionCmd.AddCommand(update_color_collectionCmd)
-  colorCollectionCmd.AddCommand(delete_color_collectionCmd)
+  colorCollectionCmd.AddCommand(allColorCollectionsCmd)
+  colorCollectionCmd.AddCommand(createColorCollectionCmd)
+  colorCollectionCmd.AddCommand(colorCollectionsCustomCmd)
+  colorCollectionCmd.AddCommand(colorCollectionsStandardCmd)
+  colorCollectionCmd.AddCommand(defaultColorCollectionCmd)
+  colorCollectionCmd.AddCommand(setDefaultColorCollectionCmd)
+  colorCollectionCmd.AddCommand(colorCollectionCmd5691)
+  colorCollectionCmd.AddCommand(updateColorCollectionCmd)
+  colorCollectionCmd.AddCommand(deleteColorCollectionCmd)
   rootCmd.AddCommand(colorCollectionCmd)
-  configCmd.AddCommand(backup_configurationCmd)
-  configCmd.AddCommand(update_backup_configurationCmd)
-  configCmd.AddCommand(cloud_storage_configurationCmd)
-  configCmd.AddCommand(update_cloud_storage_configurationCmd)
-  configCmd.AddCommand(custom_welcome_emailCmd)
-  configCmd.AddCommand(update_custom_welcome_emailCmd)
-  configCmd.AddCommand(update_custom_welcome_email_testCmd)
-  configCmd.AddCommand(digest_emails_enabledCmd)
-  configCmd.AddCommand(update_digest_emails_enabledCmd)
-  configCmd.AddCommand(create_digest_email_sendCmd)
-  configCmd.AddCommand(internal_help_resources_contentCmd)
-  configCmd.AddCommand(update_internal_help_resources_contentCmd)
-  configCmd.AddCommand(internal_help_resourcesCmd)
-  configCmd.AddCommand(update_internal_help_resourcesCmd)
-  configCmd.AddCommand(all_legacy_featuresCmd)
-  configCmd.AddCommand(legacy_featureCmd)
-  configCmd.AddCommand(update_legacy_featureCmd)
-  configCmd.AddCommand(all_localesCmd)
-  configCmd.AddCommand(all_timezonesCmd)
+  configCmd.AddCommand(backupConfigurationCmd)
+  configCmd.AddCommand(updateBackupConfigurationCmd)
+  configCmd.AddCommand(cloudStorageConfigurationCmd)
+  configCmd.AddCommand(updateCloudStorageConfigurationCmd)
+  configCmd.AddCommand(customWelcomeEmailCmd)
+  configCmd.AddCommand(updateCustomWelcomeEmailCmd)
+  configCmd.AddCommand(updateCustomWelcomeEmailTestCmd)
+  configCmd.AddCommand(digestEmailsEnabledCmd)
+  configCmd.AddCommand(updateDigestEmailsEnabledCmd)
+  configCmd.AddCommand(createDigestEmailSendCmd)
+  configCmd.AddCommand(internalHelpResourcesContentCmd)
+  configCmd.AddCommand(updateInternalHelpResourcesContentCmd)
+  configCmd.AddCommand(internalHelpResourcesCmd)
+  configCmd.AddCommand(updateInternalHelpResourcesCmd)
+  configCmd.AddCommand(allLegacyFeaturesCmd)
+  configCmd.AddCommand(legacyFeatureCmd)
+  configCmd.AddCommand(updateLegacyFeatureCmd)
+  configCmd.AddCommand(allLocalesCmd)
+  configCmd.AddCommand(allTimezonesCmd)
   configCmd.AddCommand(versionsCmd)
-  configCmd.AddCommand(whitelabel_configurationCmd)
-  configCmd.AddCommand(update_whitelabel_configurationCmd)
+  configCmd.AddCommand(whitelabelConfigurationCmd)
+  configCmd.AddCommand(updateWhitelabelConfigurationCmd)
   rootCmd.AddCommand(configCmd)
-  connectionCmd.AddCommand(all_connectionsCmd)
-  connectionCmd.AddCommand(create_connectionCmd)
-  connectionCmd.AddCommand(connectionCmd)
-  connectionCmd.AddCommand(update_connectionCmd)
-  connectionCmd.AddCommand(delete_connectionCmd)
-  connectionCmd.AddCommand(delete_connection_overrideCmd)
-  connectionCmd.AddCommand(test_connectionCmd)
-  connectionCmd.AddCommand(test_connection_configCmd)
-  connectionCmd.AddCommand(all_dialect_infosCmd)
+  connectionCmd.AddCommand(allConnectionsCmd)
+  connectionCmd.AddCommand(createConnectionCmd)
+  connectionCmd.AddCommand(connectionCmd6726)
+  connectionCmd.AddCommand(updateConnectionCmd)
+  connectionCmd.AddCommand(deleteConnectionCmd)
+  connectionCmd.AddCommand(deleteConnectionOverrideCmd)
+  connectionCmd.AddCommand(testConnectionCmd)
+  connectionCmd.AddCommand(testConnectionConfigCmd)
+  connectionCmd.AddCommand(allDialectInfosCmd)
   rootCmd.AddCommand(connectionCmd)
-  contentCmd.AddCommand(search_content_favoritesCmd)
-  contentCmd.AddCommand(content_favoriteCmd)
-  contentCmd.AddCommand(delete_content_favoriteCmd)
-  contentCmd.AddCommand(create_content_favoriteCmd)
-  contentCmd.AddCommand(all_content_metadatasCmd)
-  contentCmd.AddCommand(content_metadataCmd)
-  contentCmd.AddCommand(update_content_metadataCmd)
-  contentCmd.AddCommand(all_content_metadata_accessesCmd)
-  contentCmd.AddCommand(create_content_metadata_accessCmd)
-  contentCmd.AddCommand(update_content_metadata_accessCmd)
-  contentCmd.AddCommand(delete_content_metadata_accessCmd)
-  contentCmd.AddCommand(content_thumbnailCmd)
-  contentCmd.AddCommand(content_validationCmd)
-  contentCmd.AddCommand(search_content_viewsCmd)
-  contentCmd.AddCommand(vector_thumbnailCmd)
+  contentCmd.AddCommand(searchContentFavoritesCmd)
+  contentCmd.AddCommand(contentFavoriteCmd)
+  contentCmd.AddCommand(deleteContentFavoriteCmd)
+  contentCmd.AddCommand(createContentFavoriteCmd)
+  contentCmd.AddCommand(allContentMetadatasCmd)
+  contentCmd.AddCommand(contentMetadataCmd)
+  contentCmd.AddCommand(updateContentMetadataCmd)
+  contentCmd.AddCommand(allContentMetadataAccessesCmd)
+  contentCmd.AddCommand(createContentMetadataAccessCmd)
+  contentCmd.AddCommand(updateContentMetadataAccessCmd)
+  contentCmd.AddCommand(deleteContentMetadataAccessCmd)
+  contentCmd.AddCommand(contentThumbnailCmd)
+  contentCmd.AddCommand(contentValidationCmd)
+  contentCmd.AddCommand(searchContentViewsCmd)
+  contentCmd.AddCommand(vectorThumbnailCmd)
   rootCmd.AddCommand(contentCmd)
-  dashboardCmd.AddCommand(all_dashboardsCmd)
-  dashboardCmd.AddCommand(create_dashboardCmd)
-  dashboardCmd.AddCommand(search_dashboardsCmd)
-  dashboardCmd.AddCommand(import_lookml_dashboardCmd)
-  dashboardCmd.AddCommand(sync_lookml_dashboardCmd)
-  dashboardCmd.AddCommand(dashboardCmd)
-  dashboardCmd.AddCommand(update_dashboardCmd)
-  dashboardCmd.AddCommand(delete_dashboardCmd)
-  dashboardCmd.AddCommand(dashboard_aggregate_table_lookmlCmd)
-  dashboardCmd.AddCommand(dashboard_lookmlCmd)
-  dashboardCmd.AddCommand(search_dashboard_elementsCmd)
-  dashboardCmd.AddCommand(dashboard_elementCmd)
-  dashboardCmd.AddCommand(update_dashboard_elementCmd)
-  dashboardCmd.AddCommand(delete_dashboard_elementCmd)
-  dashboardCmd.AddCommand(dashboard_dashboard_elementsCmd)
-  dashboardCmd.AddCommand(create_dashboard_elementCmd)
-  dashboardCmd.AddCommand(dashboard_filterCmd)
-  dashboardCmd.AddCommand(update_dashboard_filterCmd)
-  dashboardCmd.AddCommand(delete_dashboard_filterCmd)
-  dashboardCmd.AddCommand(dashboard_dashboard_filtersCmd)
-  dashboardCmd.AddCommand(create_dashboard_filterCmd)
-  dashboardCmd.AddCommand(dashboard_layout_componentCmd)
-  dashboardCmd.AddCommand(update_dashboard_layout_componentCmd)
-  dashboardCmd.AddCommand(dashboard_layout_dashboard_layout_componentsCmd)
-  dashboardCmd.AddCommand(dashboard_layoutCmd)
-  dashboardCmd.AddCommand(update_dashboard_layoutCmd)
-  dashboardCmd.AddCommand(delete_dashboard_layoutCmd)
-  dashboardCmd.AddCommand(dashboard_dashboard_layoutsCmd)
-  dashboardCmd.AddCommand(create_dashboard_layoutCmd)
+  dashboardCmd.AddCommand(allDashboardsCmd)
+  dashboardCmd.AddCommand(createDashboardCmd)
+  dashboardCmd.AddCommand(searchDashboardsCmd)
+  dashboardCmd.AddCommand(importLookmlDashboardCmd)
+  dashboardCmd.AddCommand(syncLookmlDashboardCmd)
+  dashboardCmd.AddCommand(dashboardCmd2726)
+  dashboardCmd.AddCommand(updateDashboardCmd)
+  dashboardCmd.AddCommand(deleteDashboardCmd)
+  dashboardCmd.AddCommand(dashboardAggregateTableLookmlCmd)
+  dashboardCmd.AddCommand(dashboardLookmlCmd)
+  dashboardCmd.AddCommand(searchDashboardElementsCmd)
+  dashboardCmd.AddCommand(dashboardElementCmd)
+  dashboardCmd.AddCommand(updateDashboardElementCmd)
+  dashboardCmd.AddCommand(deleteDashboardElementCmd)
+  dashboardCmd.AddCommand(dashboardDashboardElementsCmd)
+  dashboardCmd.AddCommand(createDashboardElementCmd)
+  dashboardCmd.AddCommand(dashboardFilterCmd)
+  dashboardCmd.AddCommand(updateDashboardFilterCmd)
+  dashboardCmd.AddCommand(deleteDashboardFilterCmd)
+  dashboardCmd.AddCommand(dashboardDashboardFiltersCmd)
+  dashboardCmd.AddCommand(createDashboardFilterCmd)
+  dashboardCmd.AddCommand(dashboardLayoutComponentCmd)
+  dashboardCmd.AddCommand(updateDashboardLayoutComponentCmd)
+  dashboardCmd.AddCommand(dashboardLayoutDashboardLayoutComponentsCmd)
+  dashboardCmd.AddCommand(dashboardLayoutCmd)
+  dashboardCmd.AddCommand(updateDashboardLayoutCmd)
+  dashboardCmd.AddCommand(deleteDashboardLayoutCmd)
+  dashboardCmd.AddCommand(dashboardDashboardLayoutsCmd)
+  dashboardCmd.AddCommand(createDashboardLayoutCmd)
   rootCmd.AddCommand(dashboardCmd)
-  dataActionCmd.AddCommand(perform_data_actionCmd)
-  dataActionCmd.AddCommand(fetch_remote_data_action_formCmd)
+  dataActionCmd.AddCommand(performDataActionCmd)
+  dataActionCmd.AddCommand(fetchRemoteDataActionFormCmd)
   rootCmd.AddCommand(dataActionCmd)
-  datagroupCmd.AddCommand(all_datagroupsCmd)
-  datagroupCmd.AddCommand(datagroupCmd)
-  datagroupCmd.AddCommand(update_datagroupCmd)
+  datagroupCmd.AddCommand(allDatagroupsCmd)
+  datagroupCmd.AddCommand(datagroupCmd7809)
+  datagroupCmd.AddCommand(updateDatagroupCmd)
   rootCmd.AddCommand(datagroupCmd)
-  derivedTableCmd.AddCommand(graph_derived_tables_for_modelCmd)
-  derivedTableCmd.AddCommand(graph_derived_tables_for_viewCmd)
+  derivedTableCmd.AddCommand(graphDerivedTablesForModelCmd)
+  derivedTableCmd.AddCommand(graphDerivedTablesForViewCmd)
   rootCmd.AddCommand(derivedTableCmd)
-  folderCmd.AddCommand(search_foldersCmd)
-  folderCmd.AddCommand(folderCmd)
-  folderCmd.AddCommand(update_folderCmd)
-  folderCmd.AddCommand(delete_folderCmd)
-  folderCmd.AddCommand(all_foldersCmd)
-  folderCmd.AddCommand(create_folderCmd)
-  folderCmd.AddCommand(folder_childrenCmd)
-  folderCmd.AddCommand(folder_children_searchCmd)
-  folderCmd.AddCommand(folder_parentCmd)
-  folderCmd.AddCommand(folder_ancestorsCmd)
-  folderCmd.AddCommand(folder_looksCmd)
-  folderCmd.AddCommand(folder_dashboardsCmd)
+  folderCmd.AddCommand(searchFoldersCmd)
+  folderCmd.AddCommand(folderCmd7578)
+  folderCmd.AddCommand(updateFolderCmd)
+  folderCmd.AddCommand(deleteFolderCmd)
+  folderCmd.AddCommand(allFoldersCmd)
+  folderCmd.AddCommand(createFolderCmd)
+  folderCmd.AddCommand(folderChildrenCmd)
+  folderCmd.AddCommand(folderChildrenSearchCmd)
+  folderCmd.AddCommand(folderParentCmd)
+  folderCmd.AddCommand(folderAncestorsCmd)
+  folderCmd.AddCommand(folderLooksCmd)
+  folderCmd.AddCommand(folderDashboardsCmd)
   rootCmd.AddCommand(folderCmd)
-  groupCmd.AddCommand(all_groupsCmd)
-  groupCmd.AddCommand(create_groupCmd)
-  groupCmd.AddCommand(search_groupsCmd)
-  groupCmd.AddCommand(groupCmd)
-  groupCmd.AddCommand(update_groupCmd)
-  groupCmd.AddCommand(delete_groupCmd)
-  groupCmd.AddCommand(all_group_groupsCmd)
-  groupCmd.AddCommand(add_group_groupCmd)
-  groupCmd.AddCommand(all_group_usersCmd)
-  groupCmd.AddCommand(add_group_userCmd)
-  groupCmd.AddCommand(delete_group_userCmd)
-  groupCmd.AddCommand(delete_group_from_groupCmd)
-  groupCmd.AddCommand(update_user_attribute_group_valueCmd)
-  groupCmd.AddCommand(delete_user_attribute_group_valueCmd)
+  groupCmd.AddCommand(allGroupsCmd)
+  groupCmd.AddCommand(createGroupCmd)
+  groupCmd.AddCommand(searchGroupsCmd)
+  groupCmd.AddCommand(groupCmd2770)
+  groupCmd.AddCommand(updateGroupCmd)
+  groupCmd.AddCommand(deleteGroupCmd)
+  groupCmd.AddCommand(allGroupGroupsCmd)
+  groupCmd.AddCommand(addGroupGroupCmd)
+  groupCmd.AddCommand(allGroupUsersCmd)
+  groupCmd.AddCommand(addGroupUserCmd)
+  groupCmd.AddCommand(deleteGroupUserCmd)
+  groupCmd.AddCommand(deleteGroupFromGroupCmd)
+  groupCmd.AddCommand(updateUserAttributeGroupValueCmd)
+  groupCmd.AddCommand(deleteUserAttributeGroupValueCmd)
   rootCmd.AddCommand(groupCmd)
-  homepageCmd.AddCommand(all_homepagesCmd)
-  homepageCmd.AddCommand(create_homepageCmd)
-  homepageCmd.AddCommand(search_homepagesCmd)
-  homepageCmd.AddCommand(homepageCmd)
-  homepageCmd.AddCommand(update_homepageCmd)
-  homepageCmd.AddCommand(delete_homepageCmd)
-  homepageCmd.AddCommand(all_homepage_itemsCmd)
-  homepageCmd.AddCommand(create_homepage_itemCmd)
-  homepageCmd.AddCommand(homepage_itemCmd)
-  homepageCmd.AddCommand(update_homepage_itemCmd)
-  homepageCmd.AddCommand(delete_homepage_itemCmd)
-  homepageCmd.AddCommand(all_homepage_sectionsCmd)
-  homepageCmd.AddCommand(create_homepage_sectionCmd)
-  homepageCmd.AddCommand(homepage_sectionCmd)
-  homepageCmd.AddCommand(update_homepage_sectionCmd)
-  homepageCmd.AddCommand(delete_homepage_sectionCmd)
-  homepageCmd.AddCommand(all_primary_homepage_sectionsCmd)
+  homepageCmd.AddCommand(allHomepagesCmd)
+  homepageCmd.AddCommand(createHomepageCmd)
+  homepageCmd.AddCommand(searchHomepagesCmd)
+  homepageCmd.AddCommand(homepageCmd7622)
+  homepageCmd.AddCommand(updateHomepageCmd)
+  homepageCmd.AddCommand(deleteHomepageCmd)
+  homepageCmd.AddCommand(allHomepageItemsCmd)
+  homepageCmd.AddCommand(createHomepageItemCmd)
+  homepageCmd.AddCommand(homepageItemCmd)
+  homepageCmd.AddCommand(updateHomepageItemCmd)
+  homepageCmd.AddCommand(deleteHomepageItemCmd)
+  homepageCmd.AddCommand(allHomepageSectionsCmd)
+  homepageCmd.AddCommand(createHomepageSectionCmd)
+  homepageCmd.AddCommand(homepageSectionCmd)
+  homepageCmd.AddCommand(updateHomepageSectionCmd)
+  homepageCmd.AddCommand(deleteHomepageSectionCmd)
+  homepageCmd.AddCommand(allPrimaryHomepageSectionsCmd)
   rootCmd.AddCommand(homepageCmd)
-  integrationCmd.AddCommand(all_integration_hubsCmd)
-  integrationCmd.AddCommand(create_integration_hubCmd)
-  integrationCmd.AddCommand(integration_hubCmd)
-  integrationCmd.AddCommand(update_integration_hubCmd)
-  integrationCmd.AddCommand(delete_integration_hubCmd)
-  integrationCmd.AddCommand(accept_integration_hub_legal_agreementCmd)
-  integrationCmd.AddCommand(all_integrationsCmd)
-  integrationCmd.AddCommand(integrationCmd)
-  integrationCmd.AddCommand(update_integrationCmd)
-  integrationCmd.AddCommand(fetch_integration_formCmd)
-  integrationCmd.AddCommand(test_integrationCmd)
+  integrationCmd.AddCommand(allIntegrationHubsCmd)
+  integrationCmd.AddCommand(createIntegrationHubCmd)
+  integrationCmd.AddCommand(integrationHubCmd)
+  integrationCmd.AddCommand(updateIntegrationHubCmd)
+  integrationCmd.AddCommand(deleteIntegrationHubCmd)
+  integrationCmd.AddCommand(acceptIntegrationHubLegalAgreementCmd)
+  integrationCmd.AddCommand(allIntegrationsCmd)
+  integrationCmd.AddCommand(integrationCmd5380)
+  integrationCmd.AddCommand(updateIntegrationCmd)
+  integrationCmd.AddCommand(fetchIntegrationFormCmd)
+  integrationCmd.AddCommand(testIntegrationCmd)
   rootCmd.AddCommand(integrationCmd)
-  lookCmd.AddCommand(all_looksCmd)
-  lookCmd.AddCommand(create_lookCmd)
-  lookCmd.AddCommand(search_looksCmd)
-  lookCmd.AddCommand(lookCmd)
-  lookCmd.AddCommand(update_lookCmd)
-  lookCmd.AddCommand(delete_lookCmd)
-  lookCmd.AddCommand(run_lookCmd)
+  lookCmd.AddCommand(allLooksCmd)
+  lookCmd.AddCommand(createLookCmd)
+  lookCmd.AddCommand(searchLooksCmd)
+  lookCmd.AddCommand(lookCmd4947)
+  lookCmd.AddCommand(updateLookCmd)
+  lookCmd.AddCommand(deleteLookCmd)
+  lookCmd.AddCommand(runLookCmd)
   rootCmd.AddCommand(lookCmd)
-  lookmlModelCmd.AddCommand(all_lookml_modelsCmd)
-  lookmlModelCmd.AddCommand(create_lookml_modelCmd)
-  lookmlModelCmd.AddCommand(lookml_modelCmd)
-  lookmlModelCmd.AddCommand(update_lookml_modelCmd)
-  lookmlModelCmd.AddCommand(delete_lookml_modelCmd)
-  lookmlModelCmd.AddCommand(lookml_model_exploreCmd)
+  lookmlModelCmd.AddCommand(allLookmlModelsCmd)
+  lookmlModelCmd.AddCommand(createLookmlModelCmd)
+  lookmlModelCmd.AddCommand(lookmlModelCmd4483)
+  lookmlModelCmd.AddCommand(updateLookmlModelCmd)
+  lookmlModelCmd.AddCommand(deleteLookmlModelCmd)
+  lookmlModelCmd.AddCommand(lookmlModelExploreCmd)
   rootCmd.AddCommand(lookmlModelCmd)
-  projectCmd.AddCommand(all_git_branchesCmd)
-  projectCmd.AddCommand(git_branchCmd)
-  projectCmd.AddCommand(update_git_branchCmd)
-  projectCmd.AddCommand(create_git_branchCmd)
-  projectCmd.AddCommand(find_git_branchCmd)
-  projectCmd.AddCommand(delete_git_branchCmd)
-  projectCmd.AddCommand(deploy_ref_to_productionCmd)
-  projectCmd.AddCommand(deploy_to_productionCmd)
-  projectCmd.AddCommand(reset_project_to_productionCmd)
-  projectCmd.AddCommand(reset_project_to_remoteCmd)
-  projectCmd.AddCommand(all_projectsCmd)
-  projectCmd.AddCommand(create_projectCmd)
-  projectCmd.AddCommand(projectCmd)
-  projectCmd.AddCommand(update_projectCmd)
+  projectCmd.AddCommand(allGitBranchesCmd)
+  projectCmd.AddCommand(gitBranchCmd)
+  projectCmd.AddCommand(updateGitBranchCmd)
+  projectCmd.AddCommand(createGitBranchCmd)
+  projectCmd.AddCommand(findGitBranchCmd)
+  projectCmd.AddCommand(deleteGitBranchCmd)
+  projectCmd.AddCommand(deployRefToProductionCmd)
+  projectCmd.AddCommand(deployToProductionCmd)
+  projectCmd.AddCommand(resetProjectToProductionCmd)
+  projectCmd.AddCommand(resetProjectToRemoteCmd)
+  projectCmd.AddCommand(allProjectsCmd)
+  projectCmd.AddCommand(createProjectCmd)
+  projectCmd.AddCommand(projectCmd1937)
+  projectCmd.AddCommand(updateProjectCmd)
   projectCmd.AddCommand(manifestCmd)
-  projectCmd.AddCommand(git_deploy_keyCmd)
-  projectCmd.AddCommand(create_git_deploy_keyCmd)
-  projectCmd.AddCommand(project_validation_resultsCmd)
-  projectCmd.AddCommand(validate_projectCmd)
-  projectCmd.AddCommand(project_workspaceCmd)
-  projectCmd.AddCommand(all_project_filesCmd)
-  projectCmd.AddCommand(project_fileCmd)
-  projectCmd.AddCommand(all_git_connection_testsCmd)
-  projectCmd.AddCommand(run_git_connection_testCmd)
-  projectCmd.AddCommand(all_lookml_testsCmd)
-  projectCmd.AddCommand(run_lookml_testCmd)
-  projectCmd.AddCommand(tag_refCmd)
-  projectCmd.AddCommand(update_repository_credentialCmd)
-  projectCmd.AddCommand(delete_repository_credentialCmd)
-  projectCmd.AddCommand(get_all_repository_credentialsCmd)
+  projectCmd.AddCommand(gitDeployKeyCmd)
+  projectCmd.AddCommand(createGitDeployKeyCmd)
+  projectCmd.AddCommand(projectValidationResultsCmd)
+  projectCmd.AddCommand(validateProjectCmd)
+  projectCmd.AddCommand(projectWorkspaceCmd)
+  projectCmd.AddCommand(allProjectFilesCmd)
+  projectCmd.AddCommand(projectFileCmd)
+  projectCmd.AddCommand(allGitConnectionTestsCmd)
+  projectCmd.AddCommand(runGitConnectionTestCmd)
+  projectCmd.AddCommand(allLookmlTestsCmd)
+  projectCmd.AddCommand(runLookmlTestCmd)
+  projectCmd.AddCommand(tagRefCmd)
+  projectCmd.AddCommand(updateRepositoryCredentialCmd)
+  projectCmd.AddCommand(deleteRepositoryCredentialCmd)
+  projectCmd.AddCommand(getAllRepositoryCredentialsCmd)
   rootCmd.AddCommand(projectCmd)
-  queryCmd.AddCommand(create_query_taskCmd)
-  queryCmd.AddCommand(query_task_multi_resultsCmd)
-  queryCmd.AddCommand(query_taskCmd)
-  queryCmd.AddCommand(query_task_resultsCmd)
-  queryCmd.AddCommand(queryCmd)
-  queryCmd.AddCommand(query_for_slugCmd)
-  queryCmd.AddCommand(create_queryCmd)
-  queryCmd.AddCommand(run_queryCmd)
-  queryCmd.AddCommand(run_inline_queryCmd)
-  queryCmd.AddCommand(run_url_encoded_queryCmd)
-  queryCmd.AddCommand(merge_queryCmd)
-  queryCmd.AddCommand(create_merge_queryCmd)
-  queryCmd.AddCommand(all_running_queriesCmd)
-  queryCmd.AddCommand(kill_queryCmd)
-  queryCmd.AddCommand(sql_queryCmd)
-  queryCmd.AddCommand(create_sql_queryCmd)
-  queryCmd.AddCommand(run_sql_queryCmd)
+  queryCmd.AddCommand(createQueryTaskCmd)
+  queryCmd.AddCommand(queryTaskMultiResultsCmd)
+  queryCmd.AddCommand(queryTaskCmd)
+  queryCmd.AddCommand(queryTaskResultsCmd)
+  queryCmd.AddCommand(queryCmd1943)
+  queryCmd.AddCommand(queryForSlugCmd)
+  queryCmd.AddCommand(createQueryCmd)
+  queryCmd.AddCommand(runQueryCmd)
+  queryCmd.AddCommand(runInlineQueryCmd)
+  queryCmd.AddCommand(runUrlEncodedQueryCmd)
+  queryCmd.AddCommand(mergeQueryCmd)
+  queryCmd.AddCommand(createMergeQueryCmd)
+  queryCmd.AddCommand(allRunningQueriesCmd)
+  queryCmd.AddCommand(killQueryCmd)
+  queryCmd.AddCommand(sqlQueryCmd)
+  queryCmd.AddCommand(createSqlQueryCmd)
+  queryCmd.AddCommand(runSqlQueryCmd)
   rootCmd.AddCommand(queryCmd)
-  renderTaskCmd.AddCommand(create_lookml_dashboard_render_taskCmd)
-  renderTaskCmd.AddCommand(create_look_render_taskCmd)
-  renderTaskCmd.AddCommand(create_query_render_taskCmd)
-  renderTaskCmd.AddCommand(create_dashboard_render_taskCmd)
-  renderTaskCmd.AddCommand(render_taskCmd)
-  renderTaskCmd.AddCommand(render_task_resultsCmd)
+  renderTaskCmd.AddCommand(createLookmlDashboardRenderTaskCmd)
+  renderTaskCmd.AddCommand(createLookRenderTaskCmd)
+  renderTaskCmd.AddCommand(createQueryRenderTaskCmd)
+  renderTaskCmd.AddCommand(createDashboardRenderTaskCmd)
+  renderTaskCmd.AddCommand(renderTaskCmd904)
+  renderTaskCmd.AddCommand(renderTaskResultsCmd)
   rootCmd.AddCommand(renderTaskCmd)
-  roleCmd.AddCommand(search_model_setsCmd)
-  roleCmd.AddCommand(model_setCmd)
-  roleCmd.AddCommand(update_model_setCmd)
-  roleCmd.AddCommand(delete_model_setCmd)
-  roleCmd.AddCommand(all_model_setsCmd)
-  roleCmd.AddCommand(create_model_setCmd)
-  roleCmd.AddCommand(all_permissionsCmd)
-  roleCmd.AddCommand(search_permission_setsCmd)
-  roleCmd.AddCommand(permission_setCmd)
-  roleCmd.AddCommand(update_permission_setCmd)
-  roleCmd.AddCommand(delete_permission_setCmd)
-  roleCmd.AddCommand(all_permission_setsCmd)
-  roleCmd.AddCommand(create_permission_setCmd)
-  roleCmd.AddCommand(all_rolesCmd)
-  roleCmd.AddCommand(create_roleCmd)
-  roleCmd.AddCommand(search_rolesCmd)
-  roleCmd.AddCommand(roleCmd)
-  roleCmd.AddCommand(update_roleCmd)
-  roleCmd.AddCommand(delete_roleCmd)
-  roleCmd.AddCommand(role_groupsCmd)
-  roleCmd.AddCommand(set_role_groupsCmd)
-  roleCmd.AddCommand(role_usersCmd)
-  roleCmd.AddCommand(set_role_usersCmd)
+  roleCmd.AddCommand(searchModelSetsCmd)
+  roleCmd.AddCommand(modelSetCmd)
+  roleCmd.AddCommand(updateModelSetCmd)
+  roleCmd.AddCommand(deleteModelSetCmd)
+  roleCmd.AddCommand(allModelSetsCmd)
+  roleCmd.AddCommand(createModelSetCmd)
+  roleCmd.AddCommand(allPermissionsCmd)
+  roleCmd.AddCommand(searchPermissionSetsCmd)
+  roleCmd.AddCommand(permissionSetCmd)
+  roleCmd.AddCommand(updatePermissionSetCmd)
+  roleCmd.AddCommand(deletePermissionSetCmd)
+  roleCmd.AddCommand(allPermissionSetsCmd)
+  roleCmd.AddCommand(createPermissionSetCmd)
+  roleCmd.AddCommand(allRolesCmd)
+  roleCmd.AddCommand(createRoleCmd)
+  roleCmd.AddCommand(searchRolesCmd)
+  roleCmd.AddCommand(roleCmd4221)
+  roleCmd.AddCommand(updateRoleCmd)
+  roleCmd.AddCommand(deleteRoleCmd)
+  roleCmd.AddCommand(roleGroupsCmd)
+  roleCmd.AddCommand(setRoleGroupsCmd)
+  roleCmd.AddCommand(roleUsersCmd)
+  roleCmd.AddCommand(setRoleUsersCmd)
   rootCmd.AddCommand(roleCmd)
-  scheduledPlanCmd.AddCommand(scheduled_plans_for_spaceCmd)
-  scheduledPlanCmd.AddCommand(scheduled_planCmd)
-  scheduledPlanCmd.AddCommand(update_scheduled_planCmd)
-  scheduledPlanCmd.AddCommand(delete_scheduled_planCmd)
-  scheduledPlanCmd.AddCommand(all_scheduled_plansCmd)
-  scheduledPlanCmd.AddCommand(create_scheduled_planCmd)
-  scheduledPlanCmd.AddCommand(scheduled_plan_run_onceCmd)
-  scheduledPlanCmd.AddCommand(scheduled_plans_for_lookCmd)
-  scheduledPlanCmd.AddCommand(scheduled_plans_for_dashboardCmd)
-  scheduledPlanCmd.AddCommand(scheduled_plans_for_lookml_dashboardCmd)
-  scheduledPlanCmd.AddCommand(scheduled_plan_run_once_by_idCmd)
+  scheduledPlanCmd.AddCommand(scheduledPlansForSpaceCmd)
+  scheduledPlanCmd.AddCommand(scheduledPlanCmd1560)
+  scheduledPlanCmd.AddCommand(updateScheduledPlanCmd)
+  scheduledPlanCmd.AddCommand(deleteScheduledPlanCmd)
+  scheduledPlanCmd.AddCommand(allScheduledPlansCmd)
+  scheduledPlanCmd.AddCommand(createScheduledPlanCmd)
+  scheduledPlanCmd.AddCommand(scheduledPlanRunOnceCmd)
+  scheduledPlanCmd.AddCommand(scheduledPlansForLookCmd)
+  scheduledPlanCmd.AddCommand(scheduledPlansForDashboardCmd)
+  scheduledPlanCmd.AddCommand(scheduledPlansForLookmlDashboardCmd)
+  scheduledPlanCmd.AddCommand(scheduledPlanRunOnceByIdCmd)
   rootCmd.AddCommand(scheduledPlanCmd)
-  sessionCmd.AddCommand(sessionCmd)
-  sessionCmd.AddCommand(update_sessionCmd)
+  sessionCmd.AddCommand(sessionCmd4805)
+  sessionCmd.AddCommand(updateSessionCmd)
   rootCmd.AddCommand(sessionCmd)
-  spaceCmd.AddCommand(search_spacesCmd)
-  spaceCmd.AddCommand(spaceCmd)
-  spaceCmd.AddCommand(update_spaceCmd)
-  spaceCmd.AddCommand(delete_spaceCmd)
-  spaceCmd.AddCommand(all_spacesCmd)
-  spaceCmd.AddCommand(create_spaceCmd)
-  spaceCmd.AddCommand(space_childrenCmd)
-  spaceCmd.AddCommand(space_children_searchCmd)
-  spaceCmd.AddCommand(space_parentCmd)
-  spaceCmd.AddCommand(space_ancestorsCmd)
-  spaceCmd.AddCommand(space_looksCmd)
-  spaceCmd.AddCommand(space_dashboardsCmd)
+  spaceCmd.AddCommand(searchSpacesCmd)
+  spaceCmd.AddCommand(spaceCmd4664)
+  spaceCmd.AddCommand(updateSpaceCmd)
+  spaceCmd.AddCommand(deleteSpaceCmd)
+  spaceCmd.AddCommand(allSpacesCmd)
+  spaceCmd.AddCommand(createSpaceCmd)
+  spaceCmd.AddCommand(spaceChildrenCmd)
+  spaceCmd.AddCommand(spaceChildrenSearchCmd)
+  spaceCmd.AddCommand(spaceParentCmd)
+  spaceCmd.AddCommand(spaceAncestorsCmd)
+  spaceCmd.AddCommand(spaceLooksCmd)
+  spaceCmd.AddCommand(spaceDashboardsCmd)
   rootCmd.AddCommand(spaceCmd)
-  themeCmd.AddCommand(all_themesCmd)
-  themeCmd.AddCommand(create_themeCmd)
-  themeCmd.AddCommand(search_themesCmd)
-  themeCmd.AddCommand(default_themeCmd)
-  themeCmd.AddCommand(set_default_themeCmd)
-  themeCmd.AddCommand(active_themesCmd)
-  themeCmd.AddCommand(theme_or_defaultCmd)
-  themeCmd.AddCommand(validate_themeCmd)
-  themeCmd.AddCommand(themeCmd)
-  themeCmd.AddCommand(update_themeCmd)
-  themeCmd.AddCommand(delete_themeCmd)
+  themeCmd.AddCommand(allThemesCmd)
+  themeCmd.AddCommand(createThemeCmd)
+  themeCmd.AddCommand(searchThemesCmd)
+  themeCmd.AddCommand(defaultThemeCmd)
+  themeCmd.AddCommand(setDefaultThemeCmd)
+  themeCmd.AddCommand(activeThemesCmd)
+  themeCmd.AddCommand(themeOrDefaultCmd)
+  themeCmd.AddCommand(validateThemeCmd)
+  themeCmd.AddCommand(themeCmd805)
+  themeCmd.AddCommand(updateThemeCmd)
+  themeCmd.AddCommand(deleteThemeCmd)
   rootCmd.AddCommand(themeCmd)
   userCmd.AddCommand(meCmd)
-  userCmd.AddCommand(all_usersCmd)
-  userCmd.AddCommand(create_userCmd)
-  userCmd.AddCommand(search_usersCmd)
-  userCmd.AddCommand(search_users_namesCmd)
-  userCmd.AddCommand(userCmd)
-  userCmd.AddCommand(update_userCmd)
-  userCmd.AddCommand(delete_userCmd)
-  userCmd.AddCommand(user_for_credentialCmd)
-  userCmd.AddCommand(user_credentials_emailCmd)
-  userCmd.AddCommand(create_user_credentials_emailCmd)
-  userCmd.AddCommand(update_user_credentials_emailCmd)
-  userCmd.AddCommand(delete_user_credentials_emailCmd)
-  userCmd.AddCommand(user_credentials_totpCmd)
-  userCmd.AddCommand(create_user_credentials_totpCmd)
-  userCmd.AddCommand(delete_user_credentials_totpCmd)
-  userCmd.AddCommand(user_credentials_ldapCmd)
-  userCmd.AddCommand(delete_user_credentials_ldapCmd)
-  userCmd.AddCommand(user_credentials_googleCmd)
-  userCmd.AddCommand(delete_user_credentials_googleCmd)
-  userCmd.AddCommand(user_credentials_samlCmd)
-  userCmd.AddCommand(delete_user_credentials_samlCmd)
-  userCmd.AddCommand(user_credentials_oidcCmd)
-  userCmd.AddCommand(delete_user_credentials_oidcCmd)
-  userCmd.AddCommand(user_credentials_api3Cmd)
-  userCmd.AddCommand(delete_user_credentials_api3Cmd)
-  userCmd.AddCommand(all_user_credentials_api3sCmd)
-  userCmd.AddCommand(create_user_credentials_api3Cmd)
-  userCmd.AddCommand(user_credentials_embedCmd)
-  userCmd.AddCommand(delete_user_credentials_embedCmd)
-  userCmd.AddCommand(all_user_credentials_embedsCmd)
-  userCmd.AddCommand(user_credentials_looker_openidCmd)
-  userCmd.AddCommand(delete_user_credentials_looker_openidCmd)
-  userCmd.AddCommand(user_sessionCmd)
-  userCmd.AddCommand(delete_user_sessionCmd)
-  userCmd.AddCommand(all_user_sessionsCmd)
-  userCmd.AddCommand(create_user_credentials_email_password_resetCmd)
-  userCmd.AddCommand(user_rolesCmd)
-  userCmd.AddCommand(set_user_rolesCmd)
-  userCmd.AddCommand(user_attribute_user_valuesCmd)
-  userCmd.AddCommand(set_user_attribute_user_valueCmd)
-  userCmd.AddCommand(delete_user_attribute_user_valueCmd)
+  userCmd.AddCommand(allUsersCmd)
+  userCmd.AddCommand(createUserCmd)
+  userCmd.AddCommand(searchUsersCmd)
+  userCmd.AddCommand(searchUsersNamesCmd)
+  userCmd.AddCommand(userCmd4004)
+  userCmd.AddCommand(updateUserCmd)
+  userCmd.AddCommand(deleteUserCmd)
+  userCmd.AddCommand(userForCredentialCmd)
+  userCmd.AddCommand(userCredentialsEmailCmd)
+  userCmd.AddCommand(createUserCredentialsEmailCmd)
+  userCmd.AddCommand(updateUserCredentialsEmailCmd)
+  userCmd.AddCommand(deleteUserCredentialsEmailCmd)
+  userCmd.AddCommand(userCredentialsTotpCmd)
+  userCmd.AddCommand(createUserCredentialsTotpCmd)
+  userCmd.AddCommand(deleteUserCredentialsTotpCmd)
+  userCmd.AddCommand(userCredentialsLdapCmd)
+  userCmd.AddCommand(deleteUserCredentialsLdapCmd)
+  userCmd.AddCommand(userCredentialsGoogleCmd)
+  userCmd.AddCommand(deleteUserCredentialsGoogleCmd)
+  userCmd.AddCommand(userCredentialsSamlCmd)
+  userCmd.AddCommand(deleteUserCredentialsSamlCmd)
+  userCmd.AddCommand(userCredentialsOidcCmd)
+  userCmd.AddCommand(deleteUserCredentialsOidcCmd)
+  userCmd.AddCommand(userCredentialsApi3Cmd)
+  userCmd.AddCommand(deleteUserCredentialsApi3Cmd)
+  userCmd.AddCommand(allUserCredentialsApi3sCmd)
+  userCmd.AddCommand(createUserCredentialsApi3Cmd)
+  userCmd.AddCommand(userCredentialsEmbedCmd)
+  userCmd.AddCommand(deleteUserCredentialsEmbedCmd)
+  userCmd.AddCommand(allUserCredentialsEmbedsCmd)
+  userCmd.AddCommand(userCredentialsLookerOpenidCmd)
+  userCmd.AddCommand(deleteUserCredentialsLookerOpenidCmd)
+  userCmd.AddCommand(userSessionCmd)
+  userCmd.AddCommand(deleteUserSessionCmd)
+  userCmd.AddCommand(allUserSessionsCmd)
+  userCmd.AddCommand(createUserCredentialsEmailPasswordResetCmd)
+  userCmd.AddCommand(userRolesCmd)
+  userCmd.AddCommand(setUserRolesCmd)
+  userCmd.AddCommand(userAttributeUserValuesCmd)
+  userCmd.AddCommand(setUserAttributeUserValueCmd)
+  userCmd.AddCommand(deleteUserAttributeUserValueCmd)
   rootCmd.AddCommand(userCmd)
-  userAttributeCmd.AddCommand(all_user_attributesCmd)
-  userAttributeCmd.AddCommand(create_user_attributeCmd)
-  userAttributeCmd.AddCommand(user_attributeCmd)
-  userAttributeCmd.AddCommand(update_user_attributeCmd)
-  userAttributeCmd.AddCommand(delete_user_attributeCmd)
-  userAttributeCmd.AddCommand(all_user_attribute_group_valuesCmd)
-  userAttributeCmd.AddCommand(set_user_attribute_group_valuesCmd)
+  userAttributeCmd.AddCommand(allUserAttributesCmd)
+  userAttributeCmd.AddCommand(createUserAttributeCmd)
+  userAttributeCmd.AddCommand(userAttributeCmd2694)
+  userAttributeCmd.AddCommand(updateUserAttributeCmd)
+  userAttributeCmd.AddCommand(deleteUserAttributeCmd)
+  userAttributeCmd.AddCommand(allUserAttributeGroupValuesCmd)
+  userAttributeCmd.AddCommand(setUserAttributeGroupValuesCmd)
   rootCmd.AddCommand(userAttributeCmd)
-  workspaceCmd.AddCommand(all_workspacesCmd)
-  workspaceCmd.AddCommand(workspaceCmd)
+  workspaceCmd.AddCommand(allWorkspacesCmd)
+  workspaceCmd.AddCommand(workspaceCmd9059)
   rootCmd.AddCommand(workspaceCmd)
 }
