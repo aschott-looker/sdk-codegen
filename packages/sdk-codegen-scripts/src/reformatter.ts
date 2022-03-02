@@ -306,7 +306,6 @@ const fileFormatters: IFormatters = {
   '.swift': new SwiftFormatter(),
   '.ts': new TypescriptFormatter(),
   '.go': new GoFormatter(),
-  '.cli': new GoFormatter(),
 }
 
 export class FilesFormatter {

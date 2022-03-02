@@ -107,7 +107,7 @@ export const Generators: Array<IGeneratorSpec> = [
       new CliGen(api, versions),
     language: 'CLI',
     options: '-papiPackage=Looker -ppackageName=looker',
-    extension: /\.cli/gi,
+    extension: /\.go/gi,
   },
   // {
   //   language: 'R',

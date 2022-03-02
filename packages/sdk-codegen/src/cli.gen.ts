@@ -39,7 +39,7 @@ import type {
  */
 export class CliGen extends CodeGen {
   codePath = './cli'
-  fileExtension = '.cli'
+  fileExtension = '.go'
   nullStr = 'nil'
   packagePath = ''
   commentStr = '// '
