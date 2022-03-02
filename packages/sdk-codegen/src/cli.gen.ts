@@ -25,7 +25,7 @@
  */
 
 import type { IVersionInfo } from './codeGen'
-import { CodeGen, commentBlock } from './codeGen'
+import { CodeGen } from './codeGen'
 import type {
   ApiModel,
   IMethod,
@@ -54,6 +54,9 @@ export class CliGen extends CodeGen {
 
   keywords = new Set<string>([])
 
+  regionToSubCommands = new Map<string, string>()
+  currentRegion = ''
+
   constructor(public api: ApiModel, public versions?: IVersionInfo) {
     super(api, versions)
     this.packageName = `v${this.apiVersion.substring(
@@ -63,40 +66,93 @@ export class CliGen extends CodeGen {
     this.apiVersion = this.packageName
   }
 
-  declareMethod(indent: string, method: IMethod) {
-    return `${indent}${method.name}`
+  beginRegion(_indent: string, description: string): string {
+    const [name, desc] = description.split(':').map((str) => str.trim())
+    const camelCaseName = name.charAt(0).toLowerCase() + name.slice(1)
+    this.currentRegion = `${camelCaseName}Cmd`
+    return `
+var ${this.currentRegion} = &cobra.Command{
+  Use:   "${name}",
+  Short: "${desc}",
+  Long: "${desc}",
+  Run: func(cmd *cobra.Command, args []string) {
+    fmt.Println("${name} called")
+  },
+}`
   }
 
-  declareParameter(indent: string, method: IMethod, param: IParameter) {
-    const mapped = this.paramMappedType(param, method)
-    return `${indent}${param.name}: ${mapped.name}`
+  endRegion(_indent: string, _description: string): string {
+    return ''
   }
 
-  declareProperty(indent: string, property: IProperty) {
-    const type = this.typeMap(property.type)
-    return `${indent}var ${property.name}: ${type.name}`
-  }
-
-  encodePathParams(indent: string, method: IMethod) {
-    let encodings = ''
-    if (method.pathParams.length > 0) {
-      for (const param of method.pathParams) {
-        encodings += `${indent}val path_${param.name} = encodeParam(${param.name})\n`
-      }
+  declareMethod(_indent: string, method: IMethod) {
+    const commandName = `${
+      method.name.charAt(0).toLowerCase() + method.name.slice(1)
+    }Cmd`
+    if (this.regionToSubCommands.has(this.currentRegion)) {
+      const subCommands = this.regionToSubCommands.get(this.currentRegion)
+      this.regionToSubCommands.set(
+        this.currentRegion,
+        `${subCommands},${commandName}`
+      )
+    } else {
+      this.regionToSubCommands.set(this.currentRegion, commandName)
     }
-    return encodings
+    return `
+var ${commandName} = &cobra.Command{
+  Use:   "${method.name}",
+  Short: "${method.summary}",
+  Long: \`${method.description}\`,
+  Run: func(cmd *cobra.Command, args []string) {
+    fmt.Println("${method.name} called")
+  },
+}`
   }
 
-  methodSignature(indent: string, method: IMethod) {
-    return this.declareMethod(indent, method)
+  declareParameter(_indent: string, _method: IMethod, _param: IParameter) {
+    return ''
   }
 
-  methodsEpilogue(_indent: string) {
-    return '\n}'
+  declareProperty(_indent: string, _property: IProperty) {
+    return ''
+  }
+
+  encodePathParams(_indent: string, _method: IMethod) {
+    return ''
+  }
+
+  methodSignature(_indent: string, _method: IMethod) {
+    return ''
+  }
+
+  methodsEpilogue(indent: string) {
+    const addCommands = Array.from(this.regionToSubCommands)
+      .map(([key, value]) => {
+        const mainCommand = key
+        const subCommands = value.split(',')
+        const subCommandsString = subCommands
+          .map((subCommand) => {
+            return `${indent}${mainCommand}.AddCommand(${subCommand})`
+          })
+          .join('\n')
+        return `\n${subCommandsString}\n${indent}rootCmd.AddCommand(${mainCommand})`
+      })
+      .join('')
+    return `
+func init() {
+${addCommands}
+}`
   }
 
   methodsPrologue(_indent: string) {
-    return ''
+    return `
+package cmd
+
+import (
+  "fmt"
+
+  "github.com/spf13/cobra"
+)`
   }
 
   modelsEpilogue(_indent: string) {
@@ -107,29 +163,19 @@ export class CliGen extends CodeGen {
     return ''
   }
 
-  summary(indent: string, text: string) {
-    return this.commentHeader(indent, text)
+  summary(_indent: string, _text: string) {
+    return ''
   }
 
-  commentHeader(indent: string, text: string | undefined, commentStr = ' * ') {
-    if (commentStr === ' ') {
-      return `${indent}/**\n\n${commentBlock(
-        text,
-        indent,
-        commentStr
-      )}\n${indent} */\n`
-    }
-    return `${indent}/**\n${commentBlock(
-      text,
-      indent,
-      commentStr
-    )}\n${indent} */\n`
+  commentHeader(
+    _indent: string,
+    _text: string | undefined,
+    _commentStr = ' * '
+  ) {
+    return ''
   }
 
-  typeSignature(indent: string, type: IType) {
-    return `
-${this.commentHeader(indent, type.description).trim()}
-${indent}data class ${type.name} (
-`.trim()
+  typeSignature(_indent: string, _type: IType) {
+    return ''
   }
 }
