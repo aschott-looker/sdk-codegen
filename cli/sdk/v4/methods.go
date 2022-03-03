@@ -1,3 +1,27 @@
+// MIT License
+//
+// Copyright (c) 2021 Looker Data Sciences, Inc.
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+//
+
+// 429 API methods
 
 package cmd
 
@@ -7,12 +31,11 @@ import (
   "github.com/spf13/cobra"
 )
 
-var alertCmd = &cobra.Command{
+var AlertCmd = &cobra.Command{
   Use:   "Alert",
   Short: "Alert",
-  Long: "Alert",
+  Long:  "Alert",
 }
-
 
 var searchAlertsCmd = &cobra.Command{
   Use:   "searchAlerts",
@@ -21,39 +44,38 @@ var searchAlertsCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("searchAlerts called")
-    
-    _limit, _ := cmd.Flags().GetInt64("limit")
-    fmt.Println("limit set to ", _limit)
 
-    _offset, _ := cmd.Flags().GetInt64("offset")
-    fmt.Println("offset set to ", _offset)
+    limit, _ := cmd.Flags().GetInt64("limit")
+    fmt.Println("limit set to", limit)
 
-    _group_by, _ := cmd.Flags().GetString("group_by")
-    fmt.Println("group_by set to ", _group_by)
+    offset, _ := cmd.Flags().GetInt64("offset")
+    fmt.Println("offset set to", offset)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    group_by, _ := cmd.Flags().GetString("group_by")
+    fmt.Println("group_by set to", group_by)
 
-    _disabled, _ := cmd.Flags().GetBool("disabled")
-    fmt.Println("disabled set to ", _disabled)
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
 
-    _frequency, _ := cmd.Flags().GetString("frequency")
-    fmt.Println("frequency set to ", _frequency)
+    disabled, _ := cmd.Flags().GetBool("disabled")
+    fmt.Println("disabled set to", disabled)
 
-    _condition_met, _ := cmd.Flags().GetBool("condition_met")
-    fmt.Println("condition_met set to ", _condition_met)
+    frequency, _ := cmd.Flags().GetString("frequency")
+    fmt.Println("frequency set to", frequency)
 
-    _last_run_start, _ := cmd.Flags().GetString("last_run_start")
-    fmt.Println("last_run_start set to ", _last_run_start)
+    condition_met, _ := cmd.Flags().GetBool("condition_met")
+    fmt.Println("condition_met set to", condition_met)
 
-    _last_run_end, _ := cmd.Flags().GetString("last_run_end")
-    fmt.Println("last_run_end set to ", _last_run_end)
+    last_run_start, _ := cmd.Flags().GetString("last_run_start")
+    fmt.Println("last_run_start set to", last_run_start)
 
-    _all_owners, _ := cmd.Flags().GetBool("all_owners")
-    fmt.Println("all_owners set to ", _all_owners)
+    last_run_end, _ := cmd.Flags().GetString("last_run_end")
+    fmt.Println("last_run_end set to", last_run_end)
+
+    all_owners, _ := cmd.Flags().GetBool("all_owners")
+    fmt.Println("all_owners set to", all_owners)
   },
 }
-
 
 var getAlertCmd = &cobra.Command{
   Use:   "getAlert",
@@ -62,12 +84,11 @@ var getAlertCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("getAlert called")
-    
-    _alert_id, _ := cmd.Flags().GetInt64("alert_id")
-    fmt.Println("alert_id set to ", _alert_id)
+
+    alert_id, _ := cmd.Flags().GetInt64("alert_id")
+    fmt.Println("alert_id set to", alert_id)
   },
 }
-
 
 var updateAlertCmd = &cobra.Command{
   Use:   "updateAlert",
@@ -78,15 +99,14 @@ var updateAlertCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("updateAlert called")
-    
-    _alert_id, _ := cmd.Flags().GetInt64("alert_id")
-    fmt.Println("alert_id set to ", _alert_id)
 
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+    alert_id, _ := cmd.Flags().GetInt64("alert_id")
+    fmt.Println("alert_id set to", alert_id)
+
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
   },
 }
-
 
 var updateAlertFieldCmd = &cobra.Command{
   Use:   "updateAlertField",
@@ -97,15 +117,14 @@ var updateAlertFieldCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("updateAlertField called")
-    
-    _alert_id, _ := cmd.Flags().GetInt64("alert_id")
-    fmt.Println("alert_id set to ", _alert_id)
 
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+    alert_id, _ := cmd.Flags().GetInt64("alert_id")
+    fmt.Println("alert_id set to", alert_id)
+
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
   },
 }
-
 
 var deleteAlertCmd = &cobra.Command{
   Use:   "deleteAlert",
@@ -114,12 +133,11 @@ var deleteAlertCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("deleteAlert called")
-    
-    _alert_id, _ := cmd.Flags().GetInt64("alert_id")
-    fmt.Println("alert_id set to ", _alert_id)
+
+    alert_id, _ := cmd.Flags().GetInt64("alert_id")
+    fmt.Println("alert_id set to", alert_id)
   },
 }
-
 
 var createAlertCmd = &cobra.Command{
   Use:   "createAlert",
@@ -162,12 +180,11 @@ Run alert on dashboard element '103' at 5am every day. Send an email to 'test@te
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("createAlert called")
-    
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
   },
 }
-
 
 var enqueueAlertCmd = &cobra.Command{
   Use:   "enqueueAlert",
@@ -176,24 +193,20 @@ var enqueueAlertCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("enqueueAlert called")
-    
-    _alert_id, _ := cmd.Flags().GetInt64("alert_id")
-    fmt.Println("alert_id set to ", _alert_id)
 
-    _force, _ := cmd.Flags().GetBool("force")
-    fmt.Println("force set to ", _force)
+    alert_id, _ := cmd.Flags().GetInt64("alert_id")
+    fmt.Println("alert_id set to", alert_id)
+
+    force, _ := cmd.Flags().GetBool("force")
+    fmt.Println("force set to", force)
   },
 }
 
-
-
-
-var apiAuthCmd = &cobra.Command{
+var ApiAuthCmd = &cobra.Command{
   Use:   "ApiAuth",
   Short: "API Authentication",
-  Long: "API Authentication",
+  Long:  "API Authentication",
 }
-
 
 var loginCmd = &cobra.Command{
   Use:   "login",
@@ -229,15 +242,14 @@ For more information and detailed examples of Looker API authorization, see [How
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("login called")
-    
-    _client_id, _ := cmd.Flags().GetString("client_id")
-    fmt.Println("client_id set to ", _client_id)
 
-    _client_secret, _ := cmd.Flags().GetString("client_secret")
-    fmt.Println("client_secret set to ", _client_secret)
+    client_id, _ := cmd.Flags().GetString("client_id")
+    fmt.Println("client_id set to", client_id)
+
+    client_secret, _ := cmd.Flags().GetString("client_secret")
+    fmt.Println("client_secret set to", client_secret)
   },
 }
-
 
 var loginUserCmd = &cobra.Command{
   Use:   "loginUser",
@@ -261,15 +273,14 @@ See 'login' for more detail on the access token and how to use it.
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("loginUser called")
-    
-    _user_id, _ := cmd.Flags().GetInt64("user_id")
-    fmt.Println("user_id set to ", _user_id)
 
-    _associative, _ := cmd.Flags().GetBool("associative")
-    fmt.Println("associative set to ", _associative)
+    user_id, _ := cmd.Flags().GetInt64("user_id")
+    fmt.Println("user_id set to", user_id)
+
+    associative, _ := cmd.Flags().GetBool("associative")
+    fmt.Println("associative set to", associative)
   },
 }
-
 
 var logoutCmd = &cobra.Command{
   Use:   "logout",
@@ -278,19 +289,15 @@ var logoutCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("logout called")
-    
+
   },
 }
 
-
-
-
-var authCmd = &cobra.Command{
+var AuthCmd = &cobra.Command{
   Use:   "Auth",
   Short: "Manage User Authentication Configuration",
-  Long: "Manage User Authentication Configuration",
+  Long:  "Manage User Authentication Configuration",
 }
-
 
 var createEmbedSecretCmd = &cobra.Command{
   Use:   "createEmbedSecret",
@@ -301,12 +308,11 @@ The value of the 'secret' field will be set by Looker and returned.
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("createEmbedSecret called")
-    
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
   },
 }
-
 
 var deleteEmbedSecretCmd = &cobra.Command{
   Use:   "deleteEmbedSecret",
@@ -315,12 +321,11 @@ var deleteEmbedSecretCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("deleteEmbedSecret called")
-    
-    _embed_secret_id, _ := cmd.Flags().GetInt64("embed_secret_id")
-    fmt.Println("embed_secret_id set to ", _embed_secret_id)
+
+    embed_secret_id, _ := cmd.Flags().GetInt64("embed_secret_id")
+    fmt.Println("embed_secret_id set to", embed_secret_id)
   },
 }
-
 
 var createSsoEmbedUrlCmd = &cobra.Command{
   Use:   "createSsoEmbedUrl",
@@ -362,12 +367,11 @@ encrypted transport.
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("createSsoEmbedUrl called")
-    
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
   },
 }
-
 
 var createEmbedUrlAsMeCmd = &cobra.Command{
   Use:   "createEmbedUrlAsMe",
@@ -400,12 +404,11 @@ encrypted transport.
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("createEmbedUrlAsMe called")
-    
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
   },
 }
-
 
 var ldapConfigCmd = &cobra.Command{
   Use:   "ldapConfig",
@@ -429,10 +432,9 @@ See the [Looker LDAP docs](https://www.looker.com/docs/r/api/ldap_setup) for add
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("ldapConfig called")
-    
+
   },
 }
-
 
 var updateLdapConfigCmd = &cobra.Command{
   Use:   "updateLdapConfig",
@@ -451,12 +453,11 @@ See the [Looker LDAP docs](https://www.looker.com/docs/r/api/ldap_setup) for add
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("updateLdapConfig called")
-    
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
   },
 }
-
 
 var testLdapConfigConnectionCmd = &cobra.Command{
   Use:   "testLdapConfigConnection",
@@ -482,12 +483,11 @@ The active LDAP settings are not modified.
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("testLdapConfigConnection called")
-    
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
   },
 }
-
 
 var testLdapConfigAuthCmd = &cobra.Command{
   Use:   "testLdapConfigAuth",
@@ -516,12 +516,11 @@ The active LDAP settings are not modified.
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("testLdapConfigAuth called")
-    
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
   },
 }
-
 
 var testLdapConfigUserInfoCmd = &cobra.Command{
   Use:   "testLdapConfigUserInfo",
@@ -539,12 +538,11 @@ The active LDAP settings are not modified.
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("testLdapConfigUserInfo called")
-    
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
   },
 }
-
 
 var testLdapConfigUserAuthCmd = &cobra.Command{
   Use:   "testLdapConfigUserAuth",
@@ -562,12 +560,11 @@ The active LDAP settings are not modified.
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("testLdapConfigUserAuth called")
-    
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
   },
 }
-
 
 var allOauthClientAppsCmd = &cobra.Command{
   Use:   "allOauthClientApps",
@@ -582,12 +579,11 @@ has permission to see.
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("allOauthClientApps called")
-    
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var oauthClientAppCmd = &cobra.Command{
   Use:   "oauthClientApp",
@@ -598,15 +594,14 @@ Returns the registered app client with matching client_guid.
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("oauthClientApp called")
-    
-    _client_guid, _ := cmd.Flags().GetString("client_guid")
-    fmt.Println("client_guid set to ", _client_guid)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    client_guid, _ := cmd.Flags().GetString("client_guid")
+    fmt.Println("client_guid set to", client_guid)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var registerOauthClientAppCmd = &cobra.Command{
   Use:   "registerOauthClientApp",
@@ -620,18 +615,17 @@ the app details registered with the Looker instance, the request is assumed to b
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("registerOauthClientApp called")
-    
-    _client_guid, _ := cmd.Flags().GetString("client_guid")
-    fmt.Println("client_guid set to ", _client_guid)
 
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+    client_guid, _ := cmd.Flags().GetString("client_guid")
+    fmt.Println("client_guid set to", client_guid)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var updateOauthClientAppCmd = &cobra.Command{
   Use:   "updateOauthClientApp",
@@ -642,18 +636,17 @@ Modifies the details a previously registered OAuth2 login client app.
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("updateOauthClientApp called")
-    
-    _client_guid, _ := cmd.Flags().GetString("client_guid")
-    fmt.Println("client_guid set to ", _client_guid)
 
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+    client_guid, _ := cmd.Flags().GetString("client_guid")
+    fmt.Println("client_guid set to", client_guid)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var deleteOauthClientAppCmd = &cobra.Command{
   Use:   "deleteOauthClientApp",
@@ -667,12 +660,11 @@ All active sessions and tokens issued for this app will immediately become inval
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("deleteOauthClientApp called")
-    
-    _client_guid, _ := cmd.Flags().GetString("client_guid")
-    fmt.Println("client_guid set to ", _client_guid)
+
+    client_guid, _ := cmd.Flags().GetString("client_guid")
+    fmt.Println("client_guid set to", client_guid)
   },
 }
-
 
 var invalidateTokensCmd = &cobra.Command{
   Use:   "invalidateTokens",
@@ -684,12 +676,11 @@ this app for ALL USERS of this app.
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("invalidateTokens called")
-    
-    _client_guid, _ := cmd.Flags().GetString("client_guid")
-    fmt.Println("client_guid set to ", _client_guid)
+
+    client_guid, _ := cmd.Flags().GetString("client_guid")
+    fmt.Println("client_guid set to", client_guid)
   },
 }
-
 
 var activateAppUserCmd = &cobra.Command{
   Use:   "activateAppUser",
@@ -704,18 +695,17 @@ Activating a user for an app that the user is already activated with returns a s
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("activateAppUser called")
-    
-    _client_guid, _ := cmd.Flags().GetString("client_guid")
-    fmt.Println("client_guid set to ", _client_guid)
 
-    _user_id, _ := cmd.Flags().GetInt64("user_id")
-    fmt.Println("user_id set to ", _user_id)
+    client_guid, _ := cmd.Flags().GetString("client_guid")
+    fmt.Println("client_guid set to", client_guid)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    user_id, _ := cmd.Flags().GetInt64("user_id")
+    fmt.Println("user_id set to", user_id)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var deactivateAppUserCmd = &cobra.Command{
   Use:   "deactivateAppUser",
@@ -733,18 +723,17 @@ resource (app or user) does not exist or has already been deactivated.
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("deactivateAppUser called")
-    
-    _client_guid, _ := cmd.Flags().GetString("client_guid")
-    fmt.Println("client_guid set to ", _client_guid)
 
-    _user_id, _ := cmd.Flags().GetInt64("user_id")
-    fmt.Println("user_id set to ", _user_id)
+    client_guid, _ := cmd.Flags().GetString("client_guid")
+    fmt.Println("client_guid set to", client_guid)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    user_id, _ := cmd.Flags().GetInt64("user_id")
+    fmt.Println("user_id set to", user_id)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var oidcConfigCmd = &cobra.Command{
   Use:   "oidcConfig",
@@ -764,10 +753,9 @@ OIDC is enabled or disabled for Looker using the **enabled** field.
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("oidcConfig called")
-    
+
   },
 }
-
 
 var updateOidcConfigCmd = &cobra.Command{
   Use:   "updateOidcConfig",
@@ -784,12 +772,11 @@ It is **highly** recommended that any OIDC setting changes be tested using the A
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("updateOidcConfig called")
-    
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
   },
 }
-
 
 var oidcTestConfigCmd = &cobra.Command{
   Use:   "oidcTestConfig",
@@ -798,12 +785,11 @@ var oidcTestConfigCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("oidcTestConfig called")
-    
-    _test_slug, _ := cmd.Flags().GetString("test_slug")
-    fmt.Println("test_slug set to ", _test_slug)
+
+    test_slug, _ := cmd.Flags().GetString("test_slug")
+    fmt.Println("test_slug set to", test_slug)
   },
 }
-
 
 var deleteOidcTestConfigCmd = &cobra.Command{
   Use:   "deleteOidcTestConfig",
@@ -812,12 +798,11 @@ var deleteOidcTestConfigCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("deleteOidcTestConfig called")
-    
-    _test_slug, _ := cmd.Flags().GetString("test_slug")
-    fmt.Println("test_slug set to ", _test_slug)
+
+    test_slug, _ := cmd.Flags().GetString("test_slug")
+    fmt.Println("test_slug set to", test_slug)
   },
 }
-
 
 var createOidcTestConfigCmd = &cobra.Command{
   Use:   "createOidcTestConfig",
@@ -826,12 +811,11 @@ var createOidcTestConfigCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("createOidcTestConfig called")
-    
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
   },
 }
-
 
 var passwordConfigCmd = &cobra.Command{
   Use:   "passwordConfig",
@@ -840,10 +824,9 @@ var passwordConfigCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("passwordConfig called")
-    
+
   },
 }
-
 
 var updatePasswordConfigCmd = &cobra.Command{
   Use:   "updatePasswordConfig",
@@ -852,12 +835,11 @@ var updatePasswordConfigCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("updatePasswordConfig called")
-    
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
   },
 }
-
 
 var forcePasswordResetAtNextLoginForAllUsersCmd = &cobra.Command{
   Use:   "forcePasswordResetAtNextLoginForAllUsers",
@@ -866,10 +848,9 @@ var forcePasswordResetAtNextLoginForAllUsersCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("forcePasswordResetAtNextLoginForAllUsers called")
-    
+
   },
 }
-
 
 var samlConfigCmd = &cobra.Command{
   Use:   "samlConfig",
@@ -889,10 +870,9 @@ SAML is enabled or disabled for Looker using the **enabled** field.
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("samlConfig called")
-    
+
   },
 }
-
 
 var updateSamlConfigCmd = &cobra.Command{
   Use:   "updateSamlConfig",
@@ -909,12 +889,11 @@ It is **highly** recommended that any SAML setting changes be tested using the A
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("updateSamlConfig called")
-    
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
   },
 }
-
 
 var samlTestConfigCmd = &cobra.Command{
   Use:   "samlTestConfig",
@@ -923,12 +902,11 @@ var samlTestConfigCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("samlTestConfig called")
-    
-    _test_slug, _ := cmd.Flags().GetString("test_slug")
-    fmt.Println("test_slug set to ", _test_slug)
+
+    test_slug, _ := cmd.Flags().GetString("test_slug")
+    fmt.Println("test_slug set to", test_slug)
   },
 }
-
 
 var deleteSamlTestConfigCmd = &cobra.Command{
   Use:   "deleteSamlTestConfig",
@@ -937,12 +915,11 @@ var deleteSamlTestConfigCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("deleteSamlTestConfig called")
-    
-    _test_slug, _ := cmd.Flags().GetString("test_slug")
-    fmt.Println("test_slug set to ", _test_slug)
+
+    test_slug, _ := cmd.Flags().GetString("test_slug")
+    fmt.Println("test_slug set to", test_slug)
   },
 }
-
 
 var createSamlTestConfigCmd = &cobra.Command{
   Use:   "createSamlTestConfig",
@@ -951,12 +928,11 @@ var createSamlTestConfigCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("createSamlTestConfig called")
-    
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
   },
 }
-
 
 var parseSamlIdpMetadataCmd = &cobra.Command{
   Use:   "parseSamlIdpMetadata",
@@ -965,12 +941,11 @@ var parseSamlIdpMetadataCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("parseSamlIdpMetadata called")
-    
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
   },
 }
-
 
 var fetchAndParseSamlIdpMetadataCmd = &cobra.Command{
   Use:   "fetchAndParseSamlIdpMetadata",
@@ -981,12 +956,11 @@ can fetch it without requiring any special authentication.
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("fetchAndParseSamlIdpMetadata called")
-    
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
   },
 }
-
 
 var sessionConfigCmd = &cobra.Command{
   Use:   "sessionConfig",
@@ -995,10 +969,9 @@ var sessionConfigCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("sessionConfig called")
-    
+
   },
 }
-
 
 var updateSessionConfigCmd = &cobra.Command{
   Use:   "updateSessionConfig",
@@ -1007,12 +980,11 @@ var updateSessionConfigCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("updateSessionConfig called")
-    
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
   },
 }
-
 
 var allUserLoginLockoutsCmd = &cobra.Command{
   Use:   "allUserLoginLockouts",
@@ -1021,12 +993,11 @@ var allUserLoginLockoutsCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("allUserLoginLockouts called")
-    
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var searchUserLoginLockoutsCmd = &cobra.Command{
   Use:   "searchUserLoginLockouts",
@@ -1035,36 +1006,35 @@ var searchUserLoginLockoutsCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("searchUserLoginLockouts called")
-    
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
 
-    _page, _ := cmd.Flags().GetInt64("page")
-    fmt.Println("page set to ", _page)
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
 
-    _per_page, _ := cmd.Flags().GetInt64("per_page")
-    fmt.Println("per_page set to ", _per_page)
+    page, _ := cmd.Flags().GetInt64("page")
+    fmt.Println("page set to", page)
 
-    _sorts, _ := cmd.Flags().GetString("sorts")
-    fmt.Println("sorts set to ", _sorts)
+    per_page, _ := cmd.Flags().GetInt64("per_page")
+    fmt.Println("per_page set to", per_page)
 
-    _auth_type, _ := cmd.Flags().GetString("auth_type")
-    fmt.Println("auth_type set to ", _auth_type)
+    sorts, _ := cmd.Flags().GetString("sorts")
+    fmt.Println("sorts set to", sorts)
 
-    _full_name, _ := cmd.Flags().GetString("full_name")
-    fmt.Println("full_name set to ", _full_name)
+    auth_type, _ := cmd.Flags().GetString("auth_type")
+    fmt.Println("auth_type set to", auth_type)
 
-    _email, _ := cmd.Flags().GetString("email")
-    fmt.Println("email set to ", _email)
+    full_name, _ := cmd.Flags().GetString("full_name")
+    fmt.Println("full_name set to", full_name)
 
-    _remote_id, _ := cmd.Flags().GetString("remote_id")
-    fmt.Println("remote_id set to ", _remote_id)
+    email, _ := cmd.Flags().GetString("email")
+    fmt.Println("email set to", email)
 
-    _filter_or, _ := cmd.Flags().GetBool("filter_or")
-    fmt.Println("filter_or set to ", _filter_or)
+    remote_id, _ := cmd.Flags().GetString("remote_id")
+    fmt.Println("remote_id set to", remote_id)
+
+    filter_or, _ := cmd.Flags().GetBool("filter_or")
+    fmt.Println("filter_or set to", filter_or)
   },
 }
-
 
 var deleteUserLoginLockoutCmd = &cobra.Command{
   Use:   "deleteUserLoginLockout",
@@ -1073,21 +1043,17 @@ var deleteUserLoginLockoutCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("deleteUserLoginLockout called")
-    
-    _key, _ := cmd.Flags().GetString("key")
-    fmt.Println("key set to ", _key)
+
+    key, _ := cmd.Flags().GetString("key")
+    fmt.Println("key set to", key)
   },
 }
 
-
-
-
-var boardCmd = &cobra.Command{
+var BoardCmd = &cobra.Command{
   Use:   "Board",
   Short: "Manage Boards",
-  Long: "Manage Boards",
+  Long:  "Manage Boards",
 }
-
 
 var allBoardsCmd = &cobra.Command{
   Use:   "allBoards",
@@ -1096,12 +1062,11 @@ var allBoardsCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("allBoards called")
-    
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var createBoardCmd = &cobra.Command{
   Use:   "createBoard",
@@ -1110,15 +1075,14 @@ var createBoardCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("createBoard called")
-    
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var searchBoardsCmd = &cobra.Command{
   Use:   "searchBoards",
@@ -1149,65 +1113,63 @@ Boolean search params accept only "true" and "false" as values.
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("searchBoards called")
-    
-    _title, _ := cmd.Flags().GetString("title")
-    fmt.Println("title set to ", _title)
 
-    _created_at, _ := cmd.Flags().GetString("created_at")
-    fmt.Println("created_at set to ", _created_at)
+    title, _ := cmd.Flags().GetString("title")
+    fmt.Println("title set to", title)
 
-    _first_name, _ := cmd.Flags().GetString("first_name")
-    fmt.Println("first_name set to ", _first_name)
+    created_at, _ := cmd.Flags().GetString("created_at")
+    fmt.Println("created_at set to", created_at)
 
-    _last_name, _ := cmd.Flags().GetString("last_name")
-    fmt.Println("last_name set to ", _last_name)
+    first_name, _ := cmd.Flags().GetString("first_name")
+    fmt.Println("first_name set to", first_name)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    last_name, _ := cmd.Flags().GetString("last_name")
+    fmt.Println("last_name set to", last_name)
 
-    _favorited, _ := cmd.Flags().GetBool("favorited")
-    fmt.Println("favorited set to ", _favorited)
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
 
-    _creator_id, _ := cmd.Flags().GetString("creator_id")
-    fmt.Println("creator_id set to ", _creator_id)
+    favorited, _ := cmd.Flags().GetBool("favorited")
+    fmt.Println("favorited set to", favorited)
 
-    _sorts, _ := cmd.Flags().GetString("sorts")
-    fmt.Println("sorts set to ", _sorts)
+    creator_id, _ := cmd.Flags().GetString("creator_id")
+    fmt.Println("creator_id set to", creator_id)
 
-    _page, _ := cmd.Flags().GetInt64("page")
-    fmt.Println("page set to ", _page)
+    sorts, _ := cmd.Flags().GetString("sorts")
+    fmt.Println("sorts set to", sorts)
 
-    _per_page, _ := cmd.Flags().GetInt64("per_page")
-    fmt.Println("per_page set to ", _per_page)
+    page, _ := cmd.Flags().GetInt64("page")
+    fmt.Println("page set to", page)
 
-    _offset, _ := cmd.Flags().GetInt64("offset")
-    fmt.Println("offset set to ", _offset)
+    per_page, _ := cmd.Flags().GetInt64("per_page")
+    fmt.Println("per_page set to", per_page)
 
-    _limit, _ := cmd.Flags().GetInt64("limit")
-    fmt.Println("limit set to ", _limit)
+    offset, _ := cmd.Flags().GetInt64("offset")
+    fmt.Println("offset set to", offset)
 
-    _filter_or, _ := cmd.Flags().GetBool("filter_or")
-    fmt.Println("filter_or set to ", _filter_or)
+    limit, _ := cmd.Flags().GetInt64("limit")
+    fmt.Println("limit set to", limit)
+
+    filter_or, _ := cmd.Flags().GetBool("filter_or")
+    fmt.Println("filter_or set to", filter_or)
   },
 }
 
-
-var boardCmd2938 = &cobra.Command{
+var boardCmd = &cobra.Command{
   Use:   "board",
   Short: "Get Board",
   Long: `### Get information about a board.
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("board called")
-    
-    _board_id, _ := cmd.Flags().GetInt64("board_id")
-    fmt.Println("board_id set to ", _board_id)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    board_id, _ := cmd.Flags().GetInt64("board_id")
+    fmt.Println("board_id set to", board_id)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var updateBoardCmd = &cobra.Command{
   Use:   "updateBoard",
@@ -1216,18 +1178,17 @@ var updateBoardCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("updateBoard called")
-    
-    _board_id, _ := cmd.Flags().GetInt64("board_id")
-    fmt.Println("board_id set to ", _board_id)
 
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+    board_id, _ := cmd.Flags().GetInt64("board_id")
+    fmt.Println("board_id set to", board_id)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var deleteBoardCmd = &cobra.Command{
   Use:   "deleteBoard",
@@ -1236,12 +1197,11 @@ var deleteBoardCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("deleteBoard called")
-    
-    _board_id, _ := cmd.Flags().GetInt64("board_id")
-    fmt.Println("board_id set to ", _board_id)
+
+    board_id, _ := cmd.Flags().GetInt64("board_id")
+    fmt.Println("board_id set to", board_id)
   },
 }
-
 
 var allBoardItemsCmd = &cobra.Command{
   Use:   "allBoardItems",
@@ -1250,18 +1210,17 @@ var allBoardItemsCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("allBoardItems called")
-    
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
 
-    _sorts, _ := cmd.Flags().GetString("sorts")
-    fmt.Println("sorts set to ", _sorts)
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
 
-    _board_section_id, _ := cmd.Flags().GetString("board_section_id")
-    fmt.Println("board_section_id set to ", _board_section_id)
+    sorts, _ := cmd.Flags().GetString("sorts")
+    fmt.Println("sorts set to", sorts)
+
+    board_section_id, _ := cmd.Flags().GetString("board_section_id")
+    fmt.Println("board_section_id set to", board_section_id)
   },
 }
-
 
 var createBoardItemCmd = &cobra.Command{
   Use:   "createBoardItem",
@@ -1270,15 +1229,14 @@ var createBoardItemCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("createBoardItem called")
-    
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var boardItemCmd = &cobra.Command{
   Use:   "boardItem",
@@ -1287,15 +1245,14 @@ var boardItemCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("boardItem called")
-    
-    _board_item_id, _ := cmd.Flags().GetInt64("board_item_id")
-    fmt.Println("board_item_id set to ", _board_item_id)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    board_item_id, _ := cmd.Flags().GetInt64("board_item_id")
+    fmt.Println("board_item_id set to", board_item_id)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var updateBoardItemCmd = &cobra.Command{
   Use:   "updateBoardItem",
@@ -1304,18 +1261,17 @@ var updateBoardItemCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("updateBoardItem called")
-    
-    _board_item_id, _ := cmd.Flags().GetInt64("board_item_id")
-    fmt.Println("board_item_id set to ", _board_item_id)
 
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+    board_item_id, _ := cmd.Flags().GetInt64("board_item_id")
+    fmt.Println("board_item_id set to", board_item_id)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var deleteBoardItemCmd = &cobra.Command{
   Use:   "deleteBoardItem",
@@ -1324,12 +1280,11 @@ var deleteBoardItemCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("deleteBoardItem called")
-    
-    _board_item_id, _ := cmd.Flags().GetInt64("board_item_id")
-    fmt.Println("board_item_id set to ", _board_item_id)
+
+    board_item_id, _ := cmd.Flags().GetInt64("board_item_id")
+    fmt.Println("board_item_id set to", board_item_id)
   },
 }
-
 
 var allBoardSectionsCmd = &cobra.Command{
   Use:   "allBoardSections",
@@ -1338,15 +1293,14 @@ var allBoardSectionsCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("allBoardSections called")
-    
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
 
-    _sorts, _ := cmd.Flags().GetString("sorts")
-    fmt.Println("sorts set to ", _sorts)
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
+
+    sorts, _ := cmd.Flags().GetString("sorts")
+    fmt.Println("sorts set to", sorts)
   },
 }
-
 
 var createBoardSectionCmd = &cobra.Command{
   Use:   "createBoardSection",
@@ -1355,15 +1309,14 @@ var createBoardSectionCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("createBoardSection called")
-    
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var boardSectionCmd = &cobra.Command{
   Use:   "boardSection",
@@ -1372,15 +1325,14 @@ var boardSectionCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("boardSection called")
-    
-    _board_section_id, _ := cmd.Flags().GetInt64("board_section_id")
-    fmt.Println("board_section_id set to ", _board_section_id)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    board_section_id, _ := cmd.Flags().GetInt64("board_section_id")
+    fmt.Println("board_section_id set to", board_section_id)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var updateBoardSectionCmd = &cobra.Command{
   Use:   "updateBoardSection",
@@ -1389,18 +1341,17 @@ var updateBoardSectionCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("updateBoardSection called")
-    
-    _board_section_id, _ := cmd.Flags().GetInt64("board_section_id")
-    fmt.Println("board_section_id set to ", _board_section_id)
 
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+    board_section_id, _ := cmd.Flags().GetInt64("board_section_id")
+    fmt.Println("board_section_id set to", board_section_id)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var deleteBoardSectionCmd = &cobra.Command{
   Use:   "deleteBoardSection",
@@ -1409,21 +1360,17 @@ var deleteBoardSectionCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("deleteBoardSection called")
-    
-    _board_section_id, _ := cmd.Flags().GetInt64("board_section_id")
-    fmt.Println("board_section_id set to ", _board_section_id)
+
+    board_section_id, _ := cmd.Flags().GetInt64("board_section_id")
+    fmt.Println("board_section_id set to", board_section_id)
   },
 }
 
-
-
-
-var colorCollectionCmd = &cobra.Command{
+var ColorCollectionCmd = &cobra.Command{
   Use:   "ColorCollection",
   Short: "Manage Color Collections",
-  Long: "Manage Color Collections",
+  Long:  "Manage Color Collections",
 }
-
 
 var allColorCollectionsCmd = &cobra.Command{
   Use:   "allColorCollections",
@@ -1440,12 +1387,11 @@ Get all **custom** color collections with [ColorCollection](#!/ColorCollection/c
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("allColorCollections called")
-    
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var createColorCollectionCmd = &cobra.Command{
   Use:   "createColorCollection",
@@ -1463,12 +1409,11 @@ Creates a new custom color collection object, returning the details, including t
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("createColorCollection called")
-    
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
   },
 }
-
 
 var colorCollectionsCustomCmd = &cobra.Command{
   Use:   "colorCollectionsCustom",
@@ -1483,12 +1428,11 @@ Get all **standard** color collections with [ColorCollection](#!/ColorCollection
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("colorCollectionsCustom called")
-    
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var colorCollectionsStandardCmd = &cobra.Command{
   Use:   "colorCollectionsStandard",
@@ -1503,12 +1447,11 @@ Get all **custom** color collections with [ColorCollection](#!/ColorCollection/c
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("colorCollectionsStandard called")
-    
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var defaultColorCollectionCmd = &cobra.Command{
   Use:   "defaultColorCollection",
@@ -1521,10 +1464,9 @@ Set the default color collection with [ColorCollection](#!/ColorCollection/set_d
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("defaultColorCollection called")
-    
+
   },
 }
-
 
 var setDefaultColorCollectionCmd = &cobra.Command{
   Use:   "setDefaultColorCollection",
@@ -1537,14 +1479,13 @@ Returns the new specified default Color Collection object.
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("setDefaultColorCollection called")
-    
-    _collection_id, _ := cmd.Flags().GetString("collection_id")
-    fmt.Println("collection_id set to ", _collection_id)
+
+    collection_id, _ := cmd.Flags().GetString("collection_id")
+    fmt.Println("collection_id set to", collection_id)
   },
 }
 
-
-var colorCollectionCmd1675 = &cobra.Command{
+var colorCollectionCmd = &cobra.Command{
   Use:   "colorCollection",
   Short: "Get Color Collection by ID",
   Long: `### Get a Color Collection by ID
@@ -1561,15 +1502,14 @@ Get all **custom** color collections with [ColorCollection](#!/ColorCollection/c
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("colorCollection called")
-    
-    _collection_id, _ := cmd.Flags().GetString("collection_id")
-    fmt.Println("collection_id set to ", _collection_id)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    collection_id, _ := cmd.Flags().GetString("collection_id")
+    fmt.Println("collection_id set to", collection_id)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var updateColorCollectionCmd = &cobra.Command{
   Use:   "updateColorCollection",
@@ -1580,15 +1520,14 @@ var updateColorCollectionCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("updateColorCollection called")
-    
-    _collection_id, _ := cmd.Flags().GetString("collection_id")
-    fmt.Println("collection_id set to ", _collection_id)
 
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+    collection_id, _ := cmd.Flags().GetString("collection_id")
+    fmt.Println("collection_id set to", collection_id)
+
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
   },
 }
-
 
 var deleteColorCollectionCmd = &cobra.Command{
   Use:   "deleteColorCollection",
@@ -1605,21 +1544,17 @@ Because multiple color collections can have the same label, they must be deleted
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("deleteColorCollection called")
-    
-    _collection_id, _ := cmd.Flags().GetString("collection_id")
-    fmt.Println("collection_id set to ", _collection_id)
+
+    collection_id, _ := cmd.Flags().GetString("collection_id")
+    fmt.Println("collection_id set to", collection_id)
   },
 }
 
-
-
-
-var commandCmd = &cobra.Command{
+var CommandCmd = &cobra.Command{
   Use:   "Command",
   Short: "Manage Commands",
-  Long: "Manage Commands",
+  Long:  "Manage Commands",
 }
-
 
 var getAllCommandsCmd = &cobra.Command{
   Use:   "getAllCommands",
@@ -1628,18 +1563,17 @@ var getAllCommandsCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("getAllCommands called")
-    
-    _content_id, _ := cmd.Flags().GetString("content_id")
-    fmt.Println("content_id set to ", _content_id)
 
-    _content_type, _ := cmd.Flags().GetString("content_type")
-    fmt.Println("content_type set to ", _content_type)
+    content_id, _ := cmd.Flags().GetString("content_id")
+    fmt.Println("content_id set to", content_id)
 
-    _limit, _ := cmd.Flags().GetInt64("limit")
-    fmt.Println("limit set to ", _limit)
+    content_type, _ := cmd.Flags().GetString("content_type")
+    fmt.Println("content_type set to", content_type)
+
+    limit, _ := cmd.Flags().GetInt64("limit")
+    fmt.Println("limit set to", limit)
   },
 }
-
 
 var createCommandCmd = &cobra.Command{
   Use:   "createCommand",
@@ -1651,12 +1585,11 @@ var createCommandCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("createCommand called")
-    
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
   },
 }
-
 
 var updateCommandCmd = &cobra.Command{
   Use:   "updateCommand",
@@ -1667,15 +1600,14 @@ var updateCommandCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("updateCommand called")
-    
-    _command_id, _ := cmd.Flags().GetInt64("command_id")
-    fmt.Println("command_id set to ", _command_id)
 
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+    command_id, _ := cmd.Flags().GetInt64("command_id")
+    fmt.Println("command_id set to", command_id)
+
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
   },
 }
-
 
 var deleteCommandCmd = &cobra.Command{
   Use:   "deleteCommand",
@@ -1684,21 +1616,17 @@ var deleteCommandCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("deleteCommand called")
-    
-    _command_id, _ := cmd.Flags().GetInt64("command_id")
-    fmt.Println("command_id set to ", _command_id)
+
+    command_id, _ := cmd.Flags().GetInt64("command_id")
+    fmt.Println("command_id set to", command_id)
   },
 }
 
-
-
-
-var configCmd = &cobra.Command{
+var ConfigCmd = &cobra.Command{
   Use:   "Config",
   Short: "Manage General Configuration",
-  Long: "Manage General Configuration",
+  Long:  "Manage General Configuration",
 }
-
 
 var cloudStorageConfigurationCmd = &cobra.Command{
   Use:   "cloudStorageConfiguration",
@@ -1707,10 +1635,9 @@ var cloudStorageConfigurationCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("cloudStorageConfiguration called")
-    
+
   },
 }
-
 
 var updateCloudStorageConfigurationCmd = &cobra.Command{
   Use:   "updateCloudStorageConfiguration",
@@ -1719,12 +1646,11 @@ var updateCloudStorageConfigurationCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("updateCloudStorageConfiguration called")
-    
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
   },
 }
-
 
 var customWelcomeEmailCmd = &cobra.Command{
   Use:   "customWelcomeEmail",
@@ -1733,10 +1659,9 @@ var customWelcomeEmailCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("customWelcomeEmail called")
-    
+
   },
 }
-
 
 var updateCustomWelcomeEmailCmd = &cobra.Command{
   Use:   "updateCustomWelcomeEmail",
@@ -1745,15 +1670,14 @@ var updateCustomWelcomeEmailCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("updateCustomWelcomeEmail called")
-    
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
 
-    _send_test_welcome_email, _ := cmd.Flags().GetBool("send_test_welcome_email")
-    fmt.Println("send_test_welcome_email set to ", _send_test_welcome_email)
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
+
+    send_test_welcome_email, _ := cmd.Flags().GetBool("send_test_welcome_email")
+    fmt.Println("send_test_welcome_email set to", send_test_welcome_email)
   },
 }
-
 
 var updateCustomWelcomeEmailTestCmd = &cobra.Command{
   Use:   "updateCustomWelcomeEmailTest",
@@ -1762,12 +1686,11 @@ var updateCustomWelcomeEmailTestCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("updateCustomWelcomeEmailTest called")
-    
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
   },
 }
-
 
 var digestEmailsEnabledCmd = &cobra.Command{
   Use:   "digestEmailsEnabled",
@@ -1776,10 +1699,9 @@ var digestEmailsEnabledCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("digestEmailsEnabled called")
-    
+
   },
 }
-
 
 var updateDigestEmailsEnabledCmd = &cobra.Command{
   Use:   "updateDigestEmailsEnabled",
@@ -1788,12 +1710,11 @@ var updateDigestEmailsEnabledCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("updateDigestEmailsEnabled called")
-    
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
   },
 }
-
 
 var createDigestEmailSendCmd = &cobra.Command{
   Use:   "createDigestEmailSend",
@@ -1803,10 +1724,9 @@ any actual emails, it generates records containing content which may be of inter
 Emails will be sent at a later time from Looker's internal system if the Digest Emails feature is enabled in settings.`,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("createDigestEmailSend called")
-    
+
   },
 }
-
 
 var internalHelpResourcesContentCmd = &cobra.Command{
   Use:   "internalHelpResourcesContent",
@@ -1815,10 +1735,9 @@ var internalHelpResourcesContentCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("internalHelpResourcesContent called")
-    
+
   },
 }
-
 
 var updateInternalHelpResourcesContentCmd = &cobra.Command{
   Use:   "updateInternalHelpResourcesContent",
@@ -1827,12 +1746,11 @@ var updateInternalHelpResourcesContentCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("updateInternalHelpResourcesContent called")
-    
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
   },
 }
-
 
 var internalHelpResourcesCmd = &cobra.Command{
   Use:   "internalHelpResources",
@@ -1841,10 +1759,9 @@ var internalHelpResourcesCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("internalHelpResources called")
-    
+
   },
 }
-
 
 var updateInternalHelpResourcesCmd = &cobra.Command{
   Use:   "updateInternalHelpResources",
@@ -1853,12 +1770,11 @@ var updateInternalHelpResourcesCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("updateInternalHelpResources called")
-    
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
   },
 }
-
 
 var allLegacyFeaturesCmd = &cobra.Command{
   Use:   "allLegacyFeatures",
@@ -1867,10 +1783,9 @@ var allLegacyFeaturesCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("allLegacyFeatures called")
-    
+
   },
 }
-
 
 var legacyFeatureCmd = &cobra.Command{
   Use:   "legacyFeature",
@@ -1879,12 +1794,11 @@ var legacyFeatureCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("legacyFeature called")
-    
-    _legacy_feature_id, _ := cmd.Flags().GetString("legacy_feature_id")
-    fmt.Println("legacy_feature_id set to ", _legacy_feature_id)
+
+    legacy_feature_id, _ := cmd.Flags().GetString("legacy_feature_id")
+    fmt.Println("legacy_feature_id set to", legacy_feature_id)
   },
 }
-
 
 var updateLegacyFeatureCmd = &cobra.Command{
   Use:   "updateLegacyFeature",
@@ -1893,15 +1807,14 @@ var updateLegacyFeatureCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("updateLegacyFeature called")
-    
-    _legacy_feature_id, _ := cmd.Flags().GetString("legacy_feature_id")
-    fmt.Println("legacy_feature_id set to ", _legacy_feature_id)
 
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+    legacy_feature_id, _ := cmd.Flags().GetString("legacy_feature_id")
+    fmt.Println("legacy_feature_id set to", legacy_feature_id)
+
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
   },
 }
-
 
 var allLocalesCmd = &cobra.Command{
   Use:   "allLocales",
@@ -1910,10 +1823,9 @@ var allLocalesCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("allLocales called")
-    
+
   },
 }
-
 
 var mobileSettingsCmd = &cobra.Command{
   Use:   "mobileSettings",
@@ -1922,10 +1834,9 @@ var mobileSettingsCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("mobileSettings called")
-    
+
   },
 }
-
 
 var getSettingCmd = &cobra.Command{
   Use:   "getSetting",
@@ -1942,12 +1853,11 @@ Available settings are:
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("getSetting called")
-    
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var setSettingCmd = &cobra.Command{
   Use:   "setSetting",
@@ -1965,15 +1875,14 @@ See the 'Setting' type for more information on the specific values that can be c
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("setSetting called")
-    
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var allTimezonesCmd = &cobra.Command{
   Use:   "allTimezones",
@@ -1982,10 +1891,9 @@ var allTimezonesCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("allTimezones called")
-    
+
   },
 }
-
 
 var versionsCmd = &cobra.Command{
   Use:   "versions",
@@ -1994,12 +1902,11 @@ var versionsCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("versions called")
-    
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var apiSpecCmd = &cobra.Command{
   Use:   "apiSpec",
@@ -2010,15 +1917,14 @@ The specification is returned as a JSON document in Swagger 2.x format
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("apiSpec called")
-    
-    _api_version, _ := cmd.Flags().GetString("api_version")
-    fmt.Println("api_version set to ", _api_version)
 
-    _specification, _ := cmd.Flags().GetString("specification")
-    fmt.Println("specification set to ", _specification)
+    api_version, _ := cmd.Flags().GetString("api_version")
+    fmt.Println("api_version set to", api_version)
+
+    specification, _ := cmd.Flags().GetString("specification")
+    fmt.Println("specification set to", specification)
   },
 }
-
 
 var whitelabelConfigurationCmd = &cobra.Command{
   Use:   "whitelabelConfiguration",
@@ -2028,12 +1934,11 @@ var whitelabelConfigurationCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("whitelabelConfiguration called")
-    
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var updateWhitelabelConfigurationCmd = &cobra.Command{
   Use:   "updateWhitelabelConfiguration",
@@ -2042,21 +1947,17 @@ var updateWhitelabelConfigurationCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("updateWhitelabelConfiguration called")
-    
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
   },
 }
 
-
-
-
-var connectionCmd = &cobra.Command{
+var ConnectionCmd = &cobra.Command{
   Use:   "Connection",
   Short: "Manage Database Connections",
-  Long: "Manage Database Connections",
+  Long:  "Manage Database Connections",
 }
-
 
 var allConnectionsCmd = &cobra.Command{
   Use:   "allConnections",
@@ -2065,12 +1966,11 @@ var allConnectionsCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("allConnections called")
-    
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var createConnectionCmd = &cobra.Command{
   Use:   "createConnection",
@@ -2079,29 +1979,27 @@ var createConnectionCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("createConnection called")
-    
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
   },
 }
 
-
-var connectionCmd6206 = &cobra.Command{
+var connectionCmd = &cobra.Command{
   Use:   "connection",
   Short: "Get Connection",
   Long: `### Get information about a connection.
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("connection called")
-    
-    _connection_name, _ := cmd.Flags().GetString("connection_name")
-    fmt.Println("connection_name set to ", _connection_name)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    connection_name, _ := cmd.Flags().GetString("connection_name")
+    fmt.Println("connection_name set to", connection_name)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var updateConnectionCmd = &cobra.Command{
   Use:   "updateConnection",
@@ -2110,15 +2008,14 @@ var updateConnectionCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("updateConnection called")
-    
-    _connection_name, _ := cmd.Flags().GetString("connection_name")
-    fmt.Println("connection_name set to ", _connection_name)
 
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+    connection_name, _ := cmd.Flags().GetString("connection_name")
+    fmt.Println("connection_name set to", connection_name)
+
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
   },
 }
-
 
 var deleteConnectionCmd = &cobra.Command{
   Use:   "deleteConnection",
@@ -2127,12 +2024,11 @@ var deleteConnectionCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("deleteConnection called")
-    
-    _connection_name, _ := cmd.Flags().GetString("connection_name")
-    fmt.Println("connection_name set to ", _connection_name)
+
+    connection_name, _ := cmd.Flags().GetString("connection_name")
+    fmt.Println("connection_name set to", connection_name)
   },
 }
-
 
 var deleteConnectionOverrideCmd = &cobra.Command{
   Use:   "deleteConnectionOverride",
@@ -2141,15 +2037,14 @@ var deleteConnectionOverrideCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("deleteConnectionOverride called")
-    
-    _connection_name, _ := cmd.Flags().GetString("connection_name")
-    fmt.Println("connection_name set to ", _connection_name)
 
-    _override_context, _ := cmd.Flags().GetString("override_context")
-    fmt.Println("override_context set to ", _override_context)
+    connection_name, _ := cmd.Flags().GetString("connection_name")
+    fmt.Println("connection_name set to", connection_name)
+
+    override_context, _ := cmd.Flags().GetString("override_context")
+    fmt.Println("override_context set to", override_context)
   },
 }
-
 
 var testConnectionCmd = &cobra.Command{
   Use:   "testConnection",
@@ -2165,15 +2060,14 @@ Unsupported tests in the request will be ignored.
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("testConnection called")
-    
-    _connection_name, _ := cmd.Flags().GetString("connection_name")
-    fmt.Println("connection_name set to ", _connection_name)
 
-    _tests, _ := cmd.Flags().GetString("tests")
-    fmt.Println("tests set to ", _tests)
+    connection_name, _ := cmd.Flags().GetString("connection_name")
+    fmt.Println("connection_name set to", connection_name)
+
+    tests, _ := cmd.Flags().GetString("tests")
+    fmt.Println("tests set to", tests)
   },
 }
-
 
 var testConnectionConfigCmd = &cobra.Command{
   Use:   "testConnectionConfig",
@@ -2189,15 +2083,14 @@ Unsupported tests in the request will be ignored.
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("testConnectionConfig called")
-    
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
 
-    _tests, _ := cmd.Flags().GetString("tests")
-    fmt.Println("tests set to ", _tests)
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
+
+    tests, _ := cmd.Flags().GetString("tests")
+    fmt.Println("tests set to", tests)
   },
 }
-
 
 var allDialectInfosCmd = &cobra.Command{
   Use:   "allDialectInfos",
@@ -2206,12 +2099,11 @@ var allDialectInfosCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("allDialectInfos called")
-    
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var allExternalOauthApplicationsCmd = &cobra.Command{
   Use:   "allExternalOauthApplications",
@@ -2222,15 +2114,14 @@ This is an OAuth Application which Looker uses to access external systems.
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("allExternalOauthApplications called")
-    
-    _name, _ := cmd.Flags().GetString("name")
-    fmt.Println("name set to ", _name)
 
-    _client_id, _ := cmd.Flags().GetString("client_id")
-    fmt.Println("client_id set to ", _client_id)
+    name, _ := cmd.Flags().GetString("name")
+    fmt.Println("name set to", name)
+
+    client_id, _ := cmd.Flags().GetString("client_id")
+    fmt.Println("client_id set to", client_id)
   },
 }
-
 
 var createExternalOauthApplicationCmd = &cobra.Command{
   Use:   "createExternalOauthApplication",
@@ -2241,12 +2132,11 @@ This is an OAuth Application which Looker uses to access external systems.
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("createExternalOauthApplication called")
-    
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
   },
 }
-
 
 var createOauthApplicationUserStateCmd = &cobra.Command{
   Use:   "createOauthApplicationUserState",
@@ -2255,12 +2145,11 @@ var createOauthApplicationUserStateCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("createOauthApplicationUserState called")
-    
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
   },
 }
-
 
 var allSshServersCmd = &cobra.Command{
   Use:   "allSshServers",
@@ -2269,12 +2158,11 @@ var allSshServersCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("allSshServers called")
-    
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var createSshServerCmd = &cobra.Command{
   Use:   "createSshServer",
@@ -2283,12 +2171,11 @@ var createSshServerCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("createSshServer called")
-    
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
   },
 }
-
 
 var sshServerCmd = &cobra.Command{
   Use:   "sshServer",
@@ -2297,12 +2184,11 @@ var sshServerCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("sshServer called")
-    
-    _ssh_server_id, _ := cmd.Flags().GetString("ssh_server_id")
-    fmt.Println("ssh_server_id set to ", _ssh_server_id)
+
+    ssh_server_id, _ := cmd.Flags().GetString("ssh_server_id")
+    fmt.Println("ssh_server_id set to", ssh_server_id)
   },
 }
-
 
 var updateSshServerCmd = &cobra.Command{
   Use:   "updateSshServer",
@@ -2311,15 +2197,14 @@ var updateSshServerCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("updateSshServer called")
-    
-    _ssh_server_id, _ := cmd.Flags().GetString("ssh_server_id")
-    fmt.Println("ssh_server_id set to ", _ssh_server_id)
 
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+    ssh_server_id, _ := cmd.Flags().GetString("ssh_server_id")
+    fmt.Println("ssh_server_id set to", ssh_server_id)
+
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
   },
 }
-
 
 var deleteSshServerCmd = &cobra.Command{
   Use:   "deleteSshServer",
@@ -2328,12 +2213,11 @@ var deleteSshServerCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("deleteSshServer called")
-    
-    _ssh_server_id, _ := cmd.Flags().GetString("ssh_server_id")
-    fmt.Println("ssh_server_id set to ", _ssh_server_id)
+
+    ssh_server_id, _ := cmd.Flags().GetString("ssh_server_id")
+    fmt.Println("ssh_server_id set to", ssh_server_id)
   },
 }
-
 
 var testSshServerCmd = &cobra.Command{
   Use:   "testSshServer",
@@ -2342,12 +2226,11 @@ var testSshServerCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("testSshServer called")
-    
-    _ssh_server_id, _ := cmd.Flags().GetString("ssh_server_id")
-    fmt.Println("ssh_server_id set to ", _ssh_server_id)
+
+    ssh_server_id, _ := cmd.Flags().GetString("ssh_server_id")
+    fmt.Println("ssh_server_id set to", ssh_server_id)
   },
 }
-
 
 var allSshTunnelsCmd = &cobra.Command{
   Use:   "allSshTunnels",
@@ -2356,12 +2239,11 @@ var allSshTunnelsCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("allSshTunnels called")
-    
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var createSshTunnelCmd = &cobra.Command{
   Use:   "createSshTunnel",
@@ -2370,12 +2252,11 @@ var createSshTunnelCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("createSshTunnel called")
-    
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
   },
 }
-
 
 var sshTunnelCmd = &cobra.Command{
   Use:   "sshTunnel",
@@ -2384,12 +2265,11 @@ var sshTunnelCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("sshTunnel called")
-    
-    _ssh_tunnel_id, _ := cmd.Flags().GetString("ssh_tunnel_id")
-    fmt.Println("ssh_tunnel_id set to ", _ssh_tunnel_id)
+
+    ssh_tunnel_id, _ := cmd.Flags().GetString("ssh_tunnel_id")
+    fmt.Println("ssh_tunnel_id set to", ssh_tunnel_id)
   },
 }
-
 
 var updateSshTunnelCmd = &cobra.Command{
   Use:   "updateSshTunnel",
@@ -2398,15 +2278,14 @@ var updateSshTunnelCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("updateSshTunnel called")
-    
-    _ssh_tunnel_id, _ := cmd.Flags().GetString("ssh_tunnel_id")
-    fmt.Println("ssh_tunnel_id set to ", _ssh_tunnel_id)
 
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+    ssh_tunnel_id, _ := cmd.Flags().GetString("ssh_tunnel_id")
+    fmt.Println("ssh_tunnel_id set to", ssh_tunnel_id)
+
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
   },
 }
-
 
 var deleteSshTunnelCmd = &cobra.Command{
   Use:   "deleteSshTunnel",
@@ -2415,12 +2294,11 @@ var deleteSshTunnelCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("deleteSshTunnel called")
-    
-    _ssh_tunnel_id, _ := cmd.Flags().GetString("ssh_tunnel_id")
-    fmt.Println("ssh_tunnel_id set to ", _ssh_tunnel_id)
+
+    ssh_tunnel_id, _ := cmd.Flags().GetString("ssh_tunnel_id")
+    fmt.Println("ssh_tunnel_id set to", ssh_tunnel_id)
   },
 }
-
 
 var testSshTunnelCmd = &cobra.Command{
   Use:   "testSshTunnel",
@@ -2429,12 +2307,11 @@ var testSshTunnelCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("testSshTunnel called")
-    
-    _ssh_tunnel_id, _ := cmd.Flags().GetString("ssh_tunnel_id")
-    fmt.Println("ssh_tunnel_id set to ", _ssh_tunnel_id)
+
+    ssh_tunnel_id, _ := cmd.Flags().GetString("ssh_tunnel_id")
+    fmt.Println("ssh_tunnel_id set to", ssh_tunnel_id)
   },
 }
-
 
 var sshPublicKeyCmd = &cobra.Command{
   Use:   "sshPublicKey",
@@ -2445,19 +2322,15 @@ Get the public key created for this instance to identify itself to a remote SSH 
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("sshPublicKey called")
-    
+
   },
 }
 
-
-
-
-var contentCmd = &cobra.Command{
+var ContentCmd = &cobra.Command{
   Use:   "Content",
   Short: "Manage Content",
-  Long: "Manage Content",
+  Long:  "Manage Content",
 }
-
 
 var searchContentFavoritesCmd = &cobra.Command{
   Use:   "searchContentFavorites",
@@ -2488,84 +2361,80 @@ Boolean search params accept only "true" and "false" as values.
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("searchContentFavorites called")
-    
-    _id, _ := cmd.Flags().GetInt64("id")
-    fmt.Println("id set to ", _id)
 
-    _user_id, _ := cmd.Flags().GetString("user_id")
-    fmt.Println("user_id set to ", _user_id)
+    id, _ := cmd.Flags().GetInt64("id")
+    fmt.Println("id set to", id)
 
-    _content_metadata_id, _ := cmd.Flags().GetString("content_metadata_id")
-    fmt.Println("content_metadata_id set to ", _content_metadata_id)
+    user_id, _ := cmd.Flags().GetString("user_id")
+    fmt.Println("user_id set to", user_id)
 
-    _dashboard_id, _ := cmd.Flags().GetString("dashboard_id")
-    fmt.Println("dashboard_id set to ", _dashboard_id)
+    content_metadata_id, _ := cmd.Flags().GetString("content_metadata_id")
+    fmt.Println("content_metadata_id set to", content_metadata_id)
 
-    _look_id, _ := cmd.Flags().GetString("look_id")
-    fmt.Println("look_id set to ", _look_id)
+    dashboard_id, _ := cmd.Flags().GetString("dashboard_id")
+    fmt.Println("dashboard_id set to", dashboard_id)
 
-    _board_id, _ := cmd.Flags().GetString("board_id")
-    fmt.Println("board_id set to ", _board_id)
+    look_id, _ := cmd.Flags().GetString("look_id")
+    fmt.Println("look_id set to", look_id)
 
-    _limit, _ := cmd.Flags().GetInt64("limit")
-    fmt.Println("limit set to ", _limit)
+    board_id, _ := cmd.Flags().GetString("board_id")
+    fmt.Println("board_id set to", board_id)
 
-    _offset, _ := cmd.Flags().GetInt64("offset")
-    fmt.Println("offset set to ", _offset)
+    limit, _ := cmd.Flags().GetInt64("limit")
+    fmt.Println("limit set to", limit)
 
-    _sorts, _ := cmd.Flags().GetString("sorts")
-    fmt.Println("sorts set to ", _sorts)
+    offset, _ := cmd.Flags().GetInt64("offset")
+    fmt.Println("offset set to", offset)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    sorts, _ := cmd.Flags().GetString("sorts")
+    fmt.Println("sorts set to", sorts)
 
-    _filter_or, _ := cmd.Flags().GetBool("filter_or")
-    fmt.Println("filter_or set to ", _filter_or)
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
+
+    filter_or, _ := cmd.Flags().GetBool("filter_or")
+    fmt.Println("filter_or set to", filter_or)
   },
 }
-
 
 var contentFavoriteCmd = &cobra.Command{
   Use:   "contentFavorite",
   Short: "Get Favorite Content",
-  Long: `### Get favorite content by its id`,
+  Long:  `### Get favorite content by its id`,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("contentFavorite called")
-    
-    _content_favorite_id, _ := cmd.Flags().GetInt64("content_favorite_id")
-    fmt.Println("content_favorite_id set to ", _content_favorite_id)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    content_favorite_id, _ := cmd.Flags().GetInt64("content_favorite_id")
+    fmt.Println("content_favorite_id set to", content_favorite_id)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var deleteContentFavoriteCmd = &cobra.Command{
   Use:   "deleteContentFavorite",
   Short: "Delete Favorite Content",
-  Long: `### Delete favorite content`,
+  Long:  `### Delete favorite content`,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("deleteContentFavorite called")
-    
-    _content_favorite_id, _ := cmd.Flags().GetInt64("content_favorite_id")
-    fmt.Println("content_favorite_id set to ", _content_favorite_id)
+
+    content_favorite_id, _ := cmd.Flags().GetInt64("content_favorite_id")
+    fmt.Println("content_favorite_id set to", content_favorite_id)
   },
 }
-
 
 var createContentFavoriteCmd = &cobra.Command{
   Use:   "createContentFavorite",
   Short: "Create Favorite Content",
-  Long: `### Create favorite content`,
+  Long:  `### Create favorite content`,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("createContentFavorite called")
-    
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
   },
 }
-
 
 var allContentMetadatasCmd = &cobra.Command{
   Use:   "allContentMetadatas",
@@ -2574,15 +2443,14 @@ var allContentMetadatasCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("allContentMetadatas called")
-    
-    _parent_id, _ := cmd.Flags().GetInt64("parent_id")
-    fmt.Println("parent_id set to ", _parent_id)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    parent_id, _ := cmd.Flags().GetInt64("parent_id")
+    fmt.Println("parent_id set to", parent_id)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var contentMetadataCmd = &cobra.Command{
   Use:   "contentMetadata",
@@ -2591,15 +2459,14 @@ var contentMetadataCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("contentMetadata called")
-    
-    _content_metadata_id, _ := cmd.Flags().GetInt64("content_metadata_id")
-    fmt.Println("content_metadata_id set to ", _content_metadata_id)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    content_metadata_id, _ := cmd.Flags().GetInt64("content_metadata_id")
+    fmt.Println("content_metadata_id set to", content_metadata_id)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var updateContentMetadataCmd = &cobra.Command{
   Use:   "updateContentMetadata",
@@ -2608,15 +2475,14 @@ var updateContentMetadataCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("updateContentMetadata called")
-    
-    _content_metadata_id, _ := cmd.Flags().GetInt64("content_metadata_id")
-    fmt.Println("content_metadata_id set to ", _content_metadata_id)
 
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+    content_metadata_id, _ := cmd.Flags().GetInt64("content_metadata_id")
+    fmt.Println("content_metadata_id set to", content_metadata_id)
+
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
   },
 }
-
 
 var allContentMetadataAccessesCmd = &cobra.Command{
   Use:   "allContentMetadataAccesses",
@@ -2625,15 +2491,14 @@ var allContentMetadataAccessesCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("allContentMetadataAccesses called")
-    
-    _content_metadata_id, _ := cmd.Flags().GetInt64("content_metadata_id")
-    fmt.Println("content_metadata_id set to ", _content_metadata_id)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    content_metadata_id, _ := cmd.Flags().GetInt64("content_metadata_id")
+    fmt.Println("content_metadata_id set to", content_metadata_id)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var createContentMetadataAccessCmd = &cobra.Command{
   Use:   "createContentMetadataAccess",
@@ -2642,15 +2507,14 @@ var createContentMetadataAccessCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("createContentMetadataAccess called")
-    
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
 
-    _send_boards_notification_email, _ := cmd.Flags().GetBool("send_boards_notification_email")
-    fmt.Println("send_boards_notification_email set to ", _send_boards_notification_email)
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
+
+    send_boards_notification_email, _ := cmd.Flags().GetBool("send_boards_notification_email")
+    fmt.Println("send_boards_notification_email set to", send_boards_notification_email)
   },
 }
-
 
 var updateContentMetadataAccessCmd = &cobra.Command{
   Use:   "updateContentMetadataAccess",
@@ -2659,15 +2523,14 @@ var updateContentMetadataAccessCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("updateContentMetadataAccess called")
-    
-    _content_metadata_access_id, _ := cmd.Flags().GetString("content_metadata_access_id")
-    fmt.Println("content_metadata_access_id set to ", _content_metadata_access_id)
 
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+    content_metadata_access_id, _ := cmd.Flags().GetString("content_metadata_access_id")
+    fmt.Println("content_metadata_access_id set to", content_metadata_access_id)
+
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
   },
 }
-
 
 var deleteContentMetadataAccessCmd = &cobra.Command{
   Use:   "deleteContentMetadataAccess",
@@ -2676,12 +2539,11 @@ var deleteContentMetadataAccessCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("deleteContentMetadataAccess called")
-    
-    _content_metadata_access_id, _ := cmd.Flags().GetInt64("content_metadata_access_id")
-    fmt.Println("content_metadata_access_id set to ", _content_metadata_access_id)
+
+    content_metadata_access_id, _ := cmd.Flags().GetInt64("content_metadata_access_id")
+    fmt.Println("content_metadata_access_id set to", content_metadata_access_id)
   },
 }
-
 
 var contentThumbnailCmd = &cobra.Command{
   Use:   "contentThumbnail",
@@ -2693,27 +2555,26 @@ reflect the actual data displayed in the respective visualizations.
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("contentThumbnail called")
-    
+
     _type, _ := cmd.Flags().GetString("type")
-    fmt.Println("type set to ", _type)
+    fmt.Println("type set to", _type)
 
-    _resource_id, _ := cmd.Flags().GetString("resource_id")
-    fmt.Println("resource_id set to ", _resource_id)
+    resource_id, _ := cmd.Flags().GetString("resource_id")
+    fmt.Println("resource_id set to", resource_id)
 
-    _reload, _ := cmd.Flags().GetString("reload")
-    fmt.Println("reload set to ", _reload)
+    reload, _ := cmd.Flags().GetString("reload")
+    fmt.Println("reload set to", reload)
 
-    _format, _ := cmd.Flags().GetString("format")
-    fmt.Println("format set to ", _format)
+    format, _ := cmd.Flags().GetString("format")
+    fmt.Println("format set to", format)
 
-    _width, _ := cmd.Flags().GetInt64("width")
-    fmt.Println("width set to ", _width)
+    width, _ := cmd.Flags().GetInt64("width")
+    fmt.Println("width set to", width)
 
-    _height, _ := cmd.Flags().GetInt64("height")
-    fmt.Println("height set to ", _height)
+    height, _ := cmd.Flags().GetInt64("height")
+    fmt.Println("height set to", height)
   },
 }
-
 
 var contentValidationCmd = &cobra.Command{
   Use:   "contentValidation",
@@ -2725,12 +2586,11 @@ Returns a list of errors found as well as metadata about the content validation 
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("contentValidation called")
-    
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var searchContentViewsCmd = &cobra.Command{
   Use:   "searchContentViews",
@@ -2761,48 +2621,47 @@ Boolean search params accept only "true" and "false" as values.
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("searchContentViews called")
-    
-    _view_count, _ := cmd.Flags().GetString("view_count")
-    fmt.Println("view_count set to ", _view_count)
 
-    _group_id, _ := cmd.Flags().GetString("group_id")
-    fmt.Println("group_id set to ", _group_id)
+    view_count, _ := cmd.Flags().GetString("view_count")
+    fmt.Println("view_count set to", view_count)
 
-    _look_id, _ := cmd.Flags().GetString("look_id")
-    fmt.Println("look_id set to ", _look_id)
+    group_id, _ := cmd.Flags().GetString("group_id")
+    fmt.Println("group_id set to", group_id)
 
-    _dashboard_id, _ := cmd.Flags().GetString("dashboard_id")
-    fmt.Println("dashboard_id set to ", _dashboard_id)
+    look_id, _ := cmd.Flags().GetString("look_id")
+    fmt.Println("look_id set to", look_id)
 
-    _content_metadata_id, _ := cmd.Flags().GetString("content_metadata_id")
-    fmt.Println("content_metadata_id set to ", _content_metadata_id)
+    dashboard_id, _ := cmd.Flags().GetString("dashboard_id")
+    fmt.Println("dashboard_id set to", dashboard_id)
 
-    _start_of_week_date, _ := cmd.Flags().GetString("start_of_week_date")
-    fmt.Println("start_of_week_date set to ", _start_of_week_date)
+    content_metadata_id, _ := cmd.Flags().GetString("content_metadata_id")
+    fmt.Println("content_metadata_id set to", content_metadata_id)
 
-    _all_time, _ := cmd.Flags().GetBool("all_time")
-    fmt.Println("all_time set to ", _all_time)
+    start_of_week_date, _ := cmd.Flags().GetString("start_of_week_date")
+    fmt.Println("start_of_week_date set to", start_of_week_date)
 
-    _user_id, _ := cmd.Flags().GetString("user_id")
-    fmt.Println("user_id set to ", _user_id)
+    all_time, _ := cmd.Flags().GetBool("all_time")
+    fmt.Println("all_time set to", all_time)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    user_id, _ := cmd.Flags().GetString("user_id")
+    fmt.Println("user_id set to", user_id)
 
-    _limit, _ := cmd.Flags().GetInt64("limit")
-    fmt.Println("limit set to ", _limit)
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
 
-    _offset, _ := cmd.Flags().GetInt64("offset")
-    fmt.Println("offset set to ", _offset)
+    limit, _ := cmd.Flags().GetInt64("limit")
+    fmt.Println("limit set to", limit)
 
-    _sorts, _ := cmd.Flags().GetString("sorts")
-    fmt.Println("sorts set to ", _sorts)
+    offset, _ := cmd.Flags().GetInt64("offset")
+    fmt.Println("offset set to", offset)
 
-    _filter_or, _ := cmd.Flags().GetBool("filter_or")
-    fmt.Println("filter_or set to ", _filter_or)
+    sorts, _ := cmd.Flags().GetString("sorts")
+    fmt.Println("sorts set to", sorts)
+
+    filter_or, _ := cmd.Flags().GetBool("filter_or")
+    fmt.Println("filter_or set to", filter_or)
   },
 }
-
 
 var vectorThumbnailCmd = &cobra.Command{
   Use:   "vectorThumbnail",
@@ -2816,27 +2675,23 @@ reflect the actual data displayed in the respective visualizations.
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("vectorThumbnail called")
-    
+
     _type, _ := cmd.Flags().GetString("type")
-    fmt.Println("type set to ", _type)
+    fmt.Println("type set to", _type)
 
-    _resource_id, _ := cmd.Flags().GetString("resource_id")
-    fmt.Println("resource_id set to ", _resource_id)
+    resource_id, _ := cmd.Flags().GetString("resource_id")
+    fmt.Println("resource_id set to", resource_id)
 
-    _reload, _ := cmd.Flags().GetString("reload")
-    fmt.Println("reload set to ", _reload)
+    reload, _ := cmd.Flags().GetString("reload")
+    fmt.Println("reload set to", reload)
   },
 }
 
-
-
-
-var dashboardCmd = &cobra.Command{
+var DashboardCmd = &cobra.Command{
   Use:   "Dashboard",
   Short: "Manage Dashboards",
-  Long: "Manage Dashboards",
+  Long:  "Manage Dashboards",
 }
-
 
 var allDashboardsCmd = &cobra.Command{
   Use:   "allDashboards",
@@ -2851,12 +2706,11 @@ Find **deleted dashboards** with [search_dashboards()](#!/Dashboard/search_dashb
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("allDashboards called")
-    
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var createDashboardCmd = &cobra.Command{
   Use:   "createDashboard",
@@ -2878,12 +2732,11 @@ You can **permanently delete** an existing dashboard with [delete_dashboard()](#
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("createDashboard called")
-    
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
   },
 }
-
 
 var searchDashboardsCmd = &cobra.Command{
   Use:   "searchDashboards",
@@ -2920,66 +2773,65 @@ Get a **single dashboard** by id with [dashboard()](#!/Dashboard/dashboard)
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("searchDashboards called")
-    
-    _id, _ := cmd.Flags().GetString("id")
-    fmt.Println("id set to ", _id)
 
-    _slug, _ := cmd.Flags().GetString("slug")
-    fmt.Println("slug set to ", _slug)
+    id, _ := cmd.Flags().GetString("id")
+    fmt.Println("id set to", id)
 
-    _title, _ := cmd.Flags().GetString("title")
-    fmt.Println("title set to ", _title)
+    slug, _ := cmd.Flags().GetString("slug")
+    fmt.Println("slug set to", slug)
 
-    _description, _ := cmd.Flags().GetString("description")
-    fmt.Println("description set to ", _description)
+    title, _ := cmd.Flags().GetString("title")
+    fmt.Println("title set to", title)
 
-    _content_favorite_id, _ := cmd.Flags().GetString("content_favorite_id")
-    fmt.Println("content_favorite_id set to ", _content_favorite_id)
+    description, _ := cmd.Flags().GetString("description")
+    fmt.Println("description set to", description)
 
-    _folder_id, _ := cmd.Flags().GetString("folder_id")
-    fmt.Println("folder_id set to ", _folder_id)
+    content_favorite_id, _ := cmd.Flags().GetString("content_favorite_id")
+    fmt.Println("content_favorite_id set to", content_favorite_id)
 
-    _deleted, _ := cmd.Flags().GetString("deleted")
-    fmt.Println("deleted set to ", _deleted)
+    folder_id, _ := cmd.Flags().GetString("folder_id")
+    fmt.Println("folder_id set to", folder_id)
 
-    _user_id, _ := cmd.Flags().GetString("user_id")
-    fmt.Println("user_id set to ", _user_id)
+    deleted, _ := cmd.Flags().GetString("deleted")
+    fmt.Println("deleted set to", deleted)
 
-    _view_count, _ := cmd.Flags().GetString("view_count")
-    fmt.Println("view_count set to ", _view_count)
+    user_id, _ := cmd.Flags().GetString("user_id")
+    fmt.Println("user_id set to", user_id)
 
-    _content_metadata_id, _ := cmd.Flags().GetString("content_metadata_id")
-    fmt.Println("content_metadata_id set to ", _content_metadata_id)
+    view_count, _ := cmd.Flags().GetString("view_count")
+    fmt.Println("view_count set to", view_count)
 
-    _curate, _ := cmd.Flags().GetBool("curate")
-    fmt.Println("curate set to ", _curate)
+    content_metadata_id, _ := cmd.Flags().GetString("content_metadata_id")
+    fmt.Println("content_metadata_id set to", content_metadata_id)
 
-    _last_viewed_at, _ := cmd.Flags().GetString("last_viewed_at")
-    fmt.Println("last_viewed_at set to ", _last_viewed_at)
+    curate, _ := cmd.Flags().GetBool("curate")
+    fmt.Println("curate set to", curate)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    last_viewed_at, _ := cmd.Flags().GetString("last_viewed_at")
+    fmt.Println("last_viewed_at set to", last_viewed_at)
 
-    _page, _ := cmd.Flags().GetInt64("page")
-    fmt.Println("page set to ", _page)
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
 
-    _per_page, _ := cmd.Flags().GetInt64("per_page")
-    fmt.Println("per_page set to ", _per_page)
+    page, _ := cmd.Flags().GetInt64("page")
+    fmt.Println("page set to", page)
 
-    _limit, _ := cmd.Flags().GetInt64("limit")
-    fmt.Println("limit set to ", _limit)
+    per_page, _ := cmd.Flags().GetInt64("per_page")
+    fmt.Println("per_page set to", per_page)
 
-    _offset, _ := cmd.Flags().GetInt64("offset")
-    fmt.Println("offset set to ", _offset)
+    limit, _ := cmd.Flags().GetInt64("limit")
+    fmt.Println("limit set to", limit)
 
-    _sorts, _ := cmd.Flags().GetString("sorts")
-    fmt.Println("sorts set to ", _sorts)
+    offset, _ := cmd.Flags().GetInt64("offset")
+    fmt.Println("offset set to", offset)
 
-    _filter_or, _ := cmd.Flags().GetBool("filter_or")
-    fmt.Println("filter_or set to ", _filter_or)
+    sorts, _ := cmd.Flags().GetString("sorts")
+    fmt.Println("sorts set to", sorts)
+
+    filter_or, _ := cmd.Flags().GetBool("filter_or")
+    fmt.Println("filter_or set to", filter_or)
   },
 }
-
 
 var importLookmlDashboardCmd = &cobra.Command{
   Use:   "importLookmlDashboard",
@@ -2999,21 +2851,20 @@ create content in the space the dashboard is being imported to.
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("importLookmlDashboard called")
-    
-    _lookml_dashboard_id, _ := cmd.Flags().GetString("lookml_dashboard_id")
-    fmt.Println("lookml_dashboard_id set to ", _lookml_dashboard_id)
 
-    _space_id, _ := cmd.Flags().GetString("space_id")
-    fmt.Println("space_id set to ", _space_id)
+    lookml_dashboard_id, _ := cmd.Flags().GetString("lookml_dashboard_id")
+    fmt.Println("lookml_dashboard_id set to", lookml_dashboard_id)
 
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+    space_id, _ := cmd.Flags().GetString("space_id")
+    fmt.Println("space_id set to", space_id)
 
-    _raw_locale, _ := cmd.Flags().GetBool("raw_locale")
-    fmt.Println("raw_locale set to ", _raw_locale)
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
+
+    raw_locale, _ := cmd.Flags().GetBool("raw_locale")
+    fmt.Println("raw_locale set to", raw_locale)
   },
 }
-
 
 var syncLookmlDashboardCmd = &cobra.Command{
   Use:   "syncLookmlDashboard",
@@ -3030,20 +2881,19 @@ To **link** or **unlink** a UDD set the 'lookml_link_id' property with [update_d
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("syncLookmlDashboard called")
-    
-    _lookml_dashboard_id, _ := cmd.Flags().GetString("lookml_dashboard_id")
-    fmt.Println("lookml_dashboard_id set to ", _lookml_dashboard_id)
 
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+    lookml_dashboard_id, _ := cmd.Flags().GetString("lookml_dashboard_id")
+    fmt.Println("lookml_dashboard_id set to", lookml_dashboard_id)
 
-    _raw_locale, _ := cmd.Flags().GetBool("raw_locale")
-    fmt.Println("raw_locale set to ", _raw_locale)
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
+
+    raw_locale, _ := cmd.Flags().GetBool("raw_locale")
+    fmt.Println("raw_locale set to", raw_locale)
   },
 }
 
-
-var dashboardCmd5769 = &cobra.Command{
+var dashboardCmd = &cobra.Command{
   Use:   "dashboard",
   Short: "Get Dashboard",
   Long: `### Get information about a dashboard
@@ -3056,15 +2906,14 @@ You can **Search** for dashboards with [search_dashboards()](#!/Dashboard/search
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("dashboard called")
-    
-    _dashboard_id, _ := cmd.Flags().GetString("dashboard_id")
-    fmt.Println("dashboard_id set to ", _dashboard_id)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    dashboard_id, _ := cmd.Flags().GetString("dashboard_id")
+    fmt.Println("dashboard_id set to", dashboard_id)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var updateDashboardCmd = &cobra.Command{
   Use:   "updateDashboard",
@@ -3082,15 +2931,14 @@ response body for information about exactly which fields are missing or contain 
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("updateDashboard called")
-    
-    _dashboard_id, _ := cmd.Flags().GetString("dashboard_id")
-    fmt.Println("dashboard_id set to ", _dashboard_id)
 
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+    dashboard_id, _ := cmd.Flags().GetString("dashboard_id")
+    fmt.Println("dashboard_id set to", dashboard_id)
+
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
   },
 }
-
 
 var deleteDashboardCmd = &cobra.Command{
   Use:   "deleteDashboard",
@@ -3105,12 +2953,11 @@ Note: When a dashboard is deleted in the UI, it is soft deleted. Use this API ca
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("deleteDashboard called")
-    
-    _dashboard_id, _ := cmd.Flags().GetString("dashboard_id")
-    fmt.Println("dashboard_id set to ", _dashboard_id)
+
+    dashboard_id, _ := cmd.Flags().GetString("dashboard_id")
+    fmt.Println("dashboard_id set to", dashboard_id)
   },
 }
-
 
 var dashboardAggregateTableLookmlCmd = &cobra.Command{
   Use:   "dashboardAggregateTableLookml",
@@ -3122,12 +2969,11 @@ Returns a JSON object that contains the dashboard id and Aggregate Table lookml
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("dashboardAggregateTableLookml called")
-    
-    _dashboard_id, _ := cmd.Flags().GetString("dashboard_id")
-    fmt.Println("dashboard_id set to ", _dashboard_id)
+
+    dashboard_id, _ := cmd.Flags().GetString("dashboard_id")
+    fmt.Println("dashboard_id set to", dashboard_id)
   },
 }
-
 
 var dashboardLookmlCmd = &cobra.Command{
   Use:   "dashboardLookml",
@@ -3139,12 +2985,11 @@ Returns a JSON object that contains the dashboard id and the full lookml
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("dashboardLookml called")
-    
-    _dashboard_id, _ := cmd.Flags().GetString("dashboard_id")
-    fmt.Println("dashboard_id set to ", _dashboard_id)
+
+    dashboard_id, _ := cmd.Flags().GetString("dashboard_id")
+    fmt.Println("dashboard_id set to", dashboard_id)
   },
 }
-
 
 var moveDashboardCmd = &cobra.Command{
   Use:   "moveDashboard",
@@ -3158,15 +3003,14 @@ Moves a dashboard to a specified folder, and returns the moved dashboard.
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("moveDashboard called")
-    
-    _dashboard_id, _ := cmd.Flags().GetString("dashboard_id")
-    fmt.Println("dashboard_id set to ", _dashboard_id)
 
-    _folder_id, _ := cmd.Flags().GetString("folder_id")
-    fmt.Println("folder_id set to ", _folder_id)
+    dashboard_id, _ := cmd.Flags().GetString("dashboard_id")
+    fmt.Println("dashboard_id set to", dashboard_id)
+
+    folder_id, _ := cmd.Flags().GetString("folder_id")
+    fmt.Println("folder_id set to", folder_id)
   },
 }
-
 
 var copyDashboardCmd = &cobra.Command{
   Use:   "copyDashboard",
@@ -3183,15 +3027,14 @@ If a dashboard with the same title already exists in the target folder, the copy
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("copyDashboard called")
-    
-    _dashboard_id, _ := cmd.Flags().GetString("dashboard_id")
-    fmt.Println("dashboard_id set to ", _dashboard_id)
 
-    _folder_id, _ := cmd.Flags().GetString("folder_id")
-    fmt.Println("folder_id set to ", _folder_id)
+    dashboard_id, _ := cmd.Flags().GetString("dashboard_id")
+    fmt.Println("dashboard_id set to", dashboard_id)
+
+    folder_id, _ := cmd.Flags().GetString("folder_id")
+    fmt.Println("folder_id set to", folder_id)
   },
 }
-
 
 var searchDashboardElementsCmd = &cobra.Command{
   Use:   "searchDashboardElements",
@@ -3224,365 +3067,338 @@ Boolean search params accept only "true" and "false" as values.
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("searchDashboardElements called")
-    
-    _dashboard_id, _ := cmd.Flags().GetInt64("dashboard_id")
-    fmt.Println("dashboard_id set to ", _dashboard_id)
 
-    _look_id, _ := cmd.Flags().GetInt64("look_id")
-    fmt.Println("look_id set to ", _look_id)
+    dashboard_id, _ := cmd.Flags().GetInt64("dashboard_id")
+    fmt.Println("dashboard_id set to", dashboard_id)
 
-    _title, _ := cmd.Flags().GetString("title")
-    fmt.Println("title set to ", _title)
+    look_id, _ := cmd.Flags().GetInt64("look_id")
+    fmt.Println("look_id set to", look_id)
 
-    _deleted, _ := cmd.Flags().GetBool("deleted")
-    fmt.Println("deleted set to ", _deleted)
+    title, _ := cmd.Flags().GetString("title")
+    fmt.Println("title set to", title)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    deleted, _ := cmd.Flags().GetBool("deleted")
+    fmt.Println("deleted set to", deleted)
 
-    _filter_or, _ := cmd.Flags().GetBool("filter_or")
-    fmt.Println("filter_or set to ", _filter_or)
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
 
-    _sorts, _ := cmd.Flags().GetString("sorts")
-    fmt.Println("sorts set to ", _sorts)
+    filter_or, _ := cmd.Flags().GetBool("filter_or")
+    fmt.Println("filter_or set to", filter_or)
+
+    sorts, _ := cmd.Flags().GetString("sorts")
+    fmt.Println("sorts set to", sorts)
   },
 }
-
 
 var dashboardElementCmd = &cobra.Command{
   Use:   "dashboardElement",
   Short: "Get DashboardElement",
-  Long: `### Get information about the dashboard element with a specific id.`,
+  Long:  `### Get information about the dashboard element with a specific id.`,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("dashboardElement called")
-    
-    _dashboard_element_id, _ := cmd.Flags().GetString("dashboard_element_id")
-    fmt.Println("dashboard_element_id set to ", _dashboard_element_id)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    dashboard_element_id, _ := cmd.Flags().GetString("dashboard_element_id")
+    fmt.Println("dashboard_element_id set to", dashboard_element_id)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var updateDashboardElementCmd = &cobra.Command{
   Use:   "updateDashboardElement",
   Short: "Update DashboardElement",
-  Long: `### Update the dashboard element with a specific id.`,
+  Long:  `### Update the dashboard element with a specific id.`,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("updateDashboardElement called")
-    
-    _dashboard_element_id, _ := cmd.Flags().GetString("dashboard_element_id")
-    fmt.Println("dashboard_element_id set to ", _dashboard_element_id)
 
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+    dashboard_element_id, _ := cmd.Flags().GetString("dashboard_element_id")
+    fmt.Println("dashboard_element_id set to", dashboard_element_id)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var deleteDashboardElementCmd = &cobra.Command{
   Use:   "deleteDashboardElement",
   Short: "Delete DashboardElement",
-  Long: `### Delete a dashboard element with a specific id.`,
+  Long:  `### Delete a dashboard element with a specific id.`,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("deleteDashboardElement called")
-    
-    _dashboard_element_id, _ := cmd.Flags().GetString("dashboard_element_id")
-    fmt.Println("dashboard_element_id set to ", _dashboard_element_id)
+
+    dashboard_element_id, _ := cmd.Flags().GetString("dashboard_element_id")
+    fmt.Println("dashboard_element_id set to", dashboard_element_id)
   },
 }
-
 
 var dashboardDashboardElementsCmd = &cobra.Command{
   Use:   "dashboardDashboardElements",
   Short: "Get All DashboardElements",
-  Long: `### Get information about all the dashboard elements on a dashboard with a specific id.`,
+  Long:  `### Get information about all the dashboard elements on a dashboard with a specific id.`,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("dashboardDashboardElements called")
-    
-    _dashboard_id, _ := cmd.Flags().GetString("dashboard_id")
-    fmt.Println("dashboard_id set to ", _dashboard_id)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    dashboard_id, _ := cmd.Flags().GetString("dashboard_id")
+    fmt.Println("dashboard_id set to", dashboard_id)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var createDashboardElementCmd = &cobra.Command{
   Use:   "createDashboardElement",
   Short: "Create DashboardElement",
-  Long: `### Create a dashboard element on the dashboard with a specific id.`,
+  Long:  `### Create a dashboard element on the dashboard with a specific id.`,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("createDashboardElement called")
-    
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var dashboardFilterCmd = &cobra.Command{
   Use:   "dashboardFilter",
   Short: "Get Dashboard Filter",
-  Long: `### Get information about the dashboard filters with a specific id.`,
+  Long:  `### Get information about the dashboard filters with a specific id.`,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("dashboardFilter called")
-    
-    _dashboard_filter_id, _ := cmd.Flags().GetString("dashboard_filter_id")
-    fmt.Println("dashboard_filter_id set to ", _dashboard_filter_id)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    dashboard_filter_id, _ := cmd.Flags().GetString("dashboard_filter_id")
+    fmt.Println("dashboard_filter_id set to", dashboard_filter_id)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var updateDashboardFilterCmd = &cobra.Command{
   Use:   "updateDashboardFilter",
   Short: "Update Dashboard Filter",
-  Long: `### Update the dashboard filter with a specific id.`,
+  Long:  `### Update the dashboard filter with a specific id.`,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("updateDashboardFilter called")
-    
-    _dashboard_filter_id, _ := cmd.Flags().GetString("dashboard_filter_id")
-    fmt.Println("dashboard_filter_id set to ", _dashboard_filter_id)
 
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+    dashboard_filter_id, _ := cmd.Flags().GetString("dashboard_filter_id")
+    fmt.Println("dashboard_filter_id set to", dashboard_filter_id)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var deleteDashboardFilterCmd = &cobra.Command{
   Use:   "deleteDashboardFilter",
   Short: "Delete Dashboard Filter",
-  Long: `### Delete a dashboard filter with a specific id.`,
+  Long:  `### Delete a dashboard filter with a specific id.`,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("deleteDashboardFilter called")
-    
-    _dashboard_filter_id, _ := cmd.Flags().GetString("dashboard_filter_id")
-    fmt.Println("dashboard_filter_id set to ", _dashboard_filter_id)
+
+    dashboard_filter_id, _ := cmd.Flags().GetString("dashboard_filter_id")
+    fmt.Println("dashboard_filter_id set to", dashboard_filter_id)
   },
 }
-
 
 var dashboardDashboardFiltersCmd = &cobra.Command{
   Use:   "dashboardDashboardFilters",
   Short: "Get All Dashboard Filters",
-  Long: `### Get information about all the dashboard filters on a dashboard with a specific id.`,
+  Long:  `### Get information about all the dashboard filters on a dashboard with a specific id.`,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("dashboardDashboardFilters called")
-    
-    _dashboard_id, _ := cmd.Flags().GetString("dashboard_id")
-    fmt.Println("dashboard_id set to ", _dashboard_id)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    dashboard_id, _ := cmd.Flags().GetString("dashboard_id")
+    fmt.Println("dashboard_id set to", dashboard_id)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var createDashboardFilterCmd = &cobra.Command{
   Use:   "createDashboardFilter",
   Short: "Create Dashboard Filter",
-  Long: `### Create a dashboard filter on the dashboard with a specific id.`,
+  Long:  `### Create a dashboard filter on the dashboard with a specific id.`,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("createDashboardFilter called")
-    
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var dashboardLayoutComponentCmd = &cobra.Command{
   Use:   "dashboardLayoutComponent",
   Short: "Get DashboardLayoutComponent",
-  Long: `### Get information about the dashboard elements with a specific id.`,
+  Long:  `### Get information about the dashboard elements with a specific id.`,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("dashboardLayoutComponent called")
-    
-    _dashboard_layout_component_id, _ := cmd.Flags().GetString("dashboard_layout_component_id")
-    fmt.Println("dashboard_layout_component_id set to ", _dashboard_layout_component_id)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    dashboard_layout_component_id, _ := cmd.Flags().GetString("dashboard_layout_component_id")
+    fmt.Println("dashboard_layout_component_id set to", dashboard_layout_component_id)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var updateDashboardLayoutComponentCmd = &cobra.Command{
   Use:   "updateDashboardLayoutComponent",
   Short: "Update DashboardLayoutComponent",
-  Long: `### Update the dashboard element with a specific id.`,
+  Long:  `### Update the dashboard element with a specific id.`,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("updateDashboardLayoutComponent called")
-    
-    _dashboard_layout_component_id, _ := cmd.Flags().GetString("dashboard_layout_component_id")
-    fmt.Println("dashboard_layout_component_id set to ", _dashboard_layout_component_id)
 
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+    dashboard_layout_component_id, _ := cmd.Flags().GetString("dashboard_layout_component_id")
+    fmt.Println("dashboard_layout_component_id set to", dashboard_layout_component_id)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var dashboardLayoutDashboardLayoutComponentsCmd = &cobra.Command{
   Use:   "dashboardLayoutDashboardLayoutComponents",
   Short: "Get All DashboardLayoutComponents",
-  Long: `### Get information about all the dashboard layout components for a dashboard layout with a specific id.`,
+  Long:  `### Get information about all the dashboard layout components for a dashboard layout with a specific id.`,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("dashboardLayoutDashboardLayoutComponents called")
-    
-    _dashboard_layout_id, _ := cmd.Flags().GetString("dashboard_layout_id")
-    fmt.Println("dashboard_layout_id set to ", _dashboard_layout_id)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    dashboard_layout_id, _ := cmd.Flags().GetString("dashboard_layout_id")
+    fmt.Println("dashboard_layout_id set to", dashboard_layout_id)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var dashboardLayoutCmd = &cobra.Command{
   Use:   "dashboardLayout",
   Short: "Get DashboardLayout",
-  Long: `### Get information about the dashboard layouts with a specific id.`,
+  Long:  `### Get information about the dashboard layouts with a specific id.`,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("dashboardLayout called")
-    
-    _dashboard_layout_id, _ := cmd.Flags().GetString("dashboard_layout_id")
-    fmt.Println("dashboard_layout_id set to ", _dashboard_layout_id)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    dashboard_layout_id, _ := cmd.Flags().GetString("dashboard_layout_id")
+    fmt.Println("dashboard_layout_id set to", dashboard_layout_id)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var updateDashboardLayoutCmd = &cobra.Command{
   Use:   "updateDashboardLayout",
   Short: "Update DashboardLayout",
-  Long: `### Update the dashboard layout with a specific id.`,
+  Long:  `### Update the dashboard layout with a specific id.`,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("updateDashboardLayout called")
-    
-    _dashboard_layout_id, _ := cmd.Flags().GetString("dashboard_layout_id")
-    fmt.Println("dashboard_layout_id set to ", _dashboard_layout_id)
 
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+    dashboard_layout_id, _ := cmd.Flags().GetString("dashboard_layout_id")
+    fmt.Println("dashboard_layout_id set to", dashboard_layout_id)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var deleteDashboardLayoutCmd = &cobra.Command{
   Use:   "deleteDashboardLayout",
   Short: "Delete DashboardLayout",
-  Long: `### Delete a dashboard layout with a specific id.`,
+  Long:  `### Delete a dashboard layout with a specific id.`,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("deleteDashboardLayout called")
-    
-    _dashboard_layout_id, _ := cmd.Flags().GetString("dashboard_layout_id")
-    fmt.Println("dashboard_layout_id set to ", _dashboard_layout_id)
+
+    dashboard_layout_id, _ := cmd.Flags().GetString("dashboard_layout_id")
+    fmt.Println("dashboard_layout_id set to", dashboard_layout_id)
   },
 }
-
 
 var dashboardDashboardLayoutsCmd = &cobra.Command{
   Use:   "dashboardDashboardLayouts",
   Short: "Get All DashboardLayouts",
-  Long: `### Get information about all the dashboard elements on a dashboard with a specific id.`,
+  Long:  `### Get information about all the dashboard elements on a dashboard with a specific id.`,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("dashboardDashboardLayouts called")
-    
-    _dashboard_id, _ := cmd.Flags().GetString("dashboard_id")
-    fmt.Println("dashboard_id set to ", _dashboard_id)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    dashboard_id, _ := cmd.Flags().GetString("dashboard_id")
+    fmt.Println("dashboard_id set to", dashboard_id)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var createDashboardLayoutCmd = &cobra.Command{
   Use:   "createDashboardLayout",
   Short: "Create DashboardLayout",
-  Long: `### Create a dashboard layout on the dashboard with a specific id.`,
+  Long:  `### Create a dashboard layout on the dashboard with a specific id.`,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("createDashboardLayout called")
-    
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
 
-
-
-
-var dataActionCmd = &cobra.Command{
+var DataActionCmd = &cobra.Command{
   Use:   "DataAction",
   Short: "Run Data Actions",
-  Long: "Run Data Actions",
+  Long:  "Run Data Actions",
 }
-
 
 var performDataActionCmd = &cobra.Command{
   Use:   "performDataAction",
   Short: "Send a Data Action",
-  Long: `Perform a data action. The data action object can be obtained from query results, and used to perform an arbitrary action.`,
+  Long:  `Perform a data action. The data action object can be obtained from query results, and used to perform an arbitrary action.`,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("performDataAction called")
-    
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
   },
 }
-
 
 var fetchRemoteDataActionFormCmd = &cobra.Command{
   Use:   "fetchRemoteDataActionForm",
   Short: "Fetch Remote Data Action Form",
-  Long: `For some data actions, the remote server may supply a form requesting further user input. This endpoint takes a data action, asks the remote server to generate a form for it, and returns that form to you for presentation to the user.`,
+  Long:  `For some data actions, the remote server may supply a form requesting further user input. This endpoint takes a data action, asks the remote server to generate a form for it, and returns that form to you for presentation to the user.`,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("fetchRemoteDataActionForm called")
-    
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
   },
 }
 
-
-
-
-var datagroupCmd = &cobra.Command{
+var DatagroupCmd = &cobra.Command{
   Use:   "Datagroup",
   Short: "Manage Datagroups",
-  Long: "Manage Datagroups",
+  Long:  "Manage Datagroups",
 }
-
 
 var allDatagroupsCmd = &cobra.Command{
   Use:   "allDatagroups",
@@ -3591,24 +3407,22 @@ var allDatagroupsCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("allDatagroups called")
-    
+
   },
 }
 
-
-var datagroupCmd302 = &cobra.Command{
+var datagroupCmd = &cobra.Command{
   Use:   "datagroup",
   Short: "Get Datagroup",
   Long: `### Get information about a datagroup.
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("datagroup called")
-    
-    _datagroup_id, _ := cmd.Flags().GetInt64("datagroup_id")
-    fmt.Println("datagroup_id set to ", _datagroup_id)
+
+    datagroup_id, _ := cmd.Flags().GetInt64("datagroup_id")
+    fmt.Println("datagroup_id set to", datagroup_id)
   },
 }
-
 
 var updateDatagroupCmd = &cobra.Command{
   Use:   "updateDatagroup",
@@ -3617,24 +3431,20 @@ var updateDatagroupCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("updateDatagroup called")
-    
-    _datagroup_id, _ := cmd.Flags().GetInt64("datagroup_id")
-    fmt.Println("datagroup_id set to ", _datagroup_id)
 
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+    datagroup_id, _ := cmd.Flags().GetInt64("datagroup_id")
+    fmt.Println("datagroup_id set to", datagroup_id)
+
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
   },
 }
 
-
-
-
-var derivedTableCmd = &cobra.Command{
+var DerivedTableCmd = &cobra.Command{
   Use:   "DerivedTable",
   Short: "View Derived Table graphs",
-  Long: "View Derived Table graphs",
+  Long:  "View Derived Table graphs",
 }
-
 
 var graphDerivedTablesForModelCmd = &cobra.Command{
   Use:   "graphDerivedTablesForModel",
@@ -3643,18 +3453,17 @@ var graphDerivedTablesForModelCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("graphDerivedTablesForModel called")
-    
-    _model, _ := cmd.Flags().GetString("model")
-    fmt.Println("model set to ", _model)
 
-    _format, _ := cmd.Flags().GetString("format")
-    fmt.Println("format set to ", _format)
+    model, _ := cmd.Flags().GetString("model")
+    fmt.Println("model set to", model)
 
-    _color, _ := cmd.Flags().GetString("color")
-    fmt.Println("color set to ", _color)
+    format, _ := cmd.Flags().GetString("format")
+    fmt.Println("format set to", format)
+
+    color, _ := cmd.Flags().GetString("color")
+    fmt.Println("color set to", color)
   },
 }
-
 
 var graphDerivedTablesForViewCmd = &cobra.Command{
   Use:   "graphDerivedTablesForView",
@@ -3663,105 +3472,98 @@ var graphDerivedTablesForViewCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("graphDerivedTablesForView called")
-    
-    _view, _ := cmd.Flags().GetString("view")
-    fmt.Println("view set to ", _view)
 
-    _models, _ := cmd.Flags().GetString("models")
-    fmt.Println("models set to ", _models)
+    view, _ := cmd.Flags().GetString("view")
+    fmt.Println("view set to", view)
 
-    _workspace, _ := cmd.Flags().GetString("workspace")
-    fmt.Println("workspace set to ", _workspace)
+    models, _ := cmd.Flags().GetString("models")
+    fmt.Println("models set to", models)
+
+    workspace, _ := cmd.Flags().GetString("workspace")
+    fmt.Println("workspace set to", workspace)
   },
 }
 
-
-
-
-var folderCmd = &cobra.Command{
+var FolderCmd = &cobra.Command{
   Use:   "Folder",
   Short: "Manage Folders",
-  Long: "Manage Folders",
+  Long:  "Manage Folders",
 }
-
 
 var searchFoldersCmd = &cobra.Command{
   Use:   "searchFolders",
   Short: "Search Folders",
-  Long: `Search for folders by creator id, parent id, name, etc`,
+  Long:  `Search for folders by creator id, parent id, name, etc`,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("searchFolders called")
-    
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
 
-    _page, _ := cmd.Flags().GetInt64("page")
-    fmt.Println("page set to ", _page)
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
 
-    _per_page, _ := cmd.Flags().GetInt64("per_page")
-    fmt.Println("per_page set to ", _per_page)
+    page, _ := cmd.Flags().GetInt64("page")
+    fmt.Println("page set to", page)
 
-    _limit, _ := cmd.Flags().GetInt64("limit")
-    fmt.Println("limit set to ", _limit)
+    per_page, _ := cmd.Flags().GetInt64("per_page")
+    fmt.Println("per_page set to", per_page)
 
-    _offset, _ := cmd.Flags().GetInt64("offset")
-    fmt.Println("offset set to ", _offset)
+    limit, _ := cmd.Flags().GetInt64("limit")
+    fmt.Println("limit set to", limit)
 
-    _sorts, _ := cmd.Flags().GetString("sorts")
-    fmt.Println("sorts set to ", _sorts)
+    offset, _ := cmd.Flags().GetInt64("offset")
+    fmt.Println("offset set to", offset)
 
-    _name, _ := cmd.Flags().GetString("name")
-    fmt.Println("name set to ", _name)
+    sorts, _ := cmd.Flags().GetString("sorts")
+    fmt.Println("sorts set to", sorts)
 
-    _id, _ := cmd.Flags().GetInt64("id")
-    fmt.Println("id set to ", _id)
+    name, _ := cmd.Flags().GetString("name")
+    fmt.Println("name set to", name)
 
-    _parent_id, _ := cmd.Flags().GetString("parent_id")
-    fmt.Println("parent_id set to ", _parent_id)
+    id, _ := cmd.Flags().GetInt64("id")
+    fmt.Println("id set to", id)
 
-    _creator_id, _ := cmd.Flags().GetString("creator_id")
-    fmt.Println("creator_id set to ", _creator_id)
+    parent_id, _ := cmd.Flags().GetString("parent_id")
+    fmt.Println("parent_id set to", parent_id)
 
-    _filter_or, _ := cmd.Flags().GetBool("filter_or")
-    fmt.Println("filter_or set to ", _filter_or)
+    creator_id, _ := cmd.Flags().GetString("creator_id")
+    fmt.Println("creator_id set to", creator_id)
 
-    _is_shared_root, _ := cmd.Flags().GetBool("is_shared_root")
-    fmt.Println("is_shared_root set to ", _is_shared_root)
+    filter_or, _ := cmd.Flags().GetBool("filter_or")
+    fmt.Println("filter_or set to", filter_or)
+
+    is_shared_root, _ := cmd.Flags().GetBool("is_shared_root")
+    fmt.Println("is_shared_root set to", is_shared_root)
   },
 }
 
-
-var folderCmd2893 = &cobra.Command{
+var folderCmd = &cobra.Command{
   Use:   "folder",
   Short: "Get Folder",
-  Long: `### Get information about the folder with a specific id.`,
+  Long:  `### Get information about the folder with a specific id.`,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("folder called")
-    
-    _folder_id, _ := cmd.Flags().GetString("folder_id")
-    fmt.Println("folder_id set to ", _folder_id)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    folder_id, _ := cmd.Flags().GetString("folder_id")
+    fmt.Println("folder_id set to", folder_id)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var updateFolderCmd = &cobra.Command{
   Use:   "updateFolder",
   Short: "Update Folder",
-  Long: `### Update the folder with a specific id.`,
+  Long:  `### Update the folder with a specific id.`,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("updateFolder called")
-    
-    _folder_id, _ := cmd.Flags().GetString("folder_id")
-    fmt.Println("folder_id set to ", _folder_id)
 
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+    folder_id, _ := cmd.Flags().GetString("folder_id")
+    fmt.Println("folder_id set to", folder_id)
+
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
   },
 }
-
 
 var deleteFolderCmd = &cobra.Command{
   Use:   "deleteFolder",
@@ -3771,12 +3573,11 @@ var deleteFolderCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("deleteFolder called")
-    
-    _folder_id, _ := cmd.Flags().GetString("folder_id")
-    fmt.Println("folder_id set to ", _folder_id)
+
+    folder_id, _ := cmd.Flags().GetString("folder_id")
+    fmt.Println("folder_id set to", folder_id)
   },
 }
-
 
 var allFoldersCmd = &cobra.Command{
   Use:   "allFolders",
@@ -3789,12 +3590,11 @@ In API 4.0+, all personal folders will be returned.
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("allFolders called")
-    
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var createFolderCmd = &cobra.Command{
   Use:   "createFolder",
@@ -3806,91 +3606,86 @@ returns 404 Not Found.
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("createFolder called")
-    
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
   },
 }
-
 
 var folderChildrenCmd = &cobra.Command{
   Use:   "folderChildren",
   Short: "Get Folder Children",
-  Long: `### Get the children of a folder.`,
+  Long:  `### Get the children of a folder.`,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("folderChildren called")
-    
-    _folder_id, _ := cmd.Flags().GetString("folder_id")
-    fmt.Println("folder_id set to ", _folder_id)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    folder_id, _ := cmd.Flags().GetString("folder_id")
+    fmt.Println("folder_id set to", folder_id)
 
-    _page, _ := cmd.Flags().GetInt64("page")
-    fmt.Println("page set to ", _page)
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
 
-    _per_page, _ := cmd.Flags().GetInt64("per_page")
-    fmt.Println("per_page set to ", _per_page)
+    page, _ := cmd.Flags().GetInt64("page")
+    fmt.Println("page set to", page)
 
-    _sorts, _ := cmd.Flags().GetString("sorts")
-    fmt.Println("sorts set to ", _sorts)
+    per_page, _ := cmd.Flags().GetInt64("per_page")
+    fmt.Println("per_page set to", per_page)
+
+    sorts, _ := cmd.Flags().GetString("sorts")
+    fmt.Println("sorts set to", sorts)
   },
 }
-
 
 var folderChildrenSearchCmd = &cobra.Command{
   Use:   "folderChildrenSearch",
   Short: "Search Folder Children",
-  Long: `### Search the children of a folder`,
+  Long:  `### Search the children of a folder`,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("folderChildrenSearch called")
-    
-    _folder_id, _ := cmd.Flags().GetString("folder_id")
-    fmt.Println("folder_id set to ", _folder_id)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    folder_id, _ := cmd.Flags().GetString("folder_id")
+    fmt.Println("folder_id set to", folder_id)
 
-    _sorts, _ := cmd.Flags().GetString("sorts")
-    fmt.Println("sorts set to ", _sorts)
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
 
-    _name, _ := cmd.Flags().GetString("name")
-    fmt.Println("name set to ", _name)
+    sorts, _ := cmd.Flags().GetString("sorts")
+    fmt.Println("sorts set to", sorts)
+
+    name, _ := cmd.Flags().GetString("name")
+    fmt.Println("name set to", name)
   },
 }
-
 
 var folderParentCmd = &cobra.Command{
   Use:   "folderParent",
   Short: "Get Folder Parent",
-  Long: `### Get the parent of a folder`,
+  Long:  `### Get the parent of a folder`,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("folderParent called")
-    
-    _folder_id, _ := cmd.Flags().GetString("folder_id")
-    fmt.Println("folder_id set to ", _folder_id)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    folder_id, _ := cmd.Flags().GetString("folder_id")
+    fmt.Println("folder_id set to", folder_id)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var folderAncestorsCmd = &cobra.Command{
   Use:   "folderAncestors",
   Short: "Get Folder Ancestors",
-  Long: `### Get the ancestors of a folder`,
+  Long:  `### Get the ancestors of a folder`,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("folderAncestors called")
-    
-    _folder_id, _ := cmd.Flags().GetString("folder_id")
-    fmt.Println("folder_id set to ", _folder_id)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    folder_id, _ := cmd.Flags().GetString("folder_id")
+    fmt.Println("folder_id set to", folder_id)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var folderLooksCmd = &cobra.Command{
   Use:   "folderLooks",
@@ -3901,40 +3696,35 @@ In API 4.0+, all looks in a folder will be returned, excluding looks in the tras
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("folderLooks called")
-    
-    _folder_id, _ := cmd.Flags().GetString("folder_id")
-    fmt.Println("folder_id set to ", _folder_id)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    folder_id, _ := cmd.Flags().GetString("folder_id")
+    fmt.Println("folder_id set to", folder_id)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var folderDashboardsCmd = &cobra.Command{
   Use:   "folderDashboards",
   Short: "Get Folder Dashboards",
-  Long: `### Get the dashboards in a folder`,
+  Long:  `### Get the dashboards in a folder`,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("folderDashboards called")
-    
-    _folder_id, _ := cmd.Flags().GetString("folder_id")
-    fmt.Println("folder_id set to ", _folder_id)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    folder_id, _ := cmd.Flags().GetString("folder_id")
+    fmt.Println("folder_id set to", folder_id)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
 
-
-
-
-var groupCmd = &cobra.Command{
+var GroupCmd = &cobra.Command{
   Use:   "Group",
   Short: "Manage Groups",
-  Long: "Manage Groups",
+  Long:  "Manage Groups",
 }
-
 
 var allGroupsCmd = &cobra.Command{
   Use:   "allGroups",
@@ -3943,30 +3733,29 @@ var allGroupsCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("allGroups called")
-    
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
 
-    _page, _ := cmd.Flags().GetInt64("page")
-    fmt.Println("page set to ", _page)
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
 
-    _per_page, _ := cmd.Flags().GetInt64("per_page")
-    fmt.Println("per_page set to ", _per_page)
+    page, _ := cmd.Flags().GetInt64("page")
+    fmt.Println("page set to", page)
 
-    _sorts, _ := cmd.Flags().GetString("sorts")
-    fmt.Println("sorts set to ", _sorts)
+    per_page, _ := cmd.Flags().GetInt64("per_page")
+    fmt.Println("per_page set to", per_page)
 
-    _ids, _ := cmd.Flags().GetString("ids")
-    fmt.Println("ids set to ", _ids)
+    sorts, _ := cmd.Flags().GetString("sorts")
+    fmt.Println("sorts set to", sorts)
 
-    _content_metadata_id, _ := cmd.Flags().GetInt64("content_metadata_id")
-    fmt.Println("content_metadata_id set to ", _content_metadata_id)
+    ids, _ := cmd.Flags().GetString("ids")
+    fmt.Println("ids set to", ids)
 
-    _can_add_to_content_metadata, _ := cmd.Flags().GetBool("can_add_to_content_metadata")
-    fmt.Println("can_add_to_content_metadata set to ", _can_add_to_content_metadata)
+    content_metadata_id, _ := cmd.Flags().GetInt64("content_metadata_id")
+    fmt.Println("content_metadata_id set to", content_metadata_id)
+
+    can_add_to_content_metadata, _ := cmd.Flags().GetBool("can_add_to_content_metadata")
+    fmt.Println("can_add_to_content_metadata set to", can_add_to_content_metadata)
   },
 }
-
 
 var createGroupCmd = &cobra.Command{
   Use:   "createGroup",
@@ -3975,15 +3764,14 @@ var createGroupCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("createGroup called")
-    
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var searchGroupsCmd = &cobra.Command{
   Use:   "searchGroups",
@@ -4016,39 +3804,38 @@ Boolean search params accept only "true" and "false" as values.
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("searchGroups called")
-    
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
 
-    _limit, _ := cmd.Flags().GetInt64("limit")
-    fmt.Println("limit set to ", _limit)
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
 
-    _offset, _ := cmd.Flags().GetInt64("offset")
-    fmt.Println("offset set to ", _offset)
+    limit, _ := cmd.Flags().GetInt64("limit")
+    fmt.Println("limit set to", limit)
 
-    _sorts, _ := cmd.Flags().GetString("sorts")
-    fmt.Println("sorts set to ", _sorts)
+    offset, _ := cmd.Flags().GetInt64("offset")
+    fmt.Println("offset set to", offset)
 
-    _filter_or, _ := cmd.Flags().GetBool("filter_or")
-    fmt.Println("filter_or set to ", _filter_or)
+    sorts, _ := cmd.Flags().GetString("sorts")
+    fmt.Println("sorts set to", sorts)
 
-    _id, _ := cmd.Flags().GetInt64("id")
-    fmt.Println("id set to ", _id)
+    filter_or, _ := cmd.Flags().GetBool("filter_or")
+    fmt.Println("filter_or set to", filter_or)
 
-    _name, _ := cmd.Flags().GetString("name")
-    fmt.Println("name set to ", _name)
+    id, _ := cmd.Flags().GetInt64("id")
+    fmt.Println("id set to", id)
 
-    _external_group_id, _ := cmd.Flags().GetString("external_group_id")
-    fmt.Println("external_group_id set to ", _external_group_id)
+    name, _ := cmd.Flags().GetString("name")
+    fmt.Println("name set to", name)
 
-    _externally_managed, _ := cmd.Flags().GetBool("externally_managed")
-    fmt.Println("externally_managed set to ", _externally_managed)
+    external_group_id, _ := cmd.Flags().GetString("external_group_id")
+    fmt.Println("external_group_id set to", external_group_id)
 
-    _externally_orphaned, _ := cmd.Flags().GetBool("externally_orphaned")
-    fmt.Println("externally_orphaned set to ", _externally_orphaned)
+    externally_managed, _ := cmd.Flags().GetBool("externally_managed")
+    fmt.Println("externally_managed set to", externally_managed)
+
+    externally_orphaned, _ := cmd.Flags().GetBool("externally_orphaned")
+    fmt.Println("externally_orphaned set to", externally_orphaned)
   },
 }
-
 
 var searchGroupsWithRolesCmd = &cobra.Command{
   Use:   "searchGroupsWithRoles",
@@ -4081,39 +3868,38 @@ Boolean search params accept only "true" and "false" as values.
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("searchGroupsWithRoles called")
-    
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
 
-    _limit, _ := cmd.Flags().GetInt64("limit")
-    fmt.Println("limit set to ", _limit)
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
 
-    _offset, _ := cmd.Flags().GetInt64("offset")
-    fmt.Println("offset set to ", _offset)
+    limit, _ := cmd.Flags().GetInt64("limit")
+    fmt.Println("limit set to", limit)
 
-    _sorts, _ := cmd.Flags().GetString("sorts")
-    fmt.Println("sorts set to ", _sorts)
+    offset, _ := cmd.Flags().GetInt64("offset")
+    fmt.Println("offset set to", offset)
 
-    _filter_or, _ := cmd.Flags().GetBool("filter_or")
-    fmt.Println("filter_or set to ", _filter_or)
+    sorts, _ := cmd.Flags().GetString("sorts")
+    fmt.Println("sorts set to", sorts)
 
-    _id, _ := cmd.Flags().GetInt64("id")
-    fmt.Println("id set to ", _id)
+    filter_or, _ := cmd.Flags().GetBool("filter_or")
+    fmt.Println("filter_or set to", filter_or)
 
-    _name, _ := cmd.Flags().GetString("name")
-    fmt.Println("name set to ", _name)
+    id, _ := cmd.Flags().GetInt64("id")
+    fmt.Println("id set to", id)
 
-    _external_group_id, _ := cmd.Flags().GetString("external_group_id")
-    fmt.Println("external_group_id set to ", _external_group_id)
+    name, _ := cmd.Flags().GetString("name")
+    fmt.Println("name set to", name)
 
-    _externally_managed, _ := cmd.Flags().GetBool("externally_managed")
-    fmt.Println("externally_managed set to ", _externally_managed)
+    external_group_id, _ := cmd.Flags().GetString("external_group_id")
+    fmt.Println("external_group_id set to", external_group_id)
 
-    _externally_orphaned, _ := cmd.Flags().GetBool("externally_orphaned")
-    fmt.Println("externally_orphaned set to ", _externally_orphaned)
+    externally_managed, _ := cmd.Flags().GetBool("externally_managed")
+    fmt.Println("externally_managed set to", externally_managed)
+
+    externally_orphaned, _ := cmd.Flags().GetBool("externally_orphaned")
+    fmt.Println("externally_orphaned set to", externally_orphaned)
   },
 }
-
 
 var searchGroupsWithHierarchyCmd = &cobra.Command{
   Use:   "searchGroupsWithHierarchy",
@@ -4147,75 +3933,72 @@ Boolean search params accept only "true" and "false" as values.
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("searchGroupsWithHierarchy called")
-    
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
 
-    _limit, _ := cmd.Flags().GetInt64("limit")
-    fmt.Println("limit set to ", _limit)
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
 
-    _offset, _ := cmd.Flags().GetInt64("offset")
-    fmt.Println("offset set to ", _offset)
+    limit, _ := cmd.Flags().GetInt64("limit")
+    fmt.Println("limit set to", limit)
 
-    _sorts, _ := cmd.Flags().GetString("sorts")
-    fmt.Println("sorts set to ", _sorts)
+    offset, _ := cmd.Flags().GetInt64("offset")
+    fmt.Println("offset set to", offset)
 
-    _filter_or, _ := cmd.Flags().GetBool("filter_or")
-    fmt.Println("filter_or set to ", _filter_or)
+    sorts, _ := cmd.Flags().GetString("sorts")
+    fmt.Println("sorts set to", sorts)
 
-    _id, _ := cmd.Flags().GetInt64("id")
-    fmt.Println("id set to ", _id)
+    filter_or, _ := cmd.Flags().GetBool("filter_or")
+    fmt.Println("filter_or set to", filter_or)
 
-    _name, _ := cmd.Flags().GetString("name")
-    fmt.Println("name set to ", _name)
+    id, _ := cmd.Flags().GetInt64("id")
+    fmt.Println("id set to", id)
 
-    _external_group_id, _ := cmd.Flags().GetString("external_group_id")
-    fmt.Println("external_group_id set to ", _external_group_id)
+    name, _ := cmd.Flags().GetString("name")
+    fmt.Println("name set to", name)
 
-    _externally_managed, _ := cmd.Flags().GetBool("externally_managed")
-    fmt.Println("externally_managed set to ", _externally_managed)
+    external_group_id, _ := cmd.Flags().GetString("external_group_id")
+    fmt.Println("external_group_id set to", external_group_id)
 
-    _externally_orphaned, _ := cmd.Flags().GetBool("externally_orphaned")
-    fmt.Println("externally_orphaned set to ", _externally_orphaned)
+    externally_managed, _ := cmd.Flags().GetBool("externally_managed")
+    fmt.Println("externally_managed set to", externally_managed)
+
+    externally_orphaned, _ := cmd.Flags().GetBool("externally_orphaned")
+    fmt.Println("externally_orphaned set to", externally_orphaned)
   },
 }
 
-
-var groupCmd6003 = &cobra.Command{
+var groupCmd = &cobra.Command{
   Use:   "group",
   Short: "Get Group",
   Long: `### Get information about a group.
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("group called")
-    
-    _group_id, _ := cmd.Flags().GetInt64("group_id")
-    fmt.Println("group_id set to ", _group_id)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    group_id, _ := cmd.Flags().GetInt64("group_id")
+    fmt.Println("group_id set to", group_id)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var updateGroupCmd = &cobra.Command{
   Use:   "updateGroup",
   Short: "Update Group",
-  Long: `### Updates the a group (admin only).`,
+  Long:  `### Updates the a group (admin only).`,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("updateGroup called")
-    
-    _group_id, _ := cmd.Flags().GetInt64("group_id")
-    fmt.Println("group_id set to ", _group_id)
 
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+    group_id, _ := cmd.Flags().GetInt64("group_id")
+    fmt.Println("group_id set to", group_id)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var deleteGroupCmd = &cobra.Command{
   Use:   "deleteGroup",
@@ -4224,12 +4007,11 @@ var deleteGroupCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("deleteGroup called")
-    
-    _group_id, _ := cmd.Flags().GetInt64("group_id")
-    fmt.Println("group_id set to ", _group_id)
+
+    group_id, _ := cmd.Flags().GetInt64("group_id")
+    fmt.Println("group_id set to", group_id)
   },
 }
-
 
 var allGroupGroupsCmd = &cobra.Command{
   Use:   "allGroupGroups",
@@ -4238,15 +4020,14 @@ var allGroupGroupsCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("allGroupGroups called")
-    
-    _group_id, _ := cmd.Flags().GetInt64("group_id")
-    fmt.Println("group_id set to ", _group_id)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    group_id, _ := cmd.Flags().GetInt64("group_id")
+    fmt.Println("group_id set to", group_id)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var addGroupGroupCmd = &cobra.Command{
   Use:   "addGroupGroup",
@@ -4255,15 +4036,14 @@ var addGroupGroupCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("addGroupGroup called")
-    
-    _group_id, _ := cmd.Flags().GetInt64("group_id")
-    fmt.Println("group_id set to ", _group_id)
 
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+    group_id, _ := cmd.Flags().GetInt64("group_id")
+    fmt.Println("group_id set to", group_id)
+
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
   },
 }
-
 
 var allGroupUsersCmd = &cobra.Command{
   Use:   "allGroupUsers",
@@ -4272,24 +4052,23 @@ var allGroupUsersCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("allGroupUsers called")
-    
-    _group_id, _ := cmd.Flags().GetInt64("group_id")
-    fmt.Println("group_id set to ", _group_id)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    group_id, _ := cmd.Flags().GetInt64("group_id")
+    fmt.Println("group_id set to", group_id)
 
-    _page, _ := cmd.Flags().GetInt64("page")
-    fmt.Println("page set to ", _page)
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
 
-    _per_page, _ := cmd.Flags().GetInt64("per_page")
-    fmt.Println("per_page set to ", _per_page)
+    page, _ := cmd.Flags().GetInt64("page")
+    fmt.Println("page set to", page)
 
-    _sorts, _ := cmd.Flags().GetString("sorts")
-    fmt.Println("sorts set to ", _sorts)
+    per_page, _ := cmd.Flags().GetInt64("per_page")
+    fmt.Println("per_page set to", per_page)
+
+    sorts, _ := cmd.Flags().GetString("sorts")
+    fmt.Println("sorts set to", sorts)
   },
 }
-
 
 var addGroupUserCmd = &cobra.Command{
   Use:   "addGroupUser",
@@ -4298,15 +4077,14 @@ var addGroupUserCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("addGroupUser called")
-    
-    _group_id, _ := cmd.Flags().GetInt64("group_id")
-    fmt.Println("group_id set to ", _group_id)
 
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+    group_id, _ := cmd.Flags().GetInt64("group_id")
+    fmt.Println("group_id set to", group_id)
+
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
   },
 }
-
 
 var deleteGroupUserCmd = &cobra.Command{
   Use:   "deleteGroupUser",
@@ -4315,15 +4093,14 @@ var deleteGroupUserCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("deleteGroupUser called")
-    
-    _group_id, _ := cmd.Flags().GetInt64("group_id")
-    fmt.Println("group_id set to ", _group_id)
 
-    _user_id, _ := cmd.Flags().GetInt64("user_id")
-    fmt.Println("user_id set to ", _user_id)
+    group_id, _ := cmd.Flags().GetInt64("group_id")
+    fmt.Println("group_id set to", group_id)
+
+    user_id, _ := cmd.Flags().GetInt64("user_id")
+    fmt.Println("user_id set to", user_id)
   },
 }
-
 
 var deleteGroupFromGroupCmd = &cobra.Command{
   Use:   "deleteGroupFromGroup",
@@ -4332,15 +4109,14 @@ var deleteGroupFromGroupCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("deleteGroupFromGroup called")
-    
-    _group_id, _ := cmd.Flags().GetInt64("group_id")
-    fmt.Println("group_id set to ", _group_id)
 
-    _deleting_group_id, _ := cmd.Flags().GetInt64("deleting_group_id")
-    fmt.Println("deleting_group_id set to ", _deleting_group_id)
+    group_id, _ := cmd.Flags().GetInt64("group_id")
+    fmt.Println("group_id set to", group_id)
+
+    deleting_group_id, _ := cmd.Flags().GetInt64("deleting_group_id")
+    fmt.Println("deleting_group_id set to", deleting_group_id)
   },
 }
-
 
 var updateUserAttributeGroupValueCmd = &cobra.Command{
   Use:   "updateUserAttributeGroupValue",
@@ -4351,18 +4127,17 @@ For information about how user attribute values are calculated, see [Set User At
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("updateUserAttributeGroupValue called")
-    
-    _group_id, _ := cmd.Flags().GetInt64("group_id")
-    fmt.Println("group_id set to ", _group_id)
 
-    _user_attribute_id, _ := cmd.Flags().GetInt64("user_attribute_id")
-    fmt.Println("user_attribute_id set to ", _user_attribute_id)
+    group_id, _ := cmd.Flags().GetInt64("group_id")
+    fmt.Println("group_id set to", group_id)
 
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+    user_attribute_id, _ := cmd.Flags().GetInt64("user_attribute_id")
+    fmt.Println("user_attribute_id set to", user_attribute_id)
+
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
   },
 }
-
 
 var deleteUserAttributeGroupValueCmd = &cobra.Command{
   Use:   "deleteUserAttributeGroupValue",
@@ -4371,24 +4146,20 @@ var deleteUserAttributeGroupValueCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("deleteUserAttributeGroupValue called")
-    
-    _group_id, _ := cmd.Flags().GetInt64("group_id")
-    fmt.Println("group_id set to ", _group_id)
 
-    _user_attribute_id, _ := cmd.Flags().GetInt64("user_attribute_id")
-    fmt.Println("user_attribute_id set to ", _user_attribute_id)
+    group_id, _ := cmd.Flags().GetInt64("group_id")
+    fmt.Println("group_id set to", group_id)
+
+    user_attribute_id, _ := cmd.Flags().GetInt64("user_attribute_id")
+    fmt.Println("user_attribute_id set to", user_attribute_id)
   },
 }
 
-
-
-
-var homepageCmd = &cobra.Command{
+var HomepageCmd = &cobra.Command{
   Use:   "Homepage",
   Short: "Manage Homepage",
-  Long: "Manage Homepage",
+  Long:  "Manage Homepage",
 }
-
 
 var allPrimaryHomepageSectionsCmd = &cobra.Command{
   Use:   "allPrimaryHomepageSections",
@@ -4397,21 +4168,17 @@ var allPrimaryHomepageSectionsCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("allPrimaryHomepageSections called")
-    
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
 
-
-
-
-var integrationCmd = &cobra.Command{
+var IntegrationCmd = &cobra.Command{
   Use:   "Integration",
   Short: "Manage Integrations",
-  Long: "Manage Integrations",
+  Long:  "Manage Integrations",
 }
-
 
 var allIntegrationHubsCmd = &cobra.Command{
   Use:   "allIntegrationHubs",
@@ -4420,12 +4187,11 @@ var allIntegrationHubsCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("allIntegrationHubs called")
-    
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var createIntegrationHubCmd = &cobra.Command{
   Use:   "createIntegrationHub",
@@ -4436,15 +4202,14 @@ This API is rate limited to prevent it from being used for SSRF attacks
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("createIntegrationHub called")
-    
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var integrationHubCmd = &cobra.Command{
   Use:   "integrationHub",
@@ -4453,15 +4218,14 @@ var integrationHubCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("integrationHub called")
-    
-    _integration_hub_id, _ := cmd.Flags().GetInt64("integration_hub_id")
-    fmt.Println("integration_hub_id set to ", _integration_hub_id)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    integration_hub_id, _ := cmd.Flags().GetInt64("integration_hub_id")
+    fmt.Println("integration_hub_id set to", integration_hub_id)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var updateIntegrationHubCmd = &cobra.Command{
   Use:   "updateIntegrationHub",
@@ -4472,18 +4236,17 @@ This API is rate limited to prevent it from being used for SSRF attacks
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("updateIntegrationHub called")
-    
-    _integration_hub_id, _ := cmd.Flags().GetInt64("integration_hub_id")
-    fmt.Println("integration_hub_id set to ", _integration_hub_id)
 
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+    integration_hub_id, _ := cmd.Flags().GetInt64("integration_hub_id")
+    fmt.Println("integration_hub_id set to", integration_hub_id)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var deleteIntegrationHubCmd = &cobra.Command{
   Use:   "deleteIntegrationHub",
@@ -4492,25 +4255,23 @@ var deleteIntegrationHubCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("deleteIntegrationHub called")
-    
-    _integration_hub_id, _ := cmd.Flags().GetInt64("integration_hub_id")
-    fmt.Println("integration_hub_id set to ", _integration_hub_id)
+
+    integration_hub_id, _ := cmd.Flags().GetInt64("integration_hub_id")
+    fmt.Println("integration_hub_id set to", integration_hub_id)
   },
 }
-
 
 var acceptIntegrationHubLegalAgreementCmd = &cobra.Command{
   Use:   "acceptIntegrationHubLegalAgreement",
   Short: "Accept Integration Hub Legal Agreement",
-  Long: `Accepts the legal agreement for a given integration hub. This only works for integration hubs that have legal_agreement_required set to true and legal_agreement_signed set to false.`,
+  Long:  `Accepts the legal agreement for a given integration hub. This only works for integration hubs that have legal_agreement_required set to true and legal_agreement_signed set to false.`,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("acceptIntegrationHubLegalAgreement called")
-    
-    _integration_hub_id, _ := cmd.Flags().GetInt64("integration_hub_id")
-    fmt.Println("integration_hub_id set to ", _integration_hub_id)
+
+    integration_hub_id, _ := cmd.Flags().GetInt64("integration_hub_id")
+    fmt.Println("integration_hub_id set to", integration_hub_id)
   },
 }
-
 
 var allIntegrationsCmd = &cobra.Command{
   Use:   "allIntegrations",
@@ -4519,32 +4280,30 @@ var allIntegrationsCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("allIntegrations called")
-    
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
 
-    _integration_hub_id, _ := cmd.Flags().GetString("integration_hub_id")
-    fmt.Println("integration_hub_id set to ", _integration_hub_id)
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
+
+    integration_hub_id, _ := cmd.Flags().GetString("integration_hub_id")
+    fmt.Println("integration_hub_id set to", integration_hub_id)
   },
 }
 
-
-var integrationCmd7065 = &cobra.Command{
+var integrationCmd = &cobra.Command{
   Use:   "integration",
   Short: "Get Integration",
   Long: `### Get information about a Integration.
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("integration called")
-    
-    _integration_id, _ := cmd.Flags().GetString("integration_id")
-    fmt.Println("integration_id set to ", _integration_id)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    integration_id, _ := cmd.Flags().GetString("integration_id")
+    fmt.Println("integration_id set to", integration_id)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var updateIntegrationCmd = &cobra.Command{
   Use:   "updateIntegration",
@@ -4553,56 +4312,50 @@ var updateIntegrationCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("updateIntegration called")
-    
-    _integration_id, _ := cmd.Flags().GetString("integration_id")
-    fmt.Println("integration_id set to ", _integration_id)
 
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+    integration_id, _ := cmd.Flags().GetString("integration_id")
+    fmt.Println("integration_id set to", integration_id)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var fetchIntegrationFormCmd = &cobra.Command{
   Use:   "fetchIntegrationForm",
   Short: "Fetch Remote Integration Form",
-  Long: `Returns the Integration form for presentation to the user.`,
+  Long:  `Returns the Integration form for presentation to the user.`,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("fetchIntegrationForm called")
-    
-    _integration_id, _ := cmd.Flags().GetString("integration_id")
-    fmt.Println("integration_id set to ", _integration_id)
 
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+    integration_id, _ := cmd.Flags().GetString("integration_id")
+    fmt.Println("integration_id set to", integration_id)
+
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
   },
 }
-
 
 var testIntegrationCmd = &cobra.Command{
   Use:   "testIntegration",
   Short: "Test integration",
-  Long: `Tests the integration to make sure all the settings are working.`,
+  Long:  `Tests the integration to make sure all the settings are working.`,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("testIntegration called")
-    
-    _integration_id, _ := cmd.Flags().GetString("integration_id")
-    fmt.Println("integration_id set to ", _integration_id)
+
+    integration_id, _ := cmd.Flags().GetString("integration_id")
+    fmt.Println("integration_id set to", integration_id)
   },
 }
 
-
-
-
-var lookCmd = &cobra.Command{
+var LookCmd = &cobra.Command{
   Use:   "Look",
   Short: "Run and Manage Looks",
-  Long: "Run and Manage Looks",
+  Long:  "Run and Manage Looks",
 }
-
 
 var allLooksCmd = &cobra.Command{
   Use:   "allLooks",
@@ -4617,12 +4370,11 @@ Find **soft-deleted looks** with [search_looks()](#!/Look/search_looks)
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("allLooks called")
-    
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var createLookCmd = &cobra.Command{
   Use:   "createLook",
@@ -4637,15 +4389,14 @@ in the call to 'create_look()'.
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("createLook called")
-    
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var searchLooksCmd = &cobra.Command{
   Use:   "searchLooks",
@@ -4680,65 +4431,64 @@ Get a **single look** by id with [look(id)](#!/Look/look)
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("searchLooks called")
-    
-    _id, _ := cmd.Flags().GetString("id")
-    fmt.Println("id set to ", _id)
 
-    _title, _ := cmd.Flags().GetString("title")
-    fmt.Println("title set to ", _title)
+    id, _ := cmd.Flags().GetString("id")
+    fmt.Println("id set to", id)
 
-    _description, _ := cmd.Flags().GetString("description")
-    fmt.Println("description set to ", _description)
+    title, _ := cmd.Flags().GetString("title")
+    fmt.Println("title set to", title)
 
-    _content_favorite_id, _ := cmd.Flags().GetString("content_favorite_id")
-    fmt.Println("content_favorite_id set to ", _content_favorite_id)
+    description, _ := cmd.Flags().GetString("description")
+    fmt.Println("description set to", description)
 
-    _folder_id, _ := cmd.Flags().GetString("folder_id")
-    fmt.Println("folder_id set to ", _folder_id)
+    content_favorite_id, _ := cmd.Flags().GetString("content_favorite_id")
+    fmt.Println("content_favorite_id set to", content_favorite_id)
 
-    _user_id, _ := cmd.Flags().GetString("user_id")
-    fmt.Println("user_id set to ", _user_id)
+    folder_id, _ := cmd.Flags().GetString("folder_id")
+    fmt.Println("folder_id set to", folder_id)
 
-    _view_count, _ := cmd.Flags().GetString("view_count")
-    fmt.Println("view_count set to ", _view_count)
+    user_id, _ := cmd.Flags().GetString("user_id")
+    fmt.Println("user_id set to", user_id)
 
-    _deleted, _ := cmd.Flags().GetBool("deleted")
-    fmt.Println("deleted set to ", _deleted)
+    view_count, _ := cmd.Flags().GetString("view_count")
+    fmt.Println("view_count set to", view_count)
 
-    _query_id, _ := cmd.Flags().GetInt64("query_id")
-    fmt.Println("query_id set to ", _query_id)
+    deleted, _ := cmd.Flags().GetBool("deleted")
+    fmt.Println("deleted set to", deleted)
 
-    _curate, _ := cmd.Flags().GetBool("curate")
-    fmt.Println("curate set to ", _curate)
+    query_id, _ := cmd.Flags().GetInt64("query_id")
+    fmt.Println("query_id set to", query_id)
 
-    _last_viewed_at, _ := cmd.Flags().GetString("last_viewed_at")
-    fmt.Println("last_viewed_at set to ", _last_viewed_at)
+    curate, _ := cmd.Flags().GetBool("curate")
+    fmt.Println("curate set to", curate)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    last_viewed_at, _ := cmd.Flags().GetString("last_viewed_at")
+    fmt.Println("last_viewed_at set to", last_viewed_at)
 
-    _page, _ := cmd.Flags().GetInt64("page")
-    fmt.Println("page set to ", _page)
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
 
-    _per_page, _ := cmd.Flags().GetInt64("per_page")
-    fmt.Println("per_page set to ", _per_page)
+    page, _ := cmd.Flags().GetInt64("page")
+    fmt.Println("page set to", page)
 
-    _limit, _ := cmd.Flags().GetInt64("limit")
-    fmt.Println("limit set to ", _limit)
+    per_page, _ := cmd.Flags().GetInt64("per_page")
+    fmt.Println("per_page set to", per_page)
 
-    _offset, _ := cmd.Flags().GetInt64("offset")
-    fmt.Println("offset set to ", _offset)
+    limit, _ := cmd.Flags().GetInt64("limit")
+    fmt.Println("limit set to", limit)
 
-    _sorts, _ := cmd.Flags().GetString("sorts")
-    fmt.Println("sorts set to ", _sorts)
+    offset, _ := cmd.Flags().GetInt64("offset")
+    fmt.Println("offset set to", offset)
 
-    _filter_or, _ := cmd.Flags().GetBool("filter_or")
-    fmt.Println("filter_or set to ", _filter_or)
+    sorts, _ := cmd.Flags().GetString("sorts")
+    fmt.Println("sorts set to", sorts)
+
+    filter_or, _ := cmd.Flags().GetBool("filter_or")
+    fmt.Println("filter_or set to", filter_or)
   },
 }
 
-
-var lookCmd1796 = &cobra.Command{
+var lookCmd = &cobra.Command{
   Use:   "look",
   Short: "Get Look",
   Long: `### Get a Look.
@@ -4748,15 +4498,14 @@ Returns detailed information about a Look and its associated Query.
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("look called")
-    
-    _look_id, _ := cmd.Flags().GetString("look_id")
-    fmt.Println("look_id set to ", _look_id)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    look_id, _ := cmd.Flags().GetString("look_id")
+    fmt.Println("look_id set to", look_id)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var updateLookCmd = &cobra.Command{
   Use:   "updateLook",
@@ -4784,18 +4533,17 @@ database and destroyed. There is no "undo" for 'delete_look()'.
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("updateLook called")
-    
-    _look_id, _ := cmd.Flags().GetString("look_id")
-    fmt.Println("look_id set to ", _look_id)
 
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+    look_id, _ := cmd.Flags().GetString("look_id")
+    fmt.Println("look_id set to", look_id)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var deleteLookCmd = &cobra.Command{
   Use:   "deleteLook",
@@ -4810,12 +4558,11 @@ For information about soft-delete (which can be undone) see [update_look()](#!/L
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("deleteLook called")
-    
-    _look_id, _ := cmd.Flags().GetString("look_id")
-    fmt.Println("look_id set to ", _look_id)
+
+    look_id, _ := cmd.Flags().GetString("look_id")
+    fmt.Println("look_id set to", look_id)
   },
 }
-
 
 var runLookCmd = &cobra.Command{
   Use:   "runLook",
@@ -4843,51 +4590,50 @@ Supported formats:
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("runLook called")
-    
-    _look_id, _ := cmd.Flags().GetString("look_id")
-    fmt.Println("look_id set to ", _look_id)
 
-    _result_format, _ := cmd.Flags().GetString("result_format")
-    fmt.Println("result_format set to ", _result_format)
+    look_id, _ := cmd.Flags().GetString("look_id")
+    fmt.Println("look_id set to", look_id)
 
-    _limit, _ := cmd.Flags().GetInt64("limit")
-    fmt.Println("limit set to ", _limit)
+    result_format, _ := cmd.Flags().GetString("result_format")
+    fmt.Println("result_format set to", result_format)
 
-    _apply_formatting, _ := cmd.Flags().GetBool("apply_formatting")
-    fmt.Println("apply_formatting set to ", _apply_formatting)
+    limit, _ := cmd.Flags().GetInt64("limit")
+    fmt.Println("limit set to", limit)
 
-    _apply_vis, _ := cmd.Flags().GetBool("apply_vis")
-    fmt.Println("apply_vis set to ", _apply_vis)
+    apply_formatting, _ := cmd.Flags().GetBool("apply_formatting")
+    fmt.Println("apply_formatting set to", apply_formatting)
 
-    _cache, _ := cmd.Flags().GetBool("cache")
-    fmt.Println("cache set to ", _cache)
+    apply_vis, _ := cmd.Flags().GetBool("apply_vis")
+    fmt.Println("apply_vis set to", apply_vis)
 
-    _image_width, _ := cmd.Flags().GetInt64("image_width")
-    fmt.Println("image_width set to ", _image_width)
+    cache, _ := cmd.Flags().GetBool("cache")
+    fmt.Println("cache set to", cache)
 
-    _image_height, _ := cmd.Flags().GetInt64("image_height")
-    fmt.Println("image_height set to ", _image_height)
+    image_width, _ := cmd.Flags().GetInt64("image_width")
+    fmt.Println("image_width set to", image_width)
 
-    _generate_drill_links, _ := cmd.Flags().GetBool("generate_drill_links")
-    fmt.Println("generate_drill_links set to ", _generate_drill_links)
+    image_height, _ := cmd.Flags().GetInt64("image_height")
+    fmt.Println("image_height set to", image_height)
 
-    _force_production, _ := cmd.Flags().GetBool("force_production")
-    fmt.Println("force_production set to ", _force_production)
+    generate_drill_links, _ := cmd.Flags().GetBool("generate_drill_links")
+    fmt.Println("generate_drill_links set to", generate_drill_links)
 
-    _cache_only, _ := cmd.Flags().GetBool("cache_only")
-    fmt.Println("cache_only set to ", _cache_only)
+    force_production, _ := cmd.Flags().GetBool("force_production")
+    fmt.Println("force_production set to", force_production)
 
-    _path_prefix, _ := cmd.Flags().GetString("path_prefix")
-    fmt.Println("path_prefix set to ", _path_prefix)
+    cache_only, _ := cmd.Flags().GetBool("cache_only")
+    fmt.Println("cache_only set to", cache_only)
 
-    _rebuild_pdts, _ := cmd.Flags().GetBool("rebuild_pdts")
-    fmt.Println("rebuild_pdts set to ", _rebuild_pdts)
+    path_prefix, _ := cmd.Flags().GetString("path_prefix")
+    fmt.Println("path_prefix set to", path_prefix)
 
-    _server_table_calcs, _ := cmd.Flags().GetBool("server_table_calcs")
-    fmt.Println("server_table_calcs set to ", _server_table_calcs)
+    rebuild_pdts, _ := cmd.Flags().GetBool("rebuild_pdts")
+    fmt.Println("rebuild_pdts set to", rebuild_pdts)
+
+    server_table_calcs, _ := cmd.Flags().GetBool("server_table_calcs")
+    fmt.Println("server_table_calcs set to", server_table_calcs)
   },
 }
-
 
 var copyLookCmd = &cobra.Command{
   Use:   "copyLook",
@@ -4902,15 +4648,14 @@ Creates a copy of an existing look, in a specified folder, and returns the copie
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("copyLook called")
-    
-    _look_id, _ := cmd.Flags().GetString("look_id")
-    fmt.Println("look_id set to ", _look_id)
 
-    _folder_id, _ := cmd.Flags().GetString("folder_id")
-    fmt.Println("folder_id set to ", _folder_id)
+    look_id, _ := cmd.Flags().GetString("look_id")
+    fmt.Println("look_id set to", look_id)
+
+    folder_id, _ := cmd.Flags().GetString("folder_id")
+    fmt.Println("folder_id set to", folder_id)
   },
 }
-
 
 var moveLookCmd = &cobra.Command{
   Use:   "moveLook",
@@ -4924,24 +4669,20 @@ Moves a look to a specified folder, and returns the moved look.
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("moveLook called")
-    
-    _look_id, _ := cmd.Flags().GetString("look_id")
-    fmt.Println("look_id set to ", _look_id)
 
-    _folder_id, _ := cmd.Flags().GetString("folder_id")
-    fmt.Println("folder_id set to ", _folder_id)
+    look_id, _ := cmd.Flags().GetString("look_id")
+    fmt.Println("look_id set to", look_id)
+
+    folder_id, _ := cmd.Flags().GetString("folder_id")
+    fmt.Println("folder_id set to", folder_id)
   },
 }
 
-
-
-
-var lookmlModelCmd = &cobra.Command{
+var LookmlModelCmd = &cobra.Command{
   Use:   "LookmlModel",
   Short: "Manage LookML Models",
-  Long: "Manage LookML Models",
+  Long:  "Manage LookML Models",
 }
-
 
 var allLookmlModelsCmd = &cobra.Command{
   Use:   "allLookmlModels",
@@ -4950,18 +4691,17 @@ var allLookmlModelsCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("allLookmlModels called")
-    
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
 
-    _limit, _ := cmd.Flags().GetInt64("limit")
-    fmt.Println("limit set to ", _limit)
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
 
-    _offset, _ := cmd.Flags().GetInt64("offset")
-    fmt.Println("offset set to ", _offset)
+    limit, _ := cmd.Flags().GetInt64("limit")
+    fmt.Println("limit set to", limit)
+
+    offset, _ := cmd.Flags().GetInt64("offset")
+    fmt.Println("offset set to", offset)
   },
 }
-
 
 var createLookmlModelCmd = &cobra.Command{
   Use:   "createLookmlModel",
@@ -4970,29 +4710,27 @@ var createLookmlModelCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("createLookmlModel called")
-    
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
   },
 }
 
-
-var lookmlModelCmd2329 = &cobra.Command{
+var lookmlModelCmd = &cobra.Command{
   Use:   "lookmlModel",
   Short: "Get LookML Model",
   Long: `### Get information about a lookml model.
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("lookmlModel called")
-    
-    _lookml_model_name, _ := cmd.Flags().GetString("lookml_model_name")
-    fmt.Println("lookml_model_name set to ", _lookml_model_name)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    lookml_model_name, _ := cmd.Flags().GetString("lookml_model_name")
+    fmt.Println("lookml_model_name set to", lookml_model_name)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var updateLookmlModelCmd = &cobra.Command{
   Use:   "updateLookmlModel",
@@ -5001,15 +4739,14 @@ var updateLookmlModelCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("updateLookmlModel called")
-    
-    _lookml_model_name, _ := cmd.Flags().GetString("lookml_model_name")
-    fmt.Println("lookml_model_name set to ", _lookml_model_name)
 
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+    lookml_model_name, _ := cmd.Flags().GetString("lookml_model_name")
+    fmt.Println("lookml_model_name set to", lookml_model_name)
+
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
   },
 }
-
 
 var deleteLookmlModelCmd = &cobra.Command{
   Use:   "deleteLookmlModel",
@@ -5018,12 +4755,11 @@ var deleteLookmlModelCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("deleteLookmlModel called")
-    
-    _lookml_model_name, _ := cmd.Flags().GetString("lookml_model_name")
-    fmt.Println("lookml_model_name set to ", _lookml_model_name)
+
+    lookml_model_name, _ := cmd.Flags().GetString("lookml_model_name")
+    fmt.Println("lookml_model_name set to", lookml_model_name)
   },
 }
-
 
 var lookmlModelExploreCmd = &cobra.Command{
   Use:   "lookmlModelExplore",
@@ -5032,27 +4768,23 @@ var lookmlModelExploreCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("lookmlModelExplore called")
-    
-    _lookml_model_name, _ := cmd.Flags().GetString("lookml_model_name")
-    fmt.Println("lookml_model_name set to ", _lookml_model_name)
 
-    _explore_name, _ := cmd.Flags().GetString("explore_name")
-    fmt.Println("explore_name set to ", _explore_name)
+    lookml_model_name, _ := cmd.Flags().GetString("lookml_model_name")
+    fmt.Println("lookml_model_name set to", lookml_model_name)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    explore_name, _ := cmd.Flags().GetString("explore_name")
+    fmt.Println("explore_name set to", explore_name)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
 
-
-
-
-var metadataCmd = &cobra.Command{
+var MetadataCmd = &cobra.Command{
   Use:   "Metadata",
   Short: "Connection Metadata Features",
-  Long: "Connection Metadata Features",
+  Long:  "Connection Metadata Features",
 }
-
 
 var modelFieldnameSuggestionsCmd = &cobra.Command{
   Use:   "modelFieldnameSuggestions",
@@ -5062,24 +4794,23 @@ var modelFieldnameSuggestionsCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("modelFieldnameSuggestions called")
-    
-    _model_name, _ := cmd.Flags().GetString("model_name")
-    fmt.Println("model_name set to ", _model_name)
 
-    _view_name, _ := cmd.Flags().GetString("view_name")
-    fmt.Println("view_name set to ", _view_name)
+    model_name, _ := cmd.Flags().GetString("model_name")
+    fmt.Println("model_name set to", model_name)
 
-    _field_name, _ := cmd.Flags().GetString("field_name")
-    fmt.Println("field_name set to ", _field_name)
+    view_name, _ := cmd.Flags().GetString("view_name")
+    fmt.Println("view_name set to", view_name)
 
-    _term, _ := cmd.Flags().GetString("term")
-    fmt.Println("term set to ", _term)
+    field_name, _ := cmd.Flags().GetString("field_name")
+    fmt.Println("field_name set to", field_name)
 
-    _filters, _ := cmd.Flags().GetString("filters")
-    fmt.Println("filters set to ", _filters)
+    term, _ := cmd.Flags().GetString("term")
+    fmt.Println("term set to", term)
+
+    filters, _ := cmd.Flags().GetString("filters")
+    fmt.Println("filters set to", filters)
   },
 }
-
 
 var getModelCmd = &cobra.Command{
   Use:   "getModel",
@@ -5089,12 +4820,11 @@ var getModelCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("getModel called")
-    
-    _model_name, _ := cmd.Flags().GetString("model_name")
-    fmt.Println("model_name set to ", _model_name)
+
+    model_name, _ := cmd.Flags().GetString("model_name")
+    fmt.Println("model_name set to", model_name)
   },
 }
-
 
 var connectionDatabasesCmd = &cobra.Command{
   Use:   "connectionDatabases",
@@ -5111,12 +4841,11 @@ multiple databases.
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("connectionDatabases called")
-    
-    _connection_name, _ := cmd.Flags().GetString("connection_name")
-    fmt.Println("connection_name set to ", _connection_name)
+
+    connection_name, _ := cmd.Flags().GetString("connection_name")
+    fmt.Println("connection_name set to", connection_name)
   },
 }
-
 
 var connectionFeaturesCmd = &cobra.Command{
   Use:   "connectionFeatures",
@@ -5128,15 +4857,14 @@ Returns a list of feature names with 'true' (available) or 'false' (not availabl
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("connectionFeatures called")
-    
-    _connection_name, _ := cmd.Flags().GetString("connection_name")
-    fmt.Println("connection_name set to ", _connection_name)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    connection_name, _ := cmd.Flags().GetString("connection_name")
+    fmt.Println("connection_name set to", connection_name)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var connectionSchemasCmd = &cobra.Command{
   Use:   "connectionSchemas",
@@ -5146,21 +4874,20 @@ var connectionSchemasCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("connectionSchemas called")
-    
-    _connection_name, _ := cmd.Flags().GetString("connection_name")
-    fmt.Println("connection_name set to ", _connection_name)
 
-    _database, _ := cmd.Flags().GetString("database")
-    fmt.Println("database set to ", _database)
+    connection_name, _ := cmd.Flags().GetString("connection_name")
+    fmt.Println("connection_name set to", connection_name)
 
-    _cache, _ := cmd.Flags().GetBool("cache")
-    fmt.Println("cache set to ", _cache)
+    database, _ := cmd.Flags().GetString("database")
+    fmt.Println("database set to", database)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    cache, _ := cmd.Flags().GetBool("cache")
+    fmt.Println("cache set to", cache)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var connectionTablesCmd = &cobra.Command{
   Use:   "connectionTables",
@@ -5174,24 +4901,23 @@ For dialects that do **not** support multiple databases, **do not use** the data
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("connectionTables called")
-    
-    _connection_name, _ := cmd.Flags().GetString("connection_name")
-    fmt.Println("connection_name set to ", _connection_name)
 
-    _database, _ := cmd.Flags().GetString("database")
-    fmt.Println("database set to ", _database)
+    connection_name, _ := cmd.Flags().GetString("connection_name")
+    fmt.Println("connection_name set to", connection_name)
 
-    _schema_name, _ := cmd.Flags().GetString("schema_name")
-    fmt.Println("schema_name set to ", _schema_name)
+    database, _ := cmd.Flags().GetString("database")
+    fmt.Println("database set to", database)
 
-    _cache, _ := cmd.Flags().GetBool("cache")
-    fmt.Println("cache set to ", _cache)
+    schema_name, _ := cmd.Flags().GetString("schema_name")
+    fmt.Println("schema_name set to", schema_name)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    cache, _ := cmd.Flags().GetBool("cache")
+    fmt.Println("cache set to", cache)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var connectionColumnsCmd = &cobra.Command{
   Use:   "connectionColumns",
@@ -5201,30 +4927,29 @@ var connectionColumnsCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("connectionColumns called")
-    
-    _connection_name, _ := cmd.Flags().GetString("connection_name")
-    fmt.Println("connection_name set to ", _connection_name)
 
-    _database, _ := cmd.Flags().GetString("database")
-    fmt.Println("database set to ", _database)
+    connection_name, _ := cmd.Flags().GetString("connection_name")
+    fmt.Println("connection_name set to", connection_name)
 
-    _schema_name, _ := cmd.Flags().GetString("schema_name")
-    fmt.Println("schema_name set to ", _schema_name)
+    database, _ := cmd.Flags().GetString("database")
+    fmt.Println("database set to", database)
 
-    _cache, _ := cmd.Flags().GetBool("cache")
-    fmt.Println("cache set to ", _cache)
+    schema_name, _ := cmd.Flags().GetString("schema_name")
+    fmt.Println("schema_name set to", schema_name)
 
-    _table_limit, _ := cmd.Flags().GetInt64("table_limit")
-    fmt.Println("table_limit set to ", _table_limit)
+    cache, _ := cmd.Flags().GetBool("cache")
+    fmt.Println("cache set to", cache)
 
-    _table_names, _ := cmd.Flags().GetString("table_names")
-    fmt.Println("table_names set to ", _table_names)
+    table_limit, _ := cmd.Flags().GetInt64("table_limit")
+    fmt.Println("table_limit set to", table_limit)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    table_names, _ := cmd.Flags().GetString("table_names")
+    fmt.Println("table_names set to", table_names)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var connectionSearchColumnsCmd = &cobra.Command{
   Use:   "connectionSearchColumns",
@@ -5235,18 +4960,17 @@ var connectionSearchColumnsCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("connectionSearchColumns called")
-    
-    _connection_name, _ := cmd.Flags().GetString("connection_name")
-    fmt.Println("connection_name set to ", _connection_name)
 
-    _column_name, _ := cmd.Flags().GetString("column_name")
-    fmt.Println("column_name set to ", _column_name)
+    connection_name, _ := cmd.Flags().GetString("connection_name")
+    fmt.Println("connection_name set to", connection_name)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    column_name, _ := cmd.Flags().GetString("column_name")
+    fmt.Println("column_name set to", column_name)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var connectionCostEstimateCmd = &cobra.Command{
   Use:   "connectionCostEstimate",
@@ -5259,27 +4983,23 @@ Assign a 'sql' statement to the body of the request. e.g., for Ruby, '{sql: 'sel
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("connectionCostEstimate called")
-    
-    _connection_name, _ := cmd.Flags().GetString("connection_name")
-    fmt.Println("connection_name set to ", _connection_name)
 
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+    connection_name, _ := cmd.Flags().GetString("connection_name")
+    fmt.Println("connection_name set to", connection_name)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
 
-
-
-
-var projectCmd = &cobra.Command{
+var ProjectCmd = &cobra.Command{
   Use:   "Project",
   Short: "Manage Projects",
-  Long: "Manage Projects",
+  Long:  "Manage Projects",
 }
-
 
 var lockAllCmd = &cobra.Command{
   Use:   "lockAll",
@@ -5295,15 +5015,14 @@ var lockAllCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("lockAll called")
-    
-    _project_id, _ := cmd.Flags().GetString("project_id")
-    fmt.Println("project_id set to ", _project_id)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    project_id, _ := cmd.Flags().GetString("project_id")
+    fmt.Println("project_id set to", project_id)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var allGitBranchesCmd = &cobra.Command{
   Use:   "allGitBranches",
@@ -5314,12 +5033,11 @@ Returns a list of git branches in the project repository
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("allGitBranches called")
-    
-    _project_id, _ := cmd.Flags().GetString("project_id")
-    fmt.Println("project_id set to ", _project_id)
+
+    project_id, _ := cmd.Flags().GetString("project_id")
+    fmt.Println("project_id set to", project_id)
   },
 }
-
 
 var gitBranchCmd = &cobra.Command{
   Use:   "gitBranch",
@@ -5330,12 +5048,11 @@ Returns the git branch currently checked out in the given project repository
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("gitBranch called")
-    
-    _project_id, _ := cmd.Flags().GetString("project_id")
-    fmt.Println("project_id set to ", _project_id)
+
+    project_id, _ := cmd.Flags().GetString("project_id")
+    fmt.Println("project_id set to", project_id)
   },
 }
-
 
 var updateGitBranchCmd = &cobra.Command{
   Use:   "updateGitBranch",
@@ -5353,15 +5070,14 @@ Optionally specify a branch name, tag name or commit SHA to which the branch sho
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("updateGitBranch called")
-    
-    _project_id, _ := cmd.Flags().GetString("project_id")
-    fmt.Println("project_id set to ", _project_id)
 
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+    project_id, _ := cmd.Flags().GetString("project_id")
+    fmt.Println("project_id set to", project_id)
+
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
   },
 }
-
 
 var createGitBranchCmd = &cobra.Command{
   Use:   "createGitBranch",
@@ -5378,15 +5094,14 @@ Optionally specify a branch name, tag name or commit SHA as the start point in t
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("createGitBranch called")
-    
-    _project_id, _ := cmd.Flags().GetString("project_id")
-    fmt.Println("project_id set to ", _project_id)
 
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+    project_id, _ := cmd.Flags().GetString("project_id")
+    fmt.Println("project_id set to", project_id)
+
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
   },
 }
-
 
 var findGitBranchCmd = &cobra.Command{
   Use:   "findGitBranch",
@@ -5397,15 +5112,14 @@ Returns the git branch specified in branch_name path param if it exists in the g
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("findGitBranch called")
-    
-    _project_id, _ := cmd.Flags().GetString("project_id")
-    fmt.Println("project_id set to ", _project_id)
 
-    _branch_name, _ := cmd.Flags().GetString("branch_name")
-    fmt.Println("branch_name set to ", _branch_name)
+    project_id, _ := cmd.Flags().GetString("project_id")
+    fmt.Println("project_id set to", project_id)
+
+    branch_name, _ := cmd.Flags().GetString("branch_name")
+    fmt.Println("branch_name set to", branch_name)
   },
 }
-
 
 var deleteGitBranchCmd = &cobra.Command{
   Use:   "deleteGitBranch",
@@ -5416,15 +5130,14 @@ Delete git branch specified in branch_name path param from local and remote of s
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("deleteGitBranch called")
-    
-    _project_id, _ := cmd.Flags().GetString("project_id")
-    fmt.Println("project_id set to ", _project_id)
 
-    _branch_name, _ := cmd.Flags().GetString("branch_name")
-    fmt.Println("branch_name set to ", _branch_name)
+    project_id, _ := cmd.Flags().GetString("project_id")
+    fmt.Println("project_id set to", project_id)
+
+    branch_name, _ := cmd.Flags().GetString("branch_name")
+    fmt.Println("branch_name set to", branch_name)
   },
 }
-
 
 var deployRefToProductionCmd = &cobra.Command{
   Use:   "deployRefToProduction",
@@ -5442,18 +5155,17 @@ Can only specify either a branch or a ref.
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("deployRefToProduction called")
-    
-    _project_id, _ := cmd.Flags().GetString("project_id")
-    fmt.Println("project_id set to ", _project_id)
 
-    _branch, _ := cmd.Flags().GetString("branch")
-    fmt.Println("branch set to ", _branch)
+    project_id, _ := cmd.Flags().GetString("project_id")
+    fmt.Println("project_id set to", project_id)
 
-    _ref, _ := cmd.Flags().GetString("ref")
-    fmt.Println("ref set to ", _ref)
+    branch, _ := cmd.Flags().GetString("branch")
+    fmt.Println("branch set to", branch)
+
+    ref, _ := cmd.Flags().GetString("ref")
+    fmt.Println("ref set to", ref)
   },
 }
-
 
 var deployToProductionCmd = &cobra.Command{
   Use:   "deployToProduction",
@@ -5474,12 +5186,11 @@ Deploy is a two / three step process:
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("deployToProduction called")
-    
-    _project_id, _ := cmd.Flags().GetString("project_id")
-    fmt.Println("project_id set to ", _project_id)
+
+    project_id, _ := cmd.Flags().GetString("project_id")
+    fmt.Println("project_id set to", project_id)
   },
 }
-
 
 var resetProjectToProductionCmd = &cobra.Command{
   Use:   "resetProjectToProduction",
@@ -5490,12 +5201,11 @@ var resetProjectToProductionCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("resetProjectToProduction called")
-    
-    _project_id, _ := cmd.Flags().GetString("project_id")
-    fmt.Println("project_id set to ", _project_id)
+
+    project_id, _ := cmd.Flags().GetString("project_id")
+    fmt.Println("project_id set to", project_id)
   },
 }
-
 
 var resetProjectToRemoteCmd = &cobra.Command{
   Use:   "resetProjectToRemote",
@@ -5506,12 +5216,11 @@ var resetProjectToRemoteCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("resetProjectToRemote called")
-    
-    _project_id, _ := cmd.Flags().GetString("project_id")
-    fmt.Println("project_id set to ", _project_id)
+
+    project_id, _ := cmd.Flags().GetString("project_id")
+    fmt.Println("project_id set to", project_id)
   },
 }
-
 
 var allProjectsCmd = &cobra.Command{
   Use:   "allProjects",
@@ -5522,12 +5231,11 @@ Returns all projects visible to the current user
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("allProjects called")
-    
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var createProjectCmd = &cobra.Command{
   Use:   "createProject",
@@ -5543,14 +5251,13 @@ dev mode required.
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("createProject called")
-    
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
   },
 }
 
-
-var projectCmd4673 = &cobra.Command{
+var projectCmd = &cobra.Command{
   Use:   "project",
   Short: "Get Project",
   Long: `### Get A Project
@@ -5559,15 +5266,14 @@ Returns the project with the given project id
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("project called")
-    
-    _project_id, _ := cmd.Flags().GetString("project_id")
-    fmt.Println("project_id set to ", _project_id)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    project_id, _ := cmd.Flags().GetString("project_id")
+    fmt.Println("project_id set to", project_id)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var updateProjectCmd = &cobra.Command{
   Use:   "updateProject",
@@ -5598,18 +5304,17 @@ To set up a Looker project with a git repository residing on the Looker server (
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("updateProject called")
-    
-    _project_id, _ := cmd.Flags().GetString("project_id")
-    fmt.Println("project_id set to ", _project_id)
 
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+    project_id, _ := cmd.Flags().GetString("project_id")
+    fmt.Println("project_id set to", project_id)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var manifestCmd = &cobra.Command{
   Use:   "manifest",
@@ -5620,12 +5325,11 @@ Returns the project with the given project id
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("manifest called")
-    
-    _project_id, _ := cmd.Flags().GetString("project_id")
-    fmt.Println("project_id set to ", _project_id)
+
+    project_id, _ := cmd.Flags().GetString("project_id")
+    fmt.Println("project_id set to", project_id)
   },
 }
-
 
 var gitDeployKeyCmd = &cobra.Command{
   Use:   "gitDeployKey",
@@ -5636,12 +5340,11 @@ Returns the ssh public key previously created for a project's git repository.
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("gitDeployKey called")
-    
-    _project_id, _ := cmd.Flags().GetString("project_id")
-    fmt.Println("project_id set to ", _project_id)
+
+    project_id, _ := cmd.Flags().GetString("project_id")
+    fmt.Println("project_id set to", project_id)
   },
 }
-
 
 var createGitDeployKeyCmd = &cobra.Command{
   Use:   "createGitDeployKey",
@@ -5658,12 +5361,11 @@ validate and accept git requests from the Looker server.
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("createGitDeployKey called")
-    
-    _project_id, _ := cmd.Flags().GetString("project_id")
-    fmt.Println("project_id set to ", _project_id)
+
+    project_id, _ := cmd.Flags().GetString("project_id")
+    fmt.Println("project_id set to", project_id)
   },
 }
-
 
 var projectValidationResultsCmd = &cobra.Command{
   Use:   "projectValidationResults",
@@ -5683,15 +5385,14 @@ reflect the current state of the project.
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("projectValidationResults called")
-    
-    _project_id, _ := cmd.Flags().GetString("project_id")
-    fmt.Println("project_id set to ", _project_id)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    project_id, _ := cmd.Flags().GetString("project_id")
+    fmt.Println("project_id set to", project_id)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var validateProjectCmd = &cobra.Command{
   Use:   "validateProject",
@@ -5708,15 +5409,14 @@ the most recent project validation (without recomputing), use 'project_validatio
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("validateProject called")
-    
-    _project_id, _ := cmd.Flags().GetString("project_id")
-    fmt.Println("project_id set to ", _project_id)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    project_id, _ := cmd.Flags().GetString("project_id")
+    fmt.Println("project_id set to", project_id)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var projectWorkspaceCmd = &cobra.Command{
   Use:   "projectWorkspace",
@@ -5727,15 +5427,14 @@ Returns information about the state of the project files in the currently select
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("projectWorkspace called")
-    
-    _project_id, _ := cmd.Flags().GetString("project_id")
-    fmt.Println("project_id set to ", _project_id)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    project_id, _ := cmd.Flags().GetString("project_id")
+    fmt.Println("project_id set to", project_id)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var allProjectFilesCmd = &cobra.Command{
   Use:   "allProjectFiles",
@@ -5746,15 +5445,14 @@ Returns a list of the files in the project
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("allProjectFiles called")
-    
-    _project_id, _ := cmd.Flags().GetString("project_id")
-    fmt.Println("project_id set to ", _project_id)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    project_id, _ := cmd.Flags().GetString("project_id")
+    fmt.Println("project_id set to", project_id)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var projectFileCmd = &cobra.Command{
   Use:   "projectFile",
@@ -5765,18 +5463,17 @@ Returns information about a file in the project
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("projectFile called")
-    
-    _project_id, _ := cmd.Flags().GetString("project_id")
-    fmt.Println("project_id set to ", _project_id)
 
-    _file_id, _ := cmd.Flags().GetString("file_id")
-    fmt.Println("file_id set to ", _file_id)
+    project_id, _ := cmd.Flags().GetString("project_id")
+    fmt.Println("project_id set to", project_id)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    file_id, _ := cmd.Flags().GetString("file_id")
+    fmt.Println("file_id set to", file_id)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var allGitConnectionTestsCmd = &cobra.Command{
   Use:   "allGitConnectionTests",
@@ -5794,15 +5491,14 @@ For example, a late-stage test for write access is meaningless if connecting to 
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("allGitConnectionTests called")
-    
-    _project_id, _ := cmd.Flags().GetString("project_id")
-    fmt.Println("project_id set to ", _project_id)
 
-    _remote_url, _ := cmd.Flags().GetString("remote_url")
-    fmt.Println("remote_url set to ", _remote_url)
+    project_id, _ := cmd.Flags().GetString("project_id")
+    fmt.Println("project_id set to", project_id)
+
+    remote_url, _ := cmd.Flags().GetString("remote_url")
+    fmt.Println("remote_url set to", remote_url)
   },
 }
-
 
 var runGitConnectionTestCmd = &cobra.Command{
   Use:   "runGitConnectionTest",
@@ -5817,21 +5513,20 @@ Tests should be run in the order they are returned by [Get All Git Connection Te
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("runGitConnectionTest called")
-    
-    _project_id, _ := cmd.Flags().GetString("project_id")
-    fmt.Println("project_id set to ", _project_id)
 
-    _test_id, _ := cmd.Flags().GetString("test_id")
-    fmt.Println("test_id set to ", _test_id)
+    project_id, _ := cmd.Flags().GetString("project_id")
+    fmt.Println("project_id set to", project_id)
 
-    _remote_url, _ := cmd.Flags().GetString("remote_url")
-    fmt.Println("remote_url set to ", _remote_url)
+    test_id, _ := cmd.Flags().GetString("test_id")
+    fmt.Println("test_id set to", test_id)
 
-    _use_production, _ := cmd.Flags().GetString("use_production")
-    fmt.Println("use_production set to ", _use_production)
+    remote_url, _ := cmd.Flags().GetString("remote_url")
+    fmt.Println("remote_url set to", remote_url)
+
+    use_production, _ := cmd.Flags().GetString("use_production")
+    fmt.Println("use_production set to", use_production)
   },
 }
-
 
 var allLookmlTestsCmd = &cobra.Command{
   Use:   "allLookmlTests",
@@ -5844,15 +5539,14 @@ Call [Run LookML Test](#!/Project/run_lookml_test) to execute tests.
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("allLookmlTests called")
-    
-    _project_id, _ := cmd.Flags().GetString("project_id")
-    fmt.Println("project_id set to ", _project_id)
 
-    _file_id, _ := cmd.Flags().GetString("file_id")
-    fmt.Println("file_id set to ", _file_id)
+    project_id, _ := cmd.Flags().GetString("project_id")
+    fmt.Println("project_id set to", project_id)
+
+    file_id, _ := cmd.Flags().GetString("file_id")
+    fmt.Println("file_id set to", file_id)
   },
 }
-
 
 var runLookmlTestCmd = &cobra.Command{
   Use:   "runLookmlTest",
@@ -5863,21 +5557,20 @@ Runs all tests in the project, optionally filtered by file, test, and/or model.
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("runLookmlTest called")
-    
-    _project_id, _ := cmd.Flags().GetString("project_id")
-    fmt.Println("project_id set to ", _project_id)
 
-    _file_id, _ := cmd.Flags().GetString("file_id")
-    fmt.Println("file_id set to ", _file_id)
+    project_id, _ := cmd.Flags().GetString("project_id")
+    fmt.Println("project_id set to", project_id)
 
-    _test, _ := cmd.Flags().GetString("test")
-    fmt.Println("test set to ", _test)
+    file_id, _ := cmd.Flags().GetString("file_id")
+    fmt.Println("file_id set to", file_id)
 
-    _model, _ := cmd.Flags().GetString("model")
-    fmt.Println("model set to ", _model)
+    test, _ := cmd.Flags().GetString("test")
+    fmt.Println("test set to", test)
+
+    model, _ := cmd.Flags().GetString("model")
+    fmt.Println("model set to", model)
   },
 }
-
 
 var tagRefCmd = &cobra.Command{
   Use:   "tagRef",
@@ -5888,24 +5581,23 @@ This is an internal-only, undocumented route.
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("tagRef called")
-    
-    _project_id, _ := cmd.Flags().GetString("project_id")
-    fmt.Println("project_id set to ", _project_id)
 
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+    project_id, _ := cmd.Flags().GetString("project_id")
+    fmt.Println("project_id set to", project_id)
 
-    _commit_sha, _ := cmd.Flags().GetString("commit_sha")
-    fmt.Println("commit_sha set to ", _commit_sha)
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
 
-    _tag_name, _ := cmd.Flags().GetString("tag_name")
-    fmt.Println("tag_name set to ", _tag_name)
+    commit_sha, _ := cmd.Flags().GetString("commit_sha")
+    fmt.Println("commit_sha set to", commit_sha)
 
-    _tag_message, _ := cmd.Flags().GetString("tag_message")
-    fmt.Println("tag_message set to ", _tag_message)
+    tag_name, _ := cmd.Flags().GetString("tag_name")
+    fmt.Println("tag_name set to", tag_name)
+
+    tag_message, _ := cmd.Flags().GetString("tag_message")
+    fmt.Println("tag_message set to", tag_message)
   },
 }
-
 
 var updateRepositoryCredentialCmd = &cobra.Command{
   Use:   "updateRepositoryCredential",
@@ -5920,18 +5612,17 @@ Admin required.
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("updateRepositoryCredential called")
-    
-    _root_project_id, _ := cmd.Flags().GetString("root_project_id")
-    fmt.Println("root_project_id set to ", _root_project_id)
 
-    _credential_id, _ := cmd.Flags().GetString("credential_id")
-    fmt.Println("credential_id set to ", _credential_id)
+    root_project_id, _ := cmd.Flags().GetString("root_project_id")
+    fmt.Println("root_project_id set to", root_project_id)
 
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+    credential_id, _ := cmd.Flags().GetString("credential_id")
+    fmt.Println("credential_id set to", credential_id)
+
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
   },
 }
-
 
 var deleteRepositoryCredentialCmd = &cobra.Command{
   Use:   "deleteRepositoryCredential",
@@ -5945,15 +5636,14 @@ Admin required.
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("deleteRepositoryCredential called")
-    
-    _root_project_id, _ := cmd.Flags().GetString("root_project_id")
-    fmt.Println("root_project_id set to ", _root_project_id)
 
-    _credential_id, _ := cmd.Flags().GetString("credential_id")
-    fmt.Println("credential_id set to ", _credential_id)
+    root_project_id, _ := cmd.Flags().GetString("root_project_id")
+    fmt.Println("root_project_id set to", root_project_id)
+
+    credential_id, _ := cmd.Flags().GetString("credential_id")
+    fmt.Println("credential_id set to", credential_id)
   },
 }
-
 
 var getAllRepositoryCredentialsCmd = &cobra.Command{
   Use:   "getAllRepositoryCredentials",
@@ -5964,21 +5654,17 @@ var getAllRepositoryCredentialsCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("getAllRepositoryCredentials called")
-    
-    _root_project_id, _ := cmd.Flags().GetString("root_project_id")
-    fmt.Println("root_project_id set to ", _root_project_id)
+
+    root_project_id, _ := cmd.Flags().GetString("root_project_id")
+    fmt.Println("root_project_id set to", root_project_id)
   },
 }
 
-
-
-
-var queryCmd = &cobra.Command{
+var QueryCmd = &cobra.Command{
   Use:   "Query",
   Short: "Run and Manage Queries",
-  Long: "Run and Manage Queries",
+  Long:  "Run and Manage Queries",
 }
-
 
 var createQueryTaskCmd = &cobra.Command{
   Use:   "createQueryTask",
@@ -5992,51 +5678,50 @@ After the query task status reaches "Complete", use [query_task_results(query_ta
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("createQueryTask called")
-    
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
 
-    _limit, _ := cmd.Flags().GetInt64("limit")
-    fmt.Println("limit set to ", _limit)
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
 
-    _apply_formatting, _ := cmd.Flags().GetBool("apply_formatting")
-    fmt.Println("apply_formatting set to ", _apply_formatting)
+    limit, _ := cmd.Flags().GetInt64("limit")
+    fmt.Println("limit set to", limit)
 
-    _apply_vis, _ := cmd.Flags().GetBool("apply_vis")
-    fmt.Println("apply_vis set to ", _apply_vis)
+    apply_formatting, _ := cmd.Flags().GetBool("apply_formatting")
+    fmt.Println("apply_formatting set to", apply_formatting)
 
-    _cache, _ := cmd.Flags().GetBool("cache")
-    fmt.Println("cache set to ", _cache)
+    apply_vis, _ := cmd.Flags().GetBool("apply_vis")
+    fmt.Println("apply_vis set to", apply_vis)
 
-    _image_width, _ := cmd.Flags().GetInt64("image_width")
-    fmt.Println("image_width set to ", _image_width)
+    cache, _ := cmd.Flags().GetBool("cache")
+    fmt.Println("cache set to", cache)
 
-    _image_height, _ := cmd.Flags().GetInt64("image_height")
-    fmt.Println("image_height set to ", _image_height)
+    image_width, _ := cmd.Flags().GetInt64("image_width")
+    fmt.Println("image_width set to", image_width)
 
-    _generate_drill_links, _ := cmd.Flags().GetBool("generate_drill_links")
-    fmt.Println("generate_drill_links set to ", _generate_drill_links)
+    image_height, _ := cmd.Flags().GetInt64("image_height")
+    fmt.Println("image_height set to", image_height)
 
-    _force_production, _ := cmd.Flags().GetBool("force_production")
-    fmt.Println("force_production set to ", _force_production)
+    generate_drill_links, _ := cmd.Flags().GetBool("generate_drill_links")
+    fmt.Println("generate_drill_links set to", generate_drill_links)
 
-    _cache_only, _ := cmd.Flags().GetBool("cache_only")
-    fmt.Println("cache_only set to ", _cache_only)
+    force_production, _ := cmd.Flags().GetBool("force_production")
+    fmt.Println("force_production set to", force_production)
 
-    _path_prefix, _ := cmd.Flags().GetString("path_prefix")
-    fmt.Println("path_prefix set to ", _path_prefix)
+    cache_only, _ := cmd.Flags().GetBool("cache_only")
+    fmt.Println("cache_only set to", cache_only)
 
-    _rebuild_pdts, _ := cmd.Flags().GetBool("rebuild_pdts")
-    fmt.Println("rebuild_pdts set to ", _rebuild_pdts)
+    path_prefix, _ := cmd.Flags().GetString("path_prefix")
+    fmt.Println("path_prefix set to", path_prefix)
 
-    _server_table_calcs, _ := cmd.Flags().GetBool("server_table_calcs")
-    fmt.Println("server_table_calcs set to ", _server_table_calcs)
+    rebuild_pdts, _ := cmd.Flags().GetBool("rebuild_pdts")
+    fmt.Println("rebuild_pdts set to", rebuild_pdts)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    server_table_calcs, _ := cmd.Flags().GetBool("server_table_calcs")
+    fmt.Println("server_table_calcs set to", server_table_calcs)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var queryTaskMultiResultsCmd = &cobra.Command{
   Use:   "queryTaskMultiResults",
@@ -6051,12 +5736,11 @@ If the user making the API request does not have sufficient privileges to view a
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("queryTaskMultiResults called")
-    
-    _query_task_ids, _ := cmd.Flags().GetString("query_task_ids")
-    fmt.Println("query_task_ids set to ", _query_task_ids)
+
+    query_task_ids, _ := cmd.Flags().GetString("query_task_ids")
+    fmt.Println("query_task_ids set to", query_task_ids)
   },
 }
-
 
 var queryTaskCmd = &cobra.Command{
   Use:   "queryTask",
@@ -6071,15 +5755,14 @@ Use [create_query_task()](#!/Query/create_query_task) to create an async query t
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("queryTask called")
-    
-    _query_task_id, _ := cmd.Flags().GetString("query_task_id")
-    fmt.Println("query_task_id set to ", _query_task_id)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    query_task_id, _ := cmd.Flags().GetString("query_task_id")
+    fmt.Println("query_task_id set to", query_task_id)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var queryTaskResultsCmd = &cobra.Command{
   Use:   "queryTaskResults",
@@ -6110,14 +5793,13 @@ These data formats can only carry row data, and error info is not row data.
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("queryTaskResults called")
-    
-    _query_task_id, _ := cmd.Flags().GetString("query_task_id")
-    fmt.Println("query_task_id set to ", _query_task_id)
+
+    query_task_id, _ := cmd.Flags().GetString("query_task_id")
+    fmt.Println("query_task_id set to", query_task_id)
   },
 }
 
-
-var queryCmd479 = &cobra.Command{
+var queryCmd = &cobra.Command{
   Use:   "query",
   Short: "Get Query",
   Long: `### Get a previously created query by id.
@@ -6141,15 +5823,14 @@ creating new queries and can usually just be ignored.
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("query called")
-    
-    _query_id, _ := cmd.Flags().GetInt64("query_id")
-    fmt.Println("query_id set to ", _query_id)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    query_id, _ := cmd.Flags().GetInt64("query_id")
+    fmt.Println("query_id set to", query_id)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var queryForSlugCmd = &cobra.Command{
   Use:   "queryForSlug",
@@ -6174,15 +5855,14 @@ This will also work with slugs from Looker explore urls like
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("queryForSlug called")
-    
-    _slug, _ := cmd.Flags().GetString("slug")
-    fmt.Println("slug set to ", _slug)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    slug, _ := cmd.Flags().GetString("slug")
+    fmt.Println("slug set to", slug)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var createQueryCmd = &cobra.Command{
   Use:   "createQuery",
@@ -6199,15 +5879,14 @@ The query parameters are passed as json in the body of the request.
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("createQuery called")
-    
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var runQueryCmd = &cobra.Command{
   Use:   "runQuery",
@@ -6238,54 +5917,53 @@ Supported formats:
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("runQuery called")
-    
-    _query_id, _ := cmd.Flags().GetInt64("query_id")
-    fmt.Println("query_id set to ", _query_id)
 
-    _result_format, _ := cmd.Flags().GetString("result_format")
-    fmt.Println("result_format set to ", _result_format)
+    query_id, _ := cmd.Flags().GetInt64("query_id")
+    fmt.Println("query_id set to", query_id)
 
-    _limit, _ := cmd.Flags().GetInt64("limit")
-    fmt.Println("limit set to ", _limit)
+    result_format, _ := cmd.Flags().GetString("result_format")
+    fmt.Println("result_format set to", result_format)
 
-    _apply_formatting, _ := cmd.Flags().GetBool("apply_formatting")
-    fmt.Println("apply_formatting set to ", _apply_formatting)
+    limit, _ := cmd.Flags().GetInt64("limit")
+    fmt.Println("limit set to", limit)
 
-    _apply_vis, _ := cmd.Flags().GetBool("apply_vis")
-    fmt.Println("apply_vis set to ", _apply_vis)
+    apply_formatting, _ := cmd.Flags().GetBool("apply_formatting")
+    fmt.Println("apply_formatting set to", apply_formatting)
 
-    _cache, _ := cmd.Flags().GetBool("cache")
-    fmt.Println("cache set to ", _cache)
+    apply_vis, _ := cmd.Flags().GetBool("apply_vis")
+    fmt.Println("apply_vis set to", apply_vis)
 
-    _image_width, _ := cmd.Flags().GetInt64("image_width")
-    fmt.Println("image_width set to ", _image_width)
+    cache, _ := cmd.Flags().GetBool("cache")
+    fmt.Println("cache set to", cache)
 
-    _image_height, _ := cmd.Flags().GetInt64("image_height")
-    fmt.Println("image_height set to ", _image_height)
+    image_width, _ := cmd.Flags().GetInt64("image_width")
+    fmt.Println("image_width set to", image_width)
 
-    _generate_drill_links, _ := cmd.Flags().GetBool("generate_drill_links")
-    fmt.Println("generate_drill_links set to ", _generate_drill_links)
+    image_height, _ := cmd.Flags().GetInt64("image_height")
+    fmt.Println("image_height set to", image_height)
 
-    _force_production, _ := cmd.Flags().GetBool("force_production")
-    fmt.Println("force_production set to ", _force_production)
+    generate_drill_links, _ := cmd.Flags().GetBool("generate_drill_links")
+    fmt.Println("generate_drill_links set to", generate_drill_links)
 
-    _cache_only, _ := cmd.Flags().GetBool("cache_only")
-    fmt.Println("cache_only set to ", _cache_only)
+    force_production, _ := cmd.Flags().GetBool("force_production")
+    fmt.Println("force_production set to", force_production)
 
-    _path_prefix, _ := cmd.Flags().GetString("path_prefix")
-    fmt.Println("path_prefix set to ", _path_prefix)
+    cache_only, _ := cmd.Flags().GetBool("cache_only")
+    fmt.Println("cache_only set to", cache_only)
 
-    _rebuild_pdts, _ := cmd.Flags().GetBool("rebuild_pdts")
-    fmt.Println("rebuild_pdts set to ", _rebuild_pdts)
+    path_prefix, _ := cmd.Flags().GetString("path_prefix")
+    fmt.Println("path_prefix set to", path_prefix)
 
-    _server_table_calcs, _ := cmd.Flags().GetBool("server_table_calcs")
-    fmt.Println("server_table_calcs set to ", _server_table_calcs)
+    rebuild_pdts, _ := cmd.Flags().GetBool("rebuild_pdts")
+    fmt.Println("rebuild_pdts set to", rebuild_pdts)
 
-    _source, _ := cmd.Flags().GetString("source")
-    fmt.Println("source set to ", _source)
+    server_table_calcs, _ := cmd.Flags().GetBool("server_table_calcs")
+    fmt.Println("server_table_calcs set to", server_table_calcs)
+
+    source, _ := cmd.Flags().GetString("source")
+    fmt.Println("source set to", source)
   },
 }
-
 
 var runInlineQueryCmd = &cobra.Command{
   Use:   "runInlineQuery",
@@ -6345,51 +6023,50 @@ Supported formats:
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("runInlineQuery called")
-    
-    _result_format, _ := cmd.Flags().GetString("result_format")
-    fmt.Println("result_format set to ", _result_format)
 
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+    result_format, _ := cmd.Flags().GetString("result_format")
+    fmt.Println("result_format set to", result_format)
 
-    _limit, _ := cmd.Flags().GetInt64("limit")
-    fmt.Println("limit set to ", _limit)
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
 
-    _apply_formatting, _ := cmd.Flags().GetBool("apply_formatting")
-    fmt.Println("apply_formatting set to ", _apply_formatting)
+    limit, _ := cmd.Flags().GetInt64("limit")
+    fmt.Println("limit set to", limit)
 
-    _apply_vis, _ := cmd.Flags().GetBool("apply_vis")
-    fmt.Println("apply_vis set to ", _apply_vis)
+    apply_formatting, _ := cmd.Flags().GetBool("apply_formatting")
+    fmt.Println("apply_formatting set to", apply_formatting)
 
-    _cache, _ := cmd.Flags().GetBool("cache")
-    fmt.Println("cache set to ", _cache)
+    apply_vis, _ := cmd.Flags().GetBool("apply_vis")
+    fmt.Println("apply_vis set to", apply_vis)
 
-    _image_width, _ := cmd.Flags().GetInt64("image_width")
-    fmt.Println("image_width set to ", _image_width)
+    cache, _ := cmd.Flags().GetBool("cache")
+    fmt.Println("cache set to", cache)
 
-    _image_height, _ := cmd.Flags().GetInt64("image_height")
-    fmt.Println("image_height set to ", _image_height)
+    image_width, _ := cmd.Flags().GetInt64("image_width")
+    fmt.Println("image_width set to", image_width)
 
-    _generate_drill_links, _ := cmd.Flags().GetBool("generate_drill_links")
-    fmt.Println("generate_drill_links set to ", _generate_drill_links)
+    image_height, _ := cmd.Flags().GetInt64("image_height")
+    fmt.Println("image_height set to", image_height)
 
-    _force_production, _ := cmd.Flags().GetBool("force_production")
-    fmt.Println("force_production set to ", _force_production)
+    generate_drill_links, _ := cmd.Flags().GetBool("generate_drill_links")
+    fmt.Println("generate_drill_links set to", generate_drill_links)
 
-    _cache_only, _ := cmd.Flags().GetBool("cache_only")
-    fmt.Println("cache_only set to ", _cache_only)
+    force_production, _ := cmd.Flags().GetBool("force_production")
+    fmt.Println("force_production set to", force_production)
 
-    _path_prefix, _ := cmd.Flags().GetString("path_prefix")
-    fmt.Println("path_prefix set to ", _path_prefix)
+    cache_only, _ := cmd.Flags().GetBool("cache_only")
+    fmt.Println("cache_only set to", cache_only)
 
-    _rebuild_pdts, _ := cmd.Flags().GetBool("rebuild_pdts")
-    fmt.Println("rebuild_pdts set to ", _rebuild_pdts)
+    path_prefix, _ := cmd.Flags().GetString("path_prefix")
+    fmt.Println("path_prefix set to", path_prefix)
 
-    _server_table_calcs, _ := cmd.Flags().GetBool("server_table_calcs")
-    fmt.Println("server_table_calcs set to ", _server_table_calcs)
+    rebuild_pdts, _ := cmd.Flags().GetBool("rebuild_pdts")
+    fmt.Println("rebuild_pdts set to", rebuild_pdts)
+
+    server_table_calcs, _ := cmd.Flags().GetBool("server_table_calcs")
+    fmt.Println("server_table_calcs set to", server_table_calcs)
   },
 }
-
 
 var runUrlEncodedQueryCmd = &cobra.Command{
   Use:   "runUrlEncodedQuery",
@@ -6451,18 +6128,17 @@ Supported formats:
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("runUrlEncodedQuery called")
-    
-    _model_name, _ := cmd.Flags().GetString("model_name")
-    fmt.Println("model_name set to ", _model_name)
 
-    _view_name, _ := cmd.Flags().GetString("view_name")
-    fmt.Println("view_name set to ", _view_name)
+    model_name, _ := cmd.Flags().GetString("model_name")
+    fmt.Println("model_name set to", model_name)
 
-    _result_format, _ := cmd.Flags().GetString("result_format")
-    fmt.Println("result_format set to ", _result_format)
+    view_name, _ := cmd.Flags().GetString("view_name")
+    fmt.Println("view_name set to", view_name)
+
+    result_format, _ := cmd.Flags().GetString("result_format")
+    fmt.Println("result_format set to", result_format)
   },
 }
-
 
 var mergeQueryCmd = &cobra.Command{
   Use:   "mergeQuery",
@@ -6473,15 +6149,14 @@ Returns a merge query object given its id.
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("mergeQuery called")
-    
-    _merge_query_id, _ := cmd.Flags().GetString("merge_query_id")
-    fmt.Println("merge_query_id set to ", _merge_query_id)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    merge_query_id, _ := cmd.Flags().GetString("merge_query_id")
+    fmt.Println("merge_query_id set to", merge_query_id)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var createMergeQueryCmd = &cobra.Command{
   Use:   "createMergeQuery",
@@ -6506,15 +6181,14 @@ change to the contents of a merge query will produce a new object with a new id.
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("createMergeQuery called")
-    
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var allRunningQueriesCmd = &cobra.Command{
   Use:   "allRunningQueries",
@@ -6523,10 +6197,9 @@ var allRunningQueriesCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("allRunningQueries called")
-    
+
   },
 }
-
 
 var killQueryCmd = &cobra.Command{
   Use:   "killQuery",
@@ -6535,25 +6208,23 @@ var killQueryCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("killQuery called")
-    
-    _query_task_id, _ := cmd.Flags().GetString("query_task_id")
-    fmt.Println("query_task_id set to ", _query_task_id)
+
+    query_task_id, _ := cmd.Flags().GetString("query_task_id")
+    fmt.Println("query_task_id set to", query_task_id)
   },
 }
-
 
 var sqlQueryCmd = &cobra.Command{
   Use:   "sqlQuery",
   Short: "Get SQL Runner Query",
-  Long: `Get a SQL Runner query.`,
+  Long:  `Get a SQL Runner query.`,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("sqlQuery called")
-    
-    _slug, _ := cmd.Flags().GetString("slug")
-    fmt.Println("slug set to ", _slug)
+
+    slug, _ := cmd.Flags().GetString("slug")
+    fmt.Println("slug set to", slug)
   },
 }
-
 
 var createSqlQueryCmd = &cobra.Command{
   Use:   "createSqlQuery",
@@ -6564,40 +6235,35 @@ Either the 'connection_name' or 'model_name' parameter MUST be provided.
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("createSqlQuery called")
-    
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
   },
 }
-
 
 var runSqlQueryCmd = &cobra.Command{
   Use:   "runSqlQuery",
   Short: "Run SQL Runner Query",
-  Long: `Execute a SQL Runner query in a given result_format.`,
+  Long:  `Execute a SQL Runner query in a given result_format.`,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("runSqlQuery called")
-    
-    _slug, _ := cmd.Flags().GetString("slug")
-    fmt.Println("slug set to ", _slug)
 
-    _result_format, _ := cmd.Flags().GetString("result_format")
-    fmt.Println("result_format set to ", _result_format)
+    slug, _ := cmd.Flags().GetString("slug")
+    fmt.Println("slug set to", slug)
 
-    _download, _ := cmd.Flags().GetString("download")
-    fmt.Println("download set to ", _download)
+    result_format, _ := cmd.Flags().GetString("result_format")
+    fmt.Println("result_format set to", result_format)
+
+    download, _ := cmd.Flags().GetString("download")
+    fmt.Println("download set to", download)
   },
 }
 
-
-
-
-var renderTaskCmd = &cobra.Command{
+var RenderTaskCmd = &cobra.Command{
   Use:   "RenderTask",
   Short: "Manage Render Tasks",
-  Long: "Manage Render Tasks",
+  Long:  "Manage Render Tasks",
 }
-
 
 var createLookRenderTaskCmd = &cobra.Command{
   Use:   "createLookRenderTask",
@@ -6611,24 +6277,23 @@ Once the render task is complete, you can download the resulting document or ima
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("createLookRenderTask called")
-    
-    _look_id, _ := cmd.Flags().GetInt64("look_id")
-    fmt.Println("look_id set to ", _look_id)
 
-    _result_format, _ := cmd.Flags().GetString("result_format")
-    fmt.Println("result_format set to ", _result_format)
+    look_id, _ := cmd.Flags().GetInt64("look_id")
+    fmt.Println("look_id set to", look_id)
 
-    _width, _ := cmd.Flags().GetInt64("width")
-    fmt.Println("width set to ", _width)
+    result_format, _ := cmd.Flags().GetString("result_format")
+    fmt.Println("result_format set to", result_format)
 
-    _height, _ := cmd.Flags().GetInt64("height")
-    fmt.Println("height set to ", _height)
+    width, _ := cmd.Flags().GetInt64("width")
+    fmt.Println("width set to", width)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    height, _ := cmd.Flags().GetInt64("height")
+    fmt.Println("height set to", height)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var createQueryRenderTaskCmd = &cobra.Command{
   Use:   "createQueryRenderTask",
@@ -6642,24 +6307,23 @@ Once the render task is complete, you can download the resulting document or ima
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("createQueryRenderTask called")
-    
-    _query_id, _ := cmd.Flags().GetInt64("query_id")
-    fmt.Println("query_id set to ", _query_id)
 
-    _result_format, _ := cmd.Flags().GetString("result_format")
-    fmt.Println("result_format set to ", _result_format)
+    query_id, _ := cmd.Flags().GetInt64("query_id")
+    fmt.Println("query_id set to", query_id)
 
-    _width, _ := cmd.Flags().GetInt64("width")
-    fmt.Println("width set to ", _width)
+    result_format, _ := cmd.Flags().GetString("result_format")
+    fmt.Println("result_format set to", result_format)
 
-    _height, _ := cmd.Flags().GetInt64("height")
-    fmt.Println("height set to ", _height)
+    width, _ := cmd.Flags().GetInt64("width")
+    fmt.Println("width set to", width)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    height, _ := cmd.Flags().GetInt64("height")
+    fmt.Println("height set to", height)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var createDashboardRenderTaskCmd = &cobra.Command{
   Use:   "createDashboardRenderTask",
@@ -6673,38 +6337,37 @@ Once the render task is complete, you can download the resulting document or ima
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("createDashboardRenderTask called")
-    
-    _dashboard_id, _ := cmd.Flags().GetString("dashboard_id")
-    fmt.Println("dashboard_id set to ", _dashboard_id)
 
-    _result_format, _ := cmd.Flags().GetString("result_format")
-    fmt.Println("result_format set to ", _result_format)
+    dashboard_id, _ := cmd.Flags().GetString("dashboard_id")
+    fmt.Println("dashboard_id set to", dashboard_id)
 
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+    result_format, _ := cmd.Flags().GetString("result_format")
+    fmt.Println("result_format set to", result_format)
 
-    _width, _ := cmd.Flags().GetInt64("width")
-    fmt.Println("width set to ", _width)
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
 
-    _height, _ := cmd.Flags().GetInt64("height")
-    fmt.Println("height set to ", _height)
+    width, _ := cmd.Flags().GetInt64("width")
+    fmt.Println("width set to", width)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    height, _ := cmd.Flags().GetInt64("height")
+    fmt.Println("height set to", height)
 
-    _pdf_paper_size, _ := cmd.Flags().GetString("pdf_paper_size")
-    fmt.Println("pdf_paper_size set to ", _pdf_paper_size)
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
 
-    _pdf_landscape, _ := cmd.Flags().GetBool("pdf_landscape")
-    fmt.Println("pdf_landscape set to ", _pdf_landscape)
+    pdf_paper_size, _ := cmd.Flags().GetString("pdf_paper_size")
+    fmt.Println("pdf_paper_size set to", pdf_paper_size)
 
-    _long_tables, _ := cmd.Flags().GetBool("long_tables")
-    fmt.Println("long_tables set to ", _long_tables)
+    pdf_landscape, _ := cmd.Flags().GetBool("pdf_landscape")
+    fmt.Println("pdf_landscape set to", pdf_landscape)
+
+    long_tables, _ := cmd.Flags().GetBool("long_tables")
+    fmt.Println("long_tables set to", long_tables)
   },
 }
 
-
-var renderTaskCmd6639 = &cobra.Command{
+var renderTaskCmd = &cobra.Command{
   Use:   "renderTask",
   Short: "Get Render Task",
   Long: `### Get information about a render task.
@@ -6716,15 +6379,14 @@ Once the render task is complete, you can download the resulting document or ima
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("renderTask called")
-    
-    _render_task_id, _ := cmd.Flags().GetString("render_task_id")
-    fmt.Println("render_task_id set to ", _render_task_id)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    render_task_id, _ := cmd.Flags().GetString("render_task_id")
+    fmt.Println("render_task_id set to", render_task_id)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var renderTaskResultsCmd = &cobra.Command{
   Use:   "renderTaskResults",
@@ -6749,21 +6411,17 @@ the task status reaches completion (or error) instead of polling **render_task_r
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("renderTaskResults called")
-    
-    _render_task_id, _ := cmd.Flags().GetString("render_task_id")
-    fmt.Println("render_task_id set to ", _render_task_id)
+
+    render_task_id, _ := cmd.Flags().GetString("render_task_id")
+    fmt.Println("render_task_id set to", render_task_id)
   },
 }
 
-
-
-
-var roleCmd = &cobra.Command{
+var RoleCmd = &cobra.Command{
   Use:   "Role",
   Short: "Manage Roles",
-  Long: "Manage Roles",
+  Long:  "Manage Roles",
 }
-
 
 var searchModelSetsCmd = &cobra.Command{
   Use:   "searchModelSets",
@@ -6794,36 +6452,35 @@ Boolean search params accept only "true" and "false" as values.
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("searchModelSets called")
-    
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
 
-    _limit, _ := cmd.Flags().GetInt64("limit")
-    fmt.Println("limit set to ", _limit)
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
 
-    _offset, _ := cmd.Flags().GetInt64("offset")
-    fmt.Println("offset set to ", _offset)
+    limit, _ := cmd.Flags().GetInt64("limit")
+    fmt.Println("limit set to", limit)
 
-    _sorts, _ := cmd.Flags().GetString("sorts")
-    fmt.Println("sorts set to ", _sorts)
+    offset, _ := cmd.Flags().GetInt64("offset")
+    fmt.Println("offset set to", offset)
 
-    _id, _ := cmd.Flags().GetInt64("id")
-    fmt.Println("id set to ", _id)
+    sorts, _ := cmd.Flags().GetString("sorts")
+    fmt.Println("sorts set to", sorts)
 
-    _name, _ := cmd.Flags().GetString("name")
-    fmt.Println("name set to ", _name)
+    id, _ := cmd.Flags().GetInt64("id")
+    fmt.Println("id set to", id)
 
-    _all_access, _ := cmd.Flags().GetBool("all_access")
-    fmt.Println("all_access set to ", _all_access)
+    name, _ := cmd.Flags().GetString("name")
+    fmt.Println("name set to", name)
 
-    _built_in, _ := cmd.Flags().GetBool("built_in")
-    fmt.Println("built_in set to ", _built_in)
+    all_access, _ := cmd.Flags().GetBool("all_access")
+    fmt.Println("all_access set to", all_access)
 
-    _filter_or, _ := cmd.Flags().GetBool("filter_or")
-    fmt.Println("filter_or set to ", _filter_or)
+    built_in, _ := cmd.Flags().GetBool("built_in")
+    fmt.Println("built_in set to", built_in)
+
+    filter_or, _ := cmd.Flags().GetBool("filter_or")
+    fmt.Println("filter_or set to", filter_or)
   },
 }
-
 
 var modelSetCmd = &cobra.Command{
   Use:   "modelSet",
@@ -6832,15 +6489,14 @@ var modelSetCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("modelSet called")
-    
-    _model_set_id, _ := cmd.Flags().GetInt64("model_set_id")
-    fmt.Println("model_set_id set to ", _model_set_id)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    model_set_id, _ := cmd.Flags().GetInt64("model_set_id")
+    fmt.Println("model_set_id set to", model_set_id)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var updateModelSetCmd = &cobra.Command{
   Use:   "updateModelSet",
@@ -6849,15 +6505,14 @@ var updateModelSetCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("updateModelSet called")
-    
-    _model_set_id, _ := cmd.Flags().GetInt64("model_set_id")
-    fmt.Println("model_set_id set to ", _model_set_id)
 
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+    model_set_id, _ := cmd.Flags().GetInt64("model_set_id")
+    fmt.Println("model_set_id set to", model_set_id)
+
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
   },
 }
-
 
 var deleteModelSetCmd = &cobra.Command{
   Use:   "deleteModelSet",
@@ -6866,12 +6521,11 @@ var deleteModelSetCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("deleteModelSet called")
-    
-    _model_set_id, _ := cmd.Flags().GetInt64("model_set_id")
-    fmt.Println("model_set_id set to ", _model_set_id)
+
+    model_set_id, _ := cmd.Flags().GetInt64("model_set_id")
+    fmt.Println("model_set_id set to", model_set_id)
   },
 }
-
 
 var allModelSetsCmd = &cobra.Command{
   Use:   "allModelSets",
@@ -6880,12 +6534,11 @@ var allModelSetsCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("allModelSets called")
-    
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var createModelSetCmd = &cobra.Command{
   Use:   "createModelSet",
@@ -6894,12 +6547,11 @@ var createModelSetCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("createModelSet called")
-    
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
   },
 }
-
 
 var allPermissionsCmd = &cobra.Command{
   Use:   "allPermissions",
@@ -6908,10 +6560,9 @@ var allPermissionsCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("allPermissions called")
-    
+
   },
 }
-
 
 var searchPermissionSetsCmd = &cobra.Command{
   Use:   "searchPermissionSets",
@@ -6942,36 +6593,35 @@ Boolean search params accept only "true" and "false" as values.
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("searchPermissionSets called")
-    
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
 
-    _limit, _ := cmd.Flags().GetInt64("limit")
-    fmt.Println("limit set to ", _limit)
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
 
-    _offset, _ := cmd.Flags().GetInt64("offset")
-    fmt.Println("offset set to ", _offset)
+    limit, _ := cmd.Flags().GetInt64("limit")
+    fmt.Println("limit set to", limit)
 
-    _sorts, _ := cmd.Flags().GetString("sorts")
-    fmt.Println("sorts set to ", _sorts)
+    offset, _ := cmd.Flags().GetInt64("offset")
+    fmt.Println("offset set to", offset)
 
-    _id, _ := cmd.Flags().GetInt64("id")
-    fmt.Println("id set to ", _id)
+    sorts, _ := cmd.Flags().GetString("sorts")
+    fmt.Println("sorts set to", sorts)
 
-    _name, _ := cmd.Flags().GetString("name")
-    fmt.Println("name set to ", _name)
+    id, _ := cmd.Flags().GetInt64("id")
+    fmt.Println("id set to", id)
 
-    _all_access, _ := cmd.Flags().GetBool("all_access")
-    fmt.Println("all_access set to ", _all_access)
+    name, _ := cmd.Flags().GetString("name")
+    fmt.Println("name set to", name)
 
-    _built_in, _ := cmd.Flags().GetBool("built_in")
-    fmt.Println("built_in set to ", _built_in)
+    all_access, _ := cmd.Flags().GetBool("all_access")
+    fmt.Println("all_access set to", all_access)
 
-    _filter_or, _ := cmd.Flags().GetBool("filter_or")
-    fmt.Println("filter_or set to ", _filter_or)
+    built_in, _ := cmd.Flags().GetBool("built_in")
+    fmt.Println("built_in set to", built_in)
+
+    filter_or, _ := cmd.Flags().GetBool("filter_or")
+    fmt.Println("filter_or set to", filter_or)
   },
 }
-
 
 var permissionSetCmd = &cobra.Command{
   Use:   "permissionSet",
@@ -6980,15 +6630,14 @@ var permissionSetCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("permissionSet called")
-    
-    _permission_set_id, _ := cmd.Flags().GetInt64("permission_set_id")
-    fmt.Println("permission_set_id set to ", _permission_set_id)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    permission_set_id, _ := cmd.Flags().GetInt64("permission_set_id")
+    fmt.Println("permission_set_id set to", permission_set_id)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var updatePermissionSetCmd = &cobra.Command{
   Use:   "updatePermissionSet",
@@ -6997,15 +6646,14 @@ var updatePermissionSetCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("updatePermissionSet called")
-    
-    _permission_set_id, _ := cmd.Flags().GetInt64("permission_set_id")
-    fmt.Println("permission_set_id set to ", _permission_set_id)
 
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+    permission_set_id, _ := cmd.Flags().GetInt64("permission_set_id")
+    fmt.Println("permission_set_id set to", permission_set_id)
+
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
   },
 }
-
 
 var deletePermissionSetCmd = &cobra.Command{
   Use:   "deletePermissionSet",
@@ -7014,12 +6662,11 @@ var deletePermissionSetCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("deletePermissionSet called")
-    
-    _permission_set_id, _ := cmd.Flags().GetInt64("permission_set_id")
-    fmt.Println("permission_set_id set to ", _permission_set_id)
+
+    permission_set_id, _ := cmd.Flags().GetInt64("permission_set_id")
+    fmt.Println("permission_set_id set to", permission_set_id)
   },
 }
-
 
 var allPermissionSetsCmd = &cobra.Command{
   Use:   "allPermissionSets",
@@ -7028,12 +6675,11 @@ var allPermissionSetsCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("allPermissionSets called")
-    
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var createPermissionSetCmd = &cobra.Command{
   Use:   "createPermissionSet",
@@ -7042,12 +6688,11 @@ var createPermissionSetCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("createPermissionSet called")
-    
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
   },
 }
-
 
 var allRolesCmd = &cobra.Command{
   Use:   "allRoles",
@@ -7056,15 +6701,14 @@ var allRolesCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("allRoles called")
-    
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
 
-    _ids, _ := cmd.Flags().GetString("ids")
-    fmt.Println("ids set to ", _ids)
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
+
+    ids, _ := cmd.Flags().GetString("ids")
+    fmt.Println("ids set to", ids)
   },
 }
-
 
 var createRoleCmd = &cobra.Command{
   Use:   "createRole",
@@ -7073,12 +6717,11 @@ var createRoleCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("createRole called")
-    
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
   },
 }
-
 
 var searchRolesCmd = &cobra.Command{
   Use:   "searchRoles",
@@ -7111,33 +6754,32 @@ Boolean search params accept only "true" and "false" as values.
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("searchRoles called")
-    
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
 
-    _limit, _ := cmd.Flags().GetInt64("limit")
-    fmt.Println("limit set to ", _limit)
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
 
-    _offset, _ := cmd.Flags().GetInt64("offset")
-    fmt.Println("offset set to ", _offset)
+    limit, _ := cmd.Flags().GetInt64("limit")
+    fmt.Println("limit set to", limit)
 
-    _sorts, _ := cmd.Flags().GetString("sorts")
-    fmt.Println("sorts set to ", _sorts)
+    offset, _ := cmd.Flags().GetInt64("offset")
+    fmt.Println("offset set to", offset)
 
-    _id, _ := cmd.Flags().GetInt64("id")
-    fmt.Println("id set to ", _id)
+    sorts, _ := cmd.Flags().GetString("sorts")
+    fmt.Println("sorts set to", sorts)
 
-    _name, _ := cmd.Flags().GetString("name")
-    fmt.Println("name set to ", _name)
+    id, _ := cmd.Flags().GetInt64("id")
+    fmt.Println("id set to", id)
 
-    _built_in, _ := cmd.Flags().GetBool("built_in")
-    fmt.Println("built_in set to ", _built_in)
+    name, _ := cmd.Flags().GetString("name")
+    fmt.Println("name set to", name)
 
-    _filter_or, _ := cmd.Flags().GetBool("filter_or")
-    fmt.Println("filter_or set to ", _filter_or)
+    built_in, _ := cmd.Flags().GetBool("built_in")
+    fmt.Println("built_in set to", built_in)
+
+    filter_or, _ := cmd.Flags().GetBool("filter_or")
+    fmt.Println("filter_or set to", filter_or)
   },
 }
-
 
 var searchRolesWithUserCountCmd = &cobra.Command{
   Use:   "searchRolesWithUserCount",
@@ -7171,47 +6813,45 @@ Boolean search params accept only "true" and "false" as values.
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("searchRolesWithUserCount called")
-    
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
 
-    _limit, _ := cmd.Flags().GetInt64("limit")
-    fmt.Println("limit set to ", _limit)
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
 
-    _offset, _ := cmd.Flags().GetInt64("offset")
-    fmt.Println("offset set to ", _offset)
+    limit, _ := cmd.Flags().GetInt64("limit")
+    fmt.Println("limit set to", limit)
 
-    _sorts, _ := cmd.Flags().GetString("sorts")
-    fmt.Println("sorts set to ", _sorts)
+    offset, _ := cmd.Flags().GetInt64("offset")
+    fmt.Println("offset set to", offset)
 
-    _id, _ := cmd.Flags().GetInt64("id")
-    fmt.Println("id set to ", _id)
+    sorts, _ := cmd.Flags().GetString("sorts")
+    fmt.Println("sorts set to", sorts)
 
-    _name, _ := cmd.Flags().GetString("name")
-    fmt.Println("name set to ", _name)
+    id, _ := cmd.Flags().GetInt64("id")
+    fmt.Println("id set to", id)
 
-    _built_in, _ := cmd.Flags().GetBool("built_in")
-    fmt.Println("built_in set to ", _built_in)
+    name, _ := cmd.Flags().GetString("name")
+    fmt.Println("name set to", name)
 
-    _filter_or, _ := cmd.Flags().GetBool("filter_or")
-    fmt.Println("filter_or set to ", _filter_or)
+    built_in, _ := cmd.Flags().GetBool("built_in")
+    fmt.Println("built_in set to", built_in)
+
+    filter_or, _ := cmd.Flags().GetBool("filter_or")
+    fmt.Println("filter_or set to", filter_or)
   },
 }
 
-
-var roleCmd7903 = &cobra.Command{
+var roleCmd = &cobra.Command{
   Use:   "role",
   Short: "Get Role",
   Long: `### Get information about the role with a specific id.
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("role called")
-    
-    _role_id, _ := cmd.Flags().GetInt64("role_id")
-    fmt.Println("role_id set to ", _role_id)
+
+    role_id, _ := cmd.Flags().GetInt64("role_id")
+    fmt.Println("role_id set to", role_id)
   },
 }
-
 
 var updateRoleCmd = &cobra.Command{
   Use:   "updateRole",
@@ -7220,15 +6860,14 @@ var updateRoleCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("updateRole called")
-    
-    _role_id, _ := cmd.Flags().GetInt64("role_id")
-    fmt.Println("role_id set to ", _role_id)
 
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+    role_id, _ := cmd.Flags().GetInt64("role_id")
+    fmt.Println("role_id set to", role_id)
+
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
   },
 }
-
 
 var deleteRoleCmd = &cobra.Command{
   Use:   "deleteRole",
@@ -7237,12 +6876,11 @@ var deleteRoleCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("deleteRole called")
-    
-    _role_id, _ := cmd.Flags().GetInt64("role_id")
-    fmt.Println("role_id set to ", _role_id)
+
+    role_id, _ := cmd.Flags().GetInt64("role_id")
+    fmt.Println("role_id set to", role_id)
   },
 }
-
 
 var roleGroupsCmd = &cobra.Command{
   Use:   "roleGroups",
@@ -7251,15 +6889,14 @@ var roleGroupsCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("roleGroups called")
-    
-    _role_id, _ := cmd.Flags().GetInt64("role_id")
-    fmt.Println("role_id set to ", _role_id)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    role_id, _ := cmd.Flags().GetInt64("role_id")
+    fmt.Println("role_id set to", role_id)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var setRoleGroupsCmd = &cobra.Command{
   Use:   "setRoleGroups",
@@ -7268,15 +6905,14 @@ var setRoleGroupsCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("setRoleGroups called")
-    
-    _role_id, _ := cmd.Flags().GetInt64("role_id")
-    fmt.Println("role_id set to ", _role_id)
 
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+    role_id, _ := cmd.Flags().GetInt64("role_id")
+    fmt.Println("role_id set to", role_id)
+
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
   },
 }
-
 
 var roleUsersCmd = &cobra.Command{
   Use:   "roleUsers",
@@ -7285,18 +6921,17 @@ var roleUsersCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("roleUsers called")
-    
-    _role_id, _ := cmd.Flags().GetInt64("role_id")
-    fmt.Println("role_id set to ", _role_id)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    role_id, _ := cmd.Flags().GetInt64("role_id")
+    fmt.Println("role_id set to", role_id)
 
-    _direct_association_only, _ := cmd.Flags().GetBool("direct_association_only")
-    fmt.Println("direct_association_only set to ", _direct_association_only)
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
+
+    direct_association_only, _ := cmd.Flags().GetBool("direct_association_only")
+    fmt.Println("direct_association_only set to", direct_association_only)
   },
 }
-
 
 var setRoleUsersCmd = &cobra.Command{
   Use:   "setRoleUsers",
@@ -7305,24 +6940,20 @@ var setRoleUsersCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("setRoleUsers called")
-    
-    _role_id, _ := cmd.Flags().GetInt64("role_id")
-    fmt.Println("role_id set to ", _role_id)
 
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+    role_id, _ := cmd.Flags().GetInt64("role_id")
+    fmt.Println("role_id set to", role_id)
+
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
   },
 }
 
-
-
-
-var scheduledPlanCmd = &cobra.Command{
+var ScheduledPlanCmd = &cobra.Command{
   Use:   "ScheduledPlan",
   Short: "Manage Scheduled Plans",
-  Long: "Manage Scheduled Plans",
+  Long:  "Manage Scheduled Plans",
 }
-
 
 var scheduledPlansForSpaceCmd = &cobra.Command{
   Use:   "scheduledPlansForSpace",
@@ -7333,17 +6964,16 @@ Returns scheduled plans owned by the caller for a given space id.
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("scheduledPlansForSpace called")
-    
-    _space_id, _ := cmd.Flags().GetInt64("space_id")
-    fmt.Println("space_id set to ", _space_id)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    space_id, _ := cmd.Flags().GetInt64("space_id")
+    fmt.Println("space_id set to", space_id)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
 
-
-var scheduledPlanCmd7163 = &cobra.Command{
+var scheduledPlanCmd = &cobra.Command{
   Use:   "scheduledPlan",
   Short: "Get Scheduled Plan",
   Long: `### Get Information About a Scheduled Plan
@@ -7352,15 +6982,14 @@ Admins can fetch information about other users' Scheduled Plans.
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("scheduledPlan called")
-    
-    _scheduled_plan_id, _ := cmd.Flags().GetInt64("scheduled_plan_id")
-    fmt.Println("scheduled_plan_id set to ", _scheduled_plan_id)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    scheduled_plan_id, _ := cmd.Flags().GetInt64("scheduled_plan_id")
+    fmt.Println("scheduled_plan_id set to", scheduled_plan_id)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var updateScheduledPlanCmd = &cobra.Command{
   Use:   "updateScheduledPlan",
@@ -7412,15 +7041,14 @@ Valid formats vary by destination type and source object. 'wysiwyg_pdf' is only 
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("updateScheduledPlan called")
-    
-    _scheduled_plan_id, _ := cmd.Flags().GetInt64("scheduled_plan_id")
-    fmt.Println("scheduled_plan_id set to ", _scheduled_plan_id)
 
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+    scheduled_plan_id, _ := cmd.Flags().GetInt64("scheduled_plan_id")
+    fmt.Println("scheduled_plan_id set to", scheduled_plan_id)
+
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
   },
 }
-
 
 var deleteScheduledPlanCmd = &cobra.Command{
   Use:   "deleteScheduledPlan",
@@ -7433,12 +7061,11 @@ This delete cannot be undone.
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("deleteScheduledPlan called")
-    
-    _scheduled_plan_id, _ := cmd.Flags().GetInt64("scheduled_plan_id")
-    fmt.Println("scheduled_plan_id set to ", _scheduled_plan_id)
+
+    scheduled_plan_id, _ := cmd.Flags().GetInt64("scheduled_plan_id")
+    fmt.Println("scheduled_plan_id set to", scheduled_plan_id)
   },
 }
-
 
 var allScheduledPlansCmd = &cobra.Command{
   Use:   "allScheduledPlans",
@@ -7459,18 +7086,17 @@ The caller must have 'see_schedules' permission to see other users' scheduled pl
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("allScheduledPlans called")
-    
-    _user_id, _ := cmd.Flags().GetInt64("user_id")
-    fmt.Println("user_id set to ", _user_id)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    user_id, _ := cmd.Flags().GetInt64("user_id")
+    fmt.Println("user_id set to", user_id)
 
-    _all_users, _ := cmd.Flags().GetBool("all_users")
-    fmt.Println("all_users set to ", _all_users)
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
+
+    all_users, _ := cmd.Flags().GetBool("all_users")
+    fmt.Println("all_users set to", all_users)
   },
 }
-
 
 var createScheduledPlanCmd = &cobra.Command{
   Use:   "createScheduledPlan",
@@ -7538,12 +7164,11 @@ Valid formats vary by destination type and source object. 'wysiwyg_pdf' is only 
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("createScheduledPlan called")
-    
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
   },
 }
-
 
 var scheduledPlanRunOnceCmd = &cobra.Command{
   Use:   "scheduledPlanRunOnce",
@@ -7590,12 +7215,11 @@ Valid formats vary by destination type and source object. 'wysiwyg_pdf' is only 
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("scheduledPlanRunOnce called")
-    
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
   },
 }
-
 
 var scheduledPlansForLookCmd = &cobra.Command{
   Use:   "scheduledPlansForLook",
@@ -7616,21 +7240,20 @@ The caller must have 'see_schedules' permission to see other users' scheduled pl
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("scheduledPlansForLook called")
-    
-    _look_id, _ := cmd.Flags().GetInt64("look_id")
-    fmt.Println("look_id set to ", _look_id)
 
-    _user_id, _ := cmd.Flags().GetInt64("user_id")
-    fmt.Println("user_id set to ", _user_id)
+    look_id, _ := cmd.Flags().GetInt64("look_id")
+    fmt.Println("look_id set to", look_id)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    user_id, _ := cmd.Flags().GetInt64("user_id")
+    fmt.Println("user_id set to", user_id)
 
-    _all_users, _ := cmd.Flags().GetBool("all_users")
-    fmt.Println("all_users set to ", _all_users)
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
+
+    all_users, _ := cmd.Flags().GetBool("all_users")
+    fmt.Println("all_users set to", all_users)
   },
 }
-
 
 var scheduledPlansForDashboardCmd = &cobra.Command{
   Use:   "scheduledPlansForDashboard",
@@ -7651,21 +7274,20 @@ The caller must have 'see_schedules' permission to see other users' scheduled pl
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("scheduledPlansForDashboard called")
-    
-    _dashboard_id, _ := cmd.Flags().GetInt64("dashboard_id")
-    fmt.Println("dashboard_id set to ", _dashboard_id)
 
-    _user_id, _ := cmd.Flags().GetInt64("user_id")
-    fmt.Println("user_id set to ", _user_id)
+    dashboard_id, _ := cmd.Flags().GetInt64("dashboard_id")
+    fmt.Println("dashboard_id set to", dashboard_id)
 
-    _all_users, _ := cmd.Flags().GetBool("all_users")
-    fmt.Println("all_users set to ", _all_users)
+    user_id, _ := cmd.Flags().GetInt64("user_id")
+    fmt.Println("user_id set to", user_id)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    all_users, _ := cmd.Flags().GetBool("all_users")
+    fmt.Println("all_users set to", all_users)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var scheduledPlansForLookmlDashboardCmd = &cobra.Command{
   Use:   "scheduledPlansForLookmlDashboard",
@@ -7686,21 +7308,20 @@ The caller must have 'see_schedules' permission to see other users' scheduled pl
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("scheduledPlansForLookmlDashboard called")
-    
-    _lookml_dashboard_id, _ := cmd.Flags().GetString("lookml_dashboard_id")
-    fmt.Println("lookml_dashboard_id set to ", _lookml_dashboard_id)
 
-    _user_id, _ := cmd.Flags().GetInt64("user_id")
-    fmt.Println("user_id set to ", _user_id)
+    lookml_dashboard_id, _ := cmd.Flags().GetString("lookml_dashboard_id")
+    fmt.Println("lookml_dashboard_id set to", lookml_dashboard_id)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    user_id, _ := cmd.Flags().GetInt64("user_id")
+    fmt.Println("user_id set to", user_id)
 
-    _all_users, _ := cmd.Flags().GetBool("all_users")
-    fmt.Println("all_users set to ", _all_users)
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
+
+    all_users, _ := cmd.Flags().GetBool("all_users")
+    fmt.Println("all_users set to", all_users)
   },
 }
-
 
 var scheduledPlanRunOnceByIdCmd = &cobra.Command{
   Use:   "scheduledPlanRunOnceById",
@@ -7756,26 +7377,22 @@ This API is rate limited to prevent it from being used for relay spam or DoS att
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("scheduledPlanRunOnceById called")
-    
-    _scheduled_plan_id, _ := cmd.Flags().GetInt64("scheduled_plan_id")
-    fmt.Println("scheduled_plan_id set to ", _scheduled_plan_id)
 
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+    scheduled_plan_id, _ := cmd.Flags().GetInt64("scheduled_plan_id")
+    fmt.Println("scheduled_plan_id set to", scheduled_plan_id)
+
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
   },
 }
 
-
-
-
-var sessionCmd = &cobra.Command{
+var SessionCmd = &cobra.Command{
   Use:   "Session",
   Short: "Session Information",
-  Long: "Session Information",
+  Long:  "Session Information",
 }
 
-
-var sessionCmd7571 = &cobra.Command{
+var sessionCmd = &cobra.Command{
   Use:   "session",
   Short: "Get Session",
   Long: `### Get API Session
@@ -7784,10 +7401,9 @@ Returns information about the current API session, such as which workspace is se
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("session called")
-    
+
   },
 }
-
 
 var updateSessionCmd = &cobra.Command{
   Use:   "updateSession",
@@ -7815,21 +7431,17 @@ API sessions, be sure to select the dev workspace after each login.
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("updateSession called")
-    
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
   },
 }
 
-
-
-
-var themeCmd = &cobra.Command{
+var ThemeCmd = &cobra.Command{
   Use:   "Theme",
   Short: "Manage Themes",
-  Long: "Manage Themes",
+  Long:  "Manage Themes",
 }
-
 
 var allThemesCmd = &cobra.Command{
   Use:   "allThemes",
@@ -7845,12 +7457,11 @@ This method returns an array of all existing themes. The active time for the the
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("allThemes called")
-    
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var createThemeCmd = &cobra.Command{
   Use:   "createTheme",
@@ -7874,12 +7485,11 @@ For more information, see [Creating and Applying Themes](https://looker.com/docs
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("createTheme called")
-    
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
   },
 }
-
 
 var searchThemesCmd = &cobra.Command{
   Use:   "searchThemes",
@@ -7926,36 +7536,35 @@ Get a **single theme** by id with [Theme](#!/Theme/theme)
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("searchThemes called")
-    
-    _id, _ := cmd.Flags().GetInt64("id")
-    fmt.Println("id set to ", _id)
 
-    _name, _ := cmd.Flags().GetString("name")
-    fmt.Println("name set to ", _name)
+    id, _ := cmd.Flags().GetInt64("id")
+    fmt.Println("id set to", id)
 
-    _begin_at, _ := cmd.Flags().GetString("begin_at")
-    fmt.Println("begin_at set to ", _begin_at)
+    name, _ := cmd.Flags().GetString("name")
+    fmt.Println("name set to", name)
 
-    _end_at, _ := cmd.Flags().GetString("end_at")
-    fmt.Println("end_at set to ", _end_at)
+    begin_at, _ := cmd.Flags().GetString("begin_at")
+    fmt.Println("begin_at set to", begin_at)
 
-    _limit, _ := cmd.Flags().GetInt64("limit")
-    fmt.Println("limit set to ", _limit)
+    end_at, _ := cmd.Flags().GetString("end_at")
+    fmt.Println("end_at set to", end_at)
 
-    _offset, _ := cmd.Flags().GetInt64("offset")
-    fmt.Println("offset set to ", _offset)
+    limit, _ := cmd.Flags().GetInt64("limit")
+    fmt.Println("limit set to", limit)
 
-    _sorts, _ := cmd.Flags().GetString("sorts")
-    fmt.Println("sorts set to ", _sorts)
+    offset, _ := cmd.Flags().GetInt64("offset")
+    fmt.Println("offset set to", offset)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    sorts, _ := cmd.Flags().GetString("sorts")
+    fmt.Println("sorts set to", sorts)
 
-    _filter_or, _ := cmd.Flags().GetBool("filter_or")
-    fmt.Println("filter_or set to ", _filter_or)
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
+
+    filter_or, _ := cmd.Flags().GetBool("filter_or")
+    fmt.Println("filter_or set to", filter_or)
   },
 }
-
 
 var defaultThemeCmd = &cobra.Command{
   Use:   "defaultTheme",
@@ -7970,12 +7579,11 @@ The optional 'ts' parameter can specify a different timestamp than "now." If spe
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("defaultTheme called")
-    
-    _ts, _ := cmd.Flags().GetString("ts")
-    fmt.Println("ts set to ", _ts)
+
+    ts, _ := cmd.Flags().GetString("ts")
+    fmt.Println("ts set to", ts)
   },
 }
-
 
 var setDefaultThemeCmd = &cobra.Command{
   Use:   "setDefaultTheme",
@@ -7995,12 +7603,11 @@ Returns the new specified default theme object.
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("setDefaultTheme called")
-    
-    _name, _ := cmd.Flags().GetString("name")
-    fmt.Println("name set to ", _name)
+
+    name, _ := cmd.Flags().GetString("name")
+    fmt.Println("name set to", name)
   },
 }
-
 
 var activeThemesCmd = &cobra.Command{
   Use:   "activeThemes",
@@ -8019,18 +7626,17 @@ The optional 'ts' parameter can specify a different timestamp than "now."
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("activeThemes called")
-    
-    _name, _ := cmd.Flags().GetString("name")
-    fmt.Println("name set to ", _name)
 
-    _ts, _ := cmd.Flags().GetString("ts")
-    fmt.Println("ts set to ", _ts)
+    name, _ := cmd.Flags().GetString("name")
+    fmt.Println("name set to", name)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    ts, _ := cmd.Flags().GetString("ts")
+    fmt.Println("ts set to", ts)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var themeOrDefaultCmd = &cobra.Command{
   Use:   "themeOrDefault",
@@ -8045,15 +7651,14 @@ Note: API users with 'show' ability can call this function
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("themeOrDefault called")
-    
-    _name, _ := cmd.Flags().GetString("name")
-    fmt.Println("name set to ", _name)
 
-    _ts, _ := cmd.Flags().GetString("ts")
-    fmt.Println("ts set to ", _ts)
+    name, _ := cmd.Flags().GetString("name")
+    fmt.Println("name set to", name)
+
+    ts, _ := cmd.Flags().GetString("ts")
+    fmt.Println("ts set to", ts)
   },
 }
-
 
 var validateThemeCmd = &cobra.Command{
   Use:   "validateTheme",
@@ -8069,14 +7674,13 @@ See [Create Theme](#!/Theme/create_theme) for constraints
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("validateTheme called")
-    
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
   },
 }
 
-
-var themeCmd994 = &cobra.Command{
+var themeCmd = &cobra.Command{
   Use:   "theme",
   Short: "Get Theme",
   Long: `### Get a theme by ID
@@ -8088,15 +7692,14 @@ Use this to retrieve a specific theme, whether or not it's currently active.
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("theme called")
-    
-    _theme_id, _ := cmd.Flags().GetInt64("theme_id")
-    fmt.Println("theme_id set to ", _theme_id)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    theme_id, _ := cmd.Flags().GetInt64("theme_id")
+    fmt.Println("theme_id set to", theme_id)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var updateThemeCmd = &cobra.Command{
   Use:   "updateTheme",
@@ -8108,15 +7711,14 @@ var updateThemeCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("updateTheme called")
-    
-    _theme_id, _ := cmd.Flags().GetInt64("theme_id")
-    fmt.Println("theme_id set to ", _theme_id)
 
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+    theme_id, _ := cmd.Flags().GetInt64("theme_id")
+    fmt.Println("theme_id set to", theme_id)
+
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
   },
 }
-
 
 var deleteThemeCmd = &cobra.Command{
   Use:   "deleteTheme",
@@ -8134,21 +7736,17 @@ All IDs associated with a theme name can be retrieved by searching for the theme
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("deleteTheme called")
-    
-    _theme_id, _ := cmd.Flags().GetString("theme_id")
-    fmt.Println("theme_id set to ", _theme_id)
+
+    theme_id, _ := cmd.Flags().GetString("theme_id")
+    fmt.Println("theme_id set to", theme_id)
   },
 }
 
-
-
-
-var userCmd = &cobra.Command{
+var UserCmd = &cobra.Command{
   Use:   "User",
   Short: "Manage Users",
-  Long: "Manage Users",
+  Long:  "Manage Users",
 }
-
 
 var searchCredentialsEmailCmd = &cobra.Command{
   Use:   "searchCredentialsEmail",
@@ -8181,33 +7779,32 @@ Boolean search params accept only "true" and "false" as values.
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("searchCredentialsEmail called")
-    
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
 
-    _limit, _ := cmd.Flags().GetInt64("limit")
-    fmt.Println("limit set to ", _limit)
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
 
-    _offset, _ := cmd.Flags().GetInt64("offset")
-    fmt.Println("offset set to ", _offset)
+    limit, _ := cmd.Flags().GetInt64("limit")
+    fmt.Println("limit set to", limit)
 
-    _sorts, _ := cmd.Flags().GetString("sorts")
-    fmt.Println("sorts set to ", _sorts)
+    offset, _ := cmd.Flags().GetInt64("offset")
+    fmt.Println("offset set to", offset)
 
-    _id, _ := cmd.Flags().GetInt64("id")
-    fmt.Println("id set to ", _id)
+    sorts, _ := cmd.Flags().GetString("sorts")
+    fmt.Println("sorts set to", sorts)
 
-    _email, _ := cmd.Flags().GetString("email")
-    fmt.Println("email set to ", _email)
+    id, _ := cmd.Flags().GetInt64("id")
+    fmt.Println("id set to", id)
 
-    _emails, _ := cmd.Flags().GetString("emails")
-    fmt.Println("emails set to ", _emails)
+    email, _ := cmd.Flags().GetString("email")
+    fmt.Println("email set to", email)
 
-    _filter_or, _ := cmd.Flags().GetBool("filter_or")
-    fmt.Println("filter_or set to ", _filter_or)
+    emails, _ := cmd.Flags().GetString("emails")
+    fmt.Println("emails set to", emails)
+
+    filter_or, _ := cmd.Flags().GetBool("filter_or")
+    fmt.Println("filter_or set to", filter_or)
   },
 }
-
 
 var meCmd = &cobra.Command{
   Use:   "me",
@@ -8216,12 +7813,11 @@ var meCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("me called")
-    
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var allUsersCmd = &cobra.Command{
   Use:   "allUsers",
@@ -8230,30 +7826,29 @@ var allUsersCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("allUsers called")
-    
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
 
-    _page, _ := cmd.Flags().GetInt64("page")
-    fmt.Println("page set to ", _page)
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
 
-    _per_page, _ := cmd.Flags().GetInt64("per_page")
-    fmt.Println("per_page set to ", _per_page)
+    page, _ := cmd.Flags().GetInt64("page")
+    fmt.Println("page set to", page)
 
-    _limit, _ := cmd.Flags().GetInt64("limit")
-    fmt.Println("limit set to ", _limit)
+    per_page, _ := cmd.Flags().GetInt64("per_page")
+    fmt.Println("per_page set to", per_page)
 
-    _offset, _ := cmd.Flags().GetInt64("offset")
-    fmt.Println("offset set to ", _offset)
+    limit, _ := cmd.Flags().GetInt64("limit")
+    fmt.Println("limit set to", limit)
 
-    _sorts, _ := cmd.Flags().GetString("sorts")
-    fmt.Println("sorts set to ", _sorts)
+    offset, _ := cmd.Flags().GetInt64("offset")
+    fmt.Println("offset set to", offset)
 
-    _ids, _ := cmd.Flags().GetString("ids")
-    fmt.Println("ids set to ", _ids)
+    sorts, _ := cmd.Flags().GetString("sorts")
+    fmt.Println("sorts set to", sorts)
+
+    ids, _ := cmd.Flags().GetString("ids")
+    fmt.Println("ids set to", ids)
   },
 }
-
 
 var createUserCmd = &cobra.Command{
   Use:   "createUser",
@@ -8262,15 +7857,14 @@ var createUserCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("createUser called")
-    
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var searchUsersCmd = &cobra.Command{
   Use:   "searchUsers",
@@ -8309,57 +7903,56 @@ names of other users who are members of the same group as the user.
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("searchUsers called")
-    
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
 
-    _page, _ := cmd.Flags().GetInt64("page")
-    fmt.Println("page set to ", _page)
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
 
-    _per_page, _ := cmd.Flags().GetInt64("per_page")
-    fmt.Println("per_page set to ", _per_page)
+    page, _ := cmd.Flags().GetInt64("page")
+    fmt.Println("page set to", page)
 
-    _limit, _ := cmd.Flags().GetInt64("limit")
-    fmt.Println("limit set to ", _limit)
+    per_page, _ := cmd.Flags().GetInt64("per_page")
+    fmt.Println("per_page set to", per_page)
 
-    _offset, _ := cmd.Flags().GetInt64("offset")
-    fmt.Println("offset set to ", _offset)
+    limit, _ := cmd.Flags().GetInt64("limit")
+    fmt.Println("limit set to", limit)
 
-    _sorts, _ := cmd.Flags().GetString("sorts")
-    fmt.Println("sorts set to ", _sorts)
+    offset, _ := cmd.Flags().GetInt64("offset")
+    fmt.Println("offset set to", offset)
 
-    _id, _ := cmd.Flags().GetString("id")
-    fmt.Println("id set to ", _id)
+    sorts, _ := cmd.Flags().GetString("sorts")
+    fmt.Println("sorts set to", sorts)
 
-    _first_name, _ := cmd.Flags().GetString("first_name")
-    fmt.Println("first_name set to ", _first_name)
+    id, _ := cmd.Flags().GetString("id")
+    fmt.Println("id set to", id)
 
-    _last_name, _ := cmd.Flags().GetString("last_name")
-    fmt.Println("last_name set to ", _last_name)
+    first_name, _ := cmd.Flags().GetString("first_name")
+    fmt.Println("first_name set to", first_name)
 
-    _verified_looker_employee, _ := cmd.Flags().GetBool("verified_looker_employee")
-    fmt.Println("verified_looker_employee set to ", _verified_looker_employee)
+    last_name, _ := cmd.Flags().GetString("last_name")
+    fmt.Println("last_name set to", last_name)
 
-    _embed_user, _ := cmd.Flags().GetBool("embed_user")
-    fmt.Println("embed_user set to ", _embed_user)
+    verified_looker_employee, _ := cmd.Flags().GetBool("verified_looker_employee")
+    fmt.Println("verified_looker_employee set to", verified_looker_employee)
 
-    _email, _ := cmd.Flags().GetString("email")
-    fmt.Println("email set to ", _email)
+    embed_user, _ := cmd.Flags().GetBool("embed_user")
+    fmt.Println("embed_user set to", embed_user)
 
-    _is_disabled, _ := cmd.Flags().GetBool("is_disabled")
-    fmt.Println("is_disabled set to ", _is_disabled)
+    email, _ := cmd.Flags().GetString("email")
+    fmt.Println("email set to", email)
 
-    _filter_or, _ := cmd.Flags().GetBool("filter_or")
-    fmt.Println("filter_or set to ", _filter_or)
+    is_disabled, _ := cmd.Flags().GetBool("is_disabled")
+    fmt.Println("is_disabled set to", is_disabled)
 
-    _content_metadata_id, _ := cmd.Flags().GetString("content_metadata_id")
-    fmt.Println("content_metadata_id set to ", _content_metadata_id)
+    filter_or, _ := cmd.Flags().GetBool("filter_or")
+    fmt.Println("filter_or set to", filter_or)
 
-    _group_id, _ := cmd.Flags().GetString("group_id")
-    fmt.Println("group_id set to ", _group_id)
+    content_metadata_id, _ := cmd.Flags().GetString("content_metadata_id")
+    fmt.Println("content_metadata_id set to", content_metadata_id)
+
+    group_id, _ := cmd.Flags().GetString("group_id")
+    fmt.Println("group_id set to", group_id)
   },
 }
-
 
 var searchUsersNamesCmd = &cobra.Command{
   Use:   "searchUsersNames",
@@ -8373,50 +7966,49 @@ Any additional search params will be combined into a logical AND expression.
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("searchUsersNames called")
-    
-    _pattern, _ := cmd.Flags().GetString("pattern")
-    fmt.Println("pattern set to ", _pattern)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    pattern, _ := cmd.Flags().GetString("pattern")
+    fmt.Println("pattern set to", pattern)
 
-    _page, _ := cmd.Flags().GetInt64("page")
-    fmt.Println("page set to ", _page)
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
 
-    _per_page, _ := cmd.Flags().GetInt64("per_page")
-    fmt.Println("per_page set to ", _per_page)
+    page, _ := cmd.Flags().GetInt64("page")
+    fmt.Println("page set to", page)
 
-    _limit, _ := cmd.Flags().GetInt64("limit")
-    fmt.Println("limit set to ", _limit)
+    per_page, _ := cmd.Flags().GetInt64("per_page")
+    fmt.Println("per_page set to", per_page)
 
-    _offset, _ := cmd.Flags().GetInt64("offset")
-    fmt.Println("offset set to ", _offset)
+    limit, _ := cmd.Flags().GetInt64("limit")
+    fmt.Println("limit set to", limit)
 
-    _sorts, _ := cmd.Flags().GetString("sorts")
-    fmt.Println("sorts set to ", _sorts)
+    offset, _ := cmd.Flags().GetInt64("offset")
+    fmt.Println("offset set to", offset)
 
-    _id, _ := cmd.Flags().GetInt64("id")
-    fmt.Println("id set to ", _id)
+    sorts, _ := cmd.Flags().GetString("sorts")
+    fmt.Println("sorts set to", sorts)
 
-    _first_name, _ := cmd.Flags().GetString("first_name")
-    fmt.Println("first_name set to ", _first_name)
+    id, _ := cmd.Flags().GetInt64("id")
+    fmt.Println("id set to", id)
 
-    _last_name, _ := cmd.Flags().GetString("last_name")
-    fmt.Println("last_name set to ", _last_name)
+    first_name, _ := cmd.Flags().GetString("first_name")
+    fmt.Println("first_name set to", first_name)
 
-    _verified_looker_employee, _ := cmd.Flags().GetBool("verified_looker_employee")
-    fmt.Println("verified_looker_employee set to ", _verified_looker_employee)
+    last_name, _ := cmd.Flags().GetString("last_name")
+    fmt.Println("last_name set to", last_name)
 
-    _email, _ := cmd.Flags().GetString("email")
-    fmt.Println("email set to ", _email)
+    verified_looker_employee, _ := cmd.Flags().GetBool("verified_looker_employee")
+    fmt.Println("verified_looker_employee set to", verified_looker_employee)
 
-    _is_disabled, _ := cmd.Flags().GetBool("is_disabled")
-    fmt.Println("is_disabled set to ", _is_disabled)
+    email, _ := cmd.Flags().GetString("email")
+    fmt.Println("email set to", email)
+
+    is_disabled, _ := cmd.Flags().GetBool("is_disabled")
+    fmt.Println("is_disabled set to", is_disabled)
   },
 }
 
-
-var userCmd5825 = &cobra.Command{
+var userCmd = &cobra.Command{
   Use:   "user",
   Short: "Get User by Id",
   Long: `### Get information about the user with a specific id.
@@ -8427,15 +8019,14 @@ The user name and avatar url, but no sensitive information.
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("user called")
-    
-    _user_id, _ := cmd.Flags().GetInt64("user_id")
-    fmt.Println("user_id set to ", _user_id)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    user_id, _ := cmd.Flags().GetInt64("user_id")
+    fmt.Println("user_id set to", user_id)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var updateUserCmd = &cobra.Command{
   Use:   "updateUser",
@@ -8444,18 +8035,17 @@ var updateUserCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("updateUser called")
-    
-    _user_id, _ := cmd.Flags().GetInt64("user_id")
-    fmt.Println("user_id set to ", _user_id)
 
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+    user_id, _ := cmd.Flags().GetInt64("user_id")
+    fmt.Println("user_id set to", user_id)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var deleteUserCmd = &cobra.Command{
   Use:   "deleteUser",
@@ -8466,12 +8056,11 @@ var deleteUserCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("deleteUser called")
-    
-    _user_id, _ := cmd.Flags().GetInt64("user_id")
-    fmt.Println("user_id set to ", _user_id)
+
+    user_id, _ := cmd.Flags().GetInt64("user_id")
+    fmt.Println("user_id set to", user_id)
   },
 }
-
 
 var userForCredentialCmd = &cobra.Command{
   Use:   "userForCredential",
@@ -8508,447 +8097,419 @@ which field in the given credential type is actually searched when finding a use
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("userForCredential called")
-    
-    _credential_type, _ := cmd.Flags().GetString("credential_type")
-    fmt.Println("credential_type set to ", _credential_type)
 
-    _credential_id, _ := cmd.Flags().GetString("credential_id")
-    fmt.Println("credential_id set to ", _credential_id)
+    credential_type, _ := cmd.Flags().GetString("credential_type")
+    fmt.Println("credential_type set to", credential_type)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    credential_id, _ := cmd.Flags().GetString("credential_id")
+    fmt.Println("credential_id set to", credential_id)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var userCredentialsEmailCmd = &cobra.Command{
   Use:   "userCredentialsEmail",
   Short: "Get Email/Password Credential",
-  Long: `### Email/password login information for the specified user.`,
+  Long:  `### Email/password login information for the specified user.`,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("userCredentialsEmail called")
-    
-    _user_id, _ := cmd.Flags().GetInt64("user_id")
-    fmt.Println("user_id set to ", _user_id)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    user_id, _ := cmd.Flags().GetInt64("user_id")
+    fmt.Println("user_id set to", user_id)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var createUserCredentialsEmailCmd = &cobra.Command{
   Use:   "createUserCredentialsEmail",
   Short: "Create Email/Password Credential",
-  Long: `### Email/password login information for the specified user.`,
+  Long:  `### Email/password login information for the specified user.`,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("createUserCredentialsEmail called")
-    
-    _user_id, _ := cmd.Flags().GetInt64("user_id")
-    fmt.Println("user_id set to ", _user_id)
 
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+    user_id, _ := cmd.Flags().GetInt64("user_id")
+    fmt.Println("user_id set to", user_id)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var updateUserCredentialsEmailCmd = &cobra.Command{
   Use:   "updateUserCredentialsEmail",
   Short: "Update Email/Password Credential",
-  Long: `### Email/password login information for the specified user.`,
+  Long:  `### Email/password login information for the specified user.`,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("updateUserCredentialsEmail called")
-    
-    _user_id, _ := cmd.Flags().GetInt64("user_id")
-    fmt.Println("user_id set to ", _user_id)
 
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+    user_id, _ := cmd.Flags().GetInt64("user_id")
+    fmt.Println("user_id set to", user_id)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var deleteUserCredentialsEmailCmd = &cobra.Command{
   Use:   "deleteUserCredentialsEmail",
   Short: "Delete Email/Password Credential",
-  Long: `### Email/password login information for the specified user.`,
+  Long:  `### Email/password login information for the specified user.`,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("deleteUserCredentialsEmail called")
-    
-    _user_id, _ := cmd.Flags().GetInt64("user_id")
-    fmt.Println("user_id set to ", _user_id)
+
+    user_id, _ := cmd.Flags().GetInt64("user_id")
+    fmt.Println("user_id set to", user_id)
   },
 }
-
 
 var userCredentialsTotpCmd = &cobra.Command{
   Use:   "userCredentialsTotp",
   Short: "Get Two-Factor Credential",
-  Long: `### Two-factor login information for the specified user.`,
+  Long:  `### Two-factor login information for the specified user.`,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("userCredentialsTotp called")
-    
-    _user_id, _ := cmd.Flags().GetInt64("user_id")
-    fmt.Println("user_id set to ", _user_id)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    user_id, _ := cmd.Flags().GetInt64("user_id")
+    fmt.Println("user_id set to", user_id)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var createUserCredentialsTotpCmd = &cobra.Command{
   Use:   "createUserCredentialsTotp",
   Short: "Create Two-Factor Credential",
-  Long: `### Two-factor login information for the specified user.`,
+  Long:  `### Two-factor login information for the specified user.`,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("createUserCredentialsTotp called")
-    
-    _user_id, _ := cmd.Flags().GetInt64("user_id")
-    fmt.Println("user_id set to ", _user_id)
 
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+    user_id, _ := cmd.Flags().GetInt64("user_id")
+    fmt.Println("user_id set to", user_id)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var deleteUserCredentialsTotpCmd = &cobra.Command{
   Use:   "deleteUserCredentialsTotp",
   Short: "Delete Two-Factor Credential",
-  Long: `### Two-factor login information for the specified user.`,
+  Long:  `### Two-factor login information for the specified user.`,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("deleteUserCredentialsTotp called")
-    
-    _user_id, _ := cmd.Flags().GetInt64("user_id")
-    fmt.Println("user_id set to ", _user_id)
+
+    user_id, _ := cmd.Flags().GetInt64("user_id")
+    fmt.Println("user_id set to", user_id)
   },
 }
-
 
 var userCredentialsLdapCmd = &cobra.Command{
   Use:   "userCredentialsLdap",
   Short: "Get LDAP Credential",
-  Long: `### LDAP login information for the specified user.`,
+  Long:  `### LDAP login information for the specified user.`,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("userCredentialsLdap called")
-    
-    _user_id, _ := cmd.Flags().GetInt64("user_id")
-    fmt.Println("user_id set to ", _user_id)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    user_id, _ := cmd.Flags().GetInt64("user_id")
+    fmt.Println("user_id set to", user_id)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var deleteUserCredentialsLdapCmd = &cobra.Command{
   Use:   "deleteUserCredentialsLdap",
   Short: "Delete LDAP Credential",
-  Long: `### LDAP login information for the specified user.`,
+  Long:  `### LDAP login information for the specified user.`,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("deleteUserCredentialsLdap called")
-    
-    _user_id, _ := cmd.Flags().GetInt64("user_id")
-    fmt.Println("user_id set to ", _user_id)
+
+    user_id, _ := cmd.Flags().GetInt64("user_id")
+    fmt.Println("user_id set to", user_id)
   },
 }
-
 
 var userCredentialsGoogleCmd = &cobra.Command{
   Use:   "userCredentialsGoogle",
   Short: "Get Google Auth Credential",
-  Long: `### Google authentication login information for the specified user.`,
+  Long:  `### Google authentication login information for the specified user.`,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("userCredentialsGoogle called")
-    
-    _user_id, _ := cmd.Flags().GetInt64("user_id")
-    fmt.Println("user_id set to ", _user_id)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    user_id, _ := cmd.Flags().GetInt64("user_id")
+    fmt.Println("user_id set to", user_id)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var deleteUserCredentialsGoogleCmd = &cobra.Command{
   Use:   "deleteUserCredentialsGoogle",
   Short: "Delete Google Auth Credential",
-  Long: `### Google authentication login information for the specified user.`,
+  Long:  `### Google authentication login information for the specified user.`,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("deleteUserCredentialsGoogle called")
-    
-    _user_id, _ := cmd.Flags().GetInt64("user_id")
-    fmt.Println("user_id set to ", _user_id)
+
+    user_id, _ := cmd.Flags().GetInt64("user_id")
+    fmt.Println("user_id set to", user_id)
   },
 }
-
 
 var userCredentialsSamlCmd = &cobra.Command{
   Use:   "userCredentialsSaml",
   Short: "Get Saml Auth Credential",
-  Long: `### Saml authentication login information for the specified user.`,
+  Long:  `### Saml authentication login information for the specified user.`,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("userCredentialsSaml called")
-    
-    _user_id, _ := cmd.Flags().GetInt64("user_id")
-    fmt.Println("user_id set to ", _user_id)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    user_id, _ := cmd.Flags().GetInt64("user_id")
+    fmt.Println("user_id set to", user_id)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var deleteUserCredentialsSamlCmd = &cobra.Command{
   Use:   "deleteUserCredentialsSaml",
   Short: "Delete Saml Auth Credential",
-  Long: `### Saml authentication login information for the specified user.`,
+  Long:  `### Saml authentication login information for the specified user.`,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("deleteUserCredentialsSaml called")
-    
-    _user_id, _ := cmd.Flags().GetInt64("user_id")
-    fmt.Println("user_id set to ", _user_id)
+
+    user_id, _ := cmd.Flags().GetInt64("user_id")
+    fmt.Println("user_id set to", user_id)
   },
 }
-
 
 var userCredentialsOidcCmd = &cobra.Command{
   Use:   "userCredentialsOidc",
   Short: "Get OIDC Auth Credential",
-  Long: `### OpenID Connect (OIDC) authentication login information for the specified user.`,
+  Long:  `### OpenID Connect (OIDC) authentication login information for the specified user.`,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("userCredentialsOidc called")
-    
-    _user_id, _ := cmd.Flags().GetInt64("user_id")
-    fmt.Println("user_id set to ", _user_id)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    user_id, _ := cmd.Flags().GetInt64("user_id")
+    fmt.Println("user_id set to", user_id)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var deleteUserCredentialsOidcCmd = &cobra.Command{
   Use:   "deleteUserCredentialsOidc",
   Short: "Delete OIDC Auth Credential",
-  Long: `### OpenID Connect (OIDC) authentication login information for the specified user.`,
+  Long:  `### OpenID Connect (OIDC) authentication login information for the specified user.`,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("deleteUserCredentialsOidc called")
-    
-    _user_id, _ := cmd.Flags().GetInt64("user_id")
-    fmt.Println("user_id set to ", _user_id)
+
+    user_id, _ := cmd.Flags().GetInt64("user_id")
+    fmt.Println("user_id set to", user_id)
   },
 }
-
 
 var userCredentialsApi3Cmd = &cobra.Command{
   Use:   "userCredentialsApi3",
   Short: "Get API 3 Credential",
-  Long: `### API 3 login information for the specified user. This is for the newer API keys that can be added for any user.`,
+  Long:  `### API 3 login information for the specified user. This is for the newer API keys that can be added for any user.`,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("userCredentialsApi3 called")
-    
-    _user_id, _ := cmd.Flags().GetInt64("user_id")
-    fmt.Println("user_id set to ", _user_id)
 
-    _credentials_api3_id, _ := cmd.Flags().GetInt64("credentials_api3_id")
-    fmt.Println("credentials_api3_id set to ", _credentials_api3_id)
+    user_id, _ := cmd.Flags().GetInt64("user_id")
+    fmt.Println("user_id set to", user_id)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    credentials_api3_id, _ := cmd.Flags().GetInt64("credentials_api3_id")
+    fmt.Println("credentials_api3_id set to", credentials_api3_id)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var deleteUserCredentialsApi3Cmd = &cobra.Command{
   Use:   "deleteUserCredentialsApi3",
   Short: "Delete API 3 Credential",
-  Long: `### API 3 login information for the specified user. This is for the newer API keys that can be added for any user.`,
+  Long:  `### API 3 login information for the specified user. This is for the newer API keys that can be added for any user.`,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("deleteUserCredentialsApi3 called")
-    
-    _user_id, _ := cmd.Flags().GetInt64("user_id")
-    fmt.Println("user_id set to ", _user_id)
 
-    _credentials_api3_id, _ := cmd.Flags().GetInt64("credentials_api3_id")
-    fmt.Println("credentials_api3_id set to ", _credentials_api3_id)
+    user_id, _ := cmd.Flags().GetInt64("user_id")
+    fmt.Println("user_id set to", user_id)
+
+    credentials_api3_id, _ := cmd.Flags().GetInt64("credentials_api3_id")
+    fmt.Println("credentials_api3_id set to", credentials_api3_id)
   },
 }
-
 
 var allUserCredentialsApi3sCmd = &cobra.Command{
   Use:   "allUserCredentialsApi3s",
   Short: "Get All API 3 Credentials",
-  Long: `### API 3 login information for the specified user. This is for the newer API keys that can be added for any user.`,
+  Long:  `### API 3 login information for the specified user. This is for the newer API keys that can be added for any user.`,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("allUserCredentialsApi3s called")
-    
-    _user_id, _ := cmd.Flags().GetInt64("user_id")
-    fmt.Println("user_id set to ", _user_id)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    user_id, _ := cmd.Flags().GetInt64("user_id")
+    fmt.Println("user_id set to", user_id)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var createUserCredentialsApi3Cmd = &cobra.Command{
   Use:   "createUserCredentialsApi3",
   Short: "Create API 3 Credential",
-  Long: `### API 3 login information for the specified user. This is for the newer API keys that can be added for any user.`,
+  Long:  `### API 3 login information for the specified user. This is for the newer API keys that can be added for any user.`,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("createUserCredentialsApi3 called")
-    
-    _user_id, _ := cmd.Flags().GetInt64("user_id")
-    fmt.Println("user_id set to ", _user_id)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    user_id, _ := cmd.Flags().GetInt64("user_id")
+    fmt.Println("user_id set to", user_id)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var userCredentialsEmbedCmd = &cobra.Command{
   Use:   "userCredentialsEmbed",
   Short: "Get Embedding Credential",
-  Long: `### Embed login information for the specified user.`,
+  Long:  `### Embed login information for the specified user.`,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("userCredentialsEmbed called")
-    
-    _user_id, _ := cmd.Flags().GetInt64("user_id")
-    fmt.Println("user_id set to ", _user_id)
 
-    _credentials_embed_id, _ := cmd.Flags().GetInt64("credentials_embed_id")
-    fmt.Println("credentials_embed_id set to ", _credentials_embed_id)
+    user_id, _ := cmd.Flags().GetInt64("user_id")
+    fmt.Println("user_id set to", user_id)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    credentials_embed_id, _ := cmd.Flags().GetInt64("credentials_embed_id")
+    fmt.Println("credentials_embed_id set to", credentials_embed_id)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var deleteUserCredentialsEmbedCmd = &cobra.Command{
   Use:   "deleteUserCredentialsEmbed",
   Short: "Delete Embedding Credential",
-  Long: `### Embed login information for the specified user.`,
+  Long:  `### Embed login information for the specified user.`,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("deleteUserCredentialsEmbed called")
-    
-    _user_id, _ := cmd.Flags().GetInt64("user_id")
-    fmt.Println("user_id set to ", _user_id)
 
-    _credentials_embed_id, _ := cmd.Flags().GetInt64("credentials_embed_id")
-    fmt.Println("credentials_embed_id set to ", _credentials_embed_id)
+    user_id, _ := cmd.Flags().GetInt64("user_id")
+    fmt.Println("user_id set to", user_id)
+
+    credentials_embed_id, _ := cmd.Flags().GetInt64("credentials_embed_id")
+    fmt.Println("credentials_embed_id set to", credentials_embed_id)
   },
 }
-
 
 var allUserCredentialsEmbedsCmd = &cobra.Command{
   Use:   "allUserCredentialsEmbeds",
   Short: "Get All Embedding Credentials",
-  Long: `### Embed login information for the specified user.`,
+  Long:  `### Embed login information for the specified user.`,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("allUserCredentialsEmbeds called")
-    
-    _user_id, _ := cmd.Flags().GetInt64("user_id")
-    fmt.Println("user_id set to ", _user_id)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    user_id, _ := cmd.Flags().GetInt64("user_id")
+    fmt.Println("user_id set to", user_id)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var userCredentialsLookerOpenidCmd = &cobra.Command{
   Use:   "userCredentialsLookerOpenid",
   Short: "Get Looker OpenId Credential",
-  Long: `### Looker Openid login information for the specified user. Used by Looker Analysts.`,
+  Long:  `### Looker Openid login information for the specified user. Used by Looker Analysts.`,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("userCredentialsLookerOpenid called")
-    
-    _user_id, _ := cmd.Flags().GetInt64("user_id")
-    fmt.Println("user_id set to ", _user_id)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    user_id, _ := cmd.Flags().GetInt64("user_id")
+    fmt.Println("user_id set to", user_id)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var deleteUserCredentialsLookerOpenidCmd = &cobra.Command{
   Use:   "deleteUserCredentialsLookerOpenid",
   Short: "Delete Looker OpenId Credential",
-  Long: `### Looker Openid login information for the specified user. Used by Looker Analysts.`,
+  Long:  `### Looker Openid login information for the specified user. Used by Looker Analysts.`,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("deleteUserCredentialsLookerOpenid called")
-    
-    _user_id, _ := cmd.Flags().GetInt64("user_id")
-    fmt.Println("user_id set to ", _user_id)
+
+    user_id, _ := cmd.Flags().GetInt64("user_id")
+    fmt.Println("user_id set to", user_id)
   },
 }
-
 
 var userSessionCmd = &cobra.Command{
   Use:   "userSession",
   Short: "Get Web Login Session",
-  Long: `### Web login session for the specified user.`,
+  Long:  `### Web login session for the specified user.`,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("userSession called")
-    
-    _user_id, _ := cmd.Flags().GetInt64("user_id")
-    fmt.Println("user_id set to ", _user_id)
 
-    _session_id, _ := cmd.Flags().GetInt64("session_id")
-    fmt.Println("session_id set to ", _session_id)
+    user_id, _ := cmd.Flags().GetInt64("user_id")
+    fmt.Println("user_id set to", user_id)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    session_id, _ := cmd.Flags().GetInt64("session_id")
+    fmt.Println("session_id set to", session_id)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var deleteUserSessionCmd = &cobra.Command{
   Use:   "deleteUserSession",
   Short: "Delete Web Login Session",
-  Long: `### Web login session for the specified user.`,
+  Long:  `### Web login session for the specified user.`,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("deleteUserSession called")
-    
-    _user_id, _ := cmd.Flags().GetInt64("user_id")
-    fmt.Println("user_id set to ", _user_id)
 
-    _session_id, _ := cmd.Flags().GetInt64("session_id")
-    fmt.Println("session_id set to ", _session_id)
+    user_id, _ := cmd.Flags().GetInt64("user_id")
+    fmt.Println("user_id set to", user_id)
+
+    session_id, _ := cmd.Flags().GetInt64("session_id")
+    fmt.Println("session_id set to", session_id)
   },
 }
-
 
 var allUserSessionsCmd = &cobra.Command{
   Use:   "allUserSessions",
   Short: "Get All Web Login Sessions",
-  Long: `### Web login session for the specified user.`,
+  Long:  `### Web login session for the specified user.`,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("allUserSessions called")
-    
-    _user_id, _ := cmd.Flags().GetInt64("user_id")
-    fmt.Println("user_id set to ", _user_id)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    user_id, _ := cmd.Flags().GetInt64("user_id")
+    fmt.Println("user_id set to", user_id)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var createUserCredentialsEmailPasswordResetCmd = &cobra.Command{
   Use:   "createUserCredentialsEmailPasswordReset",
@@ -8965,18 +8526,17 @@ This method can be called with an empty body.
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("createUserCredentialsEmailPasswordReset called")
-    
-    _user_id, _ := cmd.Flags().GetInt64("user_id")
-    fmt.Println("user_id set to ", _user_id)
 
-    _expires, _ := cmd.Flags().GetBool("expires")
-    fmt.Println("expires set to ", _expires)
+    user_id, _ := cmd.Flags().GetInt64("user_id")
+    fmt.Println("user_id set to", user_id)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    expires, _ := cmd.Flags().GetBool("expires")
+    fmt.Println("expires set to", expires)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var userRolesCmd = &cobra.Command{
   Use:   "userRoles",
@@ -8985,18 +8545,17 @@ var userRolesCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("userRoles called")
-    
-    _user_id, _ := cmd.Flags().GetInt64("user_id")
-    fmt.Println("user_id set to ", _user_id)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    user_id, _ := cmd.Flags().GetInt64("user_id")
+    fmt.Println("user_id set to", user_id)
 
-    _direct_association_only, _ := cmd.Flags().GetBool("direct_association_only")
-    fmt.Println("direct_association_only set to ", _direct_association_only)
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
+
+    direct_association_only, _ := cmd.Flags().GetBool("direct_association_only")
+    fmt.Println("direct_association_only set to", direct_association_only)
   },
 }
-
 
 var setUserRolesCmd = &cobra.Command{
   Use:   "setUserRoles",
@@ -9005,18 +8564,17 @@ var setUserRolesCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("setUserRoles called")
-    
-    _user_id, _ := cmd.Flags().GetInt64("user_id")
-    fmt.Println("user_id set to ", _user_id)
 
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+    user_id, _ := cmd.Flags().GetInt64("user_id")
+    fmt.Println("user_id set to", user_id)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var userAttributeUserValuesCmd = &cobra.Command{
   Use:   "userAttributeUserValues",
@@ -9040,24 +8598,23 @@ The value of all hidden user attributes will be blank.
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("userAttributeUserValues called")
-    
-    _user_id, _ := cmd.Flags().GetInt64("user_id")
-    fmt.Println("user_id set to ", _user_id)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    user_id, _ := cmd.Flags().GetInt64("user_id")
+    fmt.Println("user_id set to", user_id)
 
-    _user_attribute_ids, _ := cmd.Flags().GetString("user_attribute_ids")
-    fmt.Println("user_attribute_ids set to ", _user_attribute_ids)
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
 
-    _all_values, _ := cmd.Flags().GetBool("all_values")
-    fmt.Println("all_values set to ", _all_values)
+    user_attribute_ids, _ := cmd.Flags().GetString("user_attribute_ids")
+    fmt.Println("user_attribute_ids set to", user_attribute_ids)
 
-    _include_unset, _ := cmd.Flags().GetBool("include_unset")
-    fmt.Println("include_unset set to ", _include_unset)
+    all_values, _ := cmd.Flags().GetBool("all_values")
+    fmt.Println("all_values set to", all_values)
+
+    include_unset, _ := cmd.Flags().GetBool("include_unset")
+    fmt.Println("include_unset set to", include_unset)
   },
 }
-
 
 var setUserAttributeUserValueCmd = &cobra.Command{
   Use:   "setUserAttributeUserValue",
@@ -9068,18 +8625,17 @@ Per-user user attribute values take precedence over group or default values.
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("setUserAttributeUserValue called")
-    
-    _user_id, _ := cmd.Flags().GetInt64("user_id")
-    fmt.Println("user_id set to ", _user_id)
 
-    _user_attribute_id, _ := cmd.Flags().GetInt64("user_attribute_id")
-    fmt.Println("user_attribute_id set to ", _user_attribute_id)
+    user_id, _ := cmd.Flags().GetInt64("user_id")
+    fmt.Println("user_id set to", user_id)
 
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+    user_attribute_id, _ := cmd.Flags().GetInt64("user_attribute_id")
+    fmt.Println("user_attribute_id set to", user_attribute_id)
+
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
   },
 }
-
 
 var deleteUserAttributeUserValueCmd = &cobra.Command{
   Use:   "deleteUserAttributeUserValue",
@@ -9093,15 +8649,14 @@ information about how user attribute values are resolved.
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("deleteUserAttributeUserValue called")
-    
-    _user_id, _ := cmd.Flags().GetInt64("user_id")
-    fmt.Println("user_id set to ", _user_id)
 
-    _user_attribute_id, _ := cmd.Flags().GetInt64("user_attribute_id")
-    fmt.Println("user_attribute_id set to ", _user_attribute_id)
+    user_id, _ := cmd.Flags().GetInt64("user_id")
+    fmt.Println("user_id set to", user_id)
+
+    user_attribute_id, _ := cmd.Flags().GetInt64("user_attribute_id")
+    fmt.Println("user_attribute_id set to", user_attribute_id)
   },
 }
-
 
 var sendUserCredentialsEmailPasswordResetCmd = &cobra.Command{
   Use:   "sendUserCredentialsEmailPasswordReset",
@@ -9116,15 +8671,14 @@ This method can be called with an empty body.
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("sendUserCredentialsEmailPasswordReset called")
-    
-    _user_id, _ := cmd.Flags().GetInt64("user_id")
-    fmt.Println("user_id set to ", _user_id)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    user_id, _ := cmd.Flags().GetInt64("user_id")
+    fmt.Println("user_id set to", user_id)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var wipeoutUserEmailsCmd = &cobra.Command{
   Use:   "wipeoutUserEmails",
@@ -9138,18 +8692,17 @@ The user's 'is_disabled' status must be true.
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("wipeoutUserEmails called")
-    
-    _user_id, _ := cmd.Flags().GetInt64("user_id")
-    fmt.Println("user_id set to ", _user_id)
 
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+    user_id, _ := cmd.Flags().GetInt64("user_id")
+    fmt.Println("user_id set to", user_id)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var createEmbedUserCmd = &cobra.Command{
   Use:   "createEmbedUser",
@@ -9158,21 +8711,17 @@ var createEmbedUserCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("createEmbedUser called")
-    
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
   },
 }
 
-
-
-
-var userAttributeCmd = &cobra.Command{
+var UserAttributeCmd = &cobra.Command{
   Use:   "UserAttribute",
   Short: "Manage User Attributes",
-  Long: "Manage User Attributes",
+  Long:  "Manage User Attributes",
 }
-
 
 var allUserAttributesCmd = &cobra.Command{
   Use:   "allUserAttributes",
@@ -9181,15 +8730,14 @@ var allUserAttributesCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("allUserAttributes called")
-    
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
 
-    _sorts, _ := cmd.Flags().GetString("sorts")
-    fmt.Println("sorts set to ", _sorts)
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
+
+    sorts, _ := cmd.Flags().GetString("sorts")
+    fmt.Println("sorts set to", sorts)
   },
 }
-
 
 var createUserAttributeCmd = &cobra.Command{
   Use:   "createUserAttribute",
@@ -9207,32 +8755,30 @@ user attribute will fail with a 422 error.
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("createUserAttribute called")
-    
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
 
-
-var userAttributeCmd6019 = &cobra.Command{
+var userAttributeCmd = &cobra.Command{
   Use:   "userAttribute",
   Short: "Get User Attribute",
   Long: `### Get information about a user attribute.
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("userAttribute called")
-    
-    _user_attribute_id, _ := cmd.Flags().GetInt64("user_attribute_id")
-    fmt.Println("user_attribute_id set to ", _user_attribute_id)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    user_attribute_id, _ := cmd.Flags().GetInt64("user_attribute_id")
+    fmt.Println("user_attribute_id set to", user_attribute_id)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var updateUserAttributeCmd = &cobra.Command{
   Use:   "updateUserAttribute",
@@ -9241,18 +8787,17 @@ var updateUserAttributeCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("updateUserAttribute called")
-    
-    _user_attribute_id, _ := cmd.Flags().GetInt64("user_attribute_id")
-    fmt.Println("user_attribute_id set to ", _user_attribute_id)
 
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+    user_attribute_id, _ := cmd.Flags().GetInt64("user_attribute_id")
+    fmt.Println("user_attribute_id set to", user_attribute_id)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var deleteUserAttributeCmd = &cobra.Command{
   Use:   "deleteUserAttribute",
@@ -9261,12 +8806,11 @@ var deleteUserAttributeCmd = &cobra.Command{
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("deleteUserAttribute called")
-    
-    _user_attribute_id, _ := cmd.Flags().GetInt64("user_attribute_id")
-    fmt.Println("user_attribute_id set to ", _user_attribute_id)
+
+    user_attribute_id, _ := cmd.Flags().GetInt64("user_attribute_id")
+    fmt.Println("user_attribute_id set to", user_attribute_id)
   },
 }
-
 
 var allUserAttributeGroupValuesCmd = &cobra.Command{
   Use:   "allUserAttributeGroupValues",
@@ -9281,15 +8825,14 @@ Results will only include groups that the caller's user account has permission t
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("allUserAttributeGroupValues called")
-    
-    _user_attribute_id, _ := cmd.Flags().GetInt64("user_attribute_id")
-    fmt.Println("user_attribute_id set to ", _user_attribute_id)
 
-    _fields, _ := cmd.Flags().GetString("fields")
-    fmt.Println("fields set to ", _fields)
+    user_attribute_id, _ := cmd.Flags().GetInt64("user_attribute_id")
+    fmt.Println("user_attribute_id set to", user_attribute_id)
+
+    fields, _ := cmd.Flags().GetString("fields")
+    fmt.Println("fields set to", fields)
   },
 }
-
 
 var setUserAttributeGroupValuesCmd = &cobra.Command{
   Use:   "setUserAttributeGroupValues",
@@ -9317,24 +8860,20 @@ To set a user attribute value for all members of a group, see [Set User Attribut
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("setUserAttributeGroupValues called")
-    
-    _user_attribute_id, _ := cmd.Flags().GetInt64("user_attribute_id")
-    fmt.Println("user_attribute_id set to ", _user_attribute_id)
 
-    _body, _ := cmd.Flags().GetString("body")
-    fmt.Println("body set to ", _body)
+    user_attribute_id, _ := cmd.Flags().GetInt64("user_attribute_id")
+    fmt.Println("user_attribute_id set to", user_attribute_id)
+
+    body, _ := cmd.Flags().GetString("body")
+    fmt.Println("body set to", body)
   },
 }
 
-
-
-
-var workspaceCmd = &cobra.Command{
+var WorkspaceCmd = &cobra.Command{
   Use:   "Workspace",
   Short: "Manage Workspaces",
-  Long: "Manage Workspaces",
+  Long:  "Manage Workspaces",
 }
-
 
 var allWorkspacesCmd = &cobra.Command{
   Use:   "allWorkspaces",
@@ -9345,12 +8884,11 @@ Returns all workspaces available to the calling user.
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("allWorkspaces called")
-    
+
   },
 }
 
-
-var workspaceCmd3112 = &cobra.Command{
+var workspaceCmd = &cobra.Command{
   Use:   "workspace",
   Short: "Get Workspace",
   Long: `### Get A Workspace
@@ -9385,5069 +8923,1805 @@ later and use update_session(workspace_id: "dev") to select the dev workspace fo
 `,
   Run: func(cmd *cobra.Command, args []string) {
     fmt.Println("workspace called")
-    
-    _workspace_id, _ := cmd.Flags().GetString("workspace_id")
-    fmt.Println("workspace_id set to ", _workspace_id)
+
+    workspace_id, _ := cmd.Flags().GetString("workspace_id")
+    fmt.Println("workspace_id set to", workspace_id)
   },
 }
 
-
-
 func init() {
-
-
-              alertCmd.AddCommand(searchAlertsCmd)
-            
-              searchAlertsCmd.Flags().Int64("limit", 0, "(Optional) Number of results to return (used with `offset`).")
-              
-              
-
-              searchAlertsCmd.Flags().Int64("offset", 0, "(Optional) Number of results to skip before returning any (used with `limit`).")
-              
-              
-
-              searchAlertsCmd.Flags().String("group_by", "", "(Optional) Dimension by which to order the results(`dashboard` | `owner`)")
-              
-              
-
-              searchAlertsCmd.Flags().String("fields", "", "(Optional) Requested fields.")
-              
-              
-
-              searchAlertsCmd.Flags().BoolP("disabled", false, "(Optional) Filter on returning only enabled or disabled alerts.")
-              
-              
-
-              searchAlertsCmd.Flags().String("frequency", "", "(Optional) Filter on alert frequency, such as: monthly, weekly, daily, hourly, minutes")
-              
-              
-
-              searchAlertsCmd.Flags().BoolP("condition_met", false, "(Optional) Filter on whether the alert has met its condition when it last executed")
-              
-              
-
-              searchAlertsCmd.Flags().String("last_run_start", "", "(Optional) Filter on the start range of the last time the alerts were run. Example: 2021-01-01T01:01:01-08:00.")
-              
-              
-
-              searchAlertsCmd.Flags().String("last_run_end", "", "(Optional) Filter on the start range of the last time the alerts were run. Example: 2021-01-01T01:01:01-08:00.")
-              
-              
-
-              searchAlertsCmd.Flags().BoolP("all_owners", false, "(Admin only) (Optional) Filter for all owners.")
-              
-              
-            
-
-              alertCmd.AddCommand(getAlertCmd)
-            
-              getAlertCmd.Flags().Int64("alert_id", 0, "ID of an alert")
-              cobra.MarkFlagRequired(getAlertCmd.Flags(), "alert_id")
-              
-            
-
-              alertCmd.AddCommand(updateAlertCmd)
-            
-              updateAlertCmd.Flags().Int64("alert_id", 0, "ID of an alert")
-              cobra.MarkFlagRequired(updateAlertCmd.Flags(), "alert_id")
-              
-
-              updateAlertCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(updateAlertCmd.Flags(), "body")
-              
-            
-
-              alertCmd.AddCommand(updateAlertFieldCmd)
-            
-              updateAlertFieldCmd.Flags().Int64("alert_id", 0, "ID of an alert")
-              cobra.MarkFlagRequired(updateAlertFieldCmd.Flags(), "alert_id")
-              
-
-              updateAlertFieldCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(updateAlertFieldCmd.Flags(), "body")
-              
-            
-
-              alertCmd.AddCommand(deleteAlertCmd)
-            
-              deleteAlertCmd.Flags().Int64("alert_id", 0, "ID of an alert")
-              cobra.MarkFlagRequired(deleteAlertCmd.Flags(), "alert_id")
-              
-            
-
-              alertCmd.AddCommand(createAlertCmd)
-            
-              createAlertCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(createAlertCmd.Flags(), "body")
-              
-            
-
-              alertCmd.AddCommand(enqueueAlertCmd)
-            
-              enqueueAlertCmd.Flags().Int64("alert_id", 0, "ID of an alert")
-              cobra.MarkFlagRequired(enqueueAlertCmd.Flags(), "alert_id")
-              
-
-              enqueueAlertCmd.Flags().BoolP("force", false, "Whether to enqueue an alert again if its already running.")
-              
-              
-            
-  rootCmd.AddCommand(alertCmd)
-
-              apiAuthCmd.AddCommand(loginCmd)
-            
-              loginCmd.Flags().String("client_id", "", "client_id part of API3 Key.")
-              
-              
-
-              loginCmd.Flags().String("client_secret", "", "client_secret part of API3 Key.")
-              
-              
-            
-
-              apiAuthCmd.AddCommand(loginUserCmd)
-            
-              loginUserCmd.Flags().Int64("user_id", 0, "Id of user.")
-              cobra.MarkFlagRequired(loginUserCmd.Flags(), "user_id")
-              
-
-              loginUserCmd.Flags().BoolP("associative", false, "When true (default), API calls using the returned access_token are attributed to the admin user who created the access_token. When false, API activity is attributed to the user the access_token runs as. False requires a looker license.")
-              
-              
-            
-
-              apiAuthCmd.AddCommand(logoutCmd)
-            
-            
-  rootCmd.AddCommand(apiAuthCmd)
-
-              authCmd.AddCommand(createEmbedSecretCmd)
-            
-              createEmbedSecretCmd.Flags().String("body", "", "")
-              
-              
-            
-
-              authCmd.AddCommand(deleteEmbedSecretCmd)
-            
-              deleteEmbedSecretCmd.Flags().Int64("embed_secret_id", 0, "Id of Embed Secret")
-              cobra.MarkFlagRequired(deleteEmbedSecretCmd.Flags(), "embed_secret_id")
-              
-            
-
-              authCmd.AddCommand(createSsoEmbedUrlCmd)
-            
-              createSsoEmbedUrlCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(createSsoEmbedUrlCmd.Flags(), "body")
-              
-            
-
-              authCmd.AddCommand(createEmbedUrlAsMeCmd)
-            
-              createEmbedUrlAsMeCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(createEmbedUrlAsMeCmd.Flags(), "body")
-              
-            
-
-              authCmd.AddCommand(ldapConfigCmd)
-            
-            
-
-              authCmd.AddCommand(updateLdapConfigCmd)
-            
-              updateLdapConfigCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(updateLdapConfigCmd.Flags(), "body")
-              
-            
-
-              authCmd.AddCommand(testLdapConfigConnectionCmd)
-            
-              testLdapConfigConnectionCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(testLdapConfigConnectionCmd.Flags(), "body")
-              
-            
-
-              authCmd.AddCommand(testLdapConfigAuthCmd)
-            
-              testLdapConfigAuthCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(testLdapConfigAuthCmd.Flags(), "body")
-              
-            
-
-              authCmd.AddCommand(testLdapConfigUserInfoCmd)
-            
-              testLdapConfigUserInfoCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(testLdapConfigUserInfoCmd.Flags(), "body")
-              
-            
-
-              authCmd.AddCommand(testLdapConfigUserAuthCmd)
-            
-              testLdapConfigUserAuthCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(testLdapConfigUserAuthCmd.Flags(), "body")
-              
-            
-
-              authCmd.AddCommand(allOauthClientAppsCmd)
-            
-              allOauthClientAppsCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              authCmd.AddCommand(oauthClientAppCmd)
-            
-              oauthClientAppCmd.Flags().String("client_guid", "", "The unique id of this application")
-              cobra.MarkFlagRequired(oauthClientAppCmd.Flags(), "client_guid")
-              
-
-              oauthClientAppCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              authCmd.AddCommand(registerOauthClientAppCmd)
-            
-              registerOauthClientAppCmd.Flags().String("client_guid", "", "The unique id of this application")
-              cobra.MarkFlagRequired(registerOauthClientAppCmd.Flags(), "client_guid")
-              
-
-              registerOauthClientAppCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(registerOauthClientAppCmd.Flags(), "body")
-              
-
-              registerOauthClientAppCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              authCmd.AddCommand(updateOauthClientAppCmd)
-            
-              updateOauthClientAppCmd.Flags().String("client_guid", "", "The unique id of this application")
-              cobra.MarkFlagRequired(updateOauthClientAppCmd.Flags(), "client_guid")
-              
-
-              updateOauthClientAppCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(updateOauthClientAppCmd.Flags(), "body")
-              
-
-              updateOauthClientAppCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              authCmd.AddCommand(deleteOauthClientAppCmd)
-            
-              deleteOauthClientAppCmd.Flags().String("client_guid", "", "The unique id of this application")
-              cobra.MarkFlagRequired(deleteOauthClientAppCmd.Flags(), "client_guid")
-              
-            
-
-              authCmd.AddCommand(invalidateTokensCmd)
-            
-              invalidateTokensCmd.Flags().String("client_guid", "", "The unique id of the application")
-              cobra.MarkFlagRequired(invalidateTokensCmd.Flags(), "client_guid")
-              
-            
-
-              authCmd.AddCommand(activateAppUserCmd)
-            
-              activateAppUserCmd.Flags().String("client_guid", "", "The unique id of this application")
-              cobra.MarkFlagRequired(activateAppUserCmd.Flags(), "client_guid")
-              
-
-              activateAppUserCmd.Flags().Int64("user_id", 0, "The id of the user to enable use of this app")
-              cobra.MarkFlagRequired(activateAppUserCmd.Flags(), "user_id")
-              
-
-              activateAppUserCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              authCmd.AddCommand(deactivateAppUserCmd)
-            
-              deactivateAppUserCmd.Flags().String("client_guid", "", "The unique id of this application")
-              cobra.MarkFlagRequired(deactivateAppUserCmd.Flags(), "client_guid")
-              
-
-              deactivateAppUserCmd.Flags().Int64("user_id", 0, "The id of the user to enable use of this app")
-              cobra.MarkFlagRequired(deactivateAppUserCmd.Flags(), "user_id")
-              
-
-              deactivateAppUserCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              authCmd.AddCommand(oidcConfigCmd)
-            
-            
-
-              authCmd.AddCommand(updateOidcConfigCmd)
-            
-              updateOidcConfigCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(updateOidcConfigCmd.Flags(), "body")
-              
-            
-
-              authCmd.AddCommand(oidcTestConfigCmd)
-            
-              oidcTestConfigCmd.Flags().String("test_slug", "", "Slug of test config")
-              cobra.MarkFlagRequired(oidcTestConfigCmd.Flags(), "test_slug")
-              
-            
-
-              authCmd.AddCommand(deleteOidcTestConfigCmd)
-            
-              deleteOidcTestConfigCmd.Flags().String("test_slug", "", "Slug of test config")
-              cobra.MarkFlagRequired(deleteOidcTestConfigCmd.Flags(), "test_slug")
-              
-            
-
-              authCmd.AddCommand(createOidcTestConfigCmd)
-            
-              createOidcTestConfigCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(createOidcTestConfigCmd.Flags(), "body")
-              
-            
-
-              authCmd.AddCommand(passwordConfigCmd)
-            
-            
-
-              authCmd.AddCommand(updatePasswordConfigCmd)
-            
-              updatePasswordConfigCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(updatePasswordConfigCmd.Flags(), "body")
-              
-            
-
-              authCmd.AddCommand(forcePasswordResetAtNextLoginForAllUsersCmd)
-            
-            
-
-              authCmd.AddCommand(samlConfigCmd)
-            
-            
-
-              authCmd.AddCommand(updateSamlConfigCmd)
-            
-              updateSamlConfigCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(updateSamlConfigCmd.Flags(), "body")
-              
-            
-
-              authCmd.AddCommand(samlTestConfigCmd)
-            
-              samlTestConfigCmd.Flags().String("test_slug", "", "Slug of test config")
-              cobra.MarkFlagRequired(samlTestConfigCmd.Flags(), "test_slug")
-              
-            
-
-              authCmd.AddCommand(deleteSamlTestConfigCmd)
-            
-              deleteSamlTestConfigCmd.Flags().String("test_slug", "", "Slug of test config")
-              cobra.MarkFlagRequired(deleteSamlTestConfigCmd.Flags(), "test_slug")
-              
-            
-
-              authCmd.AddCommand(createSamlTestConfigCmd)
-            
-              createSamlTestConfigCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(createSamlTestConfigCmd.Flags(), "body")
-              
-            
-
-              authCmd.AddCommand(parseSamlIdpMetadataCmd)
-            
-              parseSamlIdpMetadataCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(parseSamlIdpMetadataCmd.Flags(), "body")
-              
-            
-
-              authCmd.AddCommand(fetchAndParseSamlIdpMetadataCmd)
-            
-              fetchAndParseSamlIdpMetadataCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(fetchAndParseSamlIdpMetadataCmd.Flags(), "body")
-              
-            
-
-              authCmd.AddCommand(sessionConfigCmd)
-            
-            
-
-              authCmd.AddCommand(updateSessionConfigCmd)
-            
-              updateSessionConfigCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(updateSessionConfigCmd.Flags(), "body")
-              
-            
-
-              authCmd.AddCommand(allUserLoginLockoutsCmd)
-            
-              allUserLoginLockoutsCmd.Flags().String("fields", "", "Include only these fields in the response")
-              
-              
-            
-
-              authCmd.AddCommand(searchUserLoginLockoutsCmd)
-            
-              searchUserLoginLockoutsCmd.Flags().String("fields", "", "Include only these fields in the response")
-              
-              
-
-              searchUserLoginLockoutsCmd.Flags().Int64("page", 0, "Return only page N of paginated results")
-              
-              
-
-              searchUserLoginLockoutsCmd.Flags().Int64("per_page", 0, "Return N rows of data per page")
-              
-              
-
-              searchUserLoginLockoutsCmd.Flags().String("sorts", "", "Fields to sort by.")
-              
-              
-
-              searchUserLoginLockoutsCmd.Flags().String("auth_type", "", "Auth type user is locked out for (email, ldap, totp, api)")
-              
-              
-
-              searchUserLoginLockoutsCmd.Flags().String("full_name", "", "Match name")
-              
-              
-
-              searchUserLoginLockoutsCmd.Flags().String("email", "", "Match email")
-              
-              
-
-              searchUserLoginLockoutsCmd.Flags().String("remote_id", "", "Match remote LDAP ID")
-              
-              
-
-              searchUserLoginLockoutsCmd.Flags().BoolP("filter_or", false, "Combine given search criteria in a boolean OR expression")
-              
-              
-            
-
-              authCmd.AddCommand(deleteUserLoginLockoutCmd)
-            
-              deleteUserLoginLockoutCmd.Flags().String("key", "", "The key associated with the locked user")
-              cobra.MarkFlagRequired(deleteUserLoginLockoutCmd.Flags(), "key")
-              
-            
-  rootCmd.AddCommand(authCmd)
-
-              boardCmd.AddCommand(allBoardsCmd)
-            
-              allBoardsCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              boardCmd.AddCommand(createBoardCmd)
-            
-              createBoardCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(createBoardCmd.Flags(), "body")
-              
-
-              createBoardCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              boardCmd.AddCommand(searchBoardsCmd)
-            
-              searchBoardsCmd.Flags().String("title", "", "Matches board title.")
-              
-              
-
-              searchBoardsCmd.Flags().String("created_at", "", "Matches the timestamp for when the board was created.")
-              
-              
-
-              searchBoardsCmd.Flags().String("first_name", "", "The first name of the user who created this board.")
-              
-              
-
-              searchBoardsCmd.Flags().String("last_name", "", "The last name of the user who created this board.")
-              
-              
-
-              searchBoardsCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-
-              searchBoardsCmd.Flags().BoolP("favorited", false, "Return favorited boards when true.")
-              
-              
-
-              searchBoardsCmd.Flags().String("creator_id", "", "Filter on boards created by a particular user.")
-              
-              
-
-              searchBoardsCmd.Flags().String("sorts", "", "The fields to sort the results by")
-              
-              
-
-              searchBoardsCmd.Flags().Int64("page", 0, "The page to return.")
-              
-              
-
-              searchBoardsCmd.Flags().Int64("per_page", 0, "The number of items in the returned page.")
-              
-              
-
-              searchBoardsCmd.Flags().Int64("offset", 0, "The number of items to skip before returning any. (used with limit and takes priority over page and per_page)")
-              
-              
-
-              searchBoardsCmd.Flags().Int64("limit", 0, "The maximum number of items to return. (used with offset and takes priority over page and per_page)")
-              
-              
-
-              searchBoardsCmd.Flags().BoolP("filter_or", false, "Combine given search criteria in a boolean OR expression")
-              
-              
-            
-
-              boardCmd.AddCommand(boardCmd2938)
-            
-              boardCmd2938.Flags().Int64("board_id", 0, "Id of board")
-              cobra.MarkFlagRequired(boardCmd2938.Flags(), "board_id")
-              
-
-              boardCmd2938.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              boardCmd.AddCommand(updateBoardCmd)
-            
-              updateBoardCmd.Flags().Int64("board_id", 0, "Id of board")
-              cobra.MarkFlagRequired(updateBoardCmd.Flags(), "board_id")
-              
-
-              updateBoardCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(updateBoardCmd.Flags(), "body")
-              
-
-              updateBoardCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              boardCmd.AddCommand(deleteBoardCmd)
-            
-              deleteBoardCmd.Flags().Int64("board_id", 0, "Id of board")
-              cobra.MarkFlagRequired(deleteBoardCmd.Flags(), "board_id")
-              
-            
-
-              boardCmd.AddCommand(allBoardItemsCmd)
-            
-              allBoardItemsCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-
-              allBoardItemsCmd.Flags().String("sorts", "", "Fields to sort by.")
-              
-              
-
-              allBoardItemsCmd.Flags().String("board_section_id", "", "Filter to a specific board section")
-              
-              
-            
-
-              boardCmd.AddCommand(createBoardItemCmd)
-            
-              createBoardItemCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(createBoardItemCmd.Flags(), "body")
-              
-
-              createBoardItemCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              boardCmd.AddCommand(boardItemCmd)
-            
-              boardItemCmd.Flags().Int64("board_item_id", 0, "Id of board item")
-              cobra.MarkFlagRequired(boardItemCmd.Flags(), "board_item_id")
-              
-
-              boardItemCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              boardCmd.AddCommand(updateBoardItemCmd)
-            
-              updateBoardItemCmd.Flags().Int64("board_item_id", 0, "Id of board item")
-              cobra.MarkFlagRequired(updateBoardItemCmd.Flags(), "board_item_id")
-              
-
-              updateBoardItemCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(updateBoardItemCmd.Flags(), "body")
-              
-
-              updateBoardItemCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              boardCmd.AddCommand(deleteBoardItemCmd)
-            
-              deleteBoardItemCmd.Flags().Int64("board_item_id", 0, "Id of board_item")
-              cobra.MarkFlagRequired(deleteBoardItemCmd.Flags(), "board_item_id")
-              
-            
-
-              boardCmd.AddCommand(allBoardSectionsCmd)
-            
-              allBoardSectionsCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-
-              allBoardSectionsCmd.Flags().String("sorts", "", "Fields to sort by.")
-              
-              
-            
-
-              boardCmd.AddCommand(createBoardSectionCmd)
-            
-              createBoardSectionCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(createBoardSectionCmd.Flags(), "body")
-              
-
-              createBoardSectionCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              boardCmd.AddCommand(boardSectionCmd)
-            
-              boardSectionCmd.Flags().Int64("board_section_id", 0, "Id of board section")
-              cobra.MarkFlagRequired(boardSectionCmd.Flags(), "board_section_id")
-              
-
-              boardSectionCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              boardCmd.AddCommand(updateBoardSectionCmd)
-            
-              updateBoardSectionCmd.Flags().Int64("board_section_id", 0, "Id of board section")
-              cobra.MarkFlagRequired(updateBoardSectionCmd.Flags(), "board_section_id")
-              
-
-              updateBoardSectionCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(updateBoardSectionCmd.Flags(), "body")
-              
-
-              updateBoardSectionCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              boardCmd.AddCommand(deleteBoardSectionCmd)
-            
-              deleteBoardSectionCmd.Flags().Int64("board_section_id", 0, "Id of board section")
-              cobra.MarkFlagRequired(deleteBoardSectionCmd.Flags(), "board_section_id")
-              
-            
-  rootCmd.AddCommand(boardCmd)
-
-              colorCollectionCmd.AddCommand(allColorCollectionsCmd)
-            
-              allColorCollectionsCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              colorCollectionCmd.AddCommand(createColorCollectionCmd)
-            
-              createColorCollectionCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(createColorCollectionCmd.Flags(), "body")
-              
-            
-
-              colorCollectionCmd.AddCommand(colorCollectionsCustomCmd)
-            
-              colorCollectionsCustomCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              colorCollectionCmd.AddCommand(colorCollectionsStandardCmd)
-            
-              colorCollectionsStandardCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              colorCollectionCmd.AddCommand(defaultColorCollectionCmd)
-            
-            
-
-              colorCollectionCmd.AddCommand(setDefaultColorCollectionCmd)
-            
-              setDefaultColorCollectionCmd.Flags().String("collection_id", "", "ID of color collection to set as default")
-              cobra.MarkFlagRequired(setDefaultColorCollectionCmd.Flags(), "collection_id")
-              
-            
-
-              colorCollectionCmd.AddCommand(colorCollectionCmd1675)
-            
-              colorCollectionCmd1675.Flags().String("collection_id", "", "Id of Color Collection")
-              cobra.MarkFlagRequired(colorCollectionCmd1675.Flags(), "collection_id")
-              
-
-              colorCollectionCmd1675.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              colorCollectionCmd.AddCommand(updateColorCollectionCmd)
-            
-              updateColorCollectionCmd.Flags().String("collection_id", "", "Id of Custom Color Collection")
-              cobra.MarkFlagRequired(updateColorCollectionCmd.Flags(), "collection_id")
-              
-
-              updateColorCollectionCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(updateColorCollectionCmd.Flags(), "body")
-              
-            
-
-              colorCollectionCmd.AddCommand(deleteColorCollectionCmd)
-            
-              deleteColorCollectionCmd.Flags().String("collection_id", "", "Id of Color Collection")
-              cobra.MarkFlagRequired(deleteColorCollectionCmd.Flags(), "collection_id")
-              
-            
-  rootCmd.AddCommand(colorCollectionCmd)
-
-              commandCmd.AddCommand(getAllCommandsCmd)
-            
-              getAllCommandsCmd.Flags().String("content_id", "", "Id of the associated content. This must be accompanied with content_type.")
-              
-              
-
-              getAllCommandsCmd.Flags().String("content_type", "", "Type of the associated content. This must be accompanied with content_id.")
-              
-              
-
-              getAllCommandsCmd.Flags().Int64("limit", 0, "Number of results to return.")
-              
-              
-            
-
-              commandCmd.AddCommand(createCommandCmd)
-            
-              createCommandCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(createCommandCmd.Flags(), "body")
-              
-            
-
-              commandCmd.AddCommand(updateCommandCmd)
-            
-              updateCommandCmd.Flags().Int64("command_id", 0, "ID of a command")
-              cobra.MarkFlagRequired(updateCommandCmd.Flags(), "command_id")
-              
-
-              updateCommandCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(updateCommandCmd.Flags(), "body")
-              
-            
-
-              commandCmd.AddCommand(deleteCommandCmd)
-            
-              deleteCommandCmd.Flags().Int64("command_id", 0, "ID of a command")
-              cobra.MarkFlagRequired(deleteCommandCmd.Flags(), "command_id")
-              
-            
-  rootCmd.AddCommand(commandCmd)
-
-              configCmd.AddCommand(cloudStorageConfigurationCmd)
-            
-            
-
-              configCmd.AddCommand(updateCloudStorageConfigurationCmd)
-            
-              updateCloudStorageConfigurationCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(updateCloudStorageConfigurationCmd.Flags(), "body")
-              
-            
-
-              configCmd.AddCommand(customWelcomeEmailCmd)
-            
-            
-
-              configCmd.AddCommand(updateCustomWelcomeEmailCmd)
-            
-              updateCustomWelcomeEmailCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(updateCustomWelcomeEmailCmd.Flags(), "body")
-              
-
-              updateCustomWelcomeEmailCmd.Flags().BoolP("send_test_welcome_email", false, "If true a test email with the content from the request will be sent to the current user after saving")
-              
-              
-            
-
-              configCmd.AddCommand(updateCustomWelcomeEmailTestCmd)
-            
-              updateCustomWelcomeEmailTestCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(updateCustomWelcomeEmailTestCmd.Flags(), "body")
-              
-            
-
-              configCmd.AddCommand(digestEmailsEnabledCmd)
-            
-            
-
-              configCmd.AddCommand(updateDigestEmailsEnabledCmd)
-            
-              updateDigestEmailsEnabledCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(updateDigestEmailsEnabledCmd.Flags(), "body")
-              
-            
-
-              configCmd.AddCommand(createDigestEmailSendCmd)
-            
-            
-
-              configCmd.AddCommand(internalHelpResourcesContentCmd)
-            
-            
-
-              configCmd.AddCommand(updateInternalHelpResourcesContentCmd)
-            
-              updateInternalHelpResourcesContentCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(updateInternalHelpResourcesContentCmd.Flags(), "body")
-              
-            
-
-              configCmd.AddCommand(internalHelpResourcesCmd)
-            
-            
-
-              configCmd.AddCommand(updateInternalHelpResourcesCmd)
-            
-              updateInternalHelpResourcesCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(updateInternalHelpResourcesCmd.Flags(), "body")
-              
-            
-
-              configCmd.AddCommand(allLegacyFeaturesCmd)
-            
-            
-
-              configCmd.AddCommand(legacyFeatureCmd)
-            
-              legacyFeatureCmd.Flags().String("legacy_feature_id", "", "id of legacy feature")
-              cobra.MarkFlagRequired(legacyFeatureCmd.Flags(), "legacy_feature_id")
-              
-            
-
-              configCmd.AddCommand(updateLegacyFeatureCmd)
-            
-              updateLegacyFeatureCmd.Flags().String("legacy_feature_id", "", "id of legacy feature")
-              cobra.MarkFlagRequired(updateLegacyFeatureCmd.Flags(), "legacy_feature_id")
-              
-
-              updateLegacyFeatureCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(updateLegacyFeatureCmd.Flags(), "body")
-              
-            
-
-              configCmd.AddCommand(allLocalesCmd)
-            
-            
-
-              configCmd.AddCommand(mobileSettingsCmd)
-            
-            
-
-              configCmd.AddCommand(getSettingCmd)
-            
-              getSettingCmd.Flags().String("fields", "", "Requested fields")
-              
-              
-            
-
-              configCmd.AddCommand(setSettingCmd)
-            
-              setSettingCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(setSettingCmd.Flags(), "body")
-              
-
-              setSettingCmd.Flags().String("fields", "", "Requested fields")
-              
-              
-            
-
-              configCmd.AddCommand(allTimezonesCmd)
-            
-            
-
-              configCmd.AddCommand(versionsCmd)
-            
-              versionsCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              configCmd.AddCommand(apiSpecCmd)
-            
-              apiSpecCmd.Flags().String("api_version", "", "API version")
-              cobra.MarkFlagRequired(apiSpecCmd.Flags(), "api_version")
-              
-
-              apiSpecCmd.Flags().String("specification", "", "Specification name. Typically, this is \"swagger.json\"")
-              cobra.MarkFlagRequired(apiSpecCmd.Flags(), "specification")
-              
-            
-
-              configCmd.AddCommand(whitelabelConfigurationCmd)
-            
-              whitelabelConfigurationCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              configCmd.AddCommand(updateWhitelabelConfigurationCmd)
-            
-              updateWhitelabelConfigurationCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(updateWhitelabelConfigurationCmd.Flags(), "body")
-              
-            
-  rootCmd.AddCommand(configCmd)
-
-              connectionCmd.AddCommand(allConnectionsCmd)
-            
-              allConnectionsCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              connectionCmd.AddCommand(createConnectionCmd)
-            
-              createConnectionCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(createConnectionCmd.Flags(), "body")
-              
-            
-
-              connectionCmd.AddCommand(connectionCmd6206)
-            
-              connectionCmd6206.Flags().String("connection_name", "", "Name of connection")
-              cobra.MarkFlagRequired(connectionCmd6206.Flags(), "connection_name")
-              
-
-              connectionCmd6206.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              connectionCmd.AddCommand(updateConnectionCmd)
-            
-              updateConnectionCmd.Flags().String("connection_name", "", "Name of connection")
-              cobra.MarkFlagRequired(updateConnectionCmd.Flags(), "connection_name")
-              
-
-              updateConnectionCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(updateConnectionCmd.Flags(), "body")
-              
-            
-
-              connectionCmd.AddCommand(deleteConnectionCmd)
-            
-              deleteConnectionCmd.Flags().String("connection_name", "", "Name of connection")
-              cobra.MarkFlagRequired(deleteConnectionCmd.Flags(), "connection_name")
-              
-            
-
-              connectionCmd.AddCommand(deleteConnectionOverrideCmd)
-            
-              deleteConnectionOverrideCmd.Flags().String("connection_name", "", "Name of connection")
-              cobra.MarkFlagRequired(deleteConnectionOverrideCmd.Flags(), "connection_name")
-              
-
-              deleteConnectionOverrideCmd.Flags().String("override_context", "", "Context of connection override")
-              cobra.MarkFlagRequired(deleteConnectionOverrideCmd.Flags(), "override_context")
-              
-            
-
-              connectionCmd.AddCommand(testConnectionCmd)
-            
-              testConnectionCmd.Flags().String("connection_name", "", "Name of connection")
-              cobra.MarkFlagRequired(testConnectionCmd.Flags(), "connection_name")
-              
-
-              testConnectionCmd.Flags().String("tests", "", "Array of names of tests to run")
-              
-              
-            
-
-              connectionCmd.AddCommand(testConnectionConfigCmd)
-            
-              testConnectionConfigCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(testConnectionConfigCmd.Flags(), "body")
-              
-
-              testConnectionConfigCmd.Flags().String("tests", "", "Array of names of tests to run")
-              
-              
-            
-
-              connectionCmd.AddCommand(allDialectInfosCmd)
-            
-              allDialectInfosCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              connectionCmd.AddCommand(allExternalOauthApplicationsCmd)
-            
-              allExternalOauthApplicationsCmd.Flags().String("name", "", "Application name")
-              
-              
-
-              allExternalOauthApplicationsCmd.Flags().String("client_id", "", "Application Client ID")
-              
-              
-            
-
-              connectionCmd.AddCommand(createExternalOauthApplicationCmd)
-            
-              createExternalOauthApplicationCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(createExternalOauthApplicationCmd.Flags(), "body")
-              
-            
-
-              connectionCmd.AddCommand(createOauthApplicationUserStateCmd)
-            
-              createOauthApplicationUserStateCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(createOauthApplicationUserStateCmd.Flags(), "body")
-              
-            
-
-              connectionCmd.AddCommand(allSshServersCmd)
-            
-              allSshServersCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              connectionCmd.AddCommand(createSshServerCmd)
-            
-              createSshServerCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(createSshServerCmd.Flags(), "body")
-              
-            
-
-              connectionCmd.AddCommand(sshServerCmd)
-            
-              sshServerCmd.Flags().String("ssh_server_id", "", "Id of SSH Server")
-              cobra.MarkFlagRequired(sshServerCmd.Flags(), "ssh_server_id")
-              
-            
-
-              connectionCmd.AddCommand(updateSshServerCmd)
-            
-              updateSshServerCmd.Flags().String("ssh_server_id", "", "Id of SSH Server")
-              cobra.MarkFlagRequired(updateSshServerCmd.Flags(), "ssh_server_id")
-              
-
-              updateSshServerCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(updateSshServerCmd.Flags(), "body")
-              
-            
-
-              connectionCmd.AddCommand(deleteSshServerCmd)
-            
-              deleteSshServerCmd.Flags().String("ssh_server_id", "", "Id of SSH Server")
-              cobra.MarkFlagRequired(deleteSshServerCmd.Flags(), "ssh_server_id")
-              
-            
-
-              connectionCmd.AddCommand(testSshServerCmd)
-            
-              testSshServerCmd.Flags().String("ssh_server_id", "", "Id of SSH Server")
-              cobra.MarkFlagRequired(testSshServerCmd.Flags(), "ssh_server_id")
-              
-            
-
-              connectionCmd.AddCommand(allSshTunnelsCmd)
-            
-              allSshTunnelsCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              connectionCmd.AddCommand(createSshTunnelCmd)
-            
-              createSshTunnelCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(createSshTunnelCmd.Flags(), "body")
-              
-            
-
-              connectionCmd.AddCommand(sshTunnelCmd)
-            
-              sshTunnelCmd.Flags().String("ssh_tunnel_id", "", "Id of SSH Tunnel")
-              cobra.MarkFlagRequired(sshTunnelCmd.Flags(), "ssh_tunnel_id")
-              
-            
-
-              connectionCmd.AddCommand(updateSshTunnelCmd)
-            
-              updateSshTunnelCmd.Flags().String("ssh_tunnel_id", "", "Id of SSH Tunnel")
-              cobra.MarkFlagRequired(updateSshTunnelCmd.Flags(), "ssh_tunnel_id")
-              
-
-              updateSshTunnelCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(updateSshTunnelCmd.Flags(), "body")
-              
-            
-
-              connectionCmd.AddCommand(deleteSshTunnelCmd)
-            
-              deleteSshTunnelCmd.Flags().String("ssh_tunnel_id", "", "Id of SSH Tunnel")
-              cobra.MarkFlagRequired(deleteSshTunnelCmd.Flags(), "ssh_tunnel_id")
-              
-            
-
-              connectionCmd.AddCommand(testSshTunnelCmd)
-            
-              testSshTunnelCmd.Flags().String("ssh_tunnel_id", "", "Id of SSH Tunnel")
-              cobra.MarkFlagRequired(testSshTunnelCmd.Flags(), "ssh_tunnel_id")
-              
-            
-
-              connectionCmd.AddCommand(sshPublicKeyCmd)
-            
-            
-  rootCmd.AddCommand(connectionCmd)
-
-              contentCmd.AddCommand(searchContentFavoritesCmd)
-            
-              searchContentFavoritesCmd.Flags().Int64("id", 0, "Match content favorite id(s)")
-              
-              
-
-              searchContentFavoritesCmd.Flags().String("user_id", "", "Match user id(s).To create a list of multiple ids, use commas as separators")
-              
-              
-
-              searchContentFavoritesCmd.Flags().String("content_metadata_id", "", "Match content metadata id(s).To create a list of multiple ids, use commas as separators")
-              
-              
-
-              searchContentFavoritesCmd.Flags().String("dashboard_id", "", "Match dashboard id(s).To create a list of multiple ids, use commas as separators")
-              
-              
-
-              searchContentFavoritesCmd.Flags().String("look_id", "", "Match look id(s).To create a list of multiple ids, use commas as separators")
-              
-              
-
-              searchContentFavoritesCmd.Flags().String("board_id", "", "Match board id(s).To create a list of multiple ids, use commas as separators")
-              
-              
-
-              searchContentFavoritesCmd.Flags().Int64("limit", 0, "Number of results to return. (used with offset)")
-              
-              
-
-              searchContentFavoritesCmd.Flags().Int64("offset", 0, "Number of results to skip before returning any. (used with limit)")
-              
-              
-
-              searchContentFavoritesCmd.Flags().String("sorts", "", "Fields to sort by.")
-              
-              
-
-              searchContentFavoritesCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-
-              searchContentFavoritesCmd.Flags().BoolP("filter_or", false, "Combine given search criteria in a boolean OR expression")
-              
-              
-            
-
-              contentCmd.AddCommand(contentFavoriteCmd)
-            
-              contentFavoriteCmd.Flags().Int64("content_favorite_id", 0, "Id of favorite content")
-              cobra.MarkFlagRequired(contentFavoriteCmd.Flags(), "content_favorite_id")
-              
-
-              contentFavoriteCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              contentCmd.AddCommand(deleteContentFavoriteCmd)
-            
-              deleteContentFavoriteCmd.Flags().Int64("content_favorite_id", 0, "Id of favorite content")
-              cobra.MarkFlagRequired(deleteContentFavoriteCmd.Flags(), "content_favorite_id")
-              
-            
-
-              contentCmd.AddCommand(createContentFavoriteCmd)
-            
-              createContentFavoriteCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(createContentFavoriteCmd.Flags(), "body")
-              
-            
-
-              contentCmd.AddCommand(allContentMetadatasCmd)
-            
-              allContentMetadatasCmd.Flags().Int64("parent_id", 0, "Parent space of content.")
-              cobra.MarkFlagRequired(allContentMetadatasCmd.Flags(), "parent_id")
-              
-
-              allContentMetadatasCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              contentCmd.AddCommand(contentMetadataCmd)
-            
-              contentMetadataCmd.Flags().Int64("content_metadata_id", 0, "Id of content metadata")
-              cobra.MarkFlagRequired(contentMetadataCmd.Flags(), "content_metadata_id")
-              
-
-              contentMetadataCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              contentCmd.AddCommand(updateContentMetadataCmd)
-            
-              updateContentMetadataCmd.Flags().Int64("content_metadata_id", 0, "Id of content metadata")
-              cobra.MarkFlagRequired(updateContentMetadataCmd.Flags(), "content_metadata_id")
-              
-
-              updateContentMetadataCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(updateContentMetadataCmd.Flags(), "body")
-              
-            
-
-              contentCmd.AddCommand(allContentMetadataAccessesCmd)
-            
-              allContentMetadataAccessesCmd.Flags().Int64("content_metadata_id", 0, "Id of content metadata")
-              cobra.MarkFlagRequired(allContentMetadataAccessesCmd.Flags(), "content_metadata_id")
-              
-
-              allContentMetadataAccessesCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              contentCmd.AddCommand(createContentMetadataAccessCmd)
-            
-              createContentMetadataAccessCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(createContentMetadataAccessCmd.Flags(), "body")
-              
-
-              createContentMetadataAccessCmd.Flags().BoolP("send_boards_notification_email", false, "Optionally sends notification email when granting access to a board.")
-              
-              
-            
-
-              contentCmd.AddCommand(updateContentMetadataAccessCmd)
-            
-              updateContentMetadataAccessCmd.Flags().String("content_metadata_access_id", "", "Id of content metadata access")
-              cobra.MarkFlagRequired(updateContentMetadataAccessCmd.Flags(), "content_metadata_access_id")
-              
-
-              updateContentMetadataAccessCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(updateContentMetadataAccessCmd.Flags(), "body")
-              
-            
-
-              contentCmd.AddCommand(deleteContentMetadataAccessCmd)
-            
-              deleteContentMetadataAccessCmd.Flags().Int64("content_metadata_access_id", 0, "Id of content metadata access")
-              cobra.MarkFlagRequired(deleteContentMetadataAccessCmd.Flags(), "content_metadata_access_id")
-              
-            
-
-              contentCmd.AddCommand(contentThumbnailCmd)
-            
-              contentThumbnailCmd.Flags().String("type", "", "Either dashboard or look")
-              cobra.MarkFlagRequired(contentThumbnailCmd.Flags(), "type")
-              
-
-              contentThumbnailCmd.Flags().String("resource_id", "", "ID of the dashboard or look to render")
-              cobra.MarkFlagRequired(contentThumbnailCmd.Flags(), "resource_id")
-              
-
-              contentThumbnailCmd.Flags().String("reload", "", "Whether or not to refresh the rendered image with the latest content")
-              
-              
-
-              contentThumbnailCmd.Flags().String("format", "", "A value of png produces a thumbnail in PNG format instead of SVG (default)")
-              
-              
-
-              contentThumbnailCmd.Flags().Int64("width", 0, "The width of the image if format is supplied")
-              
-              
-
-              contentThumbnailCmd.Flags().Int64("height", 0, "The height of the image if format is supplied")
-              
-              
-            
-
-              contentCmd.AddCommand(contentValidationCmd)
-            
-              contentValidationCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              contentCmd.AddCommand(searchContentViewsCmd)
-            
-              searchContentViewsCmd.Flags().String("view_count", "", "Match view count")
-              
-              
-
-              searchContentViewsCmd.Flags().String("group_id", "", "Match Group Id")
-              
-              
-
-              searchContentViewsCmd.Flags().String("look_id", "", "Match look_id")
-              
-              
-
-              searchContentViewsCmd.Flags().String("dashboard_id", "", "Match dashboard_id")
-              
-              
-
-              searchContentViewsCmd.Flags().String("content_metadata_id", "", "Match content metadata id")
-              
-              
-
-              searchContentViewsCmd.Flags().String("start_of_week_date", "", "Match start of week date (format is \"YYYY-MM-DD\")")
-              
-              
-
-              searchContentViewsCmd.Flags().BoolP("all_time", false, "True if only all time view records should be returned")
-              
-              
-
-              searchContentViewsCmd.Flags().String("user_id", "", "Match user id")
-              
-              
-
-              searchContentViewsCmd.Flags().String("fields", "", "Requested fields")
-              
-              
-
-              searchContentViewsCmd.Flags().Int64("limit", 0, "Number of results to return. Use with `offset` to manage pagination of results")
-              
-              
-
-              searchContentViewsCmd.Flags().Int64("offset", 0, "Number of results to skip before returning data")
-              
-              
-
-              searchContentViewsCmd.Flags().String("sorts", "", "Fields to sort by")
-              
-              
-
-              searchContentViewsCmd.Flags().BoolP("filter_or", false, "Combine given search criteria in a boolean OR expression")
-              
-              
-            
-
-              contentCmd.AddCommand(vectorThumbnailCmd)
-            
-              vectorThumbnailCmd.Flags().String("type", "", "Either dashboard or look")
-              cobra.MarkFlagRequired(vectorThumbnailCmd.Flags(), "type")
-              
-
-              vectorThumbnailCmd.Flags().String("resource_id", "", "ID of the dashboard or look to render")
-              cobra.MarkFlagRequired(vectorThumbnailCmd.Flags(), "resource_id")
-              
-
-              vectorThumbnailCmd.Flags().String("reload", "", "Whether or not to refresh the rendered image with the latest content")
-              
-              
-            
-  rootCmd.AddCommand(contentCmd)
-
-              dashboardCmd.AddCommand(allDashboardsCmd)
-            
-              allDashboardsCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              dashboardCmd.AddCommand(createDashboardCmd)
-            
-              createDashboardCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(createDashboardCmd.Flags(), "body")
-              
-            
-
-              dashboardCmd.AddCommand(searchDashboardsCmd)
-            
-              searchDashboardsCmd.Flags().String("id", "", "Match dashboard id.")
-              
-              
-
-              searchDashboardsCmd.Flags().String("slug", "", "Match dashboard slug.")
-              
-              
-
-              searchDashboardsCmd.Flags().String("title", "", "Match Dashboard title.")
-              
-              
-
-              searchDashboardsCmd.Flags().String("description", "", "Match Dashboard description.")
-              
-              
-
-              searchDashboardsCmd.Flags().String("content_favorite_id", "", "Filter on a content favorite id.")
-              
-              
-
-              searchDashboardsCmd.Flags().String("folder_id", "", "Filter on a particular space.")
-              
-              
-
-              searchDashboardsCmd.Flags().String("deleted", "", "Filter on dashboards deleted status.")
-              
-              
-
-              searchDashboardsCmd.Flags().String("user_id", "", "Filter on dashboards created by a particular user.")
-              
-              
-
-              searchDashboardsCmd.Flags().String("view_count", "", "Filter on a particular value of view_count")
-              
-              
-
-              searchDashboardsCmd.Flags().String("content_metadata_id", "", "Filter on a content favorite id.")
-              
-              
-
-              searchDashboardsCmd.Flags().BoolP("curate", false, "Exclude items that exist only in personal spaces other than the users")
-              
-              
-
-              searchDashboardsCmd.Flags().String("last_viewed_at", "", "Select dashboards based on when they were last viewed")
-              
-              
-
-              searchDashboardsCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-
-              searchDashboardsCmd.Flags().Int64("page", 0, "Requested page.")
-              
-              
-
-              searchDashboardsCmd.Flags().Int64("per_page", 0, "Results per page.")
-              
-              
-
-              searchDashboardsCmd.Flags().Int64("limit", 0, "Number of results to return. (used with offset and takes priority over page and per_page)")
-              
-              
-
-              searchDashboardsCmd.Flags().Int64("offset", 0, "Number of results to skip before returning any. (used with limit and takes priority over page and per_page)")
-              
-              
-
-              searchDashboardsCmd.Flags().String("sorts", "", "One or more fields to sort by. Sortable fields: [:title, :user_id, :id, :created_at, :space_id, :folder_id, :description, :view_count, :favorite_count, :slug, :content_favorite_id, :content_metadata_id, :deleted, :deleted_at, :last_viewed_at, :last_accessed_at]")
-              
-              
-
-              searchDashboardsCmd.Flags().BoolP("filter_or", false, "Combine given search criteria in a boolean OR expression")
-              
-              
-            
-
-              dashboardCmd.AddCommand(importLookmlDashboardCmd)
-            
-              importLookmlDashboardCmd.Flags().String("lookml_dashboard_id", "", "Id of LookML dashboard")
-              cobra.MarkFlagRequired(importLookmlDashboardCmd.Flags(), "lookml_dashboard_id")
-              
-
-              importLookmlDashboardCmd.Flags().String("space_id", "", "Id of space to import the dashboard to")
-              cobra.MarkFlagRequired(importLookmlDashboardCmd.Flags(), "space_id")
-              
-
-              importLookmlDashboardCmd.Flags().String("body", "", "")
-              
-              
-
-              importLookmlDashboardCmd.Flags().BoolP("raw_locale", false, "If true, and this dashboard is localized, export it with the raw keys, not localized.")
-              
-              
-            
-
-              dashboardCmd.AddCommand(syncLookmlDashboardCmd)
-            
-              syncLookmlDashboardCmd.Flags().String("lookml_dashboard_id", "", "Id of LookML dashboard, in the form 'model::dashboardname'")
-              cobra.MarkFlagRequired(syncLookmlDashboardCmd.Flags(), "lookml_dashboard_id")
-              
-
-              syncLookmlDashboardCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(syncLookmlDashboardCmd.Flags(), "body")
-              
-
-              syncLookmlDashboardCmd.Flags().BoolP("raw_locale", false, "If true, and this dashboard is localized, export it with the raw keys, not localized.")
-              
-              
-            
-
-              dashboardCmd.AddCommand(dashboardCmd5769)
-            
-              dashboardCmd5769.Flags().String("dashboard_id", "", "Id of dashboard")
-              cobra.MarkFlagRequired(dashboardCmd5769.Flags(), "dashboard_id")
-              
-
-              dashboardCmd5769.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              dashboardCmd.AddCommand(updateDashboardCmd)
-            
-              updateDashboardCmd.Flags().String("dashboard_id", "", "Id of dashboard")
-              cobra.MarkFlagRequired(updateDashboardCmd.Flags(), "dashboard_id")
-              
-
-              updateDashboardCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(updateDashboardCmd.Flags(), "body")
-              
-            
-
-              dashboardCmd.AddCommand(deleteDashboardCmd)
-            
-              deleteDashboardCmd.Flags().String("dashboard_id", "", "Id of dashboard")
-              cobra.MarkFlagRequired(deleteDashboardCmd.Flags(), "dashboard_id")
-              
-            
-
-              dashboardCmd.AddCommand(dashboardAggregateTableLookmlCmd)
-            
-              dashboardAggregateTableLookmlCmd.Flags().String("dashboard_id", "", "Id of dashboard")
-              cobra.MarkFlagRequired(dashboardAggregateTableLookmlCmd.Flags(), "dashboard_id")
-              
-            
-
-              dashboardCmd.AddCommand(dashboardLookmlCmd)
-            
-              dashboardLookmlCmd.Flags().String("dashboard_id", "", "Id of dashboard")
-              cobra.MarkFlagRequired(dashboardLookmlCmd.Flags(), "dashboard_id")
-              
-            
-
-              dashboardCmd.AddCommand(moveDashboardCmd)
-            
-              moveDashboardCmd.Flags().String("dashboard_id", "", "Dashboard id to move.")
-              cobra.MarkFlagRequired(moveDashboardCmd.Flags(), "dashboard_id")
-              
-
-              moveDashboardCmd.Flags().String("folder_id", "", "Folder id to move to.")
-              cobra.MarkFlagRequired(moveDashboardCmd.Flags(), "folder_id")
-              
-            
-
-              dashboardCmd.AddCommand(copyDashboardCmd)
-            
-              copyDashboardCmd.Flags().String("dashboard_id", "", "Dashboard id to copy.")
-              cobra.MarkFlagRequired(copyDashboardCmd.Flags(), "dashboard_id")
-              
-
-              copyDashboardCmd.Flags().String("folder_id", "", "Folder id to copy to.")
-              
-              
-            
-
-              dashboardCmd.AddCommand(searchDashboardElementsCmd)
-            
-              searchDashboardElementsCmd.Flags().Int64("dashboard_id", 0, "Select elements that refer to a given dashboard id")
-              
-              
-
-              searchDashboardElementsCmd.Flags().Int64("look_id", 0, "Select elements that refer to a given look id")
-              
-              
-
-              searchDashboardElementsCmd.Flags().String("title", "", "Match the title of element")
-              
-              
-
-              searchDashboardElementsCmd.Flags().BoolP("deleted", false, "Select soft-deleted dashboard elements")
-              
-              
-
-              searchDashboardElementsCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-
-              searchDashboardElementsCmd.Flags().BoolP("filter_or", false, "Combine given search criteria in a boolean OR expression")
-              
-              
-
-              searchDashboardElementsCmd.Flags().String("sorts", "", "Fields to sort by. Sortable fields: [:look_id, :dashboard_id, :deleted, :title]")
-              
-              
-            
-
-              dashboardCmd.AddCommand(dashboardElementCmd)
-            
-              dashboardElementCmd.Flags().String("dashboard_element_id", "", "Id of dashboard element")
-              cobra.MarkFlagRequired(dashboardElementCmd.Flags(), "dashboard_element_id")
-              
-
-              dashboardElementCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              dashboardCmd.AddCommand(updateDashboardElementCmd)
-            
-              updateDashboardElementCmd.Flags().String("dashboard_element_id", "", "Id of dashboard element")
-              cobra.MarkFlagRequired(updateDashboardElementCmd.Flags(), "dashboard_element_id")
-              
-
-              updateDashboardElementCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(updateDashboardElementCmd.Flags(), "body")
-              
-
-              updateDashboardElementCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              dashboardCmd.AddCommand(deleteDashboardElementCmd)
-            
-              deleteDashboardElementCmd.Flags().String("dashboard_element_id", "", "Id of dashboard element")
-              cobra.MarkFlagRequired(deleteDashboardElementCmd.Flags(), "dashboard_element_id")
-              
-            
-
-              dashboardCmd.AddCommand(dashboardDashboardElementsCmd)
-            
-              dashboardDashboardElementsCmd.Flags().String("dashboard_id", "", "Id of dashboard")
-              cobra.MarkFlagRequired(dashboardDashboardElementsCmd.Flags(), "dashboard_id")
-              
-
-              dashboardDashboardElementsCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              dashboardCmd.AddCommand(createDashboardElementCmd)
-            
-              createDashboardElementCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(createDashboardElementCmd.Flags(), "body")
-              
-
-              createDashboardElementCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              dashboardCmd.AddCommand(dashboardFilterCmd)
-            
-              dashboardFilterCmd.Flags().String("dashboard_filter_id", "", "Id of dashboard filters")
-              cobra.MarkFlagRequired(dashboardFilterCmd.Flags(), "dashboard_filter_id")
-              
-
-              dashboardFilterCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              dashboardCmd.AddCommand(updateDashboardFilterCmd)
-            
-              updateDashboardFilterCmd.Flags().String("dashboard_filter_id", "", "Id of dashboard filter")
-              cobra.MarkFlagRequired(updateDashboardFilterCmd.Flags(), "dashboard_filter_id")
-              
-
-              updateDashboardFilterCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(updateDashboardFilterCmd.Flags(), "body")
-              
-
-              updateDashboardFilterCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              dashboardCmd.AddCommand(deleteDashboardFilterCmd)
-            
-              deleteDashboardFilterCmd.Flags().String("dashboard_filter_id", "", "Id of dashboard filter")
-              cobra.MarkFlagRequired(deleteDashboardFilterCmd.Flags(), "dashboard_filter_id")
-              
-            
-
-              dashboardCmd.AddCommand(dashboardDashboardFiltersCmd)
-            
-              dashboardDashboardFiltersCmd.Flags().String("dashboard_id", "", "Id of dashboard")
-              cobra.MarkFlagRequired(dashboardDashboardFiltersCmd.Flags(), "dashboard_id")
-              
-
-              dashboardDashboardFiltersCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              dashboardCmd.AddCommand(createDashboardFilterCmd)
-            
-              createDashboardFilterCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(createDashboardFilterCmd.Flags(), "body")
-              
-
-              createDashboardFilterCmd.Flags().String("fields", "", "Requested fields")
-              
-              
-            
-
-              dashboardCmd.AddCommand(dashboardLayoutComponentCmd)
-            
-              dashboardLayoutComponentCmd.Flags().String("dashboard_layout_component_id", "", "Id of dashboard layout component")
-              cobra.MarkFlagRequired(dashboardLayoutComponentCmd.Flags(), "dashboard_layout_component_id")
-              
-
-              dashboardLayoutComponentCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              dashboardCmd.AddCommand(updateDashboardLayoutComponentCmd)
-            
-              updateDashboardLayoutComponentCmd.Flags().String("dashboard_layout_component_id", "", "Id of dashboard layout component")
-              cobra.MarkFlagRequired(updateDashboardLayoutComponentCmd.Flags(), "dashboard_layout_component_id")
-              
-
-              updateDashboardLayoutComponentCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(updateDashboardLayoutComponentCmd.Flags(), "body")
-              
-
-              updateDashboardLayoutComponentCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              dashboardCmd.AddCommand(dashboardLayoutDashboardLayoutComponentsCmd)
-            
-              dashboardLayoutDashboardLayoutComponentsCmd.Flags().String("dashboard_layout_id", "", "Id of dashboard layout component")
-              cobra.MarkFlagRequired(dashboardLayoutDashboardLayoutComponentsCmd.Flags(), "dashboard_layout_id")
-              
-
-              dashboardLayoutDashboardLayoutComponentsCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              dashboardCmd.AddCommand(dashboardLayoutCmd)
-            
-              dashboardLayoutCmd.Flags().String("dashboard_layout_id", "", "Id of dashboard layouts")
-              cobra.MarkFlagRequired(dashboardLayoutCmd.Flags(), "dashboard_layout_id")
-              
-
-              dashboardLayoutCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              dashboardCmd.AddCommand(updateDashboardLayoutCmd)
-            
-              updateDashboardLayoutCmd.Flags().String("dashboard_layout_id", "", "Id of dashboard layout")
-              cobra.MarkFlagRequired(updateDashboardLayoutCmd.Flags(), "dashboard_layout_id")
-              
-
-              updateDashboardLayoutCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(updateDashboardLayoutCmd.Flags(), "body")
-              
-
-              updateDashboardLayoutCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              dashboardCmd.AddCommand(deleteDashboardLayoutCmd)
-            
-              deleteDashboardLayoutCmd.Flags().String("dashboard_layout_id", "", "Id of dashboard layout")
-              cobra.MarkFlagRequired(deleteDashboardLayoutCmd.Flags(), "dashboard_layout_id")
-              
-            
-
-              dashboardCmd.AddCommand(dashboardDashboardLayoutsCmd)
-            
-              dashboardDashboardLayoutsCmd.Flags().String("dashboard_id", "", "Id of dashboard")
-              cobra.MarkFlagRequired(dashboardDashboardLayoutsCmd.Flags(), "dashboard_id")
-              
-
-              dashboardDashboardLayoutsCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              dashboardCmd.AddCommand(createDashboardLayoutCmd)
-            
-              createDashboardLayoutCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(createDashboardLayoutCmd.Flags(), "body")
-              
-
-              createDashboardLayoutCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-  rootCmd.AddCommand(dashboardCmd)
-
-              dataActionCmd.AddCommand(performDataActionCmd)
-            
-              performDataActionCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(performDataActionCmd.Flags(), "body")
-              
-            
-
-              dataActionCmd.AddCommand(fetchRemoteDataActionFormCmd)
-            
-              fetchRemoteDataActionFormCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(fetchRemoteDataActionFormCmd.Flags(), "body")
-              
-            
-  rootCmd.AddCommand(dataActionCmd)
-
-              datagroupCmd.AddCommand(allDatagroupsCmd)
-            
-            
-
-              datagroupCmd.AddCommand(datagroupCmd302)
-            
-              datagroupCmd302.Flags().Int64("datagroup_id", 0, "ID of datagroup.")
-              cobra.MarkFlagRequired(datagroupCmd302.Flags(), "datagroup_id")
-              
-            
-
-              datagroupCmd.AddCommand(updateDatagroupCmd)
-            
-              updateDatagroupCmd.Flags().Int64("datagroup_id", 0, "ID of datagroup.")
-              cobra.MarkFlagRequired(updateDatagroupCmd.Flags(), "datagroup_id")
-              
-
-              updateDatagroupCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(updateDatagroupCmd.Flags(), "body")
-              
-            
-  rootCmd.AddCommand(datagroupCmd)
-
-              derivedTableCmd.AddCommand(graphDerivedTablesForModelCmd)
-            
-              graphDerivedTablesForModelCmd.Flags().String("model", "", "The name of the Lookml model.")
-              cobra.MarkFlagRequired(graphDerivedTablesForModelCmd.Flags(), "model")
-              
-
-              graphDerivedTablesForModelCmd.Flags().String("format", "", "The format of the graph. Valid values are [dot]. Default is `dot`")
-              
-              
-
-              graphDerivedTablesForModelCmd.Flags().String("color", "", "Color denoting the build status of the graph. Grey = not built, green = built, yellow = building, red = error.")
-              
-              
-            
-
-              derivedTableCmd.AddCommand(graphDerivedTablesForViewCmd)
-            
-              graphDerivedTablesForViewCmd.Flags().String("view", "", "The derived table's view name.")
-              cobra.MarkFlagRequired(graphDerivedTablesForViewCmd.Flags(), "view")
-              
-
-              graphDerivedTablesForViewCmd.Flags().String("models", "", "The models where this derived table is defined.")
-              
-              
-
-              graphDerivedTablesForViewCmd.Flags().String("workspace", "", "The model directory to look in, either `dev` or `production`.")
-              
-              
-            
-  rootCmd.AddCommand(derivedTableCmd)
-
-              folderCmd.AddCommand(searchFoldersCmd)
-            
-              searchFoldersCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-
-              searchFoldersCmd.Flags().Int64("page", 0, "Requested page.")
-              
-              
-
-              searchFoldersCmd.Flags().Int64("per_page", 0, "Results per page.")
-              
-              
-
-              searchFoldersCmd.Flags().Int64("limit", 0, "Number of results to return. (used with offset and takes priority over page and per_page)")
-              
-              
-
-              searchFoldersCmd.Flags().Int64("offset", 0, "Number of results to skip before returning any. (used with limit and takes priority over page and per_page)")
-              
-              
-
-              searchFoldersCmd.Flags().String("sorts", "", "Fields to sort by.")
-              
-              
-
-              searchFoldersCmd.Flags().String("name", "", "Match Space title.")
-              
-              
-
-              searchFoldersCmd.Flags().Int64("id", 0, "Match Space id")
-              
-              
-
-              searchFoldersCmd.Flags().String("parent_id", "", "Filter on a children of a particular folder.")
-              
-              
-
-              searchFoldersCmd.Flags().String("creator_id", "", "Filter on folder created by a particular user.")
-              
-              
-
-              searchFoldersCmd.Flags().BoolP("filter_or", false, "Combine given search criteria in a boolean OR expression")
-              
-              
-
-              searchFoldersCmd.Flags().BoolP("is_shared_root", false, "Match is shared root")
-              
-              
-            
-
-              folderCmd.AddCommand(folderCmd2893)
-            
-              folderCmd2893.Flags().String("folder_id", "", "Id of folder")
-              cobra.MarkFlagRequired(folderCmd2893.Flags(), "folder_id")
-              
-
-              folderCmd2893.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              folderCmd.AddCommand(updateFolderCmd)
-            
-              updateFolderCmd.Flags().String("folder_id", "", "Id of folder")
-              cobra.MarkFlagRequired(updateFolderCmd.Flags(), "folder_id")
-              
-
-              updateFolderCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(updateFolderCmd.Flags(), "body")
-              
-            
-
-              folderCmd.AddCommand(deleteFolderCmd)
-            
-              deleteFolderCmd.Flags().String("folder_id", "", "Id of folder")
-              cobra.MarkFlagRequired(deleteFolderCmd.Flags(), "folder_id")
-              
-            
-
-              folderCmd.AddCommand(allFoldersCmd)
-            
-              allFoldersCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              folderCmd.AddCommand(createFolderCmd)
-            
-              createFolderCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(createFolderCmd.Flags(), "body")
-              
-            
-
-              folderCmd.AddCommand(folderChildrenCmd)
-            
-              folderChildrenCmd.Flags().String("folder_id", "", "Id of folder")
-              cobra.MarkFlagRequired(folderChildrenCmd.Flags(), "folder_id")
-              
-
-              folderChildrenCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-
-              folderChildrenCmd.Flags().Int64("page", 0, "Requested page.")
-              
-              
-
-              folderChildrenCmd.Flags().Int64("per_page", 0, "Results per page.")
-              
-              
-
-              folderChildrenCmd.Flags().String("sorts", "", "Fields to sort by.")
-              
-              
-            
-
-              folderCmd.AddCommand(folderChildrenSearchCmd)
-            
-              folderChildrenSearchCmd.Flags().String("folder_id", "", "Id of folder")
-              cobra.MarkFlagRequired(folderChildrenSearchCmd.Flags(), "folder_id")
-              
-
-              folderChildrenSearchCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-
-              folderChildrenSearchCmd.Flags().String("sorts", "", "Fields to sort by.")
-              
-              
-
-              folderChildrenSearchCmd.Flags().String("name", "", "Match folder name.")
-              
-              
-            
-
-              folderCmd.AddCommand(folderParentCmd)
-            
-              folderParentCmd.Flags().String("folder_id", "", "Id of folder")
-              cobra.MarkFlagRequired(folderParentCmd.Flags(), "folder_id")
-              
-
-              folderParentCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              folderCmd.AddCommand(folderAncestorsCmd)
-            
-              folderAncestorsCmd.Flags().String("folder_id", "", "Id of folder")
-              cobra.MarkFlagRequired(folderAncestorsCmd.Flags(), "folder_id")
-              
-
-              folderAncestorsCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              folderCmd.AddCommand(folderLooksCmd)
-            
-              folderLooksCmd.Flags().String("folder_id", "", "Id of folder")
-              cobra.MarkFlagRequired(folderLooksCmd.Flags(), "folder_id")
-              
-
-              folderLooksCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              folderCmd.AddCommand(folderDashboardsCmd)
-            
-              folderDashboardsCmd.Flags().String("folder_id", "", "Id of folder")
-              cobra.MarkFlagRequired(folderDashboardsCmd.Flags(), "folder_id")
-              
-
-              folderDashboardsCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-  rootCmd.AddCommand(folderCmd)
-
-              groupCmd.AddCommand(allGroupsCmd)
-            
-              allGroupsCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-
-              allGroupsCmd.Flags().Int64("page", 0, "Requested page.")
-              
-              
-
-              allGroupsCmd.Flags().Int64("per_page", 0, "Results per page.")
-              
-              
-
-              allGroupsCmd.Flags().String("sorts", "", "Fields to sort by.")
-              
-              
-
-              allGroupsCmd.Flags().String("ids", "", "Optional of ids to get specific groups.")
-              
-              
-
-              allGroupsCmd.Flags().Int64("content_metadata_id", 0, "Id of content metadata to which groups must have access.")
-              
-              
-
-              allGroupsCmd.Flags().BoolP("can_add_to_content_metadata", false, "Select only groups that either can/cannot be given access to content.")
-              
-              
-            
-
-              groupCmd.AddCommand(createGroupCmd)
-            
-              createGroupCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(createGroupCmd.Flags(), "body")
-              
-
-              createGroupCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              groupCmd.AddCommand(searchGroupsCmd)
-            
-              searchGroupsCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-
-              searchGroupsCmd.Flags().Int64("limit", 0, "Number of results to return (used with `offset`).")
-              
-              
-
-              searchGroupsCmd.Flags().Int64("offset", 0, "Number of results to skip before returning any (used with `limit`).")
-              
-              
-
-              searchGroupsCmd.Flags().String("sorts", "", "Fields to sort by.")
-              
-              
-
-              searchGroupsCmd.Flags().BoolP("filter_or", false, "Combine given search criteria in a boolean OR expression")
-              
-              
-
-              searchGroupsCmd.Flags().Int64("id", 0, "Match group id.")
-              
-              
-
-              searchGroupsCmd.Flags().String("name", "", "Match group name.")
-              
-              
-
-              searchGroupsCmd.Flags().String("external_group_id", "", "Match group external_group_id.")
-              
-              
-
-              searchGroupsCmd.Flags().BoolP("externally_managed", false, "Match group externally_managed.")
-              
-              
-
-              searchGroupsCmd.Flags().BoolP("externally_orphaned", false, "Match group externally_orphaned.")
-              
-              
-            
-
-              groupCmd.AddCommand(searchGroupsWithRolesCmd)
-            
-              searchGroupsWithRolesCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-
-              searchGroupsWithRolesCmd.Flags().Int64("limit", 0, "Number of results to return (used with `offset`).")
-              
-              
-
-              searchGroupsWithRolesCmd.Flags().Int64("offset", 0, "Number of results to skip before returning any (used with `limit`).")
-              
-              
-
-              searchGroupsWithRolesCmd.Flags().String("sorts", "", "Fields to sort by.")
-              
-              
-
-              searchGroupsWithRolesCmd.Flags().BoolP("filter_or", false, "Combine given search criteria in a boolean OR expression")
-              
-              
-
-              searchGroupsWithRolesCmd.Flags().Int64("id", 0, "Match group id.")
-              
-              
-
-              searchGroupsWithRolesCmd.Flags().String("name", "", "Match group name.")
-              
-              
-
-              searchGroupsWithRolesCmd.Flags().String("external_group_id", "", "Match group external_group_id.")
-              
-              
-
-              searchGroupsWithRolesCmd.Flags().BoolP("externally_managed", false, "Match group externally_managed.")
-              
-              
-
-              searchGroupsWithRolesCmd.Flags().BoolP("externally_orphaned", false, "Match group externally_orphaned.")
-              
-              
-            
-
-              groupCmd.AddCommand(searchGroupsWithHierarchyCmd)
-            
-              searchGroupsWithHierarchyCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-
-              searchGroupsWithHierarchyCmd.Flags().Int64("limit", 0, "Number of results to return (used with `offset`).")
-              
-              
-
-              searchGroupsWithHierarchyCmd.Flags().Int64("offset", 0, "Number of results to skip before returning any (used with `limit`).")
-              
-              
-
-              searchGroupsWithHierarchyCmd.Flags().String("sorts", "", "Fields to sort by.")
-              
-              
-
-              searchGroupsWithHierarchyCmd.Flags().BoolP("filter_or", false, "Combine given search criteria in a boolean OR expression")
-              
-              
-
-              searchGroupsWithHierarchyCmd.Flags().Int64("id", 0, "Match group id.")
-              
-              
-
-              searchGroupsWithHierarchyCmd.Flags().String("name", "", "Match group name.")
-              
-              
-
-              searchGroupsWithHierarchyCmd.Flags().String("external_group_id", "", "Match group external_group_id.")
-              
-              
-
-              searchGroupsWithHierarchyCmd.Flags().BoolP("externally_managed", false, "Match group externally_managed.")
-              
-              
-
-              searchGroupsWithHierarchyCmd.Flags().BoolP("externally_orphaned", false, "Match group externally_orphaned.")
-              
-              
-            
-
-              groupCmd.AddCommand(groupCmd6003)
-            
-              groupCmd6003.Flags().Int64("group_id", 0, "Id of group")
-              cobra.MarkFlagRequired(groupCmd6003.Flags(), "group_id")
-              
-
-              groupCmd6003.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              groupCmd.AddCommand(updateGroupCmd)
-            
-              updateGroupCmd.Flags().Int64("group_id", 0, "Id of group")
-              cobra.MarkFlagRequired(updateGroupCmd.Flags(), "group_id")
-              
-
-              updateGroupCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(updateGroupCmd.Flags(), "body")
-              
-
-              updateGroupCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              groupCmd.AddCommand(deleteGroupCmd)
-            
-              deleteGroupCmd.Flags().Int64("group_id", 0, "Id of group")
-              cobra.MarkFlagRequired(deleteGroupCmd.Flags(), "group_id")
-              
-            
-
-              groupCmd.AddCommand(allGroupGroupsCmd)
-            
-              allGroupGroupsCmd.Flags().Int64("group_id", 0, "Id of group")
-              cobra.MarkFlagRequired(allGroupGroupsCmd.Flags(), "group_id")
-              
-
-              allGroupGroupsCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              groupCmd.AddCommand(addGroupGroupCmd)
-            
-              addGroupGroupCmd.Flags().Int64("group_id", 0, "Id of group")
-              cobra.MarkFlagRequired(addGroupGroupCmd.Flags(), "group_id")
-              
-
-              addGroupGroupCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(addGroupGroupCmd.Flags(), "body")
-              
-            
-
-              groupCmd.AddCommand(allGroupUsersCmd)
-            
-              allGroupUsersCmd.Flags().Int64("group_id", 0, "Id of group")
-              cobra.MarkFlagRequired(allGroupUsersCmd.Flags(), "group_id")
-              
-
-              allGroupUsersCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-
-              allGroupUsersCmd.Flags().Int64("page", 0, "Requested page.")
-              
-              
-
-              allGroupUsersCmd.Flags().Int64("per_page", 0, "Results per page.")
-              
-              
-
-              allGroupUsersCmd.Flags().String("sorts", "", "Fields to sort by.")
-              
-              
-            
-
-              groupCmd.AddCommand(addGroupUserCmd)
-            
-              addGroupUserCmd.Flags().Int64("group_id", 0, "Id of group")
-              cobra.MarkFlagRequired(addGroupUserCmd.Flags(), "group_id")
-              
-
-              addGroupUserCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(addGroupUserCmd.Flags(), "body")
-              
-            
-
-              groupCmd.AddCommand(deleteGroupUserCmd)
-            
-              deleteGroupUserCmd.Flags().Int64("group_id", 0, "Id of group")
-              cobra.MarkFlagRequired(deleteGroupUserCmd.Flags(), "group_id")
-              
-
-              deleteGroupUserCmd.Flags().Int64("user_id", 0, "Id of user to remove from group")
-              cobra.MarkFlagRequired(deleteGroupUserCmd.Flags(), "user_id")
-              
-            
-
-              groupCmd.AddCommand(deleteGroupFromGroupCmd)
-            
-              deleteGroupFromGroupCmd.Flags().Int64("group_id", 0, "Id of group")
-              cobra.MarkFlagRequired(deleteGroupFromGroupCmd.Flags(), "group_id")
-              
-
-              deleteGroupFromGroupCmd.Flags().Int64("deleting_group_id", 0, "Id of group to delete")
-              cobra.MarkFlagRequired(deleteGroupFromGroupCmd.Flags(), "deleting_group_id")
-              
-            
-
-              groupCmd.AddCommand(updateUserAttributeGroupValueCmd)
-            
-              updateUserAttributeGroupValueCmd.Flags().Int64("group_id", 0, "Id of group")
-              cobra.MarkFlagRequired(updateUserAttributeGroupValueCmd.Flags(), "group_id")
-              
-
-              updateUserAttributeGroupValueCmd.Flags().Int64("user_attribute_id", 0, "Id of user attribute")
-              cobra.MarkFlagRequired(updateUserAttributeGroupValueCmd.Flags(), "user_attribute_id")
-              
-
-              updateUserAttributeGroupValueCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(updateUserAttributeGroupValueCmd.Flags(), "body")
-              
-            
-
-              groupCmd.AddCommand(deleteUserAttributeGroupValueCmd)
-            
-              deleteUserAttributeGroupValueCmd.Flags().Int64("group_id", 0, "Id of group")
-              cobra.MarkFlagRequired(deleteUserAttributeGroupValueCmd.Flags(), "group_id")
-              
-
-              deleteUserAttributeGroupValueCmd.Flags().Int64("user_attribute_id", 0, "Id of user attribute")
-              cobra.MarkFlagRequired(deleteUserAttributeGroupValueCmd.Flags(), "user_attribute_id")
-              
-            
-  rootCmd.AddCommand(groupCmd)
-
-              homepageCmd.AddCommand(allPrimaryHomepageSectionsCmd)
-            
-              allPrimaryHomepageSectionsCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-  rootCmd.AddCommand(homepageCmd)
-
-              integrationCmd.AddCommand(allIntegrationHubsCmd)
-            
-              allIntegrationHubsCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              integrationCmd.AddCommand(createIntegrationHubCmd)
-            
-              createIntegrationHubCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(createIntegrationHubCmd.Flags(), "body")
-              
-
-              createIntegrationHubCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              integrationCmd.AddCommand(integrationHubCmd)
-            
-              integrationHubCmd.Flags().Int64("integration_hub_id", 0, "Id of Integration Hub")
-              cobra.MarkFlagRequired(integrationHubCmd.Flags(), "integration_hub_id")
-              
-
-              integrationHubCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              integrationCmd.AddCommand(updateIntegrationHubCmd)
-            
-              updateIntegrationHubCmd.Flags().Int64("integration_hub_id", 0, "Id of Integration Hub")
-              cobra.MarkFlagRequired(updateIntegrationHubCmd.Flags(), "integration_hub_id")
-              
-
-              updateIntegrationHubCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(updateIntegrationHubCmd.Flags(), "body")
-              
-
-              updateIntegrationHubCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              integrationCmd.AddCommand(deleteIntegrationHubCmd)
-            
-              deleteIntegrationHubCmd.Flags().Int64("integration_hub_id", 0, "Id of integration_hub")
-              cobra.MarkFlagRequired(deleteIntegrationHubCmd.Flags(), "integration_hub_id")
-              
-            
-
-              integrationCmd.AddCommand(acceptIntegrationHubLegalAgreementCmd)
-            
-              acceptIntegrationHubLegalAgreementCmd.Flags().Int64("integration_hub_id", 0, "Id of integration_hub")
-              cobra.MarkFlagRequired(acceptIntegrationHubLegalAgreementCmd.Flags(), "integration_hub_id")
-              
-            
-
-              integrationCmd.AddCommand(allIntegrationsCmd)
-            
-              allIntegrationsCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-
-              allIntegrationsCmd.Flags().String("integration_hub_id", "", "Filter to a specific provider")
-              
-              
-            
-
-              integrationCmd.AddCommand(integrationCmd7065)
-            
-              integrationCmd7065.Flags().String("integration_id", "", "Id of integration")
-              cobra.MarkFlagRequired(integrationCmd7065.Flags(), "integration_id")
-              
-
-              integrationCmd7065.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              integrationCmd.AddCommand(updateIntegrationCmd)
-            
-              updateIntegrationCmd.Flags().String("integration_id", "", "Id of integration")
-              cobra.MarkFlagRequired(updateIntegrationCmd.Flags(), "integration_id")
-              
-
-              updateIntegrationCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(updateIntegrationCmd.Flags(), "body")
-              
-
-              updateIntegrationCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              integrationCmd.AddCommand(fetchIntegrationFormCmd)
-            
-              fetchIntegrationFormCmd.Flags().String("integration_id", "", "Id of integration")
-              cobra.MarkFlagRequired(fetchIntegrationFormCmd.Flags(), "integration_id")
-              
-
-              fetchIntegrationFormCmd.Flags().String("body", "", "")
-              
-              
-            
-
-              integrationCmd.AddCommand(testIntegrationCmd)
-            
-              testIntegrationCmd.Flags().String("integration_id", "", "Id of integration")
-              cobra.MarkFlagRequired(testIntegrationCmd.Flags(), "integration_id")
-              
-            
-  rootCmd.AddCommand(integrationCmd)
-
-              lookCmd.AddCommand(allLooksCmd)
-            
-              allLooksCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              lookCmd.AddCommand(createLookCmd)
-            
-              createLookCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(createLookCmd.Flags(), "body")
-              
-
-              createLookCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              lookCmd.AddCommand(searchLooksCmd)
-            
-              searchLooksCmd.Flags().String("id", "", "Match look id.")
-              
-              
-
-              searchLooksCmd.Flags().String("title", "", "Match Look title.")
-              
-              
-
-              searchLooksCmd.Flags().String("description", "", "Match Look description.")
-              
-              
-
-              searchLooksCmd.Flags().String("content_favorite_id", "", "Select looks with a particular content favorite id")
-              
-              
-
-              searchLooksCmd.Flags().String("folder_id", "", "Select looks in a particular folder.")
-              
-              
-
-              searchLooksCmd.Flags().String("user_id", "", "Select looks created by a particular user.")
-              
-              
-
-              searchLooksCmd.Flags().String("view_count", "", "Select looks with particular view_count value")
-              
-              
-
-              searchLooksCmd.Flags().BoolP("deleted", false, "Select soft-deleted looks")
-              
-              
-
-              searchLooksCmd.Flags().Int64("query_id", 0, "Select looks that reference a particular query by query_id")
-              
-              
-
-              searchLooksCmd.Flags().BoolP("curate", false, "Exclude items that exist only in personal spaces other than the users")
-              
-              
-
-              searchLooksCmd.Flags().String("last_viewed_at", "", "Select looks based on when they were last viewed")
-              
-              
-
-              searchLooksCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-
-              searchLooksCmd.Flags().Int64("page", 0, "Requested page.")
-              
-              
-
-              searchLooksCmd.Flags().Int64("per_page", 0, "Results per page.")
-              
-              
-
-              searchLooksCmd.Flags().Int64("limit", 0, "Number of results to return. (used with offset and takes priority over page and per_page)")
-              
-              
-
-              searchLooksCmd.Flags().Int64("offset", 0, "Number of results to skip before returning any. (used with limit and takes priority over page and per_page)")
-              
-              
-
-              searchLooksCmd.Flags().String("sorts", "", "One or more fields to sort results by. Sortable fields: [:title, :user_id, :id, :created_at, :space_id, :folder_id, :description, :updated_at, :last_updater_id, :view_count, :favorite_count, :content_favorite_id, :deleted, :deleted_at, :last_viewed_at, :last_accessed_at, :query_id]")
-              
-              
-
-              searchLooksCmd.Flags().BoolP("filter_or", false, "Combine given search criteria in a boolean OR expression")
-              
-              
-            
-
-              lookCmd.AddCommand(lookCmd1796)
-            
-              lookCmd1796.Flags().String("look_id", "", "Id of look")
-              cobra.MarkFlagRequired(lookCmd1796.Flags(), "look_id")
-              
-
-              lookCmd1796.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              lookCmd.AddCommand(updateLookCmd)
-            
-              updateLookCmd.Flags().String("look_id", "", "Id of look")
-              cobra.MarkFlagRequired(updateLookCmd.Flags(), "look_id")
-              
-
-              updateLookCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(updateLookCmd.Flags(), "body")
-              
-
-              updateLookCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              lookCmd.AddCommand(deleteLookCmd)
-            
-              deleteLookCmd.Flags().String("look_id", "", "Id of look")
-              cobra.MarkFlagRequired(deleteLookCmd.Flags(), "look_id")
-              
-            
-
-              lookCmd.AddCommand(runLookCmd)
-            
-              runLookCmd.Flags().String("look_id", "", "Id of look")
-              cobra.MarkFlagRequired(runLookCmd.Flags(), "look_id")
-              
-
-              runLookCmd.Flags().String("result_format", "", "Format of result")
-              cobra.MarkFlagRequired(runLookCmd.Flags(), "result_format")
-              
-
-              runLookCmd.Flags().Int64("limit", 0, "Row limit (may override the limit in the saved query).")
-              
-              
-
-              runLookCmd.Flags().BoolP("apply_formatting", false, "Apply model-specified formatting to each result.")
-              
-              
-
-              runLookCmd.Flags().BoolP("apply_vis", false, "Apply visualization options to results.")
-              
-              
-
-              runLookCmd.Flags().BoolP("cache", false, "Get results from cache if available.")
-              
-              
-
-              runLookCmd.Flags().Int64("image_width", 0, "Render width for image formats.")
-              
-              
-
-              runLookCmd.Flags().Int64("image_height", 0, "Render height for image formats.")
-              
-              
-
-              runLookCmd.Flags().BoolP("generate_drill_links", false, "Generate drill links (only applicable to 'json_detail' format.")
-              
-              
-
-              runLookCmd.Flags().BoolP("force_production", false, "Force use of production models even if the user is in development mode.")
-              
-              
-
-              runLookCmd.Flags().BoolP("cache_only", false, "Retrieve any results from cache even if the results have expired.")
-              
-              
-
-              runLookCmd.Flags().String("path_prefix", "", "Prefix to use for drill links (url encoded).")
-              
-              
-
-              runLookCmd.Flags().BoolP("rebuild_pdts", false, "Rebuild PDTS used in query.")
-              
-              
-
-              runLookCmd.Flags().BoolP("server_table_calcs", false, "Perform table calculations on query results")
-              
-              
-            
-
-              lookCmd.AddCommand(copyLookCmd)
-            
-              copyLookCmd.Flags().String("look_id", "", "Look id to copy.")
-              cobra.MarkFlagRequired(copyLookCmd.Flags(), "look_id")
-              
-
-              copyLookCmd.Flags().String("folder_id", "", "Folder id to copy to.")
-              
-              
-            
-
-              lookCmd.AddCommand(moveLookCmd)
-            
-              moveLookCmd.Flags().String("look_id", "", "Look id to move.")
-              cobra.MarkFlagRequired(moveLookCmd.Flags(), "look_id")
-              
-
-              moveLookCmd.Flags().String("folder_id", "", "Folder id to move to.")
-              cobra.MarkFlagRequired(moveLookCmd.Flags(), "folder_id")
-              
-            
-  rootCmd.AddCommand(lookCmd)
-
-              lookmlModelCmd.AddCommand(allLookmlModelsCmd)
-            
-              allLookmlModelsCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-
-              allLookmlModelsCmd.Flags().Int64("limit", 0, "Number of results to return. (can be used with offset)")
-              
-              
-
-              allLookmlModelsCmd.Flags().Int64("offset", 0, "Number of results to skip before returning any. (Defaults to 0 if not set when limit is used)")
-              
-              
-            
-
-              lookmlModelCmd.AddCommand(createLookmlModelCmd)
-            
-              createLookmlModelCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(createLookmlModelCmd.Flags(), "body")
-              
-            
-
-              lookmlModelCmd.AddCommand(lookmlModelCmd2329)
-            
-              lookmlModelCmd2329.Flags().String("lookml_model_name", "", "Name of lookml model.")
-              cobra.MarkFlagRequired(lookmlModelCmd2329.Flags(), "lookml_model_name")
-              
-
-              lookmlModelCmd2329.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              lookmlModelCmd.AddCommand(updateLookmlModelCmd)
-            
-              updateLookmlModelCmd.Flags().String("lookml_model_name", "", "Name of lookml model.")
-              cobra.MarkFlagRequired(updateLookmlModelCmd.Flags(), "lookml_model_name")
-              
-
-              updateLookmlModelCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(updateLookmlModelCmd.Flags(), "body")
-              
-            
-
-              lookmlModelCmd.AddCommand(deleteLookmlModelCmd)
-            
-              deleteLookmlModelCmd.Flags().String("lookml_model_name", "", "Name of lookml model.")
-              cobra.MarkFlagRequired(deleteLookmlModelCmd.Flags(), "lookml_model_name")
-              
-            
-
-              lookmlModelCmd.AddCommand(lookmlModelExploreCmd)
-            
-              lookmlModelExploreCmd.Flags().String("lookml_model_name", "", "Name of lookml model.")
-              cobra.MarkFlagRequired(lookmlModelExploreCmd.Flags(), "lookml_model_name")
-              
-
-              lookmlModelExploreCmd.Flags().String("explore_name", "", "Name of explore.")
-              cobra.MarkFlagRequired(lookmlModelExploreCmd.Flags(), "explore_name")
-              
-
-              lookmlModelExploreCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-  rootCmd.AddCommand(lookmlModelCmd)
-
-              metadataCmd.AddCommand(modelFieldnameSuggestionsCmd)
-            
-              modelFieldnameSuggestionsCmd.Flags().String("model_name", "", "Name of model")
-              cobra.MarkFlagRequired(modelFieldnameSuggestionsCmd.Flags(), "model_name")
-              
-
-              modelFieldnameSuggestionsCmd.Flags().String("view_name", "", "Name of view")
-              cobra.MarkFlagRequired(modelFieldnameSuggestionsCmd.Flags(), "view_name")
-              
-
-              modelFieldnameSuggestionsCmd.Flags().String("field_name", "", "Name of field to use for suggestions")
-              cobra.MarkFlagRequired(modelFieldnameSuggestionsCmd.Flags(), "field_name")
-              
-
-              modelFieldnameSuggestionsCmd.Flags().String("term", "", "Search term")
-              
-              
-
-              modelFieldnameSuggestionsCmd.Flags().String("filters", "", "Suggestion filters")
-              
-              
-            
-
-              metadataCmd.AddCommand(getModelCmd)
-            
-              getModelCmd.Flags().String("model_name", "", "Name of model")
-              cobra.MarkFlagRequired(getModelCmd.Flags(), "model_name")
-              
-            
-
-              metadataCmd.AddCommand(connectionDatabasesCmd)
-            
-              connectionDatabasesCmd.Flags().String("connection_name", "", "Name of connection")
-              cobra.MarkFlagRequired(connectionDatabasesCmd.Flags(), "connection_name")
-              
-            
-
-              metadataCmd.AddCommand(connectionFeaturesCmd)
-            
-              connectionFeaturesCmd.Flags().String("connection_name", "", "Name of connection")
-              cobra.MarkFlagRequired(connectionFeaturesCmd.Flags(), "connection_name")
-              
-
-              connectionFeaturesCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              metadataCmd.AddCommand(connectionSchemasCmd)
-            
-              connectionSchemasCmd.Flags().String("connection_name", "", "Name of connection")
-              cobra.MarkFlagRequired(connectionSchemasCmd.Flags(), "connection_name")
-              
-
-              connectionSchemasCmd.Flags().String("database", "", "For dialects that support multiple databases, optionally identify which to use")
-              
-              
-
-              connectionSchemasCmd.Flags().BoolP("cache", false, "True to use fetch from cache, false to load fresh")
-              
-              
-
-              connectionSchemasCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              metadataCmd.AddCommand(connectionTablesCmd)
-            
-              connectionTablesCmd.Flags().String("connection_name", "", "Name of connection")
-              cobra.MarkFlagRequired(connectionTablesCmd.Flags(), "connection_name")
-              
-
-              connectionTablesCmd.Flags().String("database", "", "Optional. Name of database to use for the query, only if applicable")
-              
-              
-
-              connectionTablesCmd.Flags().String("schema_name", "", "Optional. Return only tables for this schema")
-              
-              
-
-              connectionTablesCmd.Flags().BoolP("cache", false, "True to fetch from cache, false to load fresh")
-              
-              
-
-              connectionTablesCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              metadataCmd.AddCommand(connectionColumnsCmd)
-            
-              connectionColumnsCmd.Flags().String("connection_name", "", "Name of connection")
-              cobra.MarkFlagRequired(connectionColumnsCmd.Flags(), "connection_name")
-              
-
-              connectionColumnsCmd.Flags().String("database", "", "For dialects that support multiple databases, optionally identify which to use")
-              
-              
-
-              connectionColumnsCmd.Flags().String("schema_name", "", "Name of schema to use.")
-              
-              
-
-              connectionColumnsCmd.Flags().BoolP("cache", false, "True to fetch from cache, false to load fresh")
-              
-              
-
-              connectionColumnsCmd.Flags().Int64("table_limit", 0, "limits the tables per schema returned")
-              
-              
-
-              connectionColumnsCmd.Flags().String("table_names", "", "only fetch columns for a given (comma-separated) list of tables")
-              
-              
-
-              connectionColumnsCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              metadataCmd.AddCommand(connectionSearchColumnsCmd)
-            
-              connectionSearchColumnsCmd.Flags().String("connection_name", "", "Name of connection")
-              cobra.MarkFlagRequired(connectionSearchColumnsCmd.Flags(), "connection_name")
-              
-
-              connectionSearchColumnsCmd.Flags().String("column_name", "", "Column name to find")
-              
-              
-
-              connectionSearchColumnsCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              metadataCmd.AddCommand(connectionCostEstimateCmd)
-            
-              connectionCostEstimateCmd.Flags().String("connection_name", "", "Name of connection")
-              cobra.MarkFlagRequired(connectionCostEstimateCmd.Flags(), "connection_name")
-              
-
-              connectionCostEstimateCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(connectionCostEstimateCmd.Flags(), "body")
-              
-
-              connectionCostEstimateCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-  rootCmd.AddCommand(metadataCmd)
-
-              projectCmd.AddCommand(lockAllCmd)
-            
-              lockAllCmd.Flags().String("project_id", "", "Id of project")
-              cobra.MarkFlagRequired(lockAllCmd.Flags(), "project_id")
-              
-
-              lockAllCmd.Flags().String("fields", "", "Requested fields")
-              
-              
-            
-
-              projectCmd.AddCommand(allGitBranchesCmd)
-            
-              allGitBranchesCmd.Flags().String("project_id", "", "Project Id")
-              cobra.MarkFlagRequired(allGitBranchesCmd.Flags(), "project_id")
-              
-            
-
-              projectCmd.AddCommand(gitBranchCmd)
-            
-              gitBranchCmd.Flags().String("project_id", "", "Project Id")
-              cobra.MarkFlagRequired(gitBranchCmd.Flags(), "project_id")
-              
-            
-
-              projectCmd.AddCommand(updateGitBranchCmd)
-            
-              updateGitBranchCmd.Flags().String("project_id", "", "Project Id")
-              cobra.MarkFlagRequired(updateGitBranchCmd.Flags(), "project_id")
-              
-
-              updateGitBranchCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(updateGitBranchCmd.Flags(), "body")
-              
-            
-
-              projectCmd.AddCommand(createGitBranchCmd)
-            
-              createGitBranchCmd.Flags().String("project_id", "", "Project Id")
-              cobra.MarkFlagRequired(createGitBranchCmd.Flags(), "project_id")
-              
-
-              createGitBranchCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(createGitBranchCmd.Flags(), "body")
-              
-            
-
-              projectCmd.AddCommand(findGitBranchCmd)
-            
-              findGitBranchCmd.Flags().String("project_id", "", "Project Id")
-              cobra.MarkFlagRequired(findGitBranchCmd.Flags(), "project_id")
-              
-
-              findGitBranchCmd.Flags().String("branch_name", "", "Branch Name")
-              cobra.MarkFlagRequired(findGitBranchCmd.Flags(), "branch_name")
-              
-            
-
-              projectCmd.AddCommand(deleteGitBranchCmd)
-            
-              deleteGitBranchCmd.Flags().String("project_id", "", "Project Id")
-              cobra.MarkFlagRequired(deleteGitBranchCmd.Flags(), "project_id")
-              
-
-              deleteGitBranchCmd.Flags().String("branch_name", "", "Branch Name")
-              cobra.MarkFlagRequired(deleteGitBranchCmd.Flags(), "branch_name")
-              
-            
-
-              projectCmd.AddCommand(deployRefToProductionCmd)
-            
-              deployRefToProductionCmd.Flags().String("project_id", "", "Id of project")
-              cobra.MarkFlagRequired(deployRefToProductionCmd.Flags(), "project_id")
-              
-
-              deployRefToProductionCmd.Flags().String("branch", "", "Branch to deploy to production")
-              
-              
-
-              deployRefToProductionCmd.Flags().String("ref", "", "Ref to deploy to production")
-              
-              
-            
-
-              projectCmd.AddCommand(deployToProductionCmd)
-            
-              deployToProductionCmd.Flags().String("project_id", "", "Id of project")
-              cobra.MarkFlagRequired(deployToProductionCmd.Flags(), "project_id")
-              
-            
-
-              projectCmd.AddCommand(resetProjectToProductionCmd)
-            
-              resetProjectToProductionCmd.Flags().String("project_id", "", "Id of project")
-              cobra.MarkFlagRequired(resetProjectToProductionCmd.Flags(), "project_id")
-              
-            
-
-              projectCmd.AddCommand(resetProjectToRemoteCmd)
-            
-              resetProjectToRemoteCmd.Flags().String("project_id", "", "Id of project")
-              cobra.MarkFlagRequired(resetProjectToRemoteCmd.Flags(), "project_id")
-              
-            
-
-              projectCmd.AddCommand(allProjectsCmd)
-            
-              allProjectsCmd.Flags().String("fields", "", "Requested fields")
-              
-              
-            
-
-              projectCmd.AddCommand(createProjectCmd)
-            
-              createProjectCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(createProjectCmd.Flags(), "body")
-              
-            
-
-              projectCmd.AddCommand(projectCmd4673)
-            
-              projectCmd4673.Flags().String("project_id", "", "Project Id")
-              cobra.MarkFlagRequired(projectCmd4673.Flags(), "project_id")
-              
-
-              projectCmd4673.Flags().String("fields", "", "Requested fields")
-              
-              
-            
-
-              projectCmd.AddCommand(updateProjectCmd)
-            
-              updateProjectCmd.Flags().String("project_id", "", "Project Id")
-              cobra.MarkFlagRequired(updateProjectCmd.Flags(), "project_id")
-              
-
-              updateProjectCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(updateProjectCmd.Flags(), "body")
-              
-
-              updateProjectCmd.Flags().String("fields", "", "Requested fields")
-              
-              
-            
-
-              projectCmd.AddCommand(manifestCmd)
-            
-              manifestCmd.Flags().String("project_id", "", "Project Id")
-              cobra.MarkFlagRequired(manifestCmd.Flags(), "project_id")
-              
-            
-
-              projectCmd.AddCommand(gitDeployKeyCmd)
-            
-              gitDeployKeyCmd.Flags().String("project_id", "", "Project Id")
-              cobra.MarkFlagRequired(gitDeployKeyCmd.Flags(), "project_id")
-              
-            
-
-              projectCmd.AddCommand(createGitDeployKeyCmd)
-            
-              createGitDeployKeyCmd.Flags().String("project_id", "", "Project Id")
-              cobra.MarkFlagRequired(createGitDeployKeyCmd.Flags(), "project_id")
-              
-            
-
-              projectCmd.AddCommand(projectValidationResultsCmd)
-            
-              projectValidationResultsCmd.Flags().String("project_id", "", "Project Id")
-              cobra.MarkFlagRequired(projectValidationResultsCmd.Flags(), "project_id")
-              
-
-              projectValidationResultsCmd.Flags().String("fields", "", "Requested fields")
-              
-              
-            
-
-              projectCmd.AddCommand(validateProjectCmd)
-            
-              validateProjectCmd.Flags().String("project_id", "", "Project Id")
-              cobra.MarkFlagRequired(validateProjectCmd.Flags(), "project_id")
-              
-
-              validateProjectCmd.Flags().String("fields", "", "Requested fields")
-              
-              
-            
-
-              projectCmd.AddCommand(projectWorkspaceCmd)
-            
-              projectWorkspaceCmd.Flags().String("project_id", "", "Project Id")
-              cobra.MarkFlagRequired(projectWorkspaceCmd.Flags(), "project_id")
-              
-
-              projectWorkspaceCmd.Flags().String("fields", "", "Requested fields")
-              
-              
-            
-
-              projectCmd.AddCommand(allProjectFilesCmd)
-            
-              allProjectFilesCmd.Flags().String("project_id", "", "Project Id")
-              cobra.MarkFlagRequired(allProjectFilesCmd.Flags(), "project_id")
-              
-
-              allProjectFilesCmd.Flags().String("fields", "", "Requested fields")
-              
-              
-            
-
-              projectCmd.AddCommand(projectFileCmd)
-            
-              projectFileCmd.Flags().String("project_id", "", "Project Id")
-              cobra.MarkFlagRequired(projectFileCmd.Flags(), "project_id")
-              
-
-              projectFileCmd.Flags().String("file_id", "", "File Id")
-              cobra.MarkFlagRequired(projectFileCmd.Flags(), "file_id")
-              
-
-              projectFileCmd.Flags().String("fields", "", "Requested fields")
-              
-              
-            
-
-              projectCmd.AddCommand(allGitConnectionTestsCmd)
-            
-              allGitConnectionTestsCmd.Flags().String("project_id", "", "Project Id")
-              cobra.MarkFlagRequired(allGitConnectionTestsCmd.Flags(), "project_id")
-              
-
-              allGitConnectionTestsCmd.Flags().String("remote_url", "", "(Optional: leave blank for root project) The remote url for remote dependency to test.")
-              
-              
-            
-
-              projectCmd.AddCommand(runGitConnectionTestCmd)
-            
-              runGitConnectionTestCmd.Flags().String("project_id", "", "Project Id")
-              cobra.MarkFlagRequired(runGitConnectionTestCmd.Flags(), "project_id")
-              
-
-              runGitConnectionTestCmd.Flags().String("test_id", "", "Test Id")
-              cobra.MarkFlagRequired(runGitConnectionTestCmd.Flags(), "test_id")
-              
-
-              runGitConnectionTestCmd.Flags().String("remote_url", "", "(Optional: leave blank for root project) The remote url for remote dependency to test.")
-              
-              
-
-              runGitConnectionTestCmd.Flags().String("use_production", "", "(Optional: leave blank for dev credentials) Whether to use git production credentials.")
-              
-              
-            
-
-              projectCmd.AddCommand(allLookmlTestsCmd)
-            
-              allLookmlTestsCmd.Flags().String("project_id", "", "Project Id")
-              cobra.MarkFlagRequired(allLookmlTestsCmd.Flags(), "project_id")
-              
-
-              allLookmlTestsCmd.Flags().String("file_id", "", "File Id")
-              
-              
-            
-
-              projectCmd.AddCommand(runLookmlTestCmd)
-            
-              runLookmlTestCmd.Flags().String("project_id", "", "Project Id")
-              cobra.MarkFlagRequired(runLookmlTestCmd.Flags(), "project_id")
-              
-
-              runLookmlTestCmd.Flags().String("file_id", "", "File Name")
-              
-              
-
-              runLookmlTestCmd.Flags().String("test", "", "Test Name")
-              
-              
-
-              runLookmlTestCmd.Flags().String("model", "", "Model Name")
-              
-              
-            
-
-              projectCmd.AddCommand(tagRefCmd)
-            
-              tagRefCmd.Flags().String("project_id", "", "Project Id")
-              cobra.MarkFlagRequired(tagRefCmd.Flags(), "project_id")
-              
-
-              tagRefCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(tagRefCmd.Flags(), "body")
-              
-
-              tagRefCmd.Flags().String("commit_sha", "", "(Optional): Commit Sha to Tag")
-              
-              
-
-              tagRefCmd.Flags().String("tag_name", "", "Tag Name")
-              
-              
-
-              tagRefCmd.Flags().String("tag_message", "", "(Optional): Tag Message")
-              
-              
-            
-
-              projectCmd.AddCommand(updateRepositoryCredentialCmd)
-            
-              updateRepositoryCredentialCmd.Flags().String("root_project_id", "", "Root Project Id")
-              cobra.MarkFlagRequired(updateRepositoryCredentialCmd.Flags(), "root_project_id")
-              
-
-              updateRepositoryCredentialCmd.Flags().String("credential_id", "", "Credential Id")
-              cobra.MarkFlagRequired(updateRepositoryCredentialCmd.Flags(), "credential_id")
-              
-
-              updateRepositoryCredentialCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(updateRepositoryCredentialCmd.Flags(), "body")
-              
-            
-
-              projectCmd.AddCommand(deleteRepositoryCredentialCmd)
-            
-              deleteRepositoryCredentialCmd.Flags().String("root_project_id", "", "Root Project Id")
-              cobra.MarkFlagRequired(deleteRepositoryCredentialCmd.Flags(), "root_project_id")
-              
-
-              deleteRepositoryCredentialCmd.Flags().String("credential_id", "", "Credential Id")
-              cobra.MarkFlagRequired(deleteRepositoryCredentialCmd.Flags(), "credential_id")
-              
-            
-
-              projectCmd.AddCommand(getAllRepositoryCredentialsCmd)
-            
-              getAllRepositoryCredentialsCmd.Flags().String("root_project_id", "", "Root Project Id")
-              cobra.MarkFlagRequired(getAllRepositoryCredentialsCmd.Flags(), "root_project_id")
-              
-            
-  rootCmd.AddCommand(projectCmd)
-
-              queryCmd.AddCommand(createQueryTaskCmd)
-            
-              createQueryTaskCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(createQueryTaskCmd.Flags(), "body")
-              
-
-              createQueryTaskCmd.Flags().Int64("limit", 0, "Row limit (may override the limit in the saved query).")
-              
-              
-
-              createQueryTaskCmd.Flags().BoolP("apply_formatting", false, "Apply model-specified formatting to each result.")
-              
-              
-
-              createQueryTaskCmd.Flags().BoolP("apply_vis", false, "Apply visualization options to results.")
-              
-              
-
-              createQueryTaskCmd.Flags().BoolP("cache", false, "Get results from cache if available.")
-              
-              
-
-              createQueryTaskCmd.Flags().Int64("image_width", 0, "Render width for image formats.")
-              
-              
-
-              createQueryTaskCmd.Flags().Int64("image_height", 0, "Render height for image formats.")
-              
-              
-
-              createQueryTaskCmd.Flags().BoolP("generate_drill_links", false, "Generate drill links (only applicable to 'json_detail' format.")
-              
-              
-
-              createQueryTaskCmd.Flags().BoolP("force_production", false, "Force use of production models even if the user is in development mode.")
-              
-              
-
-              createQueryTaskCmd.Flags().BoolP("cache_only", false, "Retrieve any results from cache even if the results have expired.")
-              
-              
-
-              createQueryTaskCmd.Flags().String("path_prefix", "", "Prefix to use for drill links (url encoded).")
-              
-              
-
-              createQueryTaskCmd.Flags().BoolP("rebuild_pdts", false, "Rebuild PDTS used in query.")
-              
-              
-
-              createQueryTaskCmd.Flags().BoolP("server_table_calcs", false, "Perform table calculations on query results")
-              
-              
-
-              createQueryTaskCmd.Flags().String("fields", "", "Requested fields")
-              
-              
-            
-
-              queryCmd.AddCommand(queryTaskMultiResultsCmd)
-            
-              queryTaskMultiResultsCmd.Flags().String("query_task_ids", "", "List of Query Task IDs")
-              cobra.MarkFlagRequired(queryTaskMultiResultsCmd.Flags(), "query_task_ids")
-              
-            
-
-              queryCmd.AddCommand(queryTaskCmd)
-            
-              queryTaskCmd.Flags().String("query_task_id", "", "ID of the Query Task")
-              cobra.MarkFlagRequired(queryTaskCmd.Flags(), "query_task_id")
-              
-
-              queryTaskCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              queryCmd.AddCommand(queryTaskResultsCmd)
-            
-              queryTaskResultsCmd.Flags().String("query_task_id", "", "ID of the Query Task")
-              cobra.MarkFlagRequired(queryTaskResultsCmd.Flags(), "query_task_id")
-              
-            
-
-              queryCmd.AddCommand(queryCmd479)
-            
-              queryCmd479.Flags().Int64("query_id", 0, "Id of query")
-              cobra.MarkFlagRequired(queryCmd479.Flags(), "query_id")
-              
-
-              queryCmd479.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              queryCmd.AddCommand(queryForSlugCmd)
-            
-              queryForSlugCmd.Flags().String("slug", "", "Slug of query")
-              cobra.MarkFlagRequired(queryForSlugCmd.Flags(), "slug")
-              
-
-              queryForSlugCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              queryCmd.AddCommand(createQueryCmd)
-            
-              createQueryCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(createQueryCmd.Flags(), "body")
-              
-
-              createQueryCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              queryCmd.AddCommand(runQueryCmd)
-            
-              runQueryCmd.Flags().Int64("query_id", 0, "Id of query")
-              cobra.MarkFlagRequired(runQueryCmd.Flags(), "query_id")
-              
-
-              runQueryCmd.Flags().String("result_format", "", "Format of result")
-              cobra.MarkFlagRequired(runQueryCmd.Flags(), "result_format")
-              
-
-              runQueryCmd.Flags().Int64("limit", 0, "Row limit (may override the limit in the saved query).")
-              
-              
-
-              runQueryCmd.Flags().BoolP("apply_formatting", false, "Apply model-specified formatting to each result.")
-              
-              
-
-              runQueryCmd.Flags().BoolP("apply_vis", false, "Apply visualization options to results.")
-              
-              
-
-              runQueryCmd.Flags().BoolP("cache", false, "Get results from cache if available.")
-              
-              
-
-              runQueryCmd.Flags().Int64("image_width", 0, "Render width for image formats.")
-              
-              
-
-              runQueryCmd.Flags().Int64("image_height", 0, "Render height for image formats.")
-              
-              
-
-              runQueryCmd.Flags().BoolP("generate_drill_links", false, "Generate drill links (only applicable to 'json_detail' format.")
-              
-              
-
-              runQueryCmd.Flags().BoolP("force_production", false, "Force use of production models even if the user is in development mode.")
-              
-              
-
-              runQueryCmd.Flags().BoolP("cache_only", false, "Retrieve any results from cache even if the results have expired.")
-              
-              
-
-              runQueryCmd.Flags().String("path_prefix", "", "Prefix to use for drill links (url encoded).")
-              
-              
-
-              runQueryCmd.Flags().BoolP("rebuild_pdts", false, "Rebuild PDTS used in query.")
-              
-              
-
-              runQueryCmd.Flags().BoolP("server_table_calcs", false, "Perform table calculations on query results")
-              
-              
-
-              runQueryCmd.Flags().String("source", "", "Specifies the source of this call.")
-              
-              
-            
-
-              queryCmd.AddCommand(runInlineQueryCmd)
-            
-              runInlineQueryCmd.Flags().String("result_format", "", "Format of result")
-              cobra.MarkFlagRequired(runInlineQueryCmd.Flags(), "result_format")
-              
-
-              runInlineQueryCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(runInlineQueryCmd.Flags(), "body")
-              
-
-              runInlineQueryCmd.Flags().Int64("limit", 0, "Row limit (may override the limit in the saved query).")
-              
-              
-
-              runInlineQueryCmd.Flags().BoolP("apply_formatting", false, "Apply model-specified formatting to each result.")
-              
-              
-
-              runInlineQueryCmd.Flags().BoolP("apply_vis", false, "Apply visualization options to results.")
-              
-              
-
-              runInlineQueryCmd.Flags().BoolP("cache", false, "Get results from cache if available.")
-              
-              
-
-              runInlineQueryCmd.Flags().Int64("image_width", 0, "Render width for image formats.")
-              
-              
-
-              runInlineQueryCmd.Flags().Int64("image_height", 0, "Render height for image formats.")
-              
-              
-
-              runInlineQueryCmd.Flags().BoolP("generate_drill_links", false, "Generate drill links (only applicable to 'json_detail' format.")
-              
-              
-
-              runInlineQueryCmd.Flags().BoolP("force_production", false, "Force use of production models even if the user is in development mode.")
-              
-              
-
-              runInlineQueryCmd.Flags().BoolP("cache_only", false, "Retrieve any results from cache even if the results have expired.")
-              
-              
-
-              runInlineQueryCmd.Flags().String("path_prefix", "", "Prefix to use for drill links (url encoded).")
-              
-              
-
-              runInlineQueryCmd.Flags().BoolP("rebuild_pdts", false, "Rebuild PDTS used in query.")
-              
-              
-
-              runInlineQueryCmd.Flags().BoolP("server_table_calcs", false, "Perform table calculations on query results")
-              
-              
-            
-
-              queryCmd.AddCommand(runUrlEncodedQueryCmd)
-            
-              runUrlEncodedQueryCmd.Flags().String("model_name", "", "Model name")
-              cobra.MarkFlagRequired(runUrlEncodedQueryCmd.Flags(), "model_name")
-              
-
-              runUrlEncodedQueryCmd.Flags().String("view_name", "", "View name")
-              cobra.MarkFlagRequired(runUrlEncodedQueryCmd.Flags(), "view_name")
-              
-
-              runUrlEncodedQueryCmd.Flags().String("result_format", "", "Format of result")
-              cobra.MarkFlagRequired(runUrlEncodedQueryCmd.Flags(), "result_format")
-              
-            
-
-              queryCmd.AddCommand(mergeQueryCmd)
-            
-              mergeQueryCmd.Flags().String("merge_query_id", "", "Merge Query Id")
-              cobra.MarkFlagRequired(mergeQueryCmd.Flags(), "merge_query_id")
-              
-
-              mergeQueryCmd.Flags().String("fields", "", "Requested fields")
-              
-              
-            
-
-              queryCmd.AddCommand(createMergeQueryCmd)
-            
-              createMergeQueryCmd.Flags().String("body", "", "")
-              
-              
-
-              createMergeQueryCmd.Flags().String("fields", "", "Requested fields")
-              
-              
-            
-
-              queryCmd.AddCommand(allRunningQueriesCmd)
-            
-            
-
-              queryCmd.AddCommand(killQueryCmd)
-            
-              killQueryCmd.Flags().String("query_task_id", "", "Query task id.")
-              cobra.MarkFlagRequired(killQueryCmd.Flags(), "query_task_id")
-              
-            
-
-              queryCmd.AddCommand(sqlQueryCmd)
-            
-              sqlQueryCmd.Flags().String("slug", "", "slug of query")
-              cobra.MarkFlagRequired(sqlQueryCmd.Flags(), "slug")
-              
-            
-
-              queryCmd.AddCommand(createSqlQueryCmd)
-            
-              createSqlQueryCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(createSqlQueryCmd.Flags(), "body")
-              
-            
-
-              queryCmd.AddCommand(runSqlQueryCmd)
-            
-              runSqlQueryCmd.Flags().String("slug", "", "slug of query")
-              cobra.MarkFlagRequired(runSqlQueryCmd.Flags(), "slug")
-              
-
-              runSqlQueryCmd.Flags().String("result_format", "", "Format of result, options are: [\"inline_json\", \"json\", \"json_detail\", \"json_fe\", \"csv\", \"html\", \"md\", \"txt\", \"xlsx\", \"gsxml\", \"json_label\"]")
-              cobra.MarkFlagRequired(runSqlQueryCmd.Flags(), "result_format")
-              
-
-              runSqlQueryCmd.Flags().String("download", "", "Defaults to false. If set to true, the HTTP response will have content-disposition and other headers set to make the HTTP response behave as a downloadable attachment instead of as inline content.")
-              
-              
-            
-  rootCmd.AddCommand(queryCmd)
-
-              renderTaskCmd.AddCommand(createLookRenderTaskCmd)
-            
-              createLookRenderTaskCmd.Flags().Int64("look_id", 0, "Id of look to render")
-              cobra.MarkFlagRequired(createLookRenderTaskCmd.Flags(), "look_id")
-              
-
-              createLookRenderTaskCmd.Flags().String("result_format", "", "Output type: png, or jpg")
-              cobra.MarkFlagRequired(createLookRenderTaskCmd.Flags(), "result_format")
-              
-
-              createLookRenderTaskCmd.Flags().Int64("width", 0, "Output width in pixels")
-              cobra.MarkFlagRequired(createLookRenderTaskCmd.Flags(), "width")
-              
-
-              createLookRenderTaskCmd.Flags().Int64("height", 0, "Output height in pixels")
-              cobra.MarkFlagRequired(createLookRenderTaskCmd.Flags(), "height")
-              
-
-              createLookRenderTaskCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              renderTaskCmd.AddCommand(createQueryRenderTaskCmd)
-            
-              createQueryRenderTaskCmd.Flags().Int64("query_id", 0, "Id of the query to render")
-              cobra.MarkFlagRequired(createQueryRenderTaskCmd.Flags(), "query_id")
-              
-
-              createQueryRenderTaskCmd.Flags().String("result_format", "", "Output type: png or jpg")
-              cobra.MarkFlagRequired(createQueryRenderTaskCmd.Flags(), "result_format")
-              
-
-              createQueryRenderTaskCmd.Flags().Int64("width", 0, "Output width in pixels")
-              cobra.MarkFlagRequired(createQueryRenderTaskCmd.Flags(), "width")
-              
-
-              createQueryRenderTaskCmd.Flags().Int64("height", 0, "Output height in pixels")
-              cobra.MarkFlagRequired(createQueryRenderTaskCmd.Flags(), "height")
-              
-
-              createQueryRenderTaskCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              renderTaskCmd.AddCommand(createDashboardRenderTaskCmd)
-            
-              createDashboardRenderTaskCmd.Flags().String("dashboard_id", "", "Id of dashboard to render. The ID can be a LookML dashboard also.")
-              cobra.MarkFlagRequired(createDashboardRenderTaskCmd.Flags(), "dashboard_id")
-              
-
-              createDashboardRenderTaskCmd.Flags().String("result_format", "", "Output type: pdf, png, or jpg")
-              cobra.MarkFlagRequired(createDashboardRenderTaskCmd.Flags(), "result_format")
-              
-
-              createDashboardRenderTaskCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(createDashboardRenderTaskCmd.Flags(), "body")
-              
-
-              createDashboardRenderTaskCmd.Flags().Int64("width", 0, "Output width in pixels")
-              cobra.MarkFlagRequired(createDashboardRenderTaskCmd.Flags(), "width")
-              
-
-              createDashboardRenderTaskCmd.Flags().Int64("height", 0, "Output height in pixels")
-              cobra.MarkFlagRequired(createDashboardRenderTaskCmd.Flags(), "height")
-              
-
-              createDashboardRenderTaskCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-
-              createDashboardRenderTaskCmd.Flags().String("pdf_paper_size", "", "Paper size for pdf. Value can be one of: [\"letter\",\"legal\",\"tabloid\",\"a0\",\"a1\",\"a2\",\"a3\",\"a4\",\"a5\"]")
-              
-              
-
-              createDashboardRenderTaskCmd.Flags().BoolP("pdf_landscape", false, "Whether to render pdf in landscape paper orientation")
-              
-              
-
-              createDashboardRenderTaskCmd.Flags().BoolP("long_tables", false, "Whether or not to expand table vis to full length")
-              
-              
-            
-
-              renderTaskCmd.AddCommand(renderTaskCmd6639)
-            
-              renderTaskCmd6639.Flags().String("render_task_id", "", "Id of render task")
-              cobra.MarkFlagRequired(renderTaskCmd6639.Flags(), "render_task_id")
-              
-
-              renderTaskCmd6639.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              renderTaskCmd.AddCommand(renderTaskResultsCmd)
-            
-              renderTaskResultsCmd.Flags().String("render_task_id", "", "Id of render task")
-              cobra.MarkFlagRequired(renderTaskResultsCmd.Flags(), "render_task_id")
-              
-            
-  rootCmd.AddCommand(renderTaskCmd)
-
-              roleCmd.AddCommand(searchModelSetsCmd)
-            
-              searchModelSetsCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-
-              searchModelSetsCmd.Flags().Int64("limit", 0, "Number of results to return (used with `offset`).")
-              
-              
-
-              searchModelSetsCmd.Flags().Int64("offset", 0, "Number of results to skip before returning any (used with `limit`).")
-              
-              
-
-              searchModelSetsCmd.Flags().String("sorts", "", "Fields to sort by.")
-              
-              
-
-              searchModelSetsCmd.Flags().Int64("id", 0, "Match model set id.")
-              
-              
-
-              searchModelSetsCmd.Flags().String("name", "", "Match model set name.")
-              
-              
-
-              searchModelSetsCmd.Flags().BoolP("all_access", false, "Match model sets by all_access status.")
-              
-              
-
-              searchModelSetsCmd.Flags().BoolP("built_in", false, "Match model sets by built_in status.")
-              
-              
-
-              searchModelSetsCmd.Flags().BoolP("filter_or", false, "Combine given search criteria in a boolean OR expression.")
-              
-              
-            
-
-              roleCmd.AddCommand(modelSetCmd)
-            
-              modelSetCmd.Flags().Int64("model_set_id", 0, "Id of model set")
-              cobra.MarkFlagRequired(modelSetCmd.Flags(), "model_set_id")
-              
-
-              modelSetCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              roleCmd.AddCommand(updateModelSetCmd)
-            
-              updateModelSetCmd.Flags().Int64("model_set_id", 0, "id of model set")
-              cobra.MarkFlagRequired(updateModelSetCmd.Flags(), "model_set_id")
-              
-
-              updateModelSetCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(updateModelSetCmd.Flags(), "body")
-              
-            
-
-              roleCmd.AddCommand(deleteModelSetCmd)
-            
-              deleteModelSetCmd.Flags().Int64("model_set_id", 0, "id of model set")
-              cobra.MarkFlagRequired(deleteModelSetCmd.Flags(), "model_set_id")
-              
-            
-
-              roleCmd.AddCommand(allModelSetsCmd)
-            
-              allModelSetsCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              roleCmd.AddCommand(createModelSetCmd)
-            
-              createModelSetCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(createModelSetCmd.Flags(), "body")
-              
-            
-
-              roleCmd.AddCommand(allPermissionsCmd)
-            
-            
-
-              roleCmd.AddCommand(searchPermissionSetsCmd)
-            
-              searchPermissionSetsCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-
-              searchPermissionSetsCmd.Flags().Int64("limit", 0, "Number of results to return (used with `offset`).")
-              
-              
-
-              searchPermissionSetsCmd.Flags().Int64("offset", 0, "Number of results to skip before returning any (used with `limit`).")
-              
-              
-
-              searchPermissionSetsCmd.Flags().String("sorts", "", "Fields to sort by.")
-              
-              
-
-              searchPermissionSetsCmd.Flags().Int64("id", 0, "Match permission set id.")
-              
-              
-
-              searchPermissionSetsCmd.Flags().String("name", "", "Match permission set name.")
-              
-              
-
-              searchPermissionSetsCmd.Flags().BoolP("all_access", false, "Match permission sets by all_access status.")
-              
-              
-
-              searchPermissionSetsCmd.Flags().BoolP("built_in", false, "Match permission sets by built_in status.")
-              
-              
-
-              searchPermissionSetsCmd.Flags().BoolP("filter_or", false, "Combine given search criteria in a boolean OR expression.")
-              
-              
-            
-
-              roleCmd.AddCommand(permissionSetCmd)
-            
-              permissionSetCmd.Flags().Int64("permission_set_id", 0, "Id of permission set")
-              cobra.MarkFlagRequired(permissionSetCmd.Flags(), "permission_set_id")
-              
-
-              permissionSetCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              roleCmd.AddCommand(updatePermissionSetCmd)
-            
-              updatePermissionSetCmd.Flags().Int64("permission_set_id", 0, "id of permission set")
-              cobra.MarkFlagRequired(updatePermissionSetCmd.Flags(), "permission_set_id")
-              
-
-              updatePermissionSetCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(updatePermissionSetCmd.Flags(), "body")
-              
-            
-
-              roleCmd.AddCommand(deletePermissionSetCmd)
-            
-              deletePermissionSetCmd.Flags().Int64("permission_set_id", 0, "Id of permission set")
-              cobra.MarkFlagRequired(deletePermissionSetCmd.Flags(), "permission_set_id")
-              
-            
-
-              roleCmd.AddCommand(allPermissionSetsCmd)
-            
-              allPermissionSetsCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              roleCmd.AddCommand(createPermissionSetCmd)
-            
-              createPermissionSetCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(createPermissionSetCmd.Flags(), "body")
-              
-            
-
-              roleCmd.AddCommand(allRolesCmd)
-            
-              allRolesCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-
-              allRolesCmd.Flags().String("ids", "", "Optional list of ids to get specific roles.")
-              
-              
-            
-
-              roleCmd.AddCommand(createRoleCmd)
-            
-              createRoleCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(createRoleCmd.Flags(), "body")
-              
-            
-
-              roleCmd.AddCommand(searchRolesCmd)
-            
-              searchRolesCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-
-              searchRolesCmd.Flags().Int64("limit", 0, "Number of results to return (used with `offset`).")
-              
-              
-
-              searchRolesCmd.Flags().Int64("offset", 0, "Number of results to skip before returning any (used with `limit`).")
-              
-              
-
-              searchRolesCmd.Flags().String("sorts", "", "Fields to sort by.")
-              
-              
-
-              searchRolesCmd.Flags().Int64("id", 0, "Match role id.")
-              
-              
-
-              searchRolesCmd.Flags().String("name", "", "Match role name.")
-              
-              
-
-              searchRolesCmd.Flags().BoolP("built_in", false, "Match roles by built_in status.")
-              
-              
-
-              searchRolesCmd.Flags().BoolP("filter_or", false, "Combine given search criteria in a boolean OR expression.")
-              
-              
-            
-
-              roleCmd.AddCommand(searchRolesWithUserCountCmd)
-            
-              searchRolesWithUserCountCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-
-              searchRolesWithUserCountCmd.Flags().Int64("limit", 0, "Number of results to return (used with `offset`).")
-              
-              
-
-              searchRolesWithUserCountCmd.Flags().Int64("offset", 0, "Number of results to skip before returning any (used with `limit`).")
-              
-              
-
-              searchRolesWithUserCountCmd.Flags().String("sorts", "", "Fields to sort by.")
-              
-              
-
-              searchRolesWithUserCountCmd.Flags().Int64("id", 0, "Match role id.")
-              
-              
-
-              searchRolesWithUserCountCmd.Flags().String("name", "", "Match role name.")
-              
-              
-
-              searchRolesWithUserCountCmd.Flags().BoolP("built_in", false, "Match roles by built_in status.")
-              
-              
-
-              searchRolesWithUserCountCmd.Flags().BoolP("filter_or", false, "Combine given search criteria in a boolean OR expression.")
-              
-              
-            
-
-              roleCmd.AddCommand(roleCmd7903)
-            
-              roleCmd7903.Flags().Int64("role_id", 0, "id of role")
-              cobra.MarkFlagRequired(roleCmd7903.Flags(), "role_id")
-              
-            
-
-              roleCmd.AddCommand(updateRoleCmd)
-            
-              updateRoleCmd.Flags().Int64("role_id", 0, "id of role")
-              cobra.MarkFlagRequired(updateRoleCmd.Flags(), "role_id")
-              
-
-              updateRoleCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(updateRoleCmd.Flags(), "body")
-              
-            
-
-              roleCmd.AddCommand(deleteRoleCmd)
-            
-              deleteRoleCmd.Flags().Int64("role_id", 0, "id of role")
-              cobra.MarkFlagRequired(deleteRoleCmd.Flags(), "role_id")
-              
-            
-
-              roleCmd.AddCommand(roleGroupsCmd)
-            
-              roleGroupsCmd.Flags().Int64("role_id", 0, "id of role")
-              cobra.MarkFlagRequired(roleGroupsCmd.Flags(), "role_id")
-              
-
-              roleGroupsCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              roleCmd.AddCommand(setRoleGroupsCmd)
-            
-              setRoleGroupsCmd.Flags().Int64("role_id", 0, "Id of Role")
-              cobra.MarkFlagRequired(setRoleGroupsCmd.Flags(), "role_id")
-              
-
-              setRoleGroupsCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(setRoleGroupsCmd.Flags(), "body")
-              
-            
-
-              roleCmd.AddCommand(roleUsersCmd)
-            
-              roleUsersCmd.Flags().Int64("role_id", 0, "id of user")
-              cobra.MarkFlagRequired(roleUsersCmd.Flags(), "role_id")
-              
-
-              roleUsersCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-
-              roleUsersCmd.Flags().BoolP("direct_association_only", false, "Get only users associated directly with the role: exclude those only associated through groups.")
-              
-              
-            
-
-              roleCmd.AddCommand(setRoleUsersCmd)
-            
-              setRoleUsersCmd.Flags().Int64("role_id", 0, "id of role")
-              cobra.MarkFlagRequired(setRoleUsersCmd.Flags(), "role_id")
-              
-
-              setRoleUsersCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(setRoleUsersCmd.Flags(), "body")
-              
-            
-  rootCmd.AddCommand(roleCmd)
-
-              scheduledPlanCmd.AddCommand(scheduledPlansForSpaceCmd)
-            
-              scheduledPlansForSpaceCmd.Flags().Int64("space_id", 0, "Space Id")
-              cobra.MarkFlagRequired(scheduledPlansForSpaceCmd.Flags(), "space_id")
-              
-
-              scheduledPlansForSpaceCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              scheduledPlanCmd.AddCommand(scheduledPlanCmd7163)
-            
-              scheduledPlanCmd7163.Flags().Int64("scheduled_plan_id", 0, "Scheduled Plan Id")
-              cobra.MarkFlagRequired(scheduledPlanCmd7163.Flags(), "scheduled_plan_id")
-              
-
-              scheduledPlanCmd7163.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              scheduledPlanCmd.AddCommand(updateScheduledPlanCmd)
-            
-              updateScheduledPlanCmd.Flags().Int64("scheduled_plan_id", 0, "Scheduled Plan Id")
-              cobra.MarkFlagRequired(updateScheduledPlanCmd.Flags(), "scheduled_plan_id")
-              
-
-              updateScheduledPlanCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(updateScheduledPlanCmd.Flags(), "body")
-              
-            
-
-              scheduledPlanCmd.AddCommand(deleteScheduledPlanCmd)
-            
-              deleteScheduledPlanCmd.Flags().Int64("scheduled_plan_id", 0, "Scheduled Plan Id")
-              cobra.MarkFlagRequired(deleteScheduledPlanCmd.Flags(), "scheduled_plan_id")
-              
-            
-
-              scheduledPlanCmd.AddCommand(allScheduledPlansCmd)
-            
-              allScheduledPlansCmd.Flags().Int64("user_id", 0, "Return scheduled plans belonging to this user_id. If not provided, returns scheduled plans owned by the caller.")
-              
-              
-
-              allScheduledPlansCmd.Flags().String("fields", "", "Comma delimited list of field names. If provided, only the fields specified will be included in the response")
-              
-              
-
-              allScheduledPlansCmd.Flags().BoolP("all_users", false, "Return scheduled plans belonging to all users (caller needs see_schedules permission)")
-              
-              
-            
-
-              scheduledPlanCmd.AddCommand(createScheduledPlanCmd)
-            
-              createScheduledPlanCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(createScheduledPlanCmd.Flags(), "body")
-              
-            
-
-              scheduledPlanCmd.AddCommand(scheduledPlanRunOnceCmd)
-            
-              scheduledPlanRunOnceCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(scheduledPlanRunOnceCmd.Flags(), "body")
-              
-            
-
-              scheduledPlanCmd.AddCommand(scheduledPlansForLookCmd)
-            
-              scheduledPlansForLookCmd.Flags().Int64("look_id", 0, "Look Id")
-              cobra.MarkFlagRequired(scheduledPlansForLookCmd.Flags(), "look_id")
-              
-
-              scheduledPlansForLookCmd.Flags().Int64("user_id", 0, "User Id (default is requesting user if not specified)")
-              
-              
-
-              scheduledPlansForLookCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-
-              scheduledPlansForLookCmd.Flags().BoolP("all_users", false, "Return scheduled plans belonging to all users for the look")
-              
-              
-            
-
-              scheduledPlanCmd.AddCommand(scheduledPlansForDashboardCmd)
-            
-              scheduledPlansForDashboardCmd.Flags().Int64("dashboard_id", 0, "Dashboard Id")
-              cobra.MarkFlagRequired(scheduledPlansForDashboardCmd.Flags(), "dashboard_id")
-              
-
-              scheduledPlansForDashboardCmd.Flags().Int64("user_id", 0, "User Id (default is requesting user if not specified)")
-              
-              
-
-              scheduledPlansForDashboardCmd.Flags().BoolP("all_users", false, "Return scheduled plans belonging to all users for the dashboard")
-              
-              
-
-              scheduledPlansForDashboardCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              scheduledPlanCmd.AddCommand(scheduledPlansForLookmlDashboardCmd)
-            
-              scheduledPlansForLookmlDashboardCmd.Flags().String("lookml_dashboard_id", "", "LookML Dashboard Id")
-              cobra.MarkFlagRequired(scheduledPlansForLookmlDashboardCmd.Flags(), "lookml_dashboard_id")
-              
-
-              scheduledPlansForLookmlDashboardCmd.Flags().Int64("user_id", 0, "User Id (default is requesting user if not specified)")
-              
-              
-
-              scheduledPlansForLookmlDashboardCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-
-              scheduledPlansForLookmlDashboardCmd.Flags().BoolP("all_users", false, "Return scheduled plans belonging to all users for the dashboard")
-              
-              
-            
-
-              scheduledPlanCmd.AddCommand(scheduledPlanRunOnceByIdCmd)
-            
-              scheduledPlanRunOnceByIdCmd.Flags().Int64("scheduled_plan_id", 0, "Id of schedule plan to copy and run")
-              cobra.MarkFlagRequired(scheduledPlanRunOnceByIdCmd.Flags(), "scheduled_plan_id")
-              
-
-              scheduledPlanRunOnceByIdCmd.Flags().String("body", "", "")
-              
-              
-            
-  rootCmd.AddCommand(scheduledPlanCmd)
-
-              sessionCmd.AddCommand(sessionCmd7571)
-            
-            
-
-              sessionCmd.AddCommand(updateSessionCmd)
-            
-              updateSessionCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(updateSessionCmd.Flags(), "body")
-              
-            
-  rootCmd.AddCommand(sessionCmd)
-
-              themeCmd.AddCommand(allThemesCmd)
-            
-              allThemesCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              themeCmd.AddCommand(createThemeCmd)
-            
-              createThemeCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(createThemeCmd.Flags(), "body")
-              
-            
-
-              themeCmd.AddCommand(searchThemesCmd)
-            
-              searchThemesCmd.Flags().Int64("id", 0, "Match theme id.")
-              
-              
-
-              searchThemesCmd.Flags().String("name", "", "Match theme name.")
-              
-              
-
-              searchThemesCmd.Flags().String("begin_at", "", "Timestamp for activation.")
-              
-              
-
-              searchThemesCmd.Flags().String("end_at", "", "Timestamp for expiration.")
-              
-              
-
-              searchThemesCmd.Flags().Int64("limit", 0, "Number of results to return (used with `offset`).")
-              
-              
-
-              searchThemesCmd.Flags().Int64("offset", 0, "Number of results to skip before returning any (used with `limit`).")
-              
-              
-
-              searchThemesCmd.Flags().String("sorts", "", "Fields to sort by.")
-              
-              
-
-              searchThemesCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-
-              searchThemesCmd.Flags().BoolP("filter_or", false, "Combine given search criteria in a boolean OR expression")
-              
-              
-            
-
-              themeCmd.AddCommand(defaultThemeCmd)
-            
-              defaultThemeCmd.Flags().String("ts", "", "Timestamp representing the target datetime for the active period. Defaults to 'now'")
-              
-              
-            
-
-              themeCmd.AddCommand(setDefaultThemeCmd)
-            
-              setDefaultThemeCmd.Flags().String("name", "", "Name of theme to set as default")
-              cobra.MarkFlagRequired(setDefaultThemeCmd.Flags(), "name")
-              
-            
-
-              themeCmd.AddCommand(activeThemesCmd)
-            
-              activeThemesCmd.Flags().String("name", "", "Name of theme")
-              
-              
-
-              activeThemesCmd.Flags().String("ts", "", "Timestamp representing the target datetime for the active period. Defaults to 'now'")
-              
-              
-
-              activeThemesCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              themeCmd.AddCommand(themeOrDefaultCmd)
-            
-              themeOrDefaultCmd.Flags().String("name", "", "Name of theme")
-              cobra.MarkFlagRequired(themeOrDefaultCmd.Flags(), "name")
-              
-
-              themeOrDefaultCmd.Flags().String("ts", "", "Timestamp representing the target datetime for the active period. Defaults to 'now'")
-              
-              
-            
-
-              themeCmd.AddCommand(validateThemeCmd)
-            
-              validateThemeCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(validateThemeCmd.Flags(), "body")
-              
-            
-
-              themeCmd.AddCommand(themeCmd994)
-            
-              themeCmd994.Flags().Int64("theme_id", 0, "Id of theme")
-              cobra.MarkFlagRequired(themeCmd994.Flags(), "theme_id")
-              
-
-              themeCmd994.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              themeCmd.AddCommand(updateThemeCmd)
-            
-              updateThemeCmd.Flags().Int64("theme_id", 0, "Id of theme")
-              cobra.MarkFlagRequired(updateThemeCmd.Flags(), "theme_id")
-              
-
-              updateThemeCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(updateThemeCmd.Flags(), "body")
-              
-            
-
-              themeCmd.AddCommand(deleteThemeCmd)
-            
-              deleteThemeCmd.Flags().String("theme_id", "", "Id of theme")
-              cobra.MarkFlagRequired(deleteThemeCmd.Flags(), "theme_id")
-              
-            
-  rootCmd.AddCommand(themeCmd)
-
-              userCmd.AddCommand(searchCredentialsEmailCmd)
-            
-              searchCredentialsEmailCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-
-              searchCredentialsEmailCmd.Flags().Int64("limit", 0, "Number of results to return (used with `offset`).")
-              
-              
-
-              searchCredentialsEmailCmd.Flags().Int64("offset", 0, "Number of results to skip before returning any (used with `limit`).")
-              
-              
-
-              searchCredentialsEmailCmd.Flags().String("sorts", "", "Fields to sort by.")
-              
-              
-
-              searchCredentialsEmailCmd.Flags().Int64("id", 0, "Match credentials_email id.")
-              
-              
-
-              searchCredentialsEmailCmd.Flags().String("email", "", "Match credentials_email email.")
-              
-              
-
-              searchCredentialsEmailCmd.Flags().String("emails", "", "Find credentials_email that match given emails.")
-              
-              
-
-              searchCredentialsEmailCmd.Flags().BoolP("filter_or", false, "Combine given search criteria in a boolean OR expression.")
-              
-              
-            
-
-              userCmd.AddCommand(meCmd)
-            
-              meCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              userCmd.AddCommand(allUsersCmd)
-            
-              allUsersCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-
-              allUsersCmd.Flags().Int64("page", 0, "DEPRECATED. Use limit and offset instead. Return only page N of paginated results")
-              
-              
-
-              allUsersCmd.Flags().Int64("per_page", 0, "DEPRECATED. Use limit and offset instead. Return N rows of data per page")
-              
-              
-
-              allUsersCmd.Flags().Int64("limit", 0, "Number of results to return. (used with offset and takes priority over page and per_page)")
-              
-              
-
-              allUsersCmd.Flags().Int64("offset", 0, "Number of results to skip before returning any. (used with limit and takes priority over page and per_page)")
-              
-              
-
-              allUsersCmd.Flags().String("sorts", "", "Fields to sort by.")
-              
-              
-
-              allUsersCmd.Flags().String("ids", "", "Optional list of ids to get specific users.")
-              
-              
-            
-
-              userCmd.AddCommand(createUserCmd)
-            
-              createUserCmd.Flags().String("body", "", "")
-              
-              
-
-              createUserCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              userCmd.AddCommand(searchUsersCmd)
-            
-              searchUsersCmd.Flags().String("fields", "", "Include only these fields in the response")
-              
-              
-
-              searchUsersCmd.Flags().Int64("page", 0, "DEPRECATED. Use limit and offset instead. Return only page N of paginated results")
-              
-              
-
-              searchUsersCmd.Flags().Int64("per_page", 0, "DEPRECATED. Use limit and offset instead. Return N rows of data per page")
-              
-              
-
-              searchUsersCmd.Flags().Int64("limit", 0, "Number of results to return. (used with offset and takes priority over page and per_page)")
-              
-              
-
-              searchUsersCmd.Flags().Int64("offset", 0, "Number of results to skip before returning any. (used with limit and takes priority over page and per_page)")
-              
-              
-
-              searchUsersCmd.Flags().String("sorts", "", "Fields to sort by.")
-              
-              
-
-              searchUsersCmd.Flags().String("id", "", "Match User Id.")
-              
-              
-
-              searchUsersCmd.Flags().String("first_name", "", "Match First name.")
-              
-              
-
-              searchUsersCmd.Flags().String("last_name", "", "Match Last name.")
-              
-              
-
-              searchUsersCmd.Flags().BoolP("verified_looker_employee", false, "Search for user accounts associated with Looker employees")
-              
-              
-
-              searchUsersCmd.Flags().BoolP("embed_user", false, "Search for only embed users")
-              
-              
-
-              searchUsersCmd.Flags().String("email", "", "Search for the user with this email address")
-              
-              
-
-              searchUsersCmd.Flags().BoolP("is_disabled", false, "Search for disabled user accounts")
-              
-              
-
-              searchUsersCmd.Flags().BoolP("filter_or", false, "Combine given search criteria in a boolean OR expression")
-              
-              
-
-              searchUsersCmd.Flags().String("content_metadata_id", "", "Search for users who have access to this content_metadata item")
-              
-              
-
-              searchUsersCmd.Flags().String("group_id", "", "Search for users who are direct members of this group")
-              
-              
-            
-
-              userCmd.AddCommand(searchUsersNamesCmd)
-            
-              searchUsersNamesCmd.Flags().String("pattern", "", "Pattern to match")
-              cobra.MarkFlagRequired(searchUsersNamesCmd.Flags(), "pattern")
-              
-
-              searchUsersNamesCmd.Flags().String("fields", "", "Include only these fields in the response")
-              
-              
-
-              searchUsersNamesCmd.Flags().Int64("page", 0, "DEPRECATED. Use limit and offset instead. Return only page N of paginated results")
-              
-              
-
-              searchUsersNamesCmd.Flags().Int64("per_page", 0, "DEPRECATED. Use limit and offset instead. Return N rows of data per page")
-              
-              
-
-              searchUsersNamesCmd.Flags().Int64("limit", 0, "Number of results to return. (used with offset and takes priority over page and per_page)")
-              
-              
-
-              searchUsersNamesCmd.Flags().Int64("offset", 0, "Number of results to skip before returning any. (used with limit and takes priority over page and per_page)")
-              
-              
-
-              searchUsersNamesCmd.Flags().String("sorts", "", "Fields to sort by")
-              
-              
-
-              searchUsersNamesCmd.Flags().Int64("id", 0, "Match User Id")
-              
-              
-
-              searchUsersNamesCmd.Flags().String("first_name", "", "Match First name")
-              
-              
-
-              searchUsersNamesCmd.Flags().String("last_name", "", "Match Last name")
-              
-              
-
-              searchUsersNamesCmd.Flags().BoolP("verified_looker_employee", false, "Match Verified Looker employee")
-              
-              
-
-              searchUsersNamesCmd.Flags().String("email", "", "Match Email Address")
-              
-              
-
-              searchUsersNamesCmd.Flags().BoolP("is_disabled", false, "Include or exclude disabled accounts in the results")
-              
-              
-            
-
-              userCmd.AddCommand(userCmd5825)
-            
-              userCmd5825.Flags().Int64("user_id", 0, "Id of user")
-              cobra.MarkFlagRequired(userCmd5825.Flags(), "user_id")
-              
-
-              userCmd5825.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              userCmd.AddCommand(updateUserCmd)
-            
-              updateUserCmd.Flags().Int64("user_id", 0, "Id of user")
-              cobra.MarkFlagRequired(updateUserCmd.Flags(), "user_id")
-              
-
-              updateUserCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(updateUserCmd.Flags(), "body")
-              
-
-              updateUserCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              userCmd.AddCommand(deleteUserCmd)
-            
-              deleteUserCmd.Flags().Int64("user_id", 0, "Id of user")
-              cobra.MarkFlagRequired(deleteUserCmd.Flags(), "user_id")
-              
-            
-
-              userCmd.AddCommand(userForCredentialCmd)
-            
-              userForCredentialCmd.Flags().String("credential_type", "", "Type name of credential")
-              cobra.MarkFlagRequired(userForCredentialCmd.Flags(), "credential_type")
-              
-
-              userForCredentialCmd.Flags().String("credential_id", "", "Id of credential")
-              cobra.MarkFlagRequired(userForCredentialCmd.Flags(), "credential_id")
-              
-
-              userForCredentialCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              userCmd.AddCommand(userCredentialsEmailCmd)
-            
-              userCredentialsEmailCmd.Flags().Int64("user_id", 0, "id of user")
-              cobra.MarkFlagRequired(userCredentialsEmailCmd.Flags(), "user_id")
-              
-
-              userCredentialsEmailCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              userCmd.AddCommand(createUserCredentialsEmailCmd)
-            
-              createUserCredentialsEmailCmd.Flags().Int64("user_id", 0, "id of user")
-              cobra.MarkFlagRequired(createUserCredentialsEmailCmd.Flags(), "user_id")
-              
-
-              createUserCredentialsEmailCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(createUserCredentialsEmailCmd.Flags(), "body")
-              
-
-              createUserCredentialsEmailCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              userCmd.AddCommand(updateUserCredentialsEmailCmd)
-            
-              updateUserCredentialsEmailCmd.Flags().Int64("user_id", 0, "id of user")
-              cobra.MarkFlagRequired(updateUserCredentialsEmailCmd.Flags(), "user_id")
-              
-
-              updateUserCredentialsEmailCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(updateUserCredentialsEmailCmd.Flags(), "body")
-              
-
-              updateUserCredentialsEmailCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              userCmd.AddCommand(deleteUserCredentialsEmailCmd)
-            
-              deleteUserCredentialsEmailCmd.Flags().Int64("user_id", 0, "id of user")
-              cobra.MarkFlagRequired(deleteUserCredentialsEmailCmd.Flags(), "user_id")
-              
-            
-
-              userCmd.AddCommand(userCredentialsTotpCmd)
-            
-              userCredentialsTotpCmd.Flags().Int64("user_id", 0, "id of user")
-              cobra.MarkFlagRequired(userCredentialsTotpCmd.Flags(), "user_id")
-              
-
-              userCredentialsTotpCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              userCmd.AddCommand(createUserCredentialsTotpCmd)
-            
-              createUserCredentialsTotpCmd.Flags().Int64("user_id", 0, "id of user")
-              cobra.MarkFlagRequired(createUserCredentialsTotpCmd.Flags(), "user_id")
-              
-
-              createUserCredentialsTotpCmd.Flags().String("body", "", "")
-              
-              
-
-              createUserCredentialsTotpCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              userCmd.AddCommand(deleteUserCredentialsTotpCmd)
-            
-              deleteUserCredentialsTotpCmd.Flags().Int64("user_id", 0, "id of user")
-              cobra.MarkFlagRequired(deleteUserCredentialsTotpCmd.Flags(), "user_id")
-              
-            
-
-              userCmd.AddCommand(userCredentialsLdapCmd)
-            
-              userCredentialsLdapCmd.Flags().Int64("user_id", 0, "id of user")
-              cobra.MarkFlagRequired(userCredentialsLdapCmd.Flags(), "user_id")
-              
-
-              userCredentialsLdapCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              userCmd.AddCommand(deleteUserCredentialsLdapCmd)
-            
-              deleteUserCredentialsLdapCmd.Flags().Int64("user_id", 0, "id of user")
-              cobra.MarkFlagRequired(deleteUserCredentialsLdapCmd.Flags(), "user_id")
-              
-            
-
-              userCmd.AddCommand(userCredentialsGoogleCmd)
-            
-              userCredentialsGoogleCmd.Flags().Int64("user_id", 0, "id of user")
-              cobra.MarkFlagRequired(userCredentialsGoogleCmd.Flags(), "user_id")
-              
-
-              userCredentialsGoogleCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              userCmd.AddCommand(deleteUserCredentialsGoogleCmd)
-            
-              deleteUserCredentialsGoogleCmd.Flags().Int64("user_id", 0, "id of user")
-              cobra.MarkFlagRequired(deleteUserCredentialsGoogleCmd.Flags(), "user_id")
-              
-            
-
-              userCmd.AddCommand(userCredentialsSamlCmd)
-            
-              userCredentialsSamlCmd.Flags().Int64("user_id", 0, "id of user")
-              cobra.MarkFlagRequired(userCredentialsSamlCmd.Flags(), "user_id")
-              
-
-              userCredentialsSamlCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              userCmd.AddCommand(deleteUserCredentialsSamlCmd)
-            
-              deleteUserCredentialsSamlCmd.Flags().Int64("user_id", 0, "id of user")
-              cobra.MarkFlagRequired(deleteUserCredentialsSamlCmd.Flags(), "user_id")
-              
-            
-
-              userCmd.AddCommand(userCredentialsOidcCmd)
-            
-              userCredentialsOidcCmd.Flags().Int64("user_id", 0, "id of user")
-              cobra.MarkFlagRequired(userCredentialsOidcCmd.Flags(), "user_id")
-              
-
-              userCredentialsOidcCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              userCmd.AddCommand(deleteUserCredentialsOidcCmd)
-            
-              deleteUserCredentialsOidcCmd.Flags().Int64("user_id", 0, "id of user")
-              cobra.MarkFlagRequired(deleteUserCredentialsOidcCmd.Flags(), "user_id")
-              
-            
-
-              userCmd.AddCommand(userCredentialsApi3Cmd)
-            
-              userCredentialsApi3Cmd.Flags().Int64("user_id", 0, "Id of user")
-              cobra.MarkFlagRequired(userCredentialsApi3Cmd.Flags(), "user_id")
-              
-
-              userCredentialsApi3Cmd.Flags().Int64("credentials_api3_id", 0, "Id of API 3 Credential")
-              cobra.MarkFlagRequired(userCredentialsApi3Cmd.Flags(), "credentials_api3_id")
-              
-
-              userCredentialsApi3Cmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              userCmd.AddCommand(deleteUserCredentialsApi3Cmd)
-            
-              deleteUserCredentialsApi3Cmd.Flags().Int64("user_id", 0, "id of user")
-              cobra.MarkFlagRequired(deleteUserCredentialsApi3Cmd.Flags(), "user_id")
-              
-
-              deleteUserCredentialsApi3Cmd.Flags().Int64("credentials_api3_id", 0, "id of API 3 Credential")
-              cobra.MarkFlagRequired(deleteUserCredentialsApi3Cmd.Flags(), "credentials_api3_id")
-              
-            
-
-              userCmd.AddCommand(allUserCredentialsApi3sCmd)
-            
-              allUserCredentialsApi3sCmd.Flags().Int64("user_id", 0, "id of user")
-              cobra.MarkFlagRequired(allUserCredentialsApi3sCmd.Flags(), "user_id")
-              
-
-              allUserCredentialsApi3sCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              userCmd.AddCommand(createUserCredentialsApi3Cmd)
-            
-              createUserCredentialsApi3Cmd.Flags().Int64("user_id", 0, "id of user")
-              cobra.MarkFlagRequired(createUserCredentialsApi3Cmd.Flags(), "user_id")
-              
-
-              createUserCredentialsApi3Cmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              userCmd.AddCommand(userCredentialsEmbedCmd)
-            
-              userCredentialsEmbedCmd.Flags().Int64("user_id", 0, "Id of user")
-              cobra.MarkFlagRequired(userCredentialsEmbedCmd.Flags(), "user_id")
-              
-
-              userCredentialsEmbedCmd.Flags().Int64("credentials_embed_id", 0, "Id of Embedding Credential")
-              cobra.MarkFlagRequired(userCredentialsEmbedCmd.Flags(), "credentials_embed_id")
-              
-
-              userCredentialsEmbedCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              userCmd.AddCommand(deleteUserCredentialsEmbedCmd)
-            
-              deleteUserCredentialsEmbedCmd.Flags().Int64("user_id", 0, "id of user")
-              cobra.MarkFlagRequired(deleteUserCredentialsEmbedCmd.Flags(), "user_id")
-              
-
-              deleteUserCredentialsEmbedCmd.Flags().Int64("credentials_embed_id", 0, "id of Embedding Credential")
-              cobra.MarkFlagRequired(deleteUserCredentialsEmbedCmd.Flags(), "credentials_embed_id")
-              
-            
-
-              userCmd.AddCommand(allUserCredentialsEmbedsCmd)
-            
-              allUserCredentialsEmbedsCmd.Flags().Int64("user_id", 0, "id of user")
-              cobra.MarkFlagRequired(allUserCredentialsEmbedsCmd.Flags(), "user_id")
-              
-
-              allUserCredentialsEmbedsCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              userCmd.AddCommand(userCredentialsLookerOpenidCmd)
-            
-              userCredentialsLookerOpenidCmd.Flags().Int64("user_id", 0, "id of user")
-              cobra.MarkFlagRequired(userCredentialsLookerOpenidCmd.Flags(), "user_id")
-              
-
-              userCredentialsLookerOpenidCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              userCmd.AddCommand(deleteUserCredentialsLookerOpenidCmd)
-            
-              deleteUserCredentialsLookerOpenidCmd.Flags().Int64("user_id", 0, "id of user")
-              cobra.MarkFlagRequired(deleteUserCredentialsLookerOpenidCmd.Flags(), "user_id")
-              
-            
-
-              userCmd.AddCommand(userSessionCmd)
-            
-              userSessionCmd.Flags().Int64("user_id", 0, "Id of user")
-              cobra.MarkFlagRequired(userSessionCmd.Flags(), "user_id")
-              
-
-              userSessionCmd.Flags().Int64("session_id", 0, "Id of Web Login Session")
-              cobra.MarkFlagRequired(userSessionCmd.Flags(), "session_id")
-              
-
-              userSessionCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              userCmd.AddCommand(deleteUserSessionCmd)
-            
-              deleteUserSessionCmd.Flags().Int64("user_id", 0, "id of user")
-              cobra.MarkFlagRequired(deleteUserSessionCmd.Flags(), "user_id")
-              
-
-              deleteUserSessionCmd.Flags().Int64("session_id", 0, "id of Web Login Session")
-              cobra.MarkFlagRequired(deleteUserSessionCmd.Flags(), "session_id")
-              
-            
-
-              userCmd.AddCommand(allUserSessionsCmd)
-            
-              allUserSessionsCmd.Flags().Int64("user_id", 0, "id of user")
-              cobra.MarkFlagRequired(allUserSessionsCmd.Flags(), "user_id")
-              
-
-              allUserSessionsCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              userCmd.AddCommand(createUserCredentialsEmailPasswordResetCmd)
-            
-              createUserCredentialsEmailPasswordResetCmd.Flags().Int64("user_id", 0, "Id of user")
-              cobra.MarkFlagRequired(createUserCredentialsEmailPasswordResetCmd.Flags(), "user_id")
-              
-
-              createUserCredentialsEmailPasswordResetCmd.Flags().BoolP("expires", false, "Expiring token.")
-              
-              
-
-              createUserCredentialsEmailPasswordResetCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              userCmd.AddCommand(userRolesCmd)
-            
-              userRolesCmd.Flags().Int64("user_id", 0, "id of user")
-              cobra.MarkFlagRequired(userRolesCmd.Flags(), "user_id")
-              
-
-              userRolesCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-
-              userRolesCmd.Flags().BoolP("direct_association_only", false, "Get only roles associated directly with the user: exclude those only associated through groups.")
-              
-              
-            
-
-              userCmd.AddCommand(setUserRolesCmd)
-            
-              setUserRolesCmd.Flags().Int64("user_id", 0, "id of user")
-              cobra.MarkFlagRequired(setUserRolesCmd.Flags(), "user_id")
-              
-
-              setUserRolesCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(setUserRolesCmd.Flags(), "body")
-              
-
-              setUserRolesCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              userCmd.AddCommand(userAttributeUserValuesCmd)
-            
-              userAttributeUserValuesCmd.Flags().Int64("user_id", 0, "Id of user")
-              cobra.MarkFlagRequired(userAttributeUserValuesCmd.Flags(), "user_id")
-              
-
-              userAttributeUserValuesCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-
-              userAttributeUserValuesCmd.Flags().String("user_attribute_ids", "", "Specific user attributes to request. Omit or leave blank to request all user attributes.")
-              
-              
-
-              userAttributeUserValuesCmd.Flags().BoolP("all_values", false, "If true, returns all values in the search path instead of just the first value found. Useful for debugging group precedence.")
-              
-              
-
-              userAttributeUserValuesCmd.Flags().BoolP("include_unset", false, "If true, returns an empty record for each requested attribute that has no user, group, or default value.")
-              
-              
-            
-
-              userCmd.AddCommand(setUserAttributeUserValueCmd)
-            
-              setUserAttributeUserValueCmd.Flags().Int64("user_id", 0, "Id of user")
-              cobra.MarkFlagRequired(setUserAttributeUserValueCmd.Flags(), "user_id")
-              
-
-              setUserAttributeUserValueCmd.Flags().Int64("user_attribute_id", 0, "Id of user attribute")
-              cobra.MarkFlagRequired(setUserAttributeUserValueCmd.Flags(), "user_attribute_id")
-              
-
-              setUserAttributeUserValueCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(setUserAttributeUserValueCmd.Flags(), "body")
-              
-            
-
-              userCmd.AddCommand(deleteUserAttributeUserValueCmd)
-            
-              deleteUserAttributeUserValueCmd.Flags().Int64("user_id", 0, "Id of user")
-              cobra.MarkFlagRequired(deleteUserAttributeUserValueCmd.Flags(), "user_id")
-              
-
-              deleteUserAttributeUserValueCmd.Flags().Int64("user_attribute_id", 0, "Id of user attribute")
-              cobra.MarkFlagRequired(deleteUserAttributeUserValueCmd.Flags(), "user_attribute_id")
-              
-            
-
-              userCmd.AddCommand(sendUserCredentialsEmailPasswordResetCmd)
-            
-              sendUserCredentialsEmailPasswordResetCmd.Flags().Int64("user_id", 0, "Id of user")
-              cobra.MarkFlagRequired(sendUserCredentialsEmailPasswordResetCmd.Flags(), "user_id")
-              
-
-              sendUserCredentialsEmailPasswordResetCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              userCmd.AddCommand(wipeoutUserEmailsCmd)
-            
-              wipeoutUserEmailsCmd.Flags().Int64("user_id", 0, "Id of user")
-              cobra.MarkFlagRequired(wipeoutUserEmailsCmd.Flags(), "user_id")
-              
-
-              wipeoutUserEmailsCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(wipeoutUserEmailsCmd.Flags(), "body")
-              
-
-              wipeoutUserEmailsCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              userCmd.AddCommand(createEmbedUserCmd)
-            
-              createEmbedUserCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(createEmbedUserCmd.Flags(), "body")
-              
-            
-  rootCmd.AddCommand(userCmd)
-
-              userAttributeCmd.AddCommand(allUserAttributesCmd)
-            
-              allUserAttributesCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-
-              allUserAttributesCmd.Flags().String("sorts", "", "Fields to order the results by. Sortable fields include: name, label")
-              
-              
-            
-
-              userAttributeCmd.AddCommand(createUserAttributeCmd)
-            
-              createUserAttributeCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(createUserAttributeCmd.Flags(), "body")
-              
-
-              createUserAttributeCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              userAttributeCmd.AddCommand(userAttributeCmd6019)
-            
-              userAttributeCmd6019.Flags().Int64("user_attribute_id", 0, "Id of user attribute")
-              cobra.MarkFlagRequired(userAttributeCmd6019.Flags(), "user_attribute_id")
-              
-
-              userAttributeCmd6019.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              userAttributeCmd.AddCommand(updateUserAttributeCmd)
-            
-              updateUserAttributeCmd.Flags().Int64("user_attribute_id", 0, "Id of user attribute")
-              cobra.MarkFlagRequired(updateUserAttributeCmd.Flags(), "user_attribute_id")
-              
-
-              updateUserAttributeCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(updateUserAttributeCmd.Flags(), "body")
-              
-
-              updateUserAttributeCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              userAttributeCmd.AddCommand(deleteUserAttributeCmd)
-            
-              deleteUserAttributeCmd.Flags().Int64("user_attribute_id", 0, "Id of user_attribute")
-              cobra.MarkFlagRequired(deleteUserAttributeCmd.Flags(), "user_attribute_id")
-              
-            
-
-              userAttributeCmd.AddCommand(allUserAttributeGroupValuesCmd)
-            
-              allUserAttributeGroupValuesCmd.Flags().Int64("user_attribute_id", 0, "Id of user attribute")
-              cobra.MarkFlagRequired(allUserAttributeGroupValuesCmd.Flags(), "user_attribute_id")
-              
-
-              allUserAttributeGroupValuesCmd.Flags().String("fields", "", "Requested fields.")
-              
-              
-            
-
-              userAttributeCmd.AddCommand(setUserAttributeGroupValuesCmd)
-            
-              setUserAttributeGroupValuesCmd.Flags().Int64("user_attribute_id", 0, "Id of user attribute")
-              cobra.MarkFlagRequired(setUserAttributeGroupValuesCmd.Flags(), "user_attribute_id")
-              
-
-              setUserAttributeGroupValuesCmd.Flags().String("body", "", "")
-              cobra.MarkFlagRequired(setUserAttributeGroupValuesCmd.Flags(), "body")
-              
-            
-  rootCmd.AddCommand(userAttributeCmd)
-
-              workspaceCmd.AddCommand(allWorkspacesCmd)
-            
-            
-
-              workspaceCmd.AddCommand(workspaceCmd3112)
-            
-              workspaceCmd3112.Flags().String("workspace_id", "", "Id of the workspace ")
-              cobra.MarkFlagRequired(workspaceCmd3112.Flags(), "workspace_id")
-              
-            
-  rootCmd.AddCommand(workspaceCmd)
+  AlertCmd.AddCommand(searchAlertsCmd)
+  searchAlertsCmd.Flags().Int64("limit", 0, "(Optional) Number of results to return (used with `offset`).")
+  searchAlertsCmd.Flags().Int64("offset", 0, "(Optional) Number of results to skip before returning any (used with `limit`).")
+  searchAlertsCmd.Flags().String("group_by", "", "(Optional) Dimension by which to order the results(`dashboard` | `owner`)")
+  searchAlertsCmd.Flags().String("fields", "", "(Optional) Requested fields.")
+  searchAlertsCmd.Flags().Bool("disabled", false, "(Optional) Filter on returning only enabled or disabled alerts.")
+  searchAlertsCmd.Flags().String("frequency", "", "(Optional) Filter on alert frequency, such as: monthly, weekly, daily, hourly, minutes")
+  searchAlertsCmd.Flags().Bool("condition_met", false, "(Optional) Filter on whether the alert has met its condition when it last executed")
+  searchAlertsCmd.Flags().String("last_run_start", "", "(Optional) Filter on the start range of the last time the alerts were run. Example: 2021-01-01T01:01:01-08:00.")
+  searchAlertsCmd.Flags().String("last_run_end", "", "(Optional) Filter on the start range of the last time the alerts were run. Example: 2021-01-01T01:01:01-08:00.")
+  searchAlertsCmd.Flags().Bool("all_owners", false, "(Admin only) (Optional) Filter for all owners.")
+  AlertCmd.AddCommand(getAlertCmd)
+  getAlertCmd.Flags().Int64("alert_id", 0, "ID of an alert")
+  cobra.MarkFlagRequired(getAlertCmd.Flags(), "alert_id")
+  AlertCmd.AddCommand(updateAlertCmd)
+  updateAlertCmd.Flags().Int64("alert_id", 0, "ID of an alert")
+  cobra.MarkFlagRequired(updateAlertCmd.Flags(), "alert_id")
+  updateAlertCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(updateAlertCmd.Flags(), "body")
+  AlertCmd.AddCommand(updateAlertFieldCmd)
+  updateAlertFieldCmd.Flags().Int64("alert_id", 0, "ID of an alert")
+  cobra.MarkFlagRequired(updateAlertFieldCmd.Flags(), "alert_id")
+  updateAlertFieldCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(updateAlertFieldCmd.Flags(), "body")
+  AlertCmd.AddCommand(deleteAlertCmd)
+  deleteAlertCmd.Flags().Int64("alert_id", 0, "ID of an alert")
+  cobra.MarkFlagRequired(deleteAlertCmd.Flags(), "alert_id")
+  AlertCmd.AddCommand(createAlertCmd)
+  createAlertCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(createAlertCmd.Flags(), "body")
+  AlertCmd.AddCommand(enqueueAlertCmd)
+  enqueueAlertCmd.Flags().Int64("alert_id", 0, "ID of an alert")
+  cobra.MarkFlagRequired(enqueueAlertCmd.Flags(), "alert_id")
+  enqueueAlertCmd.Flags().Bool("force", false, "Whether to enqueue an alert again if its already running.")
+  rootCmd.AddCommand(AlertCmd)
+  ApiAuthCmd.AddCommand(loginCmd)
+  loginCmd.Flags().String("client_id", "", "client_id part of API3 Key.")
+  loginCmd.Flags().String("client_secret", "", "client_secret part of API3 Key.")
+  ApiAuthCmd.AddCommand(loginUserCmd)
+  loginUserCmd.Flags().Int64("user_id", 0, "Id of user.")
+  cobra.MarkFlagRequired(loginUserCmd.Flags(), "user_id")
+  loginUserCmd.Flags().Bool("associative", false, "When true (default), API calls using the returned access_token are attributed to the admin user who created the access_token. When false, API activity is attributed to the user the access_token runs as. False requires a looker license.")
+  ApiAuthCmd.AddCommand(logoutCmd)
+  rootCmd.AddCommand(ApiAuthCmd)
+  AuthCmd.AddCommand(createEmbedSecretCmd)
+  createEmbedSecretCmd.Flags().String("body", "", "")
+  AuthCmd.AddCommand(deleteEmbedSecretCmd)
+  deleteEmbedSecretCmd.Flags().Int64("embed_secret_id", 0, "Id of Embed Secret")
+  cobra.MarkFlagRequired(deleteEmbedSecretCmd.Flags(), "embed_secret_id")
+  AuthCmd.AddCommand(createSsoEmbedUrlCmd)
+  createSsoEmbedUrlCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(createSsoEmbedUrlCmd.Flags(), "body")
+  AuthCmd.AddCommand(createEmbedUrlAsMeCmd)
+  createEmbedUrlAsMeCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(createEmbedUrlAsMeCmd.Flags(), "body")
+  AuthCmd.AddCommand(ldapConfigCmd)
+  AuthCmd.AddCommand(updateLdapConfigCmd)
+  updateLdapConfigCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(updateLdapConfigCmd.Flags(), "body")
+  AuthCmd.AddCommand(testLdapConfigConnectionCmd)
+  testLdapConfigConnectionCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(testLdapConfigConnectionCmd.Flags(), "body")
+  AuthCmd.AddCommand(testLdapConfigAuthCmd)
+  testLdapConfigAuthCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(testLdapConfigAuthCmd.Flags(), "body")
+  AuthCmd.AddCommand(testLdapConfigUserInfoCmd)
+  testLdapConfigUserInfoCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(testLdapConfigUserInfoCmd.Flags(), "body")
+  AuthCmd.AddCommand(testLdapConfigUserAuthCmd)
+  testLdapConfigUserAuthCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(testLdapConfigUserAuthCmd.Flags(), "body")
+  AuthCmd.AddCommand(allOauthClientAppsCmd)
+  allOauthClientAppsCmd.Flags().String("fields", "", "Requested fields.")
+  AuthCmd.AddCommand(oauthClientAppCmd)
+  oauthClientAppCmd.Flags().String("client_guid", "", "The unique id of this application")
+  cobra.MarkFlagRequired(oauthClientAppCmd.Flags(), "client_guid")
+  oauthClientAppCmd.Flags().String("fields", "", "Requested fields.")
+  AuthCmd.AddCommand(registerOauthClientAppCmd)
+  registerOauthClientAppCmd.Flags().String("client_guid", "", "The unique id of this application")
+  cobra.MarkFlagRequired(registerOauthClientAppCmd.Flags(), "client_guid")
+  registerOauthClientAppCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(registerOauthClientAppCmd.Flags(), "body")
+  registerOauthClientAppCmd.Flags().String("fields", "", "Requested fields.")
+  AuthCmd.AddCommand(updateOauthClientAppCmd)
+  updateOauthClientAppCmd.Flags().String("client_guid", "", "The unique id of this application")
+  cobra.MarkFlagRequired(updateOauthClientAppCmd.Flags(), "client_guid")
+  updateOauthClientAppCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(updateOauthClientAppCmd.Flags(), "body")
+  updateOauthClientAppCmd.Flags().String("fields", "", "Requested fields.")
+  AuthCmd.AddCommand(deleteOauthClientAppCmd)
+  deleteOauthClientAppCmd.Flags().String("client_guid", "", "The unique id of this application")
+  cobra.MarkFlagRequired(deleteOauthClientAppCmd.Flags(), "client_guid")
+  AuthCmd.AddCommand(invalidateTokensCmd)
+  invalidateTokensCmd.Flags().String("client_guid", "", "The unique id of the application")
+  cobra.MarkFlagRequired(invalidateTokensCmd.Flags(), "client_guid")
+  AuthCmd.AddCommand(activateAppUserCmd)
+  activateAppUserCmd.Flags().String("client_guid", "", "The unique id of this application")
+  cobra.MarkFlagRequired(activateAppUserCmd.Flags(), "client_guid")
+  activateAppUserCmd.Flags().Int64("user_id", 0, "The id of the user to enable use of this app")
+  cobra.MarkFlagRequired(activateAppUserCmd.Flags(), "user_id")
+  activateAppUserCmd.Flags().String("fields", "", "Requested fields.")
+  AuthCmd.AddCommand(deactivateAppUserCmd)
+  deactivateAppUserCmd.Flags().String("client_guid", "", "The unique id of this application")
+  cobra.MarkFlagRequired(deactivateAppUserCmd.Flags(), "client_guid")
+  deactivateAppUserCmd.Flags().Int64("user_id", 0, "The id of the user to enable use of this app")
+  cobra.MarkFlagRequired(deactivateAppUserCmd.Flags(), "user_id")
+  deactivateAppUserCmd.Flags().String("fields", "", "Requested fields.")
+  AuthCmd.AddCommand(oidcConfigCmd)
+  AuthCmd.AddCommand(updateOidcConfigCmd)
+  updateOidcConfigCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(updateOidcConfigCmd.Flags(), "body")
+  AuthCmd.AddCommand(oidcTestConfigCmd)
+  oidcTestConfigCmd.Flags().String("test_slug", "", "Slug of test config")
+  cobra.MarkFlagRequired(oidcTestConfigCmd.Flags(), "test_slug")
+  AuthCmd.AddCommand(deleteOidcTestConfigCmd)
+  deleteOidcTestConfigCmd.Flags().String("test_slug", "", "Slug of test config")
+  cobra.MarkFlagRequired(deleteOidcTestConfigCmd.Flags(), "test_slug")
+  AuthCmd.AddCommand(createOidcTestConfigCmd)
+  createOidcTestConfigCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(createOidcTestConfigCmd.Flags(), "body")
+  AuthCmd.AddCommand(passwordConfigCmd)
+  AuthCmd.AddCommand(updatePasswordConfigCmd)
+  updatePasswordConfigCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(updatePasswordConfigCmd.Flags(), "body")
+  AuthCmd.AddCommand(forcePasswordResetAtNextLoginForAllUsersCmd)
+  AuthCmd.AddCommand(samlConfigCmd)
+  AuthCmd.AddCommand(updateSamlConfigCmd)
+  updateSamlConfigCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(updateSamlConfigCmd.Flags(), "body")
+  AuthCmd.AddCommand(samlTestConfigCmd)
+  samlTestConfigCmd.Flags().String("test_slug", "", "Slug of test config")
+  cobra.MarkFlagRequired(samlTestConfigCmd.Flags(), "test_slug")
+  AuthCmd.AddCommand(deleteSamlTestConfigCmd)
+  deleteSamlTestConfigCmd.Flags().String("test_slug", "", "Slug of test config")
+  cobra.MarkFlagRequired(deleteSamlTestConfigCmd.Flags(), "test_slug")
+  AuthCmd.AddCommand(createSamlTestConfigCmd)
+  createSamlTestConfigCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(createSamlTestConfigCmd.Flags(), "body")
+  AuthCmd.AddCommand(parseSamlIdpMetadataCmd)
+  parseSamlIdpMetadataCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(parseSamlIdpMetadataCmd.Flags(), "body")
+  AuthCmd.AddCommand(fetchAndParseSamlIdpMetadataCmd)
+  fetchAndParseSamlIdpMetadataCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(fetchAndParseSamlIdpMetadataCmd.Flags(), "body")
+  AuthCmd.AddCommand(sessionConfigCmd)
+  AuthCmd.AddCommand(updateSessionConfigCmd)
+  updateSessionConfigCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(updateSessionConfigCmd.Flags(), "body")
+  AuthCmd.AddCommand(allUserLoginLockoutsCmd)
+  allUserLoginLockoutsCmd.Flags().String("fields", "", "Include only these fields in the response")
+  AuthCmd.AddCommand(searchUserLoginLockoutsCmd)
+  searchUserLoginLockoutsCmd.Flags().String("fields", "", "Include only these fields in the response")
+  searchUserLoginLockoutsCmd.Flags().Int64("page", 0, "Return only page N of paginated results")
+  searchUserLoginLockoutsCmd.Flags().Int64("per_page", 0, "Return N rows of data per page")
+  searchUserLoginLockoutsCmd.Flags().String("sorts", "", "Fields to sort by.")
+  searchUserLoginLockoutsCmd.Flags().String("auth_type", "", "Auth type user is locked out for (email, ldap, totp, api)")
+  searchUserLoginLockoutsCmd.Flags().String("full_name", "", "Match name")
+  searchUserLoginLockoutsCmd.Flags().String("email", "", "Match email")
+  searchUserLoginLockoutsCmd.Flags().String("remote_id", "", "Match remote LDAP ID")
+  searchUserLoginLockoutsCmd.Flags().Bool("filter_or", false, "Combine given search criteria in a boolean OR expression")
+  AuthCmd.AddCommand(deleteUserLoginLockoutCmd)
+  deleteUserLoginLockoutCmd.Flags().String("key", "", "The key associated with the locked user")
+  cobra.MarkFlagRequired(deleteUserLoginLockoutCmd.Flags(), "key")
+  rootCmd.AddCommand(AuthCmd)
+  BoardCmd.AddCommand(allBoardsCmd)
+  allBoardsCmd.Flags().String("fields", "", "Requested fields.")
+  BoardCmd.AddCommand(createBoardCmd)
+  createBoardCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(createBoardCmd.Flags(), "body")
+  createBoardCmd.Flags().String("fields", "", "Requested fields.")
+  BoardCmd.AddCommand(searchBoardsCmd)
+  searchBoardsCmd.Flags().String("title", "", "Matches board title.")
+  searchBoardsCmd.Flags().String("created_at", "", "Matches the timestamp for when the board was created.")
+  searchBoardsCmd.Flags().String("first_name", "", "The first name of the user who created this board.")
+  searchBoardsCmd.Flags().String("last_name", "", "The last name of the user who created this board.")
+  searchBoardsCmd.Flags().String("fields", "", "Requested fields.")
+  searchBoardsCmd.Flags().Bool("favorited", false, "Return favorited boards when true.")
+  searchBoardsCmd.Flags().String("creator_id", "", "Filter on boards created by a particular user.")
+  searchBoardsCmd.Flags().String("sorts", "", "The fields to sort the results by")
+  searchBoardsCmd.Flags().Int64("page", 0, "The page to return.")
+  searchBoardsCmd.Flags().Int64("per_page", 0, "The number of items in the returned page.")
+  searchBoardsCmd.Flags().Int64("offset", 0, "The number of items to skip before returning any. (used with limit and takes priority over page and per_page)")
+  searchBoardsCmd.Flags().Int64("limit", 0, "The maximum number of items to return. (used with offset and takes priority over page and per_page)")
+  searchBoardsCmd.Flags().Bool("filter_or", false, "Combine given search criteria in a boolean OR expression")
+  BoardCmd.AddCommand(boardCmd)
+  boardCmd.Flags().Int64("board_id", 0, "Id of board")
+  cobra.MarkFlagRequired(boardCmd.Flags(), "board_id")
+  boardCmd.Flags().String("fields", "", "Requested fields.")
+  BoardCmd.AddCommand(updateBoardCmd)
+  updateBoardCmd.Flags().Int64("board_id", 0, "Id of board")
+  cobra.MarkFlagRequired(updateBoardCmd.Flags(), "board_id")
+  updateBoardCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(updateBoardCmd.Flags(), "body")
+  updateBoardCmd.Flags().String("fields", "", "Requested fields.")
+  BoardCmd.AddCommand(deleteBoardCmd)
+  deleteBoardCmd.Flags().Int64("board_id", 0, "Id of board")
+  cobra.MarkFlagRequired(deleteBoardCmd.Flags(), "board_id")
+  BoardCmd.AddCommand(allBoardItemsCmd)
+  allBoardItemsCmd.Flags().String("fields", "", "Requested fields.")
+  allBoardItemsCmd.Flags().String("sorts", "", "Fields to sort by.")
+  allBoardItemsCmd.Flags().String("board_section_id", "", "Filter to a specific board section")
+  BoardCmd.AddCommand(createBoardItemCmd)
+  createBoardItemCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(createBoardItemCmd.Flags(), "body")
+  createBoardItemCmd.Flags().String("fields", "", "Requested fields.")
+  BoardCmd.AddCommand(boardItemCmd)
+  boardItemCmd.Flags().Int64("board_item_id", 0, "Id of board item")
+  cobra.MarkFlagRequired(boardItemCmd.Flags(), "board_item_id")
+  boardItemCmd.Flags().String("fields", "", "Requested fields.")
+  BoardCmd.AddCommand(updateBoardItemCmd)
+  updateBoardItemCmd.Flags().Int64("board_item_id", 0, "Id of board item")
+  cobra.MarkFlagRequired(updateBoardItemCmd.Flags(), "board_item_id")
+  updateBoardItemCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(updateBoardItemCmd.Flags(), "body")
+  updateBoardItemCmd.Flags().String("fields", "", "Requested fields.")
+  BoardCmd.AddCommand(deleteBoardItemCmd)
+  deleteBoardItemCmd.Flags().Int64("board_item_id", 0, "Id of board_item")
+  cobra.MarkFlagRequired(deleteBoardItemCmd.Flags(), "board_item_id")
+  BoardCmd.AddCommand(allBoardSectionsCmd)
+  allBoardSectionsCmd.Flags().String("fields", "", "Requested fields.")
+  allBoardSectionsCmd.Flags().String("sorts", "", "Fields to sort by.")
+  BoardCmd.AddCommand(createBoardSectionCmd)
+  createBoardSectionCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(createBoardSectionCmd.Flags(), "body")
+  createBoardSectionCmd.Flags().String("fields", "", "Requested fields.")
+  BoardCmd.AddCommand(boardSectionCmd)
+  boardSectionCmd.Flags().Int64("board_section_id", 0, "Id of board section")
+  cobra.MarkFlagRequired(boardSectionCmd.Flags(), "board_section_id")
+  boardSectionCmd.Flags().String("fields", "", "Requested fields.")
+  BoardCmd.AddCommand(updateBoardSectionCmd)
+  updateBoardSectionCmd.Flags().Int64("board_section_id", 0, "Id of board section")
+  cobra.MarkFlagRequired(updateBoardSectionCmd.Flags(), "board_section_id")
+  updateBoardSectionCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(updateBoardSectionCmd.Flags(), "body")
+  updateBoardSectionCmd.Flags().String("fields", "", "Requested fields.")
+  BoardCmd.AddCommand(deleteBoardSectionCmd)
+  deleteBoardSectionCmd.Flags().Int64("board_section_id", 0, "Id of board section")
+  cobra.MarkFlagRequired(deleteBoardSectionCmd.Flags(), "board_section_id")
+  rootCmd.AddCommand(BoardCmd)
+  ColorCollectionCmd.AddCommand(allColorCollectionsCmd)
+  allColorCollectionsCmd.Flags().String("fields", "", "Requested fields.")
+  ColorCollectionCmd.AddCommand(createColorCollectionCmd)
+  createColorCollectionCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(createColorCollectionCmd.Flags(), "body")
+  ColorCollectionCmd.AddCommand(colorCollectionsCustomCmd)
+  colorCollectionsCustomCmd.Flags().String("fields", "", "Requested fields.")
+  ColorCollectionCmd.AddCommand(colorCollectionsStandardCmd)
+  colorCollectionsStandardCmd.Flags().String("fields", "", "Requested fields.")
+  ColorCollectionCmd.AddCommand(defaultColorCollectionCmd)
+  ColorCollectionCmd.AddCommand(setDefaultColorCollectionCmd)
+  setDefaultColorCollectionCmd.Flags().String("collection_id", "", "ID of color collection to set as default")
+  cobra.MarkFlagRequired(setDefaultColorCollectionCmd.Flags(), "collection_id")
+  ColorCollectionCmd.AddCommand(colorCollectionCmd)
+  colorCollectionCmd.Flags().String("collection_id", "", "Id of Color Collection")
+  cobra.MarkFlagRequired(colorCollectionCmd.Flags(), "collection_id")
+  colorCollectionCmd.Flags().String("fields", "", "Requested fields.")
+  ColorCollectionCmd.AddCommand(updateColorCollectionCmd)
+  updateColorCollectionCmd.Flags().String("collection_id", "", "Id of Custom Color Collection")
+  cobra.MarkFlagRequired(updateColorCollectionCmd.Flags(), "collection_id")
+  updateColorCollectionCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(updateColorCollectionCmd.Flags(), "body")
+  ColorCollectionCmd.AddCommand(deleteColorCollectionCmd)
+  deleteColorCollectionCmd.Flags().String("collection_id", "", "Id of Color Collection")
+  cobra.MarkFlagRequired(deleteColorCollectionCmd.Flags(), "collection_id")
+  rootCmd.AddCommand(ColorCollectionCmd)
+  CommandCmd.AddCommand(getAllCommandsCmd)
+  getAllCommandsCmd.Flags().String("content_id", "", "Id of the associated content. This must be accompanied with content_type.")
+  getAllCommandsCmd.Flags().String("content_type", "", "Type of the associated content. This must be accompanied with content_id.")
+  getAllCommandsCmd.Flags().Int64("limit", 0, "Number of results to return.")
+  CommandCmd.AddCommand(createCommandCmd)
+  createCommandCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(createCommandCmd.Flags(), "body")
+  CommandCmd.AddCommand(updateCommandCmd)
+  updateCommandCmd.Flags().Int64("command_id", 0, "ID of a command")
+  cobra.MarkFlagRequired(updateCommandCmd.Flags(), "command_id")
+  updateCommandCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(updateCommandCmd.Flags(), "body")
+  CommandCmd.AddCommand(deleteCommandCmd)
+  deleteCommandCmd.Flags().Int64("command_id", 0, "ID of a command")
+  cobra.MarkFlagRequired(deleteCommandCmd.Flags(), "command_id")
+  rootCmd.AddCommand(CommandCmd)
+  ConfigCmd.AddCommand(cloudStorageConfigurationCmd)
+  ConfigCmd.AddCommand(updateCloudStorageConfigurationCmd)
+  updateCloudStorageConfigurationCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(updateCloudStorageConfigurationCmd.Flags(), "body")
+  ConfigCmd.AddCommand(customWelcomeEmailCmd)
+  ConfigCmd.AddCommand(updateCustomWelcomeEmailCmd)
+  updateCustomWelcomeEmailCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(updateCustomWelcomeEmailCmd.Flags(), "body")
+  updateCustomWelcomeEmailCmd.Flags().Bool("send_test_welcome_email", false, "If true a test email with the content from the request will be sent to the current user after saving")
+  ConfigCmd.AddCommand(updateCustomWelcomeEmailTestCmd)
+  updateCustomWelcomeEmailTestCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(updateCustomWelcomeEmailTestCmd.Flags(), "body")
+  ConfigCmd.AddCommand(digestEmailsEnabledCmd)
+  ConfigCmd.AddCommand(updateDigestEmailsEnabledCmd)
+  updateDigestEmailsEnabledCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(updateDigestEmailsEnabledCmd.Flags(), "body")
+  ConfigCmd.AddCommand(createDigestEmailSendCmd)
+  ConfigCmd.AddCommand(internalHelpResourcesContentCmd)
+  ConfigCmd.AddCommand(updateInternalHelpResourcesContentCmd)
+  updateInternalHelpResourcesContentCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(updateInternalHelpResourcesContentCmd.Flags(), "body")
+  ConfigCmd.AddCommand(internalHelpResourcesCmd)
+  ConfigCmd.AddCommand(updateInternalHelpResourcesCmd)
+  updateInternalHelpResourcesCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(updateInternalHelpResourcesCmd.Flags(), "body")
+  ConfigCmd.AddCommand(allLegacyFeaturesCmd)
+  ConfigCmd.AddCommand(legacyFeatureCmd)
+  legacyFeatureCmd.Flags().String("legacy_feature_id", "", "id of legacy feature")
+  cobra.MarkFlagRequired(legacyFeatureCmd.Flags(), "legacy_feature_id")
+  ConfigCmd.AddCommand(updateLegacyFeatureCmd)
+  updateLegacyFeatureCmd.Flags().String("legacy_feature_id", "", "id of legacy feature")
+  cobra.MarkFlagRequired(updateLegacyFeatureCmd.Flags(), "legacy_feature_id")
+  updateLegacyFeatureCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(updateLegacyFeatureCmd.Flags(), "body")
+  ConfigCmd.AddCommand(allLocalesCmd)
+  ConfigCmd.AddCommand(mobileSettingsCmd)
+  ConfigCmd.AddCommand(getSettingCmd)
+  getSettingCmd.Flags().String("fields", "", "Requested fields")
+  ConfigCmd.AddCommand(setSettingCmd)
+  setSettingCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(setSettingCmd.Flags(), "body")
+  setSettingCmd.Flags().String("fields", "", "Requested fields")
+  ConfigCmd.AddCommand(allTimezonesCmd)
+  ConfigCmd.AddCommand(versionsCmd)
+  versionsCmd.Flags().String("fields", "", "Requested fields.")
+  ConfigCmd.AddCommand(apiSpecCmd)
+  apiSpecCmd.Flags().String("api_version", "", "API version")
+  cobra.MarkFlagRequired(apiSpecCmd.Flags(), "api_version")
+  apiSpecCmd.Flags().String("specification", "", "Specification name. Typically, this is \"swagger.json\"")
+  cobra.MarkFlagRequired(apiSpecCmd.Flags(), "specification")
+  ConfigCmd.AddCommand(whitelabelConfigurationCmd)
+  whitelabelConfigurationCmd.Flags().String("fields", "", "Requested fields.")
+  ConfigCmd.AddCommand(updateWhitelabelConfigurationCmd)
+  updateWhitelabelConfigurationCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(updateWhitelabelConfigurationCmd.Flags(), "body")
+  rootCmd.AddCommand(ConfigCmd)
+  ConnectionCmd.AddCommand(allConnectionsCmd)
+  allConnectionsCmd.Flags().String("fields", "", "Requested fields.")
+  ConnectionCmd.AddCommand(createConnectionCmd)
+  createConnectionCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(createConnectionCmd.Flags(), "body")
+  ConnectionCmd.AddCommand(connectionCmd)
+  connectionCmd.Flags().String("connection_name", "", "Name of connection")
+  cobra.MarkFlagRequired(connectionCmd.Flags(), "connection_name")
+  connectionCmd.Flags().String("fields", "", "Requested fields.")
+  ConnectionCmd.AddCommand(updateConnectionCmd)
+  updateConnectionCmd.Flags().String("connection_name", "", "Name of connection")
+  cobra.MarkFlagRequired(updateConnectionCmd.Flags(), "connection_name")
+  updateConnectionCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(updateConnectionCmd.Flags(), "body")
+  ConnectionCmd.AddCommand(deleteConnectionCmd)
+  deleteConnectionCmd.Flags().String("connection_name", "", "Name of connection")
+  cobra.MarkFlagRequired(deleteConnectionCmd.Flags(), "connection_name")
+  ConnectionCmd.AddCommand(deleteConnectionOverrideCmd)
+  deleteConnectionOverrideCmd.Flags().String("connection_name", "", "Name of connection")
+  cobra.MarkFlagRequired(deleteConnectionOverrideCmd.Flags(), "connection_name")
+  deleteConnectionOverrideCmd.Flags().String("override_context", "", "Context of connection override")
+  cobra.MarkFlagRequired(deleteConnectionOverrideCmd.Flags(), "override_context")
+  ConnectionCmd.AddCommand(testConnectionCmd)
+  testConnectionCmd.Flags().String("connection_name", "", "Name of connection")
+  cobra.MarkFlagRequired(testConnectionCmd.Flags(), "connection_name")
+  testConnectionCmd.Flags().String("tests", "", "Array of names of tests to run")
+  ConnectionCmd.AddCommand(testConnectionConfigCmd)
+  testConnectionConfigCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(testConnectionConfigCmd.Flags(), "body")
+  testConnectionConfigCmd.Flags().String("tests", "", "Array of names of tests to run")
+  ConnectionCmd.AddCommand(allDialectInfosCmd)
+  allDialectInfosCmd.Flags().String("fields", "", "Requested fields.")
+  ConnectionCmd.AddCommand(allExternalOauthApplicationsCmd)
+  allExternalOauthApplicationsCmd.Flags().String("name", "", "Application name")
+  allExternalOauthApplicationsCmd.Flags().String("client_id", "", "Application Client ID")
+  ConnectionCmd.AddCommand(createExternalOauthApplicationCmd)
+  createExternalOauthApplicationCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(createExternalOauthApplicationCmd.Flags(), "body")
+  ConnectionCmd.AddCommand(createOauthApplicationUserStateCmd)
+  createOauthApplicationUserStateCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(createOauthApplicationUserStateCmd.Flags(), "body")
+  ConnectionCmd.AddCommand(allSshServersCmd)
+  allSshServersCmd.Flags().String("fields", "", "Requested fields.")
+  ConnectionCmd.AddCommand(createSshServerCmd)
+  createSshServerCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(createSshServerCmd.Flags(), "body")
+  ConnectionCmd.AddCommand(sshServerCmd)
+  sshServerCmd.Flags().String("ssh_server_id", "", "Id of SSH Server")
+  cobra.MarkFlagRequired(sshServerCmd.Flags(), "ssh_server_id")
+  ConnectionCmd.AddCommand(updateSshServerCmd)
+  updateSshServerCmd.Flags().String("ssh_server_id", "", "Id of SSH Server")
+  cobra.MarkFlagRequired(updateSshServerCmd.Flags(), "ssh_server_id")
+  updateSshServerCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(updateSshServerCmd.Flags(), "body")
+  ConnectionCmd.AddCommand(deleteSshServerCmd)
+  deleteSshServerCmd.Flags().String("ssh_server_id", "", "Id of SSH Server")
+  cobra.MarkFlagRequired(deleteSshServerCmd.Flags(), "ssh_server_id")
+  ConnectionCmd.AddCommand(testSshServerCmd)
+  testSshServerCmd.Flags().String("ssh_server_id", "", "Id of SSH Server")
+  cobra.MarkFlagRequired(testSshServerCmd.Flags(), "ssh_server_id")
+  ConnectionCmd.AddCommand(allSshTunnelsCmd)
+  allSshTunnelsCmd.Flags().String("fields", "", "Requested fields.")
+  ConnectionCmd.AddCommand(createSshTunnelCmd)
+  createSshTunnelCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(createSshTunnelCmd.Flags(), "body")
+  ConnectionCmd.AddCommand(sshTunnelCmd)
+  sshTunnelCmd.Flags().String("ssh_tunnel_id", "", "Id of SSH Tunnel")
+  cobra.MarkFlagRequired(sshTunnelCmd.Flags(), "ssh_tunnel_id")
+  ConnectionCmd.AddCommand(updateSshTunnelCmd)
+  updateSshTunnelCmd.Flags().String("ssh_tunnel_id", "", "Id of SSH Tunnel")
+  cobra.MarkFlagRequired(updateSshTunnelCmd.Flags(), "ssh_tunnel_id")
+  updateSshTunnelCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(updateSshTunnelCmd.Flags(), "body")
+  ConnectionCmd.AddCommand(deleteSshTunnelCmd)
+  deleteSshTunnelCmd.Flags().String("ssh_tunnel_id", "", "Id of SSH Tunnel")
+  cobra.MarkFlagRequired(deleteSshTunnelCmd.Flags(), "ssh_tunnel_id")
+  ConnectionCmd.AddCommand(testSshTunnelCmd)
+  testSshTunnelCmd.Flags().String("ssh_tunnel_id", "", "Id of SSH Tunnel")
+  cobra.MarkFlagRequired(testSshTunnelCmd.Flags(), "ssh_tunnel_id")
+  ConnectionCmd.AddCommand(sshPublicKeyCmd)
+  rootCmd.AddCommand(ConnectionCmd)
+  ContentCmd.AddCommand(searchContentFavoritesCmd)
+  searchContentFavoritesCmd.Flags().Int64("id", 0, "Match content favorite id(s)")
+  searchContentFavoritesCmd.Flags().String("user_id", "", "Match user id(s).To create a list of multiple ids, use commas as separators")
+  searchContentFavoritesCmd.Flags().String("content_metadata_id", "", "Match content metadata id(s).To create a list of multiple ids, use commas as separators")
+  searchContentFavoritesCmd.Flags().String("dashboard_id", "", "Match dashboard id(s).To create a list of multiple ids, use commas as separators")
+  searchContentFavoritesCmd.Flags().String("look_id", "", "Match look id(s).To create a list of multiple ids, use commas as separators")
+  searchContentFavoritesCmd.Flags().String("board_id", "", "Match board id(s).To create a list of multiple ids, use commas as separators")
+  searchContentFavoritesCmd.Flags().Int64("limit", 0, "Number of results to return. (used with offset)")
+  searchContentFavoritesCmd.Flags().Int64("offset", 0, "Number of results to skip before returning any. (used with limit)")
+  searchContentFavoritesCmd.Flags().String("sorts", "", "Fields to sort by.")
+  searchContentFavoritesCmd.Flags().String("fields", "", "Requested fields.")
+  searchContentFavoritesCmd.Flags().Bool("filter_or", false, "Combine given search criteria in a boolean OR expression")
+  ContentCmd.AddCommand(contentFavoriteCmd)
+  contentFavoriteCmd.Flags().Int64("content_favorite_id", 0, "Id of favorite content")
+  cobra.MarkFlagRequired(contentFavoriteCmd.Flags(), "content_favorite_id")
+  contentFavoriteCmd.Flags().String("fields", "", "Requested fields.")
+  ContentCmd.AddCommand(deleteContentFavoriteCmd)
+  deleteContentFavoriteCmd.Flags().Int64("content_favorite_id", 0, "Id of favorite content")
+  cobra.MarkFlagRequired(deleteContentFavoriteCmd.Flags(), "content_favorite_id")
+  ContentCmd.AddCommand(createContentFavoriteCmd)
+  createContentFavoriteCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(createContentFavoriteCmd.Flags(), "body")
+  ContentCmd.AddCommand(allContentMetadatasCmd)
+  allContentMetadatasCmd.Flags().Int64("parent_id", 0, "Parent space of content.")
+  cobra.MarkFlagRequired(allContentMetadatasCmd.Flags(), "parent_id")
+  allContentMetadatasCmd.Flags().String("fields", "", "Requested fields.")
+  ContentCmd.AddCommand(contentMetadataCmd)
+  contentMetadataCmd.Flags().Int64("content_metadata_id", 0, "Id of content metadata")
+  cobra.MarkFlagRequired(contentMetadataCmd.Flags(), "content_metadata_id")
+  contentMetadataCmd.Flags().String("fields", "", "Requested fields.")
+  ContentCmd.AddCommand(updateContentMetadataCmd)
+  updateContentMetadataCmd.Flags().Int64("content_metadata_id", 0, "Id of content metadata")
+  cobra.MarkFlagRequired(updateContentMetadataCmd.Flags(), "content_metadata_id")
+  updateContentMetadataCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(updateContentMetadataCmd.Flags(), "body")
+  ContentCmd.AddCommand(allContentMetadataAccessesCmd)
+  allContentMetadataAccessesCmd.Flags().Int64("content_metadata_id", 0, "Id of content metadata")
+  cobra.MarkFlagRequired(allContentMetadataAccessesCmd.Flags(), "content_metadata_id")
+  allContentMetadataAccessesCmd.Flags().String("fields", "", "Requested fields.")
+  ContentCmd.AddCommand(createContentMetadataAccessCmd)
+  createContentMetadataAccessCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(createContentMetadataAccessCmd.Flags(), "body")
+  createContentMetadataAccessCmd.Flags().Bool("send_boards_notification_email", false, "Optionally sends notification email when granting access to a board.")
+  ContentCmd.AddCommand(updateContentMetadataAccessCmd)
+  updateContentMetadataAccessCmd.Flags().String("content_metadata_access_id", "", "Id of content metadata access")
+  cobra.MarkFlagRequired(updateContentMetadataAccessCmd.Flags(), "content_metadata_access_id")
+  updateContentMetadataAccessCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(updateContentMetadataAccessCmd.Flags(), "body")
+  ContentCmd.AddCommand(deleteContentMetadataAccessCmd)
+  deleteContentMetadataAccessCmd.Flags().Int64("content_metadata_access_id", 0, "Id of content metadata access")
+  cobra.MarkFlagRequired(deleteContentMetadataAccessCmd.Flags(), "content_metadata_access_id")
+  ContentCmd.AddCommand(contentThumbnailCmd)
+  contentThumbnailCmd.Flags().String("type", "", "Either dashboard or look")
+  cobra.MarkFlagRequired(contentThumbnailCmd.Flags(), "type")
+  contentThumbnailCmd.Flags().String("resource_id", "", "ID of the dashboard or look to render")
+  cobra.MarkFlagRequired(contentThumbnailCmd.Flags(), "resource_id")
+  contentThumbnailCmd.Flags().String("reload", "", "Whether or not to refresh the rendered image with the latest content")
+  contentThumbnailCmd.Flags().String("format", "", "A value of png produces a thumbnail in PNG format instead of SVG (default)")
+  contentThumbnailCmd.Flags().Int64("width", 0, "The width of the image if format is supplied")
+  contentThumbnailCmd.Flags().Int64("height", 0, "The height of the image if format is supplied")
+  ContentCmd.AddCommand(contentValidationCmd)
+  contentValidationCmd.Flags().String("fields", "", "Requested fields.")
+  ContentCmd.AddCommand(searchContentViewsCmd)
+  searchContentViewsCmd.Flags().String("view_count", "", "Match view count")
+  searchContentViewsCmd.Flags().String("group_id", "", "Match Group Id")
+  searchContentViewsCmd.Flags().String("look_id", "", "Match look_id")
+  searchContentViewsCmd.Flags().String("dashboard_id", "", "Match dashboard_id")
+  searchContentViewsCmd.Flags().String("content_metadata_id", "", "Match content metadata id")
+  searchContentViewsCmd.Flags().String("start_of_week_date", "", "Match start of week date (format is \"YYYY-MM-DD\")")
+  searchContentViewsCmd.Flags().Bool("all_time", false, "True if only all time view records should be returned")
+  searchContentViewsCmd.Flags().String("user_id", "", "Match user id")
+  searchContentViewsCmd.Flags().String("fields", "", "Requested fields")
+  searchContentViewsCmd.Flags().Int64("limit", 0, "Number of results to return. Use with `offset` to manage pagination of results")
+  searchContentViewsCmd.Flags().Int64("offset", 0, "Number of results to skip before returning data")
+  searchContentViewsCmd.Flags().String("sorts", "", "Fields to sort by")
+  searchContentViewsCmd.Flags().Bool("filter_or", false, "Combine given search criteria in a boolean OR expression")
+  ContentCmd.AddCommand(vectorThumbnailCmd)
+  vectorThumbnailCmd.Flags().String("type", "", "Either dashboard or look")
+  cobra.MarkFlagRequired(vectorThumbnailCmd.Flags(), "type")
+  vectorThumbnailCmd.Flags().String("resource_id", "", "ID of the dashboard or look to render")
+  cobra.MarkFlagRequired(vectorThumbnailCmd.Flags(), "resource_id")
+  vectorThumbnailCmd.Flags().String("reload", "", "Whether or not to refresh the rendered image with the latest content")
+  rootCmd.AddCommand(ContentCmd)
+  DashboardCmd.AddCommand(allDashboardsCmd)
+  allDashboardsCmd.Flags().String("fields", "", "Requested fields.")
+  DashboardCmd.AddCommand(createDashboardCmd)
+  createDashboardCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(createDashboardCmd.Flags(), "body")
+  DashboardCmd.AddCommand(searchDashboardsCmd)
+  searchDashboardsCmd.Flags().String("id", "", "Match dashboard id.")
+  searchDashboardsCmd.Flags().String("slug", "", "Match dashboard slug.")
+  searchDashboardsCmd.Flags().String("title", "", "Match Dashboard title.")
+  searchDashboardsCmd.Flags().String("description", "", "Match Dashboard description.")
+  searchDashboardsCmd.Flags().String("content_favorite_id", "", "Filter on a content favorite id.")
+  searchDashboardsCmd.Flags().String("folder_id", "", "Filter on a particular space.")
+  searchDashboardsCmd.Flags().String("deleted", "", "Filter on dashboards deleted status.")
+  searchDashboardsCmd.Flags().String("user_id", "", "Filter on dashboards created by a particular user.")
+  searchDashboardsCmd.Flags().String("view_count", "", "Filter on a particular value of view_count")
+  searchDashboardsCmd.Flags().String("content_metadata_id", "", "Filter on a content favorite id.")
+  searchDashboardsCmd.Flags().Bool("curate", false, "Exclude items that exist only in personal spaces other than the users")
+  searchDashboardsCmd.Flags().String("last_viewed_at", "", "Select dashboards based on when they were last viewed")
+  searchDashboardsCmd.Flags().String("fields", "", "Requested fields.")
+  searchDashboardsCmd.Flags().Int64("page", 0, "Requested page.")
+  searchDashboardsCmd.Flags().Int64("per_page", 0, "Results per page.")
+  searchDashboardsCmd.Flags().Int64("limit", 0, "Number of results to return. (used with offset and takes priority over page and per_page)")
+  searchDashboardsCmd.Flags().Int64("offset", 0, "Number of results to skip before returning any. (used with limit and takes priority over page and per_page)")
+  searchDashboardsCmd.Flags().String("sorts", "", "One or more fields to sort by. Sortable fields: [:title, :user_id, :id, :created_at, :space_id, :folder_id, :description, :view_count, :favorite_count, :slug, :content_favorite_id, :content_metadata_id, :deleted, :deleted_at, :last_viewed_at, :last_accessed_at]")
+  searchDashboardsCmd.Flags().Bool("filter_or", false, "Combine given search criteria in a boolean OR expression")
+  DashboardCmd.AddCommand(importLookmlDashboardCmd)
+  importLookmlDashboardCmd.Flags().String("lookml_dashboard_id", "", "Id of LookML dashboard")
+  cobra.MarkFlagRequired(importLookmlDashboardCmd.Flags(), "lookml_dashboard_id")
+  importLookmlDashboardCmd.Flags().String("space_id", "", "Id of space to import the dashboard to")
+  cobra.MarkFlagRequired(importLookmlDashboardCmd.Flags(), "space_id")
+  importLookmlDashboardCmd.Flags().String("body", "", "")
+  importLookmlDashboardCmd.Flags().Bool("raw_locale", false, "If true, and this dashboard is localized, export it with the raw keys, not localized.")
+  DashboardCmd.AddCommand(syncLookmlDashboardCmd)
+  syncLookmlDashboardCmd.Flags().String("lookml_dashboard_id", "", "Id of LookML dashboard, in the form 'model::dashboardname'")
+  cobra.MarkFlagRequired(syncLookmlDashboardCmd.Flags(), "lookml_dashboard_id")
+  syncLookmlDashboardCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(syncLookmlDashboardCmd.Flags(), "body")
+  syncLookmlDashboardCmd.Flags().Bool("raw_locale", false, "If true, and this dashboard is localized, export it with the raw keys, not localized.")
+  DashboardCmd.AddCommand(dashboardCmd)
+  dashboardCmd.Flags().String("dashboard_id", "", "Id of dashboard")
+  cobra.MarkFlagRequired(dashboardCmd.Flags(), "dashboard_id")
+  dashboardCmd.Flags().String("fields", "", "Requested fields.")
+  DashboardCmd.AddCommand(updateDashboardCmd)
+  updateDashboardCmd.Flags().String("dashboard_id", "", "Id of dashboard")
+  cobra.MarkFlagRequired(updateDashboardCmd.Flags(), "dashboard_id")
+  updateDashboardCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(updateDashboardCmd.Flags(), "body")
+  DashboardCmd.AddCommand(deleteDashboardCmd)
+  deleteDashboardCmd.Flags().String("dashboard_id", "", "Id of dashboard")
+  cobra.MarkFlagRequired(deleteDashboardCmd.Flags(), "dashboard_id")
+  DashboardCmd.AddCommand(dashboardAggregateTableLookmlCmd)
+  dashboardAggregateTableLookmlCmd.Flags().String("dashboard_id", "", "Id of dashboard")
+  cobra.MarkFlagRequired(dashboardAggregateTableLookmlCmd.Flags(), "dashboard_id")
+  DashboardCmd.AddCommand(dashboardLookmlCmd)
+  dashboardLookmlCmd.Flags().String("dashboard_id", "", "Id of dashboard")
+  cobra.MarkFlagRequired(dashboardLookmlCmd.Flags(), "dashboard_id")
+  DashboardCmd.AddCommand(moveDashboardCmd)
+  moveDashboardCmd.Flags().String("dashboard_id", "", "Dashboard id to move.")
+  cobra.MarkFlagRequired(moveDashboardCmd.Flags(), "dashboard_id")
+  moveDashboardCmd.Flags().String("folder_id", "", "Folder id to move to.")
+  cobra.MarkFlagRequired(moveDashboardCmd.Flags(), "folder_id")
+  DashboardCmd.AddCommand(copyDashboardCmd)
+  copyDashboardCmd.Flags().String("dashboard_id", "", "Dashboard id to copy.")
+  cobra.MarkFlagRequired(copyDashboardCmd.Flags(), "dashboard_id")
+  copyDashboardCmd.Flags().String("folder_id", "", "Folder id to copy to.")
+  DashboardCmd.AddCommand(searchDashboardElementsCmd)
+  searchDashboardElementsCmd.Flags().Int64("dashboard_id", 0, "Select elements that refer to a given dashboard id")
+  searchDashboardElementsCmd.Flags().Int64("look_id", 0, "Select elements that refer to a given look id")
+  searchDashboardElementsCmd.Flags().String("title", "", "Match the title of element")
+  searchDashboardElementsCmd.Flags().Bool("deleted", false, "Select soft-deleted dashboard elements")
+  searchDashboardElementsCmd.Flags().String("fields", "", "Requested fields.")
+  searchDashboardElementsCmd.Flags().Bool("filter_or", false, "Combine given search criteria in a boolean OR expression")
+  searchDashboardElementsCmd.Flags().String("sorts", "", "Fields to sort by. Sortable fields: [:look_id, :dashboard_id, :deleted, :title]")
+  DashboardCmd.AddCommand(dashboardElementCmd)
+  dashboardElementCmd.Flags().String("dashboard_element_id", "", "Id of dashboard element")
+  cobra.MarkFlagRequired(dashboardElementCmd.Flags(), "dashboard_element_id")
+  dashboardElementCmd.Flags().String("fields", "", "Requested fields.")
+  DashboardCmd.AddCommand(updateDashboardElementCmd)
+  updateDashboardElementCmd.Flags().String("dashboard_element_id", "", "Id of dashboard element")
+  cobra.MarkFlagRequired(updateDashboardElementCmd.Flags(), "dashboard_element_id")
+  updateDashboardElementCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(updateDashboardElementCmd.Flags(), "body")
+  updateDashboardElementCmd.Flags().String("fields", "", "Requested fields.")
+  DashboardCmd.AddCommand(deleteDashboardElementCmd)
+  deleteDashboardElementCmd.Flags().String("dashboard_element_id", "", "Id of dashboard element")
+  cobra.MarkFlagRequired(deleteDashboardElementCmd.Flags(), "dashboard_element_id")
+  DashboardCmd.AddCommand(dashboardDashboardElementsCmd)
+  dashboardDashboardElementsCmd.Flags().String("dashboard_id", "", "Id of dashboard")
+  cobra.MarkFlagRequired(dashboardDashboardElementsCmd.Flags(), "dashboard_id")
+  dashboardDashboardElementsCmd.Flags().String("fields", "", "Requested fields.")
+  DashboardCmd.AddCommand(createDashboardElementCmd)
+  createDashboardElementCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(createDashboardElementCmd.Flags(), "body")
+  createDashboardElementCmd.Flags().String("fields", "", "Requested fields.")
+  DashboardCmd.AddCommand(dashboardFilterCmd)
+  dashboardFilterCmd.Flags().String("dashboard_filter_id", "", "Id of dashboard filters")
+  cobra.MarkFlagRequired(dashboardFilterCmd.Flags(), "dashboard_filter_id")
+  dashboardFilterCmd.Flags().String("fields", "", "Requested fields.")
+  DashboardCmd.AddCommand(updateDashboardFilterCmd)
+  updateDashboardFilterCmd.Flags().String("dashboard_filter_id", "", "Id of dashboard filter")
+  cobra.MarkFlagRequired(updateDashboardFilterCmd.Flags(), "dashboard_filter_id")
+  updateDashboardFilterCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(updateDashboardFilterCmd.Flags(), "body")
+  updateDashboardFilterCmd.Flags().String("fields", "", "Requested fields.")
+  DashboardCmd.AddCommand(deleteDashboardFilterCmd)
+  deleteDashboardFilterCmd.Flags().String("dashboard_filter_id", "", "Id of dashboard filter")
+  cobra.MarkFlagRequired(deleteDashboardFilterCmd.Flags(), "dashboard_filter_id")
+  DashboardCmd.AddCommand(dashboardDashboardFiltersCmd)
+  dashboardDashboardFiltersCmd.Flags().String("dashboard_id", "", "Id of dashboard")
+  cobra.MarkFlagRequired(dashboardDashboardFiltersCmd.Flags(), "dashboard_id")
+  dashboardDashboardFiltersCmd.Flags().String("fields", "", "Requested fields.")
+  DashboardCmd.AddCommand(createDashboardFilterCmd)
+  createDashboardFilterCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(createDashboardFilterCmd.Flags(), "body")
+  createDashboardFilterCmd.Flags().String("fields", "", "Requested fields")
+  DashboardCmd.AddCommand(dashboardLayoutComponentCmd)
+  dashboardLayoutComponentCmd.Flags().String("dashboard_layout_component_id", "", "Id of dashboard layout component")
+  cobra.MarkFlagRequired(dashboardLayoutComponentCmd.Flags(), "dashboard_layout_component_id")
+  dashboardLayoutComponentCmd.Flags().String("fields", "", "Requested fields.")
+  DashboardCmd.AddCommand(updateDashboardLayoutComponentCmd)
+  updateDashboardLayoutComponentCmd.Flags().String("dashboard_layout_component_id", "", "Id of dashboard layout component")
+  cobra.MarkFlagRequired(updateDashboardLayoutComponentCmd.Flags(), "dashboard_layout_component_id")
+  updateDashboardLayoutComponentCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(updateDashboardLayoutComponentCmd.Flags(), "body")
+  updateDashboardLayoutComponentCmd.Flags().String("fields", "", "Requested fields.")
+  DashboardCmd.AddCommand(dashboardLayoutDashboardLayoutComponentsCmd)
+  dashboardLayoutDashboardLayoutComponentsCmd.Flags().String("dashboard_layout_id", "", "Id of dashboard layout component")
+  cobra.MarkFlagRequired(dashboardLayoutDashboardLayoutComponentsCmd.Flags(), "dashboard_layout_id")
+  dashboardLayoutDashboardLayoutComponentsCmd.Flags().String("fields", "", "Requested fields.")
+  DashboardCmd.AddCommand(dashboardLayoutCmd)
+  dashboardLayoutCmd.Flags().String("dashboard_layout_id", "", "Id of dashboard layouts")
+  cobra.MarkFlagRequired(dashboardLayoutCmd.Flags(), "dashboard_layout_id")
+  dashboardLayoutCmd.Flags().String("fields", "", "Requested fields.")
+  DashboardCmd.AddCommand(updateDashboardLayoutCmd)
+  updateDashboardLayoutCmd.Flags().String("dashboard_layout_id", "", "Id of dashboard layout")
+  cobra.MarkFlagRequired(updateDashboardLayoutCmd.Flags(), "dashboard_layout_id")
+  updateDashboardLayoutCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(updateDashboardLayoutCmd.Flags(), "body")
+  updateDashboardLayoutCmd.Flags().String("fields", "", "Requested fields.")
+  DashboardCmd.AddCommand(deleteDashboardLayoutCmd)
+  deleteDashboardLayoutCmd.Flags().String("dashboard_layout_id", "", "Id of dashboard layout")
+  cobra.MarkFlagRequired(deleteDashboardLayoutCmd.Flags(), "dashboard_layout_id")
+  DashboardCmd.AddCommand(dashboardDashboardLayoutsCmd)
+  dashboardDashboardLayoutsCmd.Flags().String("dashboard_id", "", "Id of dashboard")
+  cobra.MarkFlagRequired(dashboardDashboardLayoutsCmd.Flags(), "dashboard_id")
+  dashboardDashboardLayoutsCmd.Flags().String("fields", "", "Requested fields.")
+  DashboardCmd.AddCommand(createDashboardLayoutCmd)
+  createDashboardLayoutCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(createDashboardLayoutCmd.Flags(), "body")
+  createDashboardLayoutCmd.Flags().String("fields", "", "Requested fields.")
+  rootCmd.AddCommand(DashboardCmd)
+  DataActionCmd.AddCommand(performDataActionCmd)
+  performDataActionCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(performDataActionCmd.Flags(), "body")
+  DataActionCmd.AddCommand(fetchRemoteDataActionFormCmd)
+  fetchRemoteDataActionFormCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(fetchRemoteDataActionFormCmd.Flags(), "body")
+  rootCmd.AddCommand(DataActionCmd)
+  DatagroupCmd.AddCommand(allDatagroupsCmd)
+  DatagroupCmd.AddCommand(datagroupCmd)
+  datagroupCmd.Flags().Int64("datagroup_id", 0, "ID of datagroup.")
+  cobra.MarkFlagRequired(datagroupCmd.Flags(), "datagroup_id")
+  DatagroupCmd.AddCommand(updateDatagroupCmd)
+  updateDatagroupCmd.Flags().Int64("datagroup_id", 0, "ID of datagroup.")
+  cobra.MarkFlagRequired(updateDatagroupCmd.Flags(), "datagroup_id")
+  updateDatagroupCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(updateDatagroupCmd.Flags(), "body")
+  rootCmd.AddCommand(DatagroupCmd)
+  DerivedTableCmd.AddCommand(graphDerivedTablesForModelCmd)
+  graphDerivedTablesForModelCmd.Flags().String("model", "", "The name of the Lookml model.")
+  cobra.MarkFlagRequired(graphDerivedTablesForModelCmd.Flags(), "model")
+  graphDerivedTablesForModelCmd.Flags().String("format", "", "The format of the graph. Valid values are [dot]. Default is `dot`")
+  graphDerivedTablesForModelCmd.Flags().String("color", "", "Color denoting the build status of the graph. Grey = not built, green = built, yellow = building, red = error.")
+  DerivedTableCmd.AddCommand(graphDerivedTablesForViewCmd)
+  graphDerivedTablesForViewCmd.Flags().String("view", "", "The derived table's view name.")
+  cobra.MarkFlagRequired(graphDerivedTablesForViewCmd.Flags(), "view")
+  graphDerivedTablesForViewCmd.Flags().String("models", "", "The models where this derived table is defined.")
+  graphDerivedTablesForViewCmd.Flags().String("workspace", "", "The model directory to look in, either `dev` or `production`.")
+  rootCmd.AddCommand(DerivedTableCmd)
+  FolderCmd.AddCommand(searchFoldersCmd)
+  searchFoldersCmd.Flags().String("fields", "", "Requested fields.")
+  searchFoldersCmd.Flags().Int64("page", 0, "Requested page.")
+  searchFoldersCmd.Flags().Int64("per_page", 0, "Results per page.")
+  searchFoldersCmd.Flags().Int64("limit", 0, "Number of results to return. (used with offset and takes priority over page and per_page)")
+  searchFoldersCmd.Flags().Int64("offset", 0, "Number of results to skip before returning any. (used with limit and takes priority over page and per_page)")
+  searchFoldersCmd.Flags().String("sorts", "", "Fields to sort by.")
+  searchFoldersCmd.Flags().String("name", "", "Match Space title.")
+  searchFoldersCmd.Flags().Int64("id", 0, "Match Space id")
+  searchFoldersCmd.Flags().String("parent_id", "", "Filter on a children of a particular folder.")
+  searchFoldersCmd.Flags().String("creator_id", "", "Filter on folder created by a particular user.")
+  searchFoldersCmd.Flags().Bool("filter_or", false, "Combine given search criteria in a boolean OR expression")
+  searchFoldersCmd.Flags().Bool("is_shared_root", false, "Match is shared root")
+  FolderCmd.AddCommand(folderCmd)
+  folderCmd.Flags().String("folder_id", "", "Id of folder")
+  cobra.MarkFlagRequired(folderCmd.Flags(), "folder_id")
+  folderCmd.Flags().String("fields", "", "Requested fields.")
+  FolderCmd.AddCommand(updateFolderCmd)
+  updateFolderCmd.Flags().String("folder_id", "", "Id of folder")
+  cobra.MarkFlagRequired(updateFolderCmd.Flags(), "folder_id")
+  updateFolderCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(updateFolderCmd.Flags(), "body")
+  FolderCmd.AddCommand(deleteFolderCmd)
+  deleteFolderCmd.Flags().String("folder_id", "", "Id of folder")
+  cobra.MarkFlagRequired(deleteFolderCmd.Flags(), "folder_id")
+  FolderCmd.AddCommand(allFoldersCmd)
+  allFoldersCmd.Flags().String("fields", "", "Requested fields.")
+  FolderCmd.AddCommand(createFolderCmd)
+  createFolderCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(createFolderCmd.Flags(), "body")
+  FolderCmd.AddCommand(folderChildrenCmd)
+  folderChildrenCmd.Flags().String("folder_id", "", "Id of folder")
+  cobra.MarkFlagRequired(folderChildrenCmd.Flags(), "folder_id")
+  folderChildrenCmd.Flags().String("fields", "", "Requested fields.")
+  folderChildrenCmd.Flags().Int64("page", 0, "Requested page.")
+  folderChildrenCmd.Flags().Int64("per_page", 0, "Results per page.")
+  folderChildrenCmd.Flags().String("sorts", "", "Fields to sort by.")
+  FolderCmd.AddCommand(folderChildrenSearchCmd)
+  folderChildrenSearchCmd.Flags().String("folder_id", "", "Id of folder")
+  cobra.MarkFlagRequired(folderChildrenSearchCmd.Flags(), "folder_id")
+  folderChildrenSearchCmd.Flags().String("fields", "", "Requested fields.")
+  folderChildrenSearchCmd.Flags().String("sorts", "", "Fields to sort by.")
+  folderChildrenSearchCmd.Flags().String("name", "", "Match folder name.")
+  FolderCmd.AddCommand(folderParentCmd)
+  folderParentCmd.Flags().String("folder_id", "", "Id of folder")
+  cobra.MarkFlagRequired(folderParentCmd.Flags(), "folder_id")
+  folderParentCmd.Flags().String("fields", "", "Requested fields.")
+  FolderCmd.AddCommand(folderAncestorsCmd)
+  folderAncestorsCmd.Flags().String("folder_id", "", "Id of folder")
+  cobra.MarkFlagRequired(folderAncestorsCmd.Flags(), "folder_id")
+  folderAncestorsCmd.Flags().String("fields", "", "Requested fields.")
+  FolderCmd.AddCommand(folderLooksCmd)
+  folderLooksCmd.Flags().String("folder_id", "", "Id of folder")
+  cobra.MarkFlagRequired(folderLooksCmd.Flags(), "folder_id")
+  folderLooksCmd.Flags().String("fields", "", "Requested fields.")
+  FolderCmd.AddCommand(folderDashboardsCmd)
+  folderDashboardsCmd.Flags().String("folder_id", "", "Id of folder")
+  cobra.MarkFlagRequired(folderDashboardsCmd.Flags(), "folder_id")
+  folderDashboardsCmd.Flags().String("fields", "", "Requested fields.")
+  rootCmd.AddCommand(FolderCmd)
+  GroupCmd.AddCommand(allGroupsCmd)
+  allGroupsCmd.Flags().String("fields", "", "Requested fields.")
+  allGroupsCmd.Flags().Int64("page", 0, "Requested page.")
+  allGroupsCmd.Flags().Int64("per_page", 0, "Results per page.")
+  allGroupsCmd.Flags().String("sorts", "", "Fields to sort by.")
+  allGroupsCmd.Flags().String("ids", "", "Optional of ids to get specific groups.")
+  allGroupsCmd.Flags().Int64("content_metadata_id", 0, "Id of content metadata to which groups must have access.")
+  allGroupsCmd.Flags().Bool("can_add_to_content_metadata", false, "Select only groups that either can/cannot be given access to content.")
+  GroupCmd.AddCommand(createGroupCmd)
+  createGroupCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(createGroupCmd.Flags(), "body")
+  createGroupCmd.Flags().String("fields", "", "Requested fields.")
+  GroupCmd.AddCommand(searchGroupsCmd)
+  searchGroupsCmd.Flags().String("fields", "", "Requested fields.")
+  searchGroupsCmd.Flags().Int64("limit", 0, "Number of results to return (used with `offset`).")
+  searchGroupsCmd.Flags().Int64("offset", 0, "Number of results to skip before returning any (used with `limit`).")
+  searchGroupsCmd.Flags().String("sorts", "", "Fields to sort by.")
+  searchGroupsCmd.Flags().Bool("filter_or", false, "Combine given search criteria in a boolean OR expression")
+  searchGroupsCmd.Flags().Int64("id", 0, "Match group id.")
+  searchGroupsCmd.Flags().String("name", "", "Match group name.")
+  searchGroupsCmd.Flags().String("external_group_id", "", "Match group external_group_id.")
+  searchGroupsCmd.Flags().Bool("externally_managed", false, "Match group externally_managed.")
+  searchGroupsCmd.Flags().Bool("externally_orphaned", false, "Match group externally_orphaned.")
+  GroupCmd.AddCommand(searchGroupsWithRolesCmd)
+  searchGroupsWithRolesCmd.Flags().String("fields", "", "Requested fields.")
+  searchGroupsWithRolesCmd.Flags().Int64("limit", 0, "Number of results to return (used with `offset`).")
+  searchGroupsWithRolesCmd.Flags().Int64("offset", 0, "Number of results to skip before returning any (used with `limit`).")
+  searchGroupsWithRolesCmd.Flags().String("sorts", "", "Fields to sort by.")
+  searchGroupsWithRolesCmd.Flags().Bool("filter_or", false, "Combine given search criteria in a boolean OR expression")
+  searchGroupsWithRolesCmd.Flags().Int64("id", 0, "Match group id.")
+  searchGroupsWithRolesCmd.Flags().String("name", "", "Match group name.")
+  searchGroupsWithRolesCmd.Flags().String("external_group_id", "", "Match group external_group_id.")
+  searchGroupsWithRolesCmd.Flags().Bool("externally_managed", false, "Match group externally_managed.")
+  searchGroupsWithRolesCmd.Flags().Bool("externally_orphaned", false, "Match group externally_orphaned.")
+  GroupCmd.AddCommand(searchGroupsWithHierarchyCmd)
+  searchGroupsWithHierarchyCmd.Flags().String("fields", "", "Requested fields.")
+  searchGroupsWithHierarchyCmd.Flags().Int64("limit", 0, "Number of results to return (used with `offset`).")
+  searchGroupsWithHierarchyCmd.Flags().Int64("offset", 0, "Number of results to skip before returning any (used with `limit`).")
+  searchGroupsWithHierarchyCmd.Flags().String("sorts", "", "Fields to sort by.")
+  searchGroupsWithHierarchyCmd.Flags().Bool("filter_or", false, "Combine given search criteria in a boolean OR expression")
+  searchGroupsWithHierarchyCmd.Flags().Int64("id", 0, "Match group id.")
+  searchGroupsWithHierarchyCmd.Flags().String("name", "", "Match group name.")
+  searchGroupsWithHierarchyCmd.Flags().String("external_group_id", "", "Match group external_group_id.")
+  searchGroupsWithHierarchyCmd.Flags().Bool("externally_managed", false, "Match group externally_managed.")
+  searchGroupsWithHierarchyCmd.Flags().Bool("externally_orphaned", false, "Match group externally_orphaned.")
+  GroupCmd.AddCommand(groupCmd)
+  groupCmd.Flags().Int64("group_id", 0, "Id of group")
+  cobra.MarkFlagRequired(groupCmd.Flags(), "group_id")
+  groupCmd.Flags().String("fields", "", "Requested fields.")
+  GroupCmd.AddCommand(updateGroupCmd)
+  updateGroupCmd.Flags().Int64("group_id", 0, "Id of group")
+  cobra.MarkFlagRequired(updateGroupCmd.Flags(), "group_id")
+  updateGroupCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(updateGroupCmd.Flags(), "body")
+  updateGroupCmd.Flags().String("fields", "", "Requested fields.")
+  GroupCmd.AddCommand(deleteGroupCmd)
+  deleteGroupCmd.Flags().Int64("group_id", 0, "Id of group")
+  cobra.MarkFlagRequired(deleteGroupCmd.Flags(), "group_id")
+  GroupCmd.AddCommand(allGroupGroupsCmd)
+  allGroupGroupsCmd.Flags().Int64("group_id", 0, "Id of group")
+  cobra.MarkFlagRequired(allGroupGroupsCmd.Flags(), "group_id")
+  allGroupGroupsCmd.Flags().String("fields", "", "Requested fields.")
+  GroupCmd.AddCommand(addGroupGroupCmd)
+  addGroupGroupCmd.Flags().Int64("group_id", 0, "Id of group")
+  cobra.MarkFlagRequired(addGroupGroupCmd.Flags(), "group_id")
+  addGroupGroupCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(addGroupGroupCmd.Flags(), "body")
+  GroupCmd.AddCommand(allGroupUsersCmd)
+  allGroupUsersCmd.Flags().Int64("group_id", 0, "Id of group")
+  cobra.MarkFlagRequired(allGroupUsersCmd.Flags(), "group_id")
+  allGroupUsersCmd.Flags().String("fields", "", "Requested fields.")
+  allGroupUsersCmd.Flags().Int64("page", 0, "Requested page.")
+  allGroupUsersCmd.Flags().Int64("per_page", 0, "Results per page.")
+  allGroupUsersCmd.Flags().String("sorts", "", "Fields to sort by.")
+  GroupCmd.AddCommand(addGroupUserCmd)
+  addGroupUserCmd.Flags().Int64("group_id", 0, "Id of group")
+  cobra.MarkFlagRequired(addGroupUserCmd.Flags(), "group_id")
+  addGroupUserCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(addGroupUserCmd.Flags(), "body")
+  GroupCmd.AddCommand(deleteGroupUserCmd)
+  deleteGroupUserCmd.Flags().Int64("group_id", 0, "Id of group")
+  cobra.MarkFlagRequired(deleteGroupUserCmd.Flags(), "group_id")
+  deleteGroupUserCmd.Flags().Int64("user_id", 0, "Id of user to remove from group")
+  cobra.MarkFlagRequired(deleteGroupUserCmd.Flags(), "user_id")
+  GroupCmd.AddCommand(deleteGroupFromGroupCmd)
+  deleteGroupFromGroupCmd.Flags().Int64("group_id", 0, "Id of group")
+  cobra.MarkFlagRequired(deleteGroupFromGroupCmd.Flags(), "group_id")
+  deleteGroupFromGroupCmd.Flags().Int64("deleting_group_id", 0, "Id of group to delete")
+  cobra.MarkFlagRequired(deleteGroupFromGroupCmd.Flags(), "deleting_group_id")
+  GroupCmd.AddCommand(updateUserAttributeGroupValueCmd)
+  updateUserAttributeGroupValueCmd.Flags().Int64("group_id", 0, "Id of group")
+  cobra.MarkFlagRequired(updateUserAttributeGroupValueCmd.Flags(), "group_id")
+  updateUserAttributeGroupValueCmd.Flags().Int64("user_attribute_id", 0, "Id of user attribute")
+  cobra.MarkFlagRequired(updateUserAttributeGroupValueCmd.Flags(), "user_attribute_id")
+  updateUserAttributeGroupValueCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(updateUserAttributeGroupValueCmd.Flags(), "body")
+  GroupCmd.AddCommand(deleteUserAttributeGroupValueCmd)
+  deleteUserAttributeGroupValueCmd.Flags().Int64("group_id", 0, "Id of group")
+  cobra.MarkFlagRequired(deleteUserAttributeGroupValueCmd.Flags(), "group_id")
+  deleteUserAttributeGroupValueCmd.Flags().Int64("user_attribute_id", 0, "Id of user attribute")
+  cobra.MarkFlagRequired(deleteUserAttributeGroupValueCmd.Flags(), "user_attribute_id")
+  rootCmd.AddCommand(GroupCmd)
+  HomepageCmd.AddCommand(allPrimaryHomepageSectionsCmd)
+  allPrimaryHomepageSectionsCmd.Flags().String("fields", "", "Requested fields.")
+  rootCmd.AddCommand(HomepageCmd)
+  IntegrationCmd.AddCommand(allIntegrationHubsCmd)
+  allIntegrationHubsCmd.Flags().String("fields", "", "Requested fields.")
+  IntegrationCmd.AddCommand(createIntegrationHubCmd)
+  createIntegrationHubCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(createIntegrationHubCmd.Flags(), "body")
+  createIntegrationHubCmd.Flags().String("fields", "", "Requested fields.")
+  IntegrationCmd.AddCommand(integrationHubCmd)
+  integrationHubCmd.Flags().Int64("integration_hub_id", 0, "Id of Integration Hub")
+  cobra.MarkFlagRequired(integrationHubCmd.Flags(), "integration_hub_id")
+  integrationHubCmd.Flags().String("fields", "", "Requested fields.")
+  IntegrationCmd.AddCommand(updateIntegrationHubCmd)
+  updateIntegrationHubCmd.Flags().Int64("integration_hub_id", 0, "Id of Integration Hub")
+  cobra.MarkFlagRequired(updateIntegrationHubCmd.Flags(), "integration_hub_id")
+  updateIntegrationHubCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(updateIntegrationHubCmd.Flags(), "body")
+  updateIntegrationHubCmd.Flags().String("fields", "", "Requested fields.")
+  IntegrationCmd.AddCommand(deleteIntegrationHubCmd)
+  deleteIntegrationHubCmd.Flags().Int64("integration_hub_id", 0, "Id of integration_hub")
+  cobra.MarkFlagRequired(deleteIntegrationHubCmd.Flags(), "integration_hub_id")
+  IntegrationCmd.AddCommand(acceptIntegrationHubLegalAgreementCmd)
+  acceptIntegrationHubLegalAgreementCmd.Flags().Int64("integration_hub_id", 0, "Id of integration_hub")
+  cobra.MarkFlagRequired(acceptIntegrationHubLegalAgreementCmd.Flags(), "integration_hub_id")
+  IntegrationCmd.AddCommand(allIntegrationsCmd)
+  allIntegrationsCmd.Flags().String("fields", "", "Requested fields.")
+  allIntegrationsCmd.Flags().String("integration_hub_id", "", "Filter to a specific provider")
+  IntegrationCmd.AddCommand(integrationCmd)
+  integrationCmd.Flags().String("integration_id", "", "Id of integration")
+  cobra.MarkFlagRequired(integrationCmd.Flags(), "integration_id")
+  integrationCmd.Flags().String("fields", "", "Requested fields.")
+  IntegrationCmd.AddCommand(updateIntegrationCmd)
+  updateIntegrationCmd.Flags().String("integration_id", "", "Id of integration")
+  cobra.MarkFlagRequired(updateIntegrationCmd.Flags(), "integration_id")
+  updateIntegrationCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(updateIntegrationCmd.Flags(), "body")
+  updateIntegrationCmd.Flags().String("fields", "", "Requested fields.")
+  IntegrationCmd.AddCommand(fetchIntegrationFormCmd)
+  fetchIntegrationFormCmd.Flags().String("integration_id", "", "Id of integration")
+  cobra.MarkFlagRequired(fetchIntegrationFormCmd.Flags(), "integration_id")
+  fetchIntegrationFormCmd.Flags().String("body", "", "")
+  IntegrationCmd.AddCommand(testIntegrationCmd)
+  testIntegrationCmd.Flags().String("integration_id", "", "Id of integration")
+  cobra.MarkFlagRequired(testIntegrationCmd.Flags(), "integration_id")
+  rootCmd.AddCommand(IntegrationCmd)
+  LookCmd.AddCommand(allLooksCmd)
+  allLooksCmd.Flags().String("fields", "", "Requested fields.")
+  LookCmd.AddCommand(createLookCmd)
+  createLookCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(createLookCmd.Flags(), "body")
+  createLookCmd.Flags().String("fields", "", "Requested fields.")
+  LookCmd.AddCommand(searchLooksCmd)
+  searchLooksCmd.Flags().String("id", "", "Match look id.")
+  searchLooksCmd.Flags().String("title", "", "Match Look title.")
+  searchLooksCmd.Flags().String("description", "", "Match Look description.")
+  searchLooksCmd.Flags().String("content_favorite_id", "", "Select looks with a particular content favorite id")
+  searchLooksCmd.Flags().String("folder_id", "", "Select looks in a particular folder.")
+  searchLooksCmd.Flags().String("user_id", "", "Select looks created by a particular user.")
+  searchLooksCmd.Flags().String("view_count", "", "Select looks with particular view_count value")
+  searchLooksCmd.Flags().Bool("deleted", false, "Select soft-deleted looks")
+  searchLooksCmd.Flags().Int64("query_id", 0, "Select looks that reference a particular query by query_id")
+  searchLooksCmd.Flags().Bool("curate", false, "Exclude items that exist only in personal spaces other than the users")
+  searchLooksCmd.Flags().String("last_viewed_at", "", "Select looks based on when they were last viewed")
+  searchLooksCmd.Flags().String("fields", "", "Requested fields.")
+  searchLooksCmd.Flags().Int64("page", 0, "Requested page.")
+  searchLooksCmd.Flags().Int64("per_page", 0, "Results per page.")
+  searchLooksCmd.Flags().Int64("limit", 0, "Number of results to return. (used with offset and takes priority over page and per_page)")
+  searchLooksCmd.Flags().Int64("offset", 0, "Number of results to skip before returning any. (used with limit and takes priority over page and per_page)")
+  searchLooksCmd.Flags().String("sorts", "", "One or more fields to sort results by. Sortable fields: [:title, :user_id, :id, :created_at, :space_id, :folder_id, :description, :updated_at, :last_updater_id, :view_count, :favorite_count, :content_favorite_id, :deleted, :deleted_at, :last_viewed_at, :last_accessed_at, :query_id]")
+  searchLooksCmd.Flags().Bool("filter_or", false, "Combine given search criteria in a boolean OR expression")
+  LookCmd.AddCommand(lookCmd)
+  lookCmd.Flags().String("look_id", "", "Id of look")
+  cobra.MarkFlagRequired(lookCmd.Flags(), "look_id")
+  lookCmd.Flags().String("fields", "", "Requested fields.")
+  LookCmd.AddCommand(updateLookCmd)
+  updateLookCmd.Flags().String("look_id", "", "Id of look")
+  cobra.MarkFlagRequired(updateLookCmd.Flags(), "look_id")
+  updateLookCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(updateLookCmd.Flags(), "body")
+  updateLookCmd.Flags().String("fields", "", "Requested fields.")
+  LookCmd.AddCommand(deleteLookCmd)
+  deleteLookCmd.Flags().String("look_id", "", "Id of look")
+  cobra.MarkFlagRequired(deleteLookCmd.Flags(), "look_id")
+  LookCmd.AddCommand(runLookCmd)
+  runLookCmd.Flags().String("look_id", "", "Id of look")
+  cobra.MarkFlagRequired(runLookCmd.Flags(), "look_id")
+  runLookCmd.Flags().String("result_format", "", "Format of result")
+  cobra.MarkFlagRequired(runLookCmd.Flags(), "result_format")
+  runLookCmd.Flags().Int64("limit", 0, "Row limit (may override the limit in the saved query).")
+  runLookCmd.Flags().Bool("apply_formatting", false, "Apply model-specified formatting to each result.")
+  runLookCmd.Flags().Bool("apply_vis", false, "Apply visualization options to results.")
+  runLookCmd.Flags().Bool("cache", false, "Get results from cache if available.")
+  runLookCmd.Flags().Int64("image_width", 0, "Render width for image formats.")
+  runLookCmd.Flags().Int64("image_height", 0, "Render height for image formats.")
+  runLookCmd.Flags().Bool("generate_drill_links", false, "Generate drill links (only applicable to 'json_detail' format.")
+  runLookCmd.Flags().Bool("force_production", false, "Force use of production models even if the user is in development mode.")
+  runLookCmd.Flags().Bool("cache_only", false, "Retrieve any results from cache even if the results have expired.")
+  runLookCmd.Flags().String("path_prefix", "", "Prefix to use for drill links (url encoded).")
+  runLookCmd.Flags().Bool("rebuild_pdts", false, "Rebuild PDTS used in query.")
+  runLookCmd.Flags().Bool("server_table_calcs", false, "Perform table calculations on query results")
+  LookCmd.AddCommand(copyLookCmd)
+  copyLookCmd.Flags().String("look_id", "", "Look id to copy.")
+  cobra.MarkFlagRequired(copyLookCmd.Flags(), "look_id")
+  copyLookCmd.Flags().String("folder_id", "", "Folder id to copy to.")
+  LookCmd.AddCommand(moveLookCmd)
+  moveLookCmd.Flags().String("look_id", "", "Look id to move.")
+  cobra.MarkFlagRequired(moveLookCmd.Flags(), "look_id")
+  moveLookCmd.Flags().String("folder_id", "", "Folder id to move to.")
+  cobra.MarkFlagRequired(moveLookCmd.Flags(), "folder_id")
+  rootCmd.AddCommand(LookCmd)
+  LookmlModelCmd.AddCommand(allLookmlModelsCmd)
+  allLookmlModelsCmd.Flags().String("fields", "", "Requested fields.")
+  allLookmlModelsCmd.Flags().Int64("limit", 0, "Number of results to return. (can be used with offset)")
+  allLookmlModelsCmd.Flags().Int64("offset", 0, "Number of results to skip before returning any. (Defaults to 0 if not set when limit is used)")
+  LookmlModelCmd.AddCommand(createLookmlModelCmd)
+  createLookmlModelCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(createLookmlModelCmd.Flags(), "body")
+  LookmlModelCmd.AddCommand(lookmlModelCmd)
+  lookmlModelCmd.Flags().String("lookml_model_name", "", "Name of lookml model.")
+  cobra.MarkFlagRequired(lookmlModelCmd.Flags(), "lookml_model_name")
+  lookmlModelCmd.Flags().String("fields", "", "Requested fields.")
+  LookmlModelCmd.AddCommand(updateLookmlModelCmd)
+  updateLookmlModelCmd.Flags().String("lookml_model_name", "", "Name of lookml model.")
+  cobra.MarkFlagRequired(updateLookmlModelCmd.Flags(), "lookml_model_name")
+  updateLookmlModelCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(updateLookmlModelCmd.Flags(), "body")
+  LookmlModelCmd.AddCommand(deleteLookmlModelCmd)
+  deleteLookmlModelCmd.Flags().String("lookml_model_name", "", "Name of lookml model.")
+  cobra.MarkFlagRequired(deleteLookmlModelCmd.Flags(), "lookml_model_name")
+  LookmlModelCmd.AddCommand(lookmlModelExploreCmd)
+  lookmlModelExploreCmd.Flags().String("lookml_model_name", "", "Name of lookml model.")
+  cobra.MarkFlagRequired(lookmlModelExploreCmd.Flags(), "lookml_model_name")
+  lookmlModelExploreCmd.Flags().String("explore_name", "", "Name of explore.")
+  cobra.MarkFlagRequired(lookmlModelExploreCmd.Flags(), "explore_name")
+  lookmlModelExploreCmd.Flags().String("fields", "", "Requested fields.")
+  rootCmd.AddCommand(LookmlModelCmd)
+  MetadataCmd.AddCommand(modelFieldnameSuggestionsCmd)
+  modelFieldnameSuggestionsCmd.Flags().String("model_name", "", "Name of model")
+  cobra.MarkFlagRequired(modelFieldnameSuggestionsCmd.Flags(), "model_name")
+  modelFieldnameSuggestionsCmd.Flags().String("view_name", "", "Name of view")
+  cobra.MarkFlagRequired(modelFieldnameSuggestionsCmd.Flags(), "view_name")
+  modelFieldnameSuggestionsCmd.Flags().String("field_name", "", "Name of field to use for suggestions")
+  cobra.MarkFlagRequired(modelFieldnameSuggestionsCmd.Flags(), "field_name")
+  modelFieldnameSuggestionsCmd.Flags().String("term", "", "Search term")
+  modelFieldnameSuggestionsCmd.Flags().String("filters", "", "Suggestion filters")
+  MetadataCmd.AddCommand(getModelCmd)
+  getModelCmd.Flags().String("model_name", "", "Name of model")
+  cobra.MarkFlagRequired(getModelCmd.Flags(), "model_name")
+  MetadataCmd.AddCommand(connectionDatabasesCmd)
+  connectionDatabasesCmd.Flags().String("connection_name", "", "Name of connection")
+  cobra.MarkFlagRequired(connectionDatabasesCmd.Flags(), "connection_name")
+  MetadataCmd.AddCommand(connectionFeaturesCmd)
+  connectionFeaturesCmd.Flags().String("connection_name", "", "Name of connection")
+  cobra.MarkFlagRequired(connectionFeaturesCmd.Flags(), "connection_name")
+  connectionFeaturesCmd.Flags().String("fields", "", "Requested fields.")
+  MetadataCmd.AddCommand(connectionSchemasCmd)
+  connectionSchemasCmd.Flags().String("connection_name", "", "Name of connection")
+  cobra.MarkFlagRequired(connectionSchemasCmd.Flags(), "connection_name")
+  connectionSchemasCmd.Flags().String("database", "", "For dialects that support multiple databases, optionally identify which to use")
+  connectionSchemasCmd.Flags().Bool("cache", false, "True to use fetch from cache, false to load fresh")
+  connectionSchemasCmd.Flags().String("fields", "", "Requested fields.")
+  MetadataCmd.AddCommand(connectionTablesCmd)
+  connectionTablesCmd.Flags().String("connection_name", "", "Name of connection")
+  cobra.MarkFlagRequired(connectionTablesCmd.Flags(), "connection_name")
+  connectionTablesCmd.Flags().String("database", "", "Optional. Name of database to use for the query, only if applicable")
+  connectionTablesCmd.Flags().String("schema_name", "", "Optional. Return only tables for this schema")
+  connectionTablesCmd.Flags().Bool("cache", false, "True to fetch from cache, false to load fresh")
+  connectionTablesCmd.Flags().String("fields", "", "Requested fields.")
+  MetadataCmd.AddCommand(connectionColumnsCmd)
+  connectionColumnsCmd.Flags().String("connection_name", "", "Name of connection")
+  cobra.MarkFlagRequired(connectionColumnsCmd.Flags(), "connection_name")
+  connectionColumnsCmd.Flags().String("database", "", "For dialects that support multiple databases, optionally identify which to use")
+  connectionColumnsCmd.Flags().String("schema_name", "", "Name of schema to use.")
+  connectionColumnsCmd.Flags().Bool("cache", false, "True to fetch from cache, false to load fresh")
+  connectionColumnsCmd.Flags().Int64("table_limit", 0, "limits the tables per schema returned")
+  connectionColumnsCmd.Flags().String("table_names", "", "only fetch columns for a given (comma-separated) list of tables")
+  connectionColumnsCmd.Flags().String("fields", "", "Requested fields.")
+  MetadataCmd.AddCommand(connectionSearchColumnsCmd)
+  connectionSearchColumnsCmd.Flags().String("connection_name", "", "Name of connection")
+  cobra.MarkFlagRequired(connectionSearchColumnsCmd.Flags(), "connection_name")
+  connectionSearchColumnsCmd.Flags().String("column_name", "", "Column name to find")
+  connectionSearchColumnsCmd.Flags().String("fields", "", "Requested fields.")
+  MetadataCmd.AddCommand(connectionCostEstimateCmd)
+  connectionCostEstimateCmd.Flags().String("connection_name", "", "Name of connection")
+  cobra.MarkFlagRequired(connectionCostEstimateCmd.Flags(), "connection_name")
+  connectionCostEstimateCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(connectionCostEstimateCmd.Flags(), "body")
+  connectionCostEstimateCmd.Flags().String("fields", "", "Requested fields.")
+  rootCmd.AddCommand(MetadataCmd)
+  ProjectCmd.AddCommand(lockAllCmd)
+  lockAllCmd.Flags().String("project_id", "", "Id of project")
+  cobra.MarkFlagRequired(lockAllCmd.Flags(), "project_id")
+  lockAllCmd.Flags().String("fields", "", "Requested fields")
+  ProjectCmd.AddCommand(allGitBranchesCmd)
+  allGitBranchesCmd.Flags().String("project_id", "", "Project Id")
+  cobra.MarkFlagRequired(allGitBranchesCmd.Flags(), "project_id")
+  ProjectCmd.AddCommand(gitBranchCmd)
+  gitBranchCmd.Flags().String("project_id", "", "Project Id")
+  cobra.MarkFlagRequired(gitBranchCmd.Flags(), "project_id")
+  ProjectCmd.AddCommand(updateGitBranchCmd)
+  updateGitBranchCmd.Flags().String("project_id", "", "Project Id")
+  cobra.MarkFlagRequired(updateGitBranchCmd.Flags(), "project_id")
+  updateGitBranchCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(updateGitBranchCmd.Flags(), "body")
+  ProjectCmd.AddCommand(createGitBranchCmd)
+  createGitBranchCmd.Flags().String("project_id", "", "Project Id")
+  cobra.MarkFlagRequired(createGitBranchCmd.Flags(), "project_id")
+  createGitBranchCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(createGitBranchCmd.Flags(), "body")
+  ProjectCmd.AddCommand(findGitBranchCmd)
+  findGitBranchCmd.Flags().String("project_id", "", "Project Id")
+  cobra.MarkFlagRequired(findGitBranchCmd.Flags(), "project_id")
+  findGitBranchCmd.Flags().String("branch_name", "", "Branch Name")
+  cobra.MarkFlagRequired(findGitBranchCmd.Flags(), "branch_name")
+  ProjectCmd.AddCommand(deleteGitBranchCmd)
+  deleteGitBranchCmd.Flags().String("project_id", "", "Project Id")
+  cobra.MarkFlagRequired(deleteGitBranchCmd.Flags(), "project_id")
+  deleteGitBranchCmd.Flags().String("branch_name", "", "Branch Name")
+  cobra.MarkFlagRequired(deleteGitBranchCmd.Flags(), "branch_name")
+  ProjectCmd.AddCommand(deployRefToProductionCmd)
+  deployRefToProductionCmd.Flags().String("project_id", "", "Id of project")
+  cobra.MarkFlagRequired(deployRefToProductionCmd.Flags(), "project_id")
+  deployRefToProductionCmd.Flags().String("branch", "", "Branch to deploy to production")
+  deployRefToProductionCmd.Flags().String("ref", "", "Ref to deploy to production")
+  ProjectCmd.AddCommand(deployToProductionCmd)
+  deployToProductionCmd.Flags().String("project_id", "", "Id of project")
+  cobra.MarkFlagRequired(deployToProductionCmd.Flags(), "project_id")
+  ProjectCmd.AddCommand(resetProjectToProductionCmd)
+  resetProjectToProductionCmd.Flags().String("project_id", "", "Id of project")
+  cobra.MarkFlagRequired(resetProjectToProductionCmd.Flags(), "project_id")
+  ProjectCmd.AddCommand(resetProjectToRemoteCmd)
+  resetProjectToRemoteCmd.Flags().String("project_id", "", "Id of project")
+  cobra.MarkFlagRequired(resetProjectToRemoteCmd.Flags(), "project_id")
+  ProjectCmd.AddCommand(allProjectsCmd)
+  allProjectsCmd.Flags().String("fields", "", "Requested fields")
+  ProjectCmd.AddCommand(createProjectCmd)
+  createProjectCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(createProjectCmd.Flags(), "body")
+  ProjectCmd.AddCommand(projectCmd)
+  projectCmd.Flags().String("project_id", "", "Project Id")
+  cobra.MarkFlagRequired(projectCmd.Flags(), "project_id")
+  projectCmd.Flags().String("fields", "", "Requested fields")
+  ProjectCmd.AddCommand(updateProjectCmd)
+  updateProjectCmd.Flags().String("project_id", "", "Project Id")
+  cobra.MarkFlagRequired(updateProjectCmd.Flags(), "project_id")
+  updateProjectCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(updateProjectCmd.Flags(), "body")
+  updateProjectCmd.Flags().String("fields", "", "Requested fields")
+  ProjectCmd.AddCommand(manifestCmd)
+  manifestCmd.Flags().String("project_id", "", "Project Id")
+  cobra.MarkFlagRequired(manifestCmd.Flags(), "project_id")
+  ProjectCmd.AddCommand(gitDeployKeyCmd)
+  gitDeployKeyCmd.Flags().String("project_id", "", "Project Id")
+  cobra.MarkFlagRequired(gitDeployKeyCmd.Flags(), "project_id")
+  ProjectCmd.AddCommand(createGitDeployKeyCmd)
+  createGitDeployKeyCmd.Flags().String("project_id", "", "Project Id")
+  cobra.MarkFlagRequired(createGitDeployKeyCmd.Flags(), "project_id")
+  ProjectCmd.AddCommand(projectValidationResultsCmd)
+  projectValidationResultsCmd.Flags().String("project_id", "", "Project Id")
+  cobra.MarkFlagRequired(projectValidationResultsCmd.Flags(), "project_id")
+  projectValidationResultsCmd.Flags().String("fields", "", "Requested fields")
+  ProjectCmd.AddCommand(validateProjectCmd)
+  validateProjectCmd.Flags().String("project_id", "", "Project Id")
+  cobra.MarkFlagRequired(validateProjectCmd.Flags(), "project_id")
+  validateProjectCmd.Flags().String("fields", "", "Requested fields")
+  ProjectCmd.AddCommand(projectWorkspaceCmd)
+  projectWorkspaceCmd.Flags().String("project_id", "", "Project Id")
+  cobra.MarkFlagRequired(projectWorkspaceCmd.Flags(), "project_id")
+  projectWorkspaceCmd.Flags().String("fields", "", "Requested fields")
+  ProjectCmd.AddCommand(allProjectFilesCmd)
+  allProjectFilesCmd.Flags().String("project_id", "", "Project Id")
+  cobra.MarkFlagRequired(allProjectFilesCmd.Flags(), "project_id")
+  allProjectFilesCmd.Flags().String("fields", "", "Requested fields")
+  ProjectCmd.AddCommand(projectFileCmd)
+  projectFileCmd.Flags().String("project_id", "", "Project Id")
+  cobra.MarkFlagRequired(projectFileCmd.Flags(), "project_id")
+  projectFileCmd.Flags().String("file_id", "", "File Id")
+  cobra.MarkFlagRequired(projectFileCmd.Flags(), "file_id")
+  projectFileCmd.Flags().String("fields", "", "Requested fields")
+  ProjectCmd.AddCommand(allGitConnectionTestsCmd)
+  allGitConnectionTestsCmd.Flags().String("project_id", "", "Project Id")
+  cobra.MarkFlagRequired(allGitConnectionTestsCmd.Flags(), "project_id")
+  allGitConnectionTestsCmd.Flags().String("remote_url", "", "(Optional: leave blank for root project) The remote url for remote dependency to test.")
+  ProjectCmd.AddCommand(runGitConnectionTestCmd)
+  runGitConnectionTestCmd.Flags().String("project_id", "", "Project Id")
+  cobra.MarkFlagRequired(runGitConnectionTestCmd.Flags(), "project_id")
+  runGitConnectionTestCmd.Flags().String("test_id", "", "Test Id")
+  cobra.MarkFlagRequired(runGitConnectionTestCmd.Flags(), "test_id")
+  runGitConnectionTestCmd.Flags().String("remote_url", "", "(Optional: leave blank for root project) The remote url for remote dependency to test.")
+  runGitConnectionTestCmd.Flags().String("use_production", "", "(Optional: leave blank for dev credentials) Whether to use git production credentials.")
+  ProjectCmd.AddCommand(allLookmlTestsCmd)
+  allLookmlTestsCmd.Flags().String("project_id", "", "Project Id")
+  cobra.MarkFlagRequired(allLookmlTestsCmd.Flags(), "project_id")
+  allLookmlTestsCmd.Flags().String("file_id", "", "File Id")
+  ProjectCmd.AddCommand(runLookmlTestCmd)
+  runLookmlTestCmd.Flags().String("project_id", "", "Project Id")
+  cobra.MarkFlagRequired(runLookmlTestCmd.Flags(), "project_id")
+  runLookmlTestCmd.Flags().String("file_id", "", "File Name")
+  runLookmlTestCmd.Flags().String("test", "", "Test Name")
+  runLookmlTestCmd.Flags().String("model", "", "Model Name")
+  ProjectCmd.AddCommand(tagRefCmd)
+  tagRefCmd.Flags().String("project_id", "", "Project Id")
+  cobra.MarkFlagRequired(tagRefCmd.Flags(), "project_id")
+  tagRefCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(tagRefCmd.Flags(), "body")
+  tagRefCmd.Flags().String("commit_sha", "", "(Optional): Commit Sha to Tag")
+  tagRefCmd.Flags().String("tag_name", "", "Tag Name")
+  tagRefCmd.Flags().String("tag_message", "", "(Optional): Tag Message")
+  ProjectCmd.AddCommand(updateRepositoryCredentialCmd)
+  updateRepositoryCredentialCmd.Flags().String("root_project_id", "", "Root Project Id")
+  cobra.MarkFlagRequired(updateRepositoryCredentialCmd.Flags(), "root_project_id")
+  updateRepositoryCredentialCmd.Flags().String("credential_id", "", "Credential Id")
+  cobra.MarkFlagRequired(updateRepositoryCredentialCmd.Flags(), "credential_id")
+  updateRepositoryCredentialCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(updateRepositoryCredentialCmd.Flags(), "body")
+  ProjectCmd.AddCommand(deleteRepositoryCredentialCmd)
+  deleteRepositoryCredentialCmd.Flags().String("root_project_id", "", "Root Project Id")
+  cobra.MarkFlagRequired(deleteRepositoryCredentialCmd.Flags(), "root_project_id")
+  deleteRepositoryCredentialCmd.Flags().String("credential_id", "", "Credential Id")
+  cobra.MarkFlagRequired(deleteRepositoryCredentialCmd.Flags(), "credential_id")
+  ProjectCmd.AddCommand(getAllRepositoryCredentialsCmd)
+  getAllRepositoryCredentialsCmd.Flags().String("root_project_id", "", "Root Project Id")
+  cobra.MarkFlagRequired(getAllRepositoryCredentialsCmd.Flags(), "root_project_id")
+  rootCmd.AddCommand(ProjectCmd)
+  QueryCmd.AddCommand(createQueryTaskCmd)
+  createQueryTaskCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(createQueryTaskCmd.Flags(), "body")
+  createQueryTaskCmd.Flags().Int64("limit", 0, "Row limit (may override the limit in the saved query).")
+  createQueryTaskCmd.Flags().Bool("apply_formatting", false, "Apply model-specified formatting to each result.")
+  createQueryTaskCmd.Flags().Bool("apply_vis", false, "Apply visualization options to results.")
+  createQueryTaskCmd.Flags().Bool("cache", false, "Get results from cache if available.")
+  createQueryTaskCmd.Flags().Int64("image_width", 0, "Render width for image formats.")
+  createQueryTaskCmd.Flags().Int64("image_height", 0, "Render height for image formats.")
+  createQueryTaskCmd.Flags().Bool("generate_drill_links", false, "Generate drill links (only applicable to 'json_detail' format.")
+  createQueryTaskCmd.Flags().Bool("force_production", false, "Force use of production models even if the user is in development mode.")
+  createQueryTaskCmd.Flags().Bool("cache_only", false, "Retrieve any results from cache even if the results have expired.")
+  createQueryTaskCmd.Flags().String("path_prefix", "", "Prefix to use for drill links (url encoded).")
+  createQueryTaskCmd.Flags().Bool("rebuild_pdts", false, "Rebuild PDTS used in query.")
+  createQueryTaskCmd.Flags().Bool("server_table_calcs", false, "Perform table calculations on query results")
+  createQueryTaskCmd.Flags().String("fields", "", "Requested fields")
+  QueryCmd.AddCommand(queryTaskMultiResultsCmd)
+  queryTaskMultiResultsCmd.Flags().String("query_task_ids", "", "List of Query Task IDs")
+  cobra.MarkFlagRequired(queryTaskMultiResultsCmd.Flags(), "query_task_ids")
+  QueryCmd.AddCommand(queryTaskCmd)
+  queryTaskCmd.Flags().String("query_task_id", "", "ID of the Query Task")
+  cobra.MarkFlagRequired(queryTaskCmd.Flags(), "query_task_id")
+  queryTaskCmd.Flags().String("fields", "", "Requested fields.")
+  QueryCmd.AddCommand(queryTaskResultsCmd)
+  queryTaskResultsCmd.Flags().String("query_task_id", "", "ID of the Query Task")
+  cobra.MarkFlagRequired(queryTaskResultsCmd.Flags(), "query_task_id")
+  QueryCmd.AddCommand(queryCmd)
+  queryCmd.Flags().Int64("query_id", 0, "Id of query")
+  cobra.MarkFlagRequired(queryCmd.Flags(), "query_id")
+  queryCmd.Flags().String("fields", "", "Requested fields.")
+  QueryCmd.AddCommand(queryForSlugCmd)
+  queryForSlugCmd.Flags().String("slug", "", "Slug of query")
+  cobra.MarkFlagRequired(queryForSlugCmd.Flags(), "slug")
+  queryForSlugCmd.Flags().String("fields", "", "Requested fields.")
+  QueryCmd.AddCommand(createQueryCmd)
+  createQueryCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(createQueryCmd.Flags(), "body")
+  createQueryCmd.Flags().String("fields", "", "Requested fields.")
+  QueryCmd.AddCommand(runQueryCmd)
+  runQueryCmd.Flags().Int64("query_id", 0, "Id of query")
+  cobra.MarkFlagRequired(runQueryCmd.Flags(), "query_id")
+  runQueryCmd.Flags().String("result_format", "", "Format of result")
+  cobra.MarkFlagRequired(runQueryCmd.Flags(), "result_format")
+  runQueryCmd.Flags().Int64("limit", 0, "Row limit (may override the limit in the saved query).")
+  runQueryCmd.Flags().Bool("apply_formatting", false, "Apply model-specified formatting to each result.")
+  runQueryCmd.Flags().Bool("apply_vis", false, "Apply visualization options to results.")
+  runQueryCmd.Flags().Bool("cache", false, "Get results from cache if available.")
+  runQueryCmd.Flags().Int64("image_width", 0, "Render width for image formats.")
+  runQueryCmd.Flags().Int64("image_height", 0, "Render height for image formats.")
+  runQueryCmd.Flags().Bool("generate_drill_links", false, "Generate drill links (only applicable to 'json_detail' format.")
+  runQueryCmd.Flags().Bool("force_production", false, "Force use of production models even if the user is in development mode.")
+  runQueryCmd.Flags().Bool("cache_only", false, "Retrieve any results from cache even if the results have expired.")
+  runQueryCmd.Flags().String("path_prefix", "", "Prefix to use for drill links (url encoded).")
+  runQueryCmd.Flags().Bool("rebuild_pdts", false, "Rebuild PDTS used in query.")
+  runQueryCmd.Flags().Bool("server_table_calcs", false, "Perform table calculations on query results")
+  runQueryCmd.Flags().String("source", "", "Specifies the source of this call.")
+  QueryCmd.AddCommand(runInlineQueryCmd)
+  runInlineQueryCmd.Flags().String("result_format", "", "Format of result")
+  cobra.MarkFlagRequired(runInlineQueryCmd.Flags(), "result_format")
+  runInlineQueryCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(runInlineQueryCmd.Flags(), "body")
+  runInlineQueryCmd.Flags().Int64("limit", 0, "Row limit (may override the limit in the saved query).")
+  runInlineQueryCmd.Flags().Bool("apply_formatting", false, "Apply model-specified formatting to each result.")
+  runInlineQueryCmd.Flags().Bool("apply_vis", false, "Apply visualization options to results.")
+  runInlineQueryCmd.Flags().Bool("cache", false, "Get results from cache if available.")
+  runInlineQueryCmd.Flags().Int64("image_width", 0, "Render width for image formats.")
+  runInlineQueryCmd.Flags().Int64("image_height", 0, "Render height for image formats.")
+  runInlineQueryCmd.Flags().Bool("generate_drill_links", false, "Generate drill links (only applicable to 'json_detail' format.")
+  runInlineQueryCmd.Flags().Bool("force_production", false, "Force use of production models even if the user is in development mode.")
+  runInlineQueryCmd.Flags().Bool("cache_only", false, "Retrieve any results from cache even if the results have expired.")
+  runInlineQueryCmd.Flags().String("path_prefix", "", "Prefix to use for drill links (url encoded).")
+  runInlineQueryCmd.Flags().Bool("rebuild_pdts", false, "Rebuild PDTS used in query.")
+  runInlineQueryCmd.Flags().Bool("server_table_calcs", false, "Perform table calculations on query results")
+  QueryCmd.AddCommand(runUrlEncodedQueryCmd)
+  runUrlEncodedQueryCmd.Flags().String("model_name", "", "Model name")
+  cobra.MarkFlagRequired(runUrlEncodedQueryCmd.Flags(), "model_name")
+  runUrlEncodedQueryCmd.Flags().String("view_name", "", "View name")
+  cobra.MarkFlagRequired(runUrlEncodedQueryCmd.Flags(), "view_name")
+  runUrlEncodedQueryCmd.Flags().String("result_format", "", "Format of result")
+  cobra.MarkFlagRequired(runUrlEncodedQueryCmd.Flags(), "result_format")
+  QueryCmd.AddCommand(mergeQueryCmd)
+  mergeQueryCmd.Flags().String("merge_query_id", "", "Merge Query Id")
+  cobra.MarkFlagRequired(mergeQueryCmd.Flags(), "merge_query_id")
+  mergeQueryCmd.Flags().String("fields", "", "Requested fields")
+  QueryCmd.AddCommand(createMergeQueryCmd)
+  createMergeQueryCmd.Flags().String("body", "", "")
+  createMergeQueryCmd.Flags().String("fields", "", "Requested fields")
+  QueryCmd.AddCommand(allRunningQueriesCmd)
+  QueryCmd.AddCommand(killQueryCmd)
+  killQueryCmd.Flags().String("query_task_id", "", "Query task id.")
+  cobra.MarkFlagRequired(killQueryCmd.Flags(), "query_task_id")
+  QueryCmd.AddCommand(sqlQueryCmd)
+  sqlQueryCmd.Flags().String("slug", "", "slug of query")
+  cobra.MarkFlagRequired(sqlQueryCmd.Flags(), "slug")
+  QueryCmd.AddCommand(createSqlQueryCmd)
+  createSqlQueryCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(createSqlQueryCmd.Flags(), "body")
+  QueryCmd.AddCommand(runSqlQueryCmd)
+  runSqlQueryCmd.Flags().String("slug", "", "slug of query")
+  cobra.MarkFlagRequired(runSqlQueryCmd.Flags(), "slug")
+  runSqlQueryCmd.Flags().String("result_format", "", "Format of result, options are: [\"inline_json\", \"json\", \"json_detail\", \"json_fe\", \"csv\", \"html\", \"md\", \"txt\", \"xlsx\", \"gsxml\", \"json_label\"]")
+  cobra.MarkFlagRequired(runSqlQueryCmd.Flags(), "result_format")
+  runSqlQueryCmd.Flags().String("download", "", "Defaults to false. If set to true, the HTTP response will have content-disposition and other headers set to make the HTTP response behave as a downloadable attachment instead of as inline content.")
+  rootCmd.AddCommand(QueryCmd)
+  RenderTaskCmd.AddCommand(createLookRenderTaskCmd)
+  createLookRenderTaskCmd.Flags().Int64("look_id", 0, "Id of look to render")
+  cobra.MarkFlagRequired(createLookRenderTaskCmd.Flags(), "look_id")
+  createLookRenderTaskCmd.Flags().String("result_format", "", "Output type: png, or jpg")
+  cobra.MarkFlagRequired(createLookRenderTaskCmd.Flags(), "result_format")
+  createLookRenderTaskCmd.Flags().Int64("width", 0, "Output width in pixels")
+  cobra.MarkFlagRequired(createLookRenderTaskCmd.Flags(), "width")
+  createLookRenderTaskCmd.Flags().Int64("height", 0, "Output height in pixels")
+  cobra.MarkFlagRequired(createLookRenderTaskCmd.Flags(), "height")
+  createLookRenderTaskCmd.Flags().String("fields", "", "Requested fields.")
+  RenderTaskCmd.AddCommand(createQueryRenderTaskCmd)
+  createQueryRenderTaskCmd.Flags().Int64("query_id", 0, "Id of the query to render")
+  cobra.MarkFlagRequired(createQueryRenderTaskCmd.Flags(), "query_id")
+  createQueryRenderTaskCmd.Flags().String("result_format", "", "Output type: png or jpg")
+  cobra.MarkFlagRequired(createQueryRenderTaskCmd.Flags(), "result_format")
+  createQueryRenderTaskCmd.Flags().Int64("width", 0, "Output width in pixels")
+  cobra.MarkFlagRequired(createQueryRenderTaskCmd.Flags(), "width")
+  createQueryRenderTaskCmd.Flags().Int64("height", 0, "Output height in pixels")
+  cobra.MarkFlagRequired(createQueryRenderTaskCmd.Flags(), "height")
+  createQueryRenderTaskCmd.Flags().String("fields", "", "Requested fields.")
+  RenderTaskCmd.AddCommand(createDashboardRenderTaskCmd)
+  createDashboardRenderTaskCmd.Flags().String("dashboard_id", "", "Id of dashboard to render. The ID can be a LookML dashboard also.")
+  cobra.MarkFlagRequired(createDashboardRenderTaskCmd.Flags(), "dashboard_id")
+  createDashboardRenderTaskCmd.Flags().String("result_format", "", "Output type: pdf, png, or jpg")
+  cobra.MarkFlagRequired(createDashboardRenderTaskCmd.Flags(), "result_format")
+  createDashboardRenderTaskCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(createDashboardRenderTaskCmd.Flags(), "body")
+  createDashboardRenderTaskCmd.Flags().Int64("width", 0, "Output width in pixels")
+  cobra.MarkFlagRequired(createDashboardRenderTaskCmd.Flags(), "width")
+  createDashboardRenderTaskCmd.Flags().Int64("height", 0, "Output height in pixels")
+  cobra.MarkFlagRequired(createDashboardRenderTaskCmd.Flags(), "height")
+  createDashboardRenderTaskCmd.Flags().String("fields", "", "Requested fields.")
+  createDashboardRenderTaskCmd.Flags().String("pdf_paper_size", "", "Paper size for pdf. Value can be one of: [\"letter\",\"legal\",\"tabloid\",\"a0\",\"a1\",\"a2\",\"a3\",\"a4\",\"a5\"]")
+  createDashboardRenderTaskCmd.Flags().Bool("pdf_landscape", false, "Whether to render pdf in landscape paper orientation")
+  createDashboardRenderTaskCmd.Flags().Bool("long_tables", false, "Whether or not to expand table vis to full length")
+  RenderTaskCmd.AddCommand(renderTaskCmd)
+  renderTaskCmd.Flags().String("render_task_id", "", "Id of render task")
+  cobra.MarkFlagRequired(renderTaskCmd.Flags(), "render_task_id")
+  renderTaskCmd.Flags().String("fields", "", "Requested fields.")
+  RenderTaskCmd.AddCommand(renderTaskResultsCmd)
+  renderTaskResultsCmd.Flags().String("render_task_id", "", "Id of render task")
+  cobra.MarkFlagRequired(renderTaskResultsCmd.Flags(), "render_task_id")
+  rootCmd.AddCommand(RenderTaskCmd)
+  RoleCmd.AddCommand(searchModelSetsCmd)
+  searchModelSetsCmd.Flags().String("fields", "", "Requested fields.")
+  searchModelSetsCmd.Flags().Int64("limit", 0, "Number of results to return (used with `offset`).")
+  searchModelSetsCmd.Flags().Int64("offset", 0, "Number of results to skip before returning any (used with `limit`).")
+  searchModelSetsCmd.Flags().String("sorts", "", "Fields to sort by.")
+  searchModelSetsCmd.Flags().Int64("id", 0, "Match model set id.")
+  searchModelSetsCmd.Flags().String("name", "", "Match model set name.")
+  searchModelSetsCmd.Flags().Bool("all_access", false, "Match model sets by all_access status.")
+  searchModelSetsCmd.Flags().Bool("built_in", false, "Match model sets by built_in status.")
+  searchModelSetsCmd.Flags().Bool("filter_or", false, "Combine given search criteria in a boolean OR expression.")
+  RoleCmd.AddCommand(modelSetCmd)
+  modelSetCmd.Flags().Int64("model_set_id", 0, "Id of model set")
+  cobra.MarkFlagRequired(modelSetCmd.Flags(), "model_set_id")
+  modelSetCmd.Flags().String("fields", "", "Requested fields.")
+  RoleCmd.AddCommand(updateModelSetCmd)
+  updateModelSetCmd.Flags().Int64("model_set_id", 0, "id of model set")
+  cobra.MarkFlagRequired(updateModelSetCmd.Flags(), "model_set_id")
+  updateModelSetCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(updateModelSetCmd.Flags(), "body")
+  RoleCmd.AddCommand(deleteModelSetCmd)
+  deleteModelSetCmd.Flags().Int64("model_set_id", 0, "id of model set")
+  cobra.MarkFlagRequired(deleteModelSetCmd.Flags(), "model_set_id")
+  RoleCmd.AddCommand(allModelSetsCmd)
+  allModelSetsCmd.Flags().String("fields", "", "Requested fields.")
+  RoleCmd.AddCommand(createModelSetCmd)
+  createModelSetCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(createModelSetCmd.Flags(), "body")
+  RoleCmd.AddCommand(allPermissionsCmd)
+  RoleCmd.AddCommand(searchPermissionSetsCmd)
+  searchPermissionSetsCmd.Flags().String("fields", "", "Requested fields.")
+  searchPermissionSetsCmd.Flags().Int64("limit", 0, "Number of results to return (used with `offset`).")
+  searchPermissionSetsCmd.Flags().Int64("offset", 0, "Number of results to skip before returning any (used with `limit`).")
+  searchPermissionSetsCmd.Flags().String("sorts", "", "Fields to sort by.")
+  searchPermissionSetsCmd.Flags().Int64("id", 0, "Match permission set id.")
+  searchPermissionSetsCmd.Flags().String("name", "", "Match permission set name.")
+  searchPermissionSetsCmd.Flags().Bool("all_access", false, "Match permission sets by all_access status.")
+  searchPermissionSetsCmd.Flags().Bool("built_in", false, "Match permission sets by built_in status.")
+  searchPermissionSetsCmd.Flags().Bool("filter_or", false, "Combine given search criteria in a boolean OR expression.")
+  RoleCmd.AddCommand(permissionSetCmd)
+  permissionSetCmd.Flags().Int64("permission_set_id", 0, "Id of permission set")
+  cobra.MarkFlagRequired(permissionSetCmd.Flags(), "permission_set_id")
+  permissionSetCmd.Flags().String("fields", "", "Requested fields.")
+  RoleCmd.AddCommand(updatePermissionSetCmd)
+  updatePermissionSetCmd.Flags().Int64("permission_set_id", 0, "id of permission set")
+  cobra.MarkFlagRequired(updatePermissionSetCmd.Flags(), "permission_set_id")
+  updatePermissionSetCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(updatePermissionSetCmd.Flags(), "body")
+  RoleCmd.AddCommand(deletePermissionSetCmd)
+  deletePermissionSetCmd.Flags().Int64("permission_set_id", 0, "Id of permission set")
+  cobra.MarkFlagRequired(deletePermissionSetCmd.Flags(), "permission_set_id")
+  RoleCmd.AddCommand(allPermissionSetsCmd)
+  allPermissionSetsCmd.Flags().String("fields", "", "Requested fields.")
+  RoleCmd.AddCommand(createPermissionSetCmd)
+  createPermissionSetCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(createPermissionSetCmd.Flags(), "body")
+  RoleCmd.AddCommand(allRolesCmd)
+  allRolesCmd.Flags().String("fields", "", "Requested fields.")
+  allRolesCmd.Flags().String("ids", "", "Optional list of ids to get specific roles.")
+  RoleCmd.AddCommand(createRoleCmd)
+  createRoleCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(createRoleCmd.Flags(), "body")
+  RoleCmd.AddCommand(searchRolesCmd)
+  searchRolesCmd.Flags().String("fields", "", "Requested fields.")
+  searchRolesCmd.Flags().Int64("limit", 0, "Number of results to return (used with `offset`).")
+  searchRolesCmd.Flags().Int64("offset", 0, "Number of results to skip before returning any (used with `limit`).")
+  searchRolesCmd.Flags().String("sorts", "", "Fields to sort by.")
+  searchRolesCmd.Flags().Int64("id", 0, "Match role id.")
+  searchRolesCmd.Flags().String("name", "", "Match role name.")
+  searchRolesCmd.Flags().Bool("built_in", false, "Match roles by built_in status.")
+  searchRolesCmd.Flags().Bool("filter_or", false, "Combine given search criteria in a boolean OR expression.")
+  RoleCmd.AddCommand(searchRolesWithUserCountCmd)
+  searchRolesWithUserCountCmd.Flags().String("fields", "", "Requested fields.")
+  searchRolesWithUserCountCmd.Flags().Int64("limit", 0, "Number of results to return (used with `offset`).")
+  searchRolesWithUserCountCmd.Flags().Int64("offset", 0, "Number of results to skip before returning any (used with `limit`).")
+  searchRolesWithUserCountCmd.Flags().String("sorts", "", "Fields to sort by.")
+  searchRolesWithUserCountCmd.Flags().Int64("id", 0, "Match role id.")
+  searchRolesWithUserCountCmd.Flags().String("name", "", "Match role name.")
+  searchRolesWithUserCountCmd.Flags().Bool("built_in", false, "Match roles by built_in status.")
+  searchRolesWithUserCountCmd.Flags().Bool("filter_or", false, "Combine given search criteria in a boolean OR expression.")
+  RoleCmd.AddCommand(roleCmd)
+  roleCmd.Flags().Int64("role_id", 0, "id of role")
+  cobra.MarkFlagRequired(roleCmd.Flags(), "role_id")
+  RoleCmd.AddCommand(updateRoleCmd)
+  updateRoleCmd.Flags().Int64("role_id", 0, "id of role")
+  cobra.MarkFlagRequired(updateRoleCmd.Flags(), "role_id")
+  updateRoleCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(updateRoleCmd.Flags(), "body")
+  RoleCmd.AddCommand(deleteRoleCmd)
+  deleteRoleCmd.Flags().Int64("role_id", 0, "id of role")
+  cobra.MarkFlagRequired(deleteRoleCmd.Flags(), "role_id")
+  RoleCmd.AddCommand(roleGroupsCmd)
+  roleGroupsCmd.Flags().Int64("role_id", 0, "id of role")
+  cobra.MarkFlagRequired(roleGroupsCmd.Flags(), "role_id")
+  roleGroupsCmd.Flags().String("fields", "", "Requested fields.")
+  RoleCmd.AddCommand(setRoleGroupsCmd)
+  setRoleGroupsCmd.Flags().Int64("role_id", 0, "Id of Role")
+  cobra.MarkFlagRequired(setRoleGroupsCmd.Flags(), "role_id")
+  setRoleGroupsCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(setRoleGroupsCmd.Flags(), "body")
+  RoleCmd.AddCommand(roleUsersCmd)
+  roleUsersCmd.Flags().Int64("role_id", 0, "id of user")
+  cobra.MarkFlagRequired(roleUsersCmd.Flags(), "role_id")
+  roleUsersCmd.Flags().String("fields", "", "Requested fields.")
+  roleUsersCmd.Flags().Bool("direct_association_only", false, "Get only users associated directly with the role: exclude those only associated through groups.")
+  RoleCmd.AddCommand(setRoleUsersCmd)
+  setRoleUsersCmd.Flags().Int64("role_id", 0, "id of role")
+  cobra.MarkFlagRequired(setRoleUsersCmd.Flags(), "role_id")
+  setRoleUsersCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(setRoleUsersCmd.Flags(), "body")
+  rootCmd.AddCommand(RoleCmd)
+  ScheduledPlanCmd.AddCommand(scheduledPlansForSpaceCmd)
+  scheduledPlansForSpaceCmd.Flags().Int64("space_id", 0, "Space Id")
+  cobra.MarkFlagRequired(scheduledPlansForSpaceCmd.Flags(), "space_id")
+  scheduledPlansForSpaceCmd.Flags().String("fields", "", "Requested fields.")
+  ScheduledPlanCmd.AddCommand(scheduledPlanCmd)
+  scheduledPlanCmd.Flags().Int64("scheduled_plan_id", 0, "Scheduled Plan Id")
+  cobra.MarkFlagRequired(scheduledPlanCmd.Flags(), "scheduled_plan_id")
+  scheduledPlanCmd.Flags().String("fields", "", "Requested fields.")
+  ScheduledPlanCmd.AddCommand(updateScheduledPlanCmd)
+  updateScheduledPlanCmd.Flags().Int64("scheduled_plan_id", 0, "Scheduled Plan Id")
+  cobra.MarkFlagRequired(updateScheduledPlanCmd.Flags(), "scheduled_plan_id")
+  updateScheduledPlanCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(updateScheduledPlanCmd.Flags(), "body")
+  ScheduledPlanCmd.AddCommand(deleteScheduledPlanCmd)
+  deleteScheduledPlanCmd.Flags().Int64("scheduled_plan_id", 0, "Scheduled Plan Id")
+  cobra.MarkFlagRequired(deleteScheduledPlanCmd.Flags(), "scheduled_plan_id")
+  ScheduledPlanCmd.AddCommand(allScheduledPlansCmd)
+  allScheduledPlansCmd.Flags().Int64("user_id", 0, "Return scheduled plans belonging to this user_id. If not provided, returns scheduled plans owned by the caller.")
+  allScheduledPlansCmd.Flags().String("fields", "", "Comma delimited list of field names. If provided, only the fields specified will be included in the response")
+  allScheduledPlansCmd.Flags().Bool("all_users", false, "Return scheduled plans belonging to all users (caller needs see_schedules permission)")
+  ScheduledPlanCmd.AddCommand(createScheduledPlanCmd)
+  createScheduledPlanCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(createScheduledPlanCmd.Flags(), "body")
+  ScheduledPlanCmd.AddCommand(scheduledPlanRunOnceCmd)
+  scheduledPlanRunOnceCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(scheduledPlanRunOnceCmd.Flags(), "body")
+  ScheduledPlanCmd.AddCommand(scheduledPlansForLookCmd)
+  scheduledPlansForLookCmd.Flags().Int64("look_id", 0, "Look Id")
+  cobra.MarkFlagRequired(scheduledPlansForLookCmd.Flags(), "look_id")
+  scheduledPlansForLookCmd.Flags().Int64("user_id", 0, "User Id (default is requesting user if not specified)")
+  scheduledPlansForLookCmd.Flags().String("fields", "", "Requested fields.")
+  scheduledPlansForLookCmd.Flags().Bool("all_users", false, "Return scheduled plans belonging to all users for the look")
+  ScheduledPlanCmd.AddCommand(scheduledPlansForDashboardCmd)
+  scheduledPlansForDashboardCmd.Flags().Int64("dashboard_id", 0, "Dashboard Id")
+  cobra.MarkFlagRequired(scheduledPlansForDashboardCmd.Flags(), "dashboard_id")
+  scheduledPlansForDashboardCmd.Flags().Int64("user_id", 0, "User Id (default is requesting user if not specified)")
+  scheduledPlansForDashboardCmd.Flags().Bool("all_users", false, "Return scheduled plans belonging to all users for the dashboard")
+  scheduledPlansForDashboardCmd.Flags().String("fields", "", "Requested fields.")
+  ScheduledPlanCmd.AddCommand(scheduledPlansForLookmlDashboardCmd)
+  scheduledPlansForLookmlDashboardCmd.Flags().String("lookml_dashboard_id", "", "LookML Dashboard Id")
+  cobra.MarkFlagRequired(scheduledPlansForLookmlDashboardCmd.Flags(), "lookml_dashboard_id")
+  scheduledPlansForLookmlDashboardCmd.Flags().Int64("user_id", 0, "User Id (default is requesting user if not specified)")
+  scheduledPlansForLookmlDashboardCmd.Flags().String("fields", "", "Requested fields.")
+  scheduledPlansForLookmlDashboardCmd.Flags().Bool("all_users", false, "Return scheduled plans belonging to all users for the dashboard")
+  ScheduledPlanCmd.AddCommand(scheduledPlanRunOnceByIdCmd)
+  scheduledPlanRunOnceByIdCmd.Flags().Int64("scheduled_plan_id", 0, "Id of schedule plan to copy and run")
+  cobra.MarkFlagRequired(scheduledPlanRunOnceByIdCmd.Flags(), "scheduled_plan_id")
+  scheduledPlanRunOnceByIdCmd.Flags().String("body", "", "")
+  rootCmd.AddCommand(ScheduledPlanCmd)
+  SessionCmd.AddCommand(sessionCmd)
+  SessionCmd.AddCommand(updateSessionCmd)
+  updateSessionCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(updateSessionCmd.Flags(), "body")
+  rootCmd.AddCommand(SessionCmd)
+  ThemeCmd.AddCommand(allThemesCmd)
+  allThemesCmd.Flags().String("fields", "", "Requested fields.")
+  ThemeCmd.AddCommand(createThemeCmd)
+  createThemeCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(createThemeCmd.Flags(), "body")
+  ThemeCmd.AddCommand(searchThemesCmd)
+  searchThemesCmd.Flags().Int64("id", 0, "Match theme id.")
+  searchThemesCmd.Flags().String("name", "", "Match theme name.")
+  searchThemesCmd.Flags().String("begin_at", "", "Timestamp for activation.")
+  searchThemesCmd.Flags().String("end_at", "", "Timestamp for expiration.")
+  searchThemesCmd.Flags().Int64("limit", 0, "Number of results to return (used with `offset`).")
+  searchThemesCmd.Flags().Int64("offset", 0, "Number of results to skip before returning any (used with `limit`).")
+  searchThemesCmd.Flags().String("sorts", "", "Fields to sort by.")
+  searchThemesCmd.Flags().String("fields", "", "Requested fields.")
+  searchThemesCmd.Flags().Bool("filter_or", false, "Combine given search criteria in a boolean OR expression")
+  ThemeCmd.AddCommand(defaultThemeCmd)
+  defaultThemeCmd.Flags().String("ts", "", "Timestamp representing the target datetime for the active period. Defaults to 'now'")
+  ThemeCmd.AddCommand(setDefaultThemeCmd)
+  setDefaultThemeCmd.Flags().String("name", "", "Name of theme to set as default")
+  cobra.MarkFlagRequired(setDefaultThemeCmd.Flags(), "name")
+  ThemeCmd.AddCommand(activeThemesCmd)
+  activeThemesCmd.Flags().String("name", "", "Name of theme")
+  activeThemesCmd.Flags().String("ts", "", "Timestamp representing the target datetime for the active period. Defaults to 'now'")
+  activeThemesCmd.Flags().String("fields", "", "Requested fields.")
+  ThemeCmd.AddCommand(themeOrDefaultCmd)
+  themeOrDefaultCmd.Flags().String("name", "", "Name of theme")
+  cobra.MarkFlagRequired(themeOrDefaultCmd.Flags(), "name")
+  themeOrDefaultCmd.Flags().String("ts", "", "Timestamp representing the target datetime for the active period. Defaults to 'now'")
+  ThemeCmd.AddCommand(validateThemeCmd)
+  validateThemeCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(validateThemeCmd.Flags(), "body")
+  ThemeCmd.AddCommand(themeCmd)
+  themeCmd.Flags().Int64("theme_id", 0, "Id of theme")
+  cobra.MarkFlagRequired(themeCmd.Flags(), "theme_id")
+  themeCmd.Flags().String("fields", "", "Requested fields.")
+  ThemeCmd.AddCommand(updateThemeCmd)
+  updateThemeCmd.Flags().Int64("theme_id", 0, "Id of theme")
+  cobra.MarkFlagRequired(updateThemeCmd.Flags(), "theme_id")
+  updateThemeCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(updateThemeCmd.Flags(), "body")
+  ThemeCmd.AddCommand(deleteThemeCmd)
+  deleteThemeCmd.Flags().String("theme_id", "", "Id of theme")
+  cobra.MarkFlagRequired(deleteThemeCmd.Flags(), "theme_id")
+  rootCmd.AddCommand(ThemeCmd)
+  UserCmd.AddCommand(searchCredentialsEmailCmd)
+  searchCredentialsEmailCmd.Flags().String("fields", "", "Requested fields.")
+  searchCredentialsEmailCmd.Flags().Int64("limit", 0, "Number of results to return (used with `offset`).")
+  searchCredentialsEmailCmd.Flags().Int64("offset", 0, "Number of results to skip before returning any (used with `limit`).")
+  searchCredentialsEmailCmd.Flags().String("sorts", "", "Fields to sort by.")
+  searchCredentialsEmailCmd.Flags().Int64("id", 0, "Match credentials_email id.")
+  searchCredentialsEmailCmd.Flags().String("email", "", "Match credentials_email email.")
+  searchCredentialsEmailCmd.Flags().String("emails", "", "Find credentials_email that match given emails.")
+  searchCredentialsEmailCmd.Flags().Bool("filter_or", false, "Combine given search criteria in a boolean OR expression.")
+  UserCmd.AddCommand(meCmd)
+  meCmd.Flags().String("fields", "", "Requested fields.")
+  UserCmd.AddCommand(allUsersCmd)
+  allUsersCmd.Flags().String("fields", "", "Requested fields.")
+  allUsersCmd.Flags().Int64("page", 0, "DEPRECATED. Use limit and offset instead. Return only page N of paginated results")
+  allUsersCmd.Flags().Int64("per_page", 0, "DEPRECATED. Use limit and offset instead. Return N rows of data per page")
+  allUsersCmd.Flags().Int64("limit", 0, "Number of results to return. (used with offset and takes priority over page and per_page)")
+  allUsersCmd.Flags().Int64("offset", 0, "Number of results to skip before returning any. (used with limit and takes priority over page and per_page)")
+  allUsersCmd.Flags().String("sorts", "", "Fields to sort by.")
+  allUsersCmd.Flags().String("ids", "", "Optional list of ids to get specific users.")
+  UserCmd.AddCommand(createUserCmd)
+  createUserCmd.Flags().String("body", "", "")
+  createUserCmd.Flags().String("fields", "", "Requested fields.")
+  UserCmd.AddCommand(searchUsersCmd)
+  searchUsersCmd.Flags().String("fields", "", "Include only these fields in the response")
+  searchUsersCmd.Flags().Int64("page", 0, "DEPRECATED. Use limit and offset instead. Return only page N of paginated results")
+  searchUsersCmd.Flags().Int64("per_page", 0, "DEPRECATED. Use limit and offset instead. Return N rows of data per page")
+  searchUsersCmd.Flags().Int64("limit", 0, "Number of results to return. (used with offset and takes priority over page and per_page)")
+  searchUsersCmd.Flags().Int64("offset", 0, "Number of results to skip before returning any. (used with limit and takes priority over page and per_page)")
+  searchUsersCmd.Flags().String("sorts", "", "Fields to sort by.")
+  searchUsersCmd.Flags().String("id", "", "Match User Id.")
+  searchUsersCmd.Flags().String("first_name", "", "Match First name.")
+  searchUsersCmd.Flags().String("last_name", "", "Match Last name.")
+  searchUsersCmd.Flags().Bool("verified_looker_employee", false, "Search for user accounts associated with Looker employees")
+  searchUsersCmd.Flags().Bool("embed_user", false, "Search for only embed users")
+  searchUsersCmd.Flags().String("email", "", "Search for the user with this email address")
+  searchUsersCmd.Flags().Bool("is_disabled", false, "Search for disabled user accounts")
+  searchUsersCmd.Flags().Bool("filter_or", false, "Combine given search criteria in a boolean OR expression")
+  searchUsersCmd.Flags().String("content_metadata_id", "", "Search for users who have access to this content_metadata item")
+  searchUsersCmd.Flags().String("group_id", "", "Search for users who are direct members of this group")
+  UserCmd.AddCommand(searchUsersNamesCmd)
+  searchUsersNamesCmd.Flags().String("pattern", "", "Pattern to match")
+  cobra.MarkFlagRequired(searchUsersNamesCmd.Flags(), "pattern")
+  searchUsersNamesCmd.Flags().String("fields", "", "Include only these fields in the response")
+  searchUsersNamesCmd.Flags().Int64("page", 0, "DEPRECATED. Use limit and offset instead. Return only page N of paginated results")
+  searchUsersNamesCmd.Flags().Int64("per_page", 0, "DEPRECATED. Use limit and offset instead. Return N rows of data per page")
+  searchUsersNamesCmd.Flags().Int64("limit", 0, "Number of results to return. (used with offset and takes priority over page and per_page)")
+  searchUsersNamesCmd.Flags().Int64("offset", 0, "Number of results to skip before returning any. (used with limit and takes priority over page and per_page)")
+  searchUsersNamesCmd.Flags().String("sorts", "", "Fields to sort by")
+  searchUsersNamesCmd.Flags().Int64("id", 0, "Match User Id")
+  searchUsersNamesCmd.Flags().String("first_name", "", "Match First name")
+  searchUsersNamesCmd.Flags().String("last_name", "", "Match Last name")
+  searchUsersNamesCmd.Flags().Bool("verified_looker_employee", false, "Match Verified Looker employee")
+  searchUsersNamesCmd.Flags().String("email", "", "Match Email Address")
+  searchUsersNamesCmd.Flags().Bool("is_disabled", false, "Include or exclude disabled accounts in the results")
+  UserCmd.AddCommand(userCmd)
+  userCmd.Flags().Int64("user_id", 0, "Id of user")
+  cobra.MarkFlagRequired(userCmd.Flags(), "user_id")
+  userCmd.Flags().String("fields", "", "Requested fields.")
+  UserCmd.AddCommand(updateUserCmd)
+  updateUserCmd.Flags().Int64("user_id", 0, "Id of user")
+  cobra.MarkFlagRequired(updateUserCmd.Flags(), "user_id")
+  updateUserCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(updateUserCmd.Flags(), "body")
+  updateUserCmd.Flags().String("fields", "", "Requested fields.")
+  UserCmd.AddCommand(deleteUserCmd)
+  deleteUserCmd.Flags().Int64("user_id", 0, "Id of user")
+  cobra.MarkFlagRequired(deleteUserCmd.Flags(), "user_id")
+  UserCmd.AddCommand(userForCredentialCmd)
+  userForCredentialCmd.Flags().String("credential_type", "", "Type name of credential")
+  cobra.MarkFlagRequired(userForCredentialCmd.Flags(), "credential_type")
+  userForCredentialCmd.Flags().String("credential_id", "", "Id of credential")
+  cobra.MarkFlagRequired(userForCredentialCmd.Flags(), "credential_id")
+  userForCredentialCmd.Flags().String("fields", "", "Requested fields.")
+  UserCmd.AddCommand(userCredentialsEmailCmd)
+  userCredentialsEmailCmd.Flags().Int64("user_id", 0, "id of user")
+  cobra.MarkFlagRequired(userCredentialsEmailCmd.Flags(), "user_id")
+  userCredentialsEmailCmd.Flags().String("fields", "", "Requested fields.")
+  UserCmd.AddCommand(createUserCredentialsEmailCmd)
+  createUserCredentialsEmailCmd.Flags().Int64("user_id", 0, "id of user")
+  cobra.MarkFlagRequired(createUserCredentialsEmailCmd.Flags(), "user_id")
+  createUserCredentialsEmailCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(createUserCredentialsEmailCmd.Flags(), "body")
+  createUserCredentialsEmailCmd.Flags().String("fields", "", "Requested fields.")
+  UserCmd.AddCommand(updateUserCredentialsEmailCmd)
+  updateUserCredentialsEmailCmd.Flags().Int64("user_id", 0, "id of user")
+  cobra.MarkFlagRequired(updateUserCredentialsEmailCmd.Flags(), "user_id")
+  updateUserCredentialsEmailCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(updateUserCredentialsEmailCmd.Flags(), "body")
+  updateUserCredentialsEmailCmd.Flags().String("fields", "", "Requested fields.")
+  UserCmd.AddCommand(deleteUserCredentialsEmailCmd)
+  deleteUserCredentialsEmailCmd.Flags().Int64("user_id", 0, "id of user")
+  cobra.MarkFlagRequired(deleteUserCredentialsEmailCmd.Flags(), "user_id")
+  UserCmd.AddCommand(userCredentialsTotpCmd)
+  userCredentialsTotpCmd.Flags().Int64("user_id", 0, "id of user")
+  cobra.MarkFlagRequired(userCredentialsTotpCmd.Flags(), "user_id")
+  userCredentialsTotpCmd.Flags().String("fields", "", "Requested fields.")
+  UserCmd.AddCommand(createUserCredentialsTotpCmd)
+  createUserCredentialsTotpCmd.Flags().Int64("user_id", 0, "id of user")
+  cobra.MarkFlagRequired(createUserCredentialsTotpCmd.Flags(), "user_id")
+  createUserCredentialsTotpCmd.Flags().String("body", "", "")
+  createUserCredentialsTotpCmd.Flags().String("fields", "", "Requested fields.")
+  UserCmd.AddCommand(deleteUserCredentialsTotpCmd)
+  deleteUserCredentialsTotpCmd.Flags().Int64("user_id", 0, "id of user")
+  cobra.MarkFlagRequired(deleteUserCredentialsTotpCmd.Flags(), "user_id")
+  UserCmd.AddCommand(userCredentialsLdapCmd)
+  userCredentialsLdapCmd.Flags().Int64("user_id", 0, "id of user")
+  cobra.MarkFlagRequired(userCredentialsLdapCmd.Flags(), "user_id")
+  userCredentialsLdapCmd.Flags().String("fields", "", "Requested fields.")
+  UserCmd.AddCommand(deleteUserCredentialsLdapCmd)
+  deleteUserCredentialsLdapCmd.Flags().Int64("user_id", 0, "id of user")
+  cobra.MarkFlagRequired(deleteUserCredentialsLdapCmd.Flags(), "user_id")
+  UserCmd.AddCommand(userCredentialsGoogleCmd)
+  userCredentialsGoogleCmd.Flags().Int64("user_id", 0, "id of user")
+  cobra.MarkFlagRequired(userCredentialsGoogleCmd.Flags(), "user_id")
+  userCredentialsGoogleCmd.Flags().String("fields", "", "Requested fields.")
+  UserCmd.AddCommand(deleteUserCredentialsGoogleCmd)
+  deleteUserCredentialsGoogleCmd.Flags().Int64("user_id", 0, "id of user")
+  cobra.MarkFlagRequired(deleteUserCredentialsGoogleCmd.Flags(), "user_id")
+  UserCmd.AddCommand(userCredentialsSamlCmd)
+  userCredentialsSamlCmd.Flags().Int64("user_id", 0, "id of user")
+  cobra.MarkFlagRequired(userCredentialsSamlCmd.Flags(), "user_id")
+  userCredentialsSamlCmd.Flags().String("fields", "", "Requested fields.")
+  UserCmd.AddCommand(deleteUserCredentialsSamlCmd)
+  deleteUserCredentialsSamlCmd.Flags().Int64("user_id", 0, "id of user")
+  cobra.MarkFlagRequired(deleteUserCredentialsSamlCmd.Flags(), "user_id")
+  UserCmd.AddCommand(userCredentialsOidcCmd)
+  userCredentialsOidcCmd.Flags().Int64("user_id", 0, "id of user")
+  cobra.MarkFlagRequired(userCredentialsOidcCmd.Flags(), "user_id")
+  userCredentialsOidcCmd.Flags().String("fields", "", "Requested fields.")
+  UserCmd.AddCommand(deleteUserCredentialsOidcCmd)
+  deleteUserCredentialsOidcCmd.Flags().Int64("user_id", 0, "id of user")
+  cobra.MarkFlagRequired(deleteUserCredentialsOidcCmd.Flags(), "user_id")
+  UserCmd.AddCommand(userCredentialsApi3Cmd)
+  userCredentialsApi3Cmd.Flags().Int64("user_id", 0, "Id of user")
+  cobra.MarkFlagRequired(userCredentialsApi3Cmd.Flags(), "user_id")
+  userCredentialsApi3Cmd.Flags().Int64("credentials_api3_id", 0, "Id of API 3 Credential")
+  cobra.MarkFlagRequired(userCredentialsApi3Cmd.Flags(), "credentials_api3_id")
+  userCredentialsApi3Cmd.Flags().String("fields", "", "Requested fields.")
+  UserCmd.AddCommand(deleteUserCredentialsApi3Cmd)
+  deleteUserCredentialsApi3Cmd.Flags().Int64("user_id", 0, "id of user")
+  cobra.MarkFlagRequired(deleteUserCredentialsApi3Cmd.Flags(), "user_id")
+  deleteUserCredentialsApi3Cmd.Flags().Int64("credentials_api3_id", 0, "id of API 3 Credential")
+  cobra.MarkFlagRequired(deleteUserCredentialsApi3Cmd.Flags(), "credentials_api3_id")
+  UserCmd.AddCommand(allUserCredentialsApi3sCmd)
+  allUserCredentialsApi3sCmd.Flags().Int64("user_id", 0, "id of user")
+  cobra.MarkFlagRequired(allUserCredentialsApi3sCmd.Flags(), "user_id")
+  allUserCredentialsApi3sCmd.Flags().String("fields", "", "Requested fields.")
+  UserCmd.AddCommand(createUserCredentialsApi3Cmd)
+  createUserCredentialsApi3Cmd.Flags().Int64("user_id", 0, "id of user")
+  cobra.MarkFlagRequired(createUserCredentialsApi3Cmd.Flags(), "user_id")
+  createUserCredentialsApi3Cmd.Flags().String("fields", "", "Requested fields.")
+  UserCmd.AddCommand(userCredentialsEmbedCmd)
+  userCredentialsEmbedCmd.Flags().Int64("user_id", 0, "Id of user")
+  cobra.MarkFlagRequired(userCredentialsEmbedCmd.Flags(), "user_id")
+  userCredentialsEmbedCmd.Flags().Int64("credentials_embed_id", 0, "Id of Embedding Credential")
+  cobra.MarkFlagRequired(userCredentialsEmbedCmd.Flags(), "credentials_embed_id")
+  userCredentialsEmbedCmd.Flags().String("fields", "", "Requested fields.")
+  UserCmd.AddCommand(deleteUserCredentialsEmbedCmd)
+  deleteUserCredentialsEmbedCmd.Flags().Int64("user_id", 0, "id of user")
+  cobra.MarkFlagRequired(deleteUserCredentialsEmbedCmd.Flags(), "user_id")
+  deleteUserCredentialsEmbedCmd.Flags().Int64("credentials_embed_id", 0, "id of Embedding Credential")
+  cobra.MarkFlagRequired(deleteUserCredentialsEmbedCmd.Flags(), "credentials_embed_id")
+  UserCmd.AddCommand(allUserCredentialsEmbedsCmd)
+  allUserCredentialsEmbedsCmd.Flags().Int64("user_id", 0, "id of user")
+  cobra.MarkFlagRequired(allUserCredentialsEmbedsCmd.Flags(), "user_id")
+  allUserCredentialsEmbedsCmd.Flags().String("fields", "", "Requested fields.")
+  UserCmd.AddCommand(userCredentialsLookerOpenidCmd)
+  userCredentialsLookerOpenidCmd.Flags().Int64("user_id", 0, "id of user")
+  cobra.MarkFlagRequired(userCredentialsLookerOpenidCmd.Flags(), "user_id")
+  userCredentialsLookerOpenidCmd.Flags().String("fields", "", "Requested fields.")
+  UserCmd.AddCommand(deleteUserCredentialsLookerOpenidCmd)
+  deleteUserCredentialsLookerOpenidCmd.Flags().Int64("user_id", 0, "id of user")
+  cobra.MarkFlagRequired(deleteUserCredentialsLookerOpenidCmd.Flags(), "user_id")
+  UserCmd.AddCommand(userSessionCmd)
+  userSessionCmd.Flags().Int64("user_id", 0, "Id of user")
+  cobra.MarkFlagRequired(userSessionCmd.Flags(), "user_id")
+  userSessionCmd.Flags().Int64("session_id", 0, "Id of Web Login Session")
+  cobra.MarkFlagRequired(userSessionCmd.Flags(), "session_id")
+  userSessionCmd.Flags().String("fields", "", "Requested fields.")
+  UserCmd.AddCommand(deleteUserSessionCmd)
+  deleteUserSessionCmd.Flags().Int64("user_id", 0, "id of user")
+  cobra.MarkFlagRequired(deleteUserSessionCmd.Flags(), "user_id")
+  deleteUserSessionCmd.Flags().Int64("session_id", 0, "id of Web Login Session")
+  cobra.MarkFlagRequired(deleteUserSessionCmd.Flags(), "session_id")
+  UserCmd.AddCommand(allUserSessionsCmd)
+  allUserSessionsCmd.Flags().Int64("user_id", 0, "id of user")
+  cobra.MarkFlagRequired(allUserSessionsCmd.Flags(), "user_id")
+  allUserSessionsCmd.Flags().String("fields", "", "Requested fields.")
+  UserCmd.AddCommand(createUserCredentialsEmailPasswordResetCmd)
+  createUserCredentialsEmailPasswordResetCmd.Flags().Int64("user_id", 0, "Id of user")
+  cobra.MarkFlagRequired(createUserCredentialsEmailPasswordResetCmd.Flags(), "user_id")
+  createUserCredentialsEmailPasswordResetCmd.Flags().Bool("expires", false, "Expiring token.")
+  createUserCredentialsEmailPasswordResetCmd.Flags().String("fields", "", "Requested fields.")
+  UserCmd.AddCommand(userRolesCmd)
+  userRolesCmd.Flags().Int64("user_id", 0, "id of user")
+  cobra.MarkFlagRequired(userRolesCmd.Flags(), "user_id")
+  userRolesCmd.Flags().String("fields", "", "Requested fields.")
+  userRolesCmd.Flags().Bool("direct_association_only", false, "Get only roles associated directly with the user: exclude those only associated through groups.")
+  UserCmd.AddCommand(setUserRolesCmd)
+  setUserRolesCmd.Flags().Int64("user_id", 0, "id of user")
+  cobra.MarkFlagRequired(setUserRolesCmd.Flags(), "user_id")
+  setUserRolesCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(setUserRolesCmd.Flags(), "body")
+  setUserRolesCmd.Flags().String("fields", "", "Requested fields.")
+  UserCmd.AddCommand(userAttributeUserValuesCmd)
+  userAttributeUserValuesCmd.Flags().Int64("user_id", 0, "Id of user")
+  cobra.MarkFlagRequired(userAttributeUserValuesCmd.Flags(), "user_id")
+  userAttributeUserValuesCmd.Flags().String("fields", "", "Requested fields.")
+  userAttributeUserValuesCmd.Flags().String("user_attribute_ids", "", "Specific user attributes to request. Omit or leave blank to request all user attributes.")
+  userAttributeUserValuesCmd.Flags().Bool("all_values", false, "If true, returns all values in the search path instead of just the first value found. Useful for debugging group precedence.")
+  userAttributeUserValuesCmd.Flags().Bool("include_unset", false, "If true, returns an empty record for each requested attribute that has no user, group, or default value.")
+  UserCmd.AddCommand(setUserAttributeUserValueCmd)
+  setUserAttributeUserValueCmd.Flags().Int64("user_id", 0, "Id of user")
+  cobra.MarkFlagRequired(setUserAttributeUserValueCmd.Flags(), "user_id")
+  setUserAttributeUserValueCmd.Flags().Int64("user_attribute_id", 0, "Id of user attribute")
+  cobra.MarkFlagRequired(setUserAttributeUserValueCmd.Flags(), "user_attribute_id")
+  setUserAttributeUserValueCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(setUserAttributeUserValueCmd.Flags(), "body")
+  UserCmd.AddCommand(deleteUserAttributeUserValueCmd)
+  deleteUserAttributeUserValueCmd.Flags().Int64("user_id", 0, "Id of user")
+  cobra.MarkFlagRequired(deleteUserAttributeUserValueCmd.Flags(), "user_id")
+  deleteUserAttributeUserValueCmd.Flags().Int64("user_attribute_id", 0, "Id of user attribute")
+  cobra.MarkFlagRequired(deleteUserAttributeUserValueCmd.Flags(), "user_attribute_id")
+  UserCmd.AddCommand(sendUserCredentialsEmailPasswordResetCmd)
+  sendUserCredentialsEmailPasswordResetCmd.Flags().Int64("user_id", 0, "Id of user")
+  cobra.MarkFlagRequired(sendUserCredentialsEmailPasswordResetCmd.Flags(), "user_id")
+  sendUserCredentialsEmailPasswordResetCmd.Flags().String("fields", "", "Requested fields.")
+  UserCmd.AddCommand(wipeoutUserEmailsCmd)
+  wipeoutUserEmailsCmd.Flags().Int64("user_id", 0, "Id of user")
+  cobra.MarkFlagRequired(wipeoutUserEmailsCmd.Flags(), "user_id")
+  wipeoutUserEmailsCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(wipeoutUserEmailsCmd.Flags(), "body")
+  wipeoutUserEmailsCmd.Flags().String("fields", "", "Requested fields.")
+  UserCmd.AddCommand(createEmbedUserCmd)
+  createEmbedUserCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(createEmbedUserCmd.Flags(), "body")
+  rootCmd.AddCommand(UserCmd)
+  UserAttributeCmd.AddCommand(allUserAttributesCmd)
+  allUserAttributesCmd.Flags().String("fields", "", "Requested fields.")
+  allUserAttributesCmd.Flags().String("sorts", "", "Fields to order the results by. Sortable fields include: name, label")
+  UserAttributeCmd.AddCommand(createUserAttributeCmd)
+  createUserAttributeCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(createUserAttributeCmd.Flags(), "body")
+  createUserAttributeCmd.Flags().String("fields", "", "Requested fields.")
+  UserAttributeCmd.AddCommand(userAttributeCmd)
+  userAttributeCmd.Flags().Int64("user_attribute_id", 0, "Id of user attribute")
+  cobra.MarkFlagRequired(userAttributeCmd.Flags(), "user_attribute_id")
+  userAttributeCmd.Flags().String("fields", "", "Requested fields.")
+  UserAttributeCmd.AddCommand(updateUserAttributeCmd)
+  updateUserAttributeCmd.Flags().Int64("user_attribute_id", 0, "Id of user attribute")
+  cobra.MarkFlagRequired(updateUserAttributeCmd.Flags(), "user_attribute_id")
+  updateUserAttributeCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(updateUserAttributeCmd.Flags(), "body")
+  updateUserAttributeCmd.Flags().String("fields", "", "Requested fields.")
+  UserAttributeCmd.AddCommand(deleteUserAttributeCmd)
+  deleteUserAttributeCmd.Flags().Int64("user_attribute_id", 0, "Id of user_attribute")
+  cobra.MarkFlagRequired(deleteUserAttributeCmd.Flags(), "user_attribute_id")
+  UserAttributeCmd.AddCommand(allUserAttributeGroupValuesCmd)
+  allUserAttributeGroupValuesCmd.Flags().Int64("user_attribute_id", 0, "Id of user attribute")
+  cobra.MarkFlagRequired(allUserAttributeGroupValuesCmd.Flags(), "user_attribute_id")
+  allUserAttributeGroupValuesCmd.Flags().String("fields", "", "Requested fields.")
+  UserAttributeCmd.AddCommand(setUserAttributeGroupValuesCmd)
+  setUserAttributeGroupValuesCmd.Flags().Int64("user_attribute_id", 0, "Id of user attribute")
+  cobra.MarkFlagRequired(setUserAttributeGroupValuesCmd.Flags(), "user_attribute_id")
+  setUserAttributeGroupValuesCmd.Flags().String("body", "", "")
+  cobra.MarkFlagRequired(setUserAttributeGroupValuesCmd.Flags(), "body")
+  rootCmd.AddCommand(UserAttributeCmd)
+  WorkspaceCmd.AddCommand(allWorkspacesCmd)
+  WorkspaceCmd.AddCommand(workspaceCmd)
+  workspaceCmd.Flags().String("workspace_id", "", "Id of the workspace ")
+  cobra.MarkFlagRequired(workspaceCmd.Flags(), "workspace_id")
+  rootCmd.AddCommand(WorkspaceCmd)
 }

@@ -40,23 +40,39 @@ import type {
 export class CliGen extends CodeGen {
   codePath = './cli'
   fileExtension = '.go'
-  nullStr = 'nil'
   packagePath = ''
-  commentStr = '// '
 
-  enumDelimiter = '\n'
-  indentStr = '  '
-  endTypeStr = '}'
-  codeQuote = `"`
+  keywords = new Set<string>([
+    'break',
+    'default',
+    'func',
+    'interface',
+    'select',
+    'case',
+    'defer',
+    'go',
+    'map',
+    'struct',
+    'chan',
+    'else',
+    'goto',
+    'package',
+    'switch',
+    'const',
+    'fallthrough',
+    'if',
+    'range',
+    'type',
+    'continue',
+    'for',
+    'import',
+    'return',
+    'var',
+  ])
 
-  useNamedParameters = false
-  needsRequestTypes = true
-
-  keywords = new Set<string>([])
-
-  regionToSubCommands = new Map<string, Array<SubCommand>>()
-  currentRegion = ''
-  commands = new Set<string>([])
+  commandToSubCommands = new Map<string, Array<SubCommand>>()
+  currentCommand = ''
+  usedCommands = new Set<string>([])
 
   constructor(public api: ApiModel, public versions?: IVersionInfo) {
     super(api, versions)
@@ -67,31 +83,163 @@ export class CliGen extends CodeGen {
     this.apiVersion = this.packageName
   }
 
+  supportsMultiApi(): boolean {
+    return false
+  }
+
+  reserve(name: string) {
+    if (this.keywords.has(name)) {
+      return `_${name}`
+    }
+    return name
+  }
+
   beginRegion(_indent: string, description: string): string {
     const [name, desc] = description.split(':').map((str) => str.trim())
-    const camelCaseName = name.charAt(0).toLowerCase() + name.slice(1)
-    this.currentRegion = `${camelCaseName}Cmd`
-    if (this.commands.has(this.currentRegion)) {
-      this.currentRegion = `${this.currentRegion}${this.getRandomInt(10000)}`
-    }
-    this.commands.add(this.currentRegion)
-    return `
-var ${this.currentRegion} = &cobra.Command{
+    this.currentCommand = this.getUnusedCommandName(this.toCamelCase(name))
+    return `var ${this.currentCommand} = &cobra.Command{
   Use:   "${name}",
   Short: "${desc}",
   Long: "${desc}",
 }`
   }
 
-  getRandomInt(max: number) {
-    return Math.floor(Math.random() * max)
-  }
-
   endRegion(_indent: string, _description: string): string {
     return ''
   }
 
-  getMappedType(type: IType): string {
+  declareMethod(indent: string, method: IMethod) {
+    const name = this.toCamelCase(method.name)
+    const commandName = this.getUnusedCommandName(name)
+    const siblingCommands = this.commandToSubCommands.get(this.currentCommand)
+
+    const flags = method.allParams.map((param) => {
+      return new Flag(
+        param.name,
+        this.replaceAll(param.description, '"', '\\"'),
+        param.required,
+        this.getPFlag(param.type)
+      )
+    })
+    const subCommand = new SubCommand(commandName, flags)
+    if (siblingCommands !== undefined) {
+      siblingCommands.push(subCommand)
+    } else {
+      this.commandToSubCommands.set(this.currentCommand, [subCommand])
+    }
+
+    const flagsCode = method.allParams
+      .map((param) => this.declareParameter(indent, method, param))
+      .join('\n')
+
+    return `
+var ${commandName} = &cobra.Command{
+  Use:   "${name}",
+  Short: "${method.summary}",
+  Long: \`${this.replaceAll(method.description, '`', "'")}\`,
+  Run: func(cmd *cobra.Command, args []string) {
+    fmt.Println("${name} called")
+    ${flagsCode}
+  },
+}`
+  }
+
+  declareParameter(_indent: string, _method: IMethod, param: IParameter) {
+    return `
+    ${this.reserve(param.name)}, _ := cmd.Flags().Get${this.getPFlag(
+      param.type
+    )}("${param.name}")
+    fmt.Println("${param.name} set to", ${this.reserve(param.name)})`
+  }
+
+  methodsPrologue(_indent: string) {
+    return `package cmd
+
+import (
+  "fmt"
+
+  "github.com/spf13/cobra"
+)
+`
+  }
+
+  methodsEpilogue(_indent: string) {
+    const addCommandsCode = Array.from(this.commandToSubCommands)
+      .map(([mainCommand, subCommands]) => {
+        const subCommandsString = subCommands
+          .map((subCommand) => {
+            const flagsCode = subCommand.flags
+              .map((flag) => {
+                if (flag.required) {
+                  return `  ${subCommand.name}.Flags().${flag.type}("${
+                    flag.name
+                  }", ${flag.defaultValue()}, "${flag.description}")
+  cobra.MarkFlagRequired(${subCommand.name}.Flags(), "${flag.name}")
+`
+                } else {
+                  return `  ${subCommand.name}.Flags().${flag.type}("${
+                    flag.name
+                  }", ${flag.defaultValue()}, "${flag.description}")
+`
+                }
+              })
+              .join('')
+            return `  ${mainCommand}.AddCommand(${subCommand.name})
+${flagsCode}`
+          })
+          .join('')
+        return `${subCommandsString}  rootCmd.AddCommand(${mainCommand})
+`
+      })
+      .join('')
+
+    return `
+func init() {
+${addCommandsCode}}
+`
+  }
+
+  declareProperty(_indent: string, _property: IProperty) {
+    return ''
+  }
+
+  encodePathParams(_indent: string, _method: IMethod) {
+    return ''
+  }
+
+  methodSignature(_indent: string, _method: IMethod) {
+    return ''
+  }
+
+  modelsEpilogue(_indent: string) {
+    return ''
+  }
+
+  modelsPrologue(_indent: string) {
+    return ''
+  }
+
+  summary(_indent: string, _text: string) {
+    return ''
+  }
+
+  typeSignature(_indent: string, _type: IType) {
+    return ''
+  }
+
+  getUnusedCommandName(command: string) {
+    command = `${command}Cmd`
+    if (this.usedCommands.has(command)) {
+      command = `${command}${this.getRandomInt(10000)}`
+    }
+    return command
+  }
+
+  getRandomInt(max: number) {
+    return Math.floor(Math.random() * max)
+  }
+
+  getPFlag(type: IType): string {
     switch (type.name) {
       case 'boolean': {
         return 'Bool'
@@ -120,168 +268,26 @@ var ${this.currentRegion} = &cobra.Command{
     }
   }
 
-  declareMethod(_indent: string, method: IMethod) {
-    let commandName = method.name
-    const underScoreIndexes = this.getAllIndexes(commandName, '_')
-    underScoreIndexes.forEach((index) => {
-      commandName = this.replaceAt(
-        commandName,
-        index + 1,
-        commandName[index + 1].toUpperCase()
-      )
-    })
-    const use = this.replaceAll(commandName, '_', '')
-    commandName = `${use}Cmd`
-    if (this.commands.has(commandName)) {
-      commandName = `${commandName}${this.getRandomInt(10000)}`
-    }
-    this.commands.add(commandName)
-    const subCommands = this.regionToSubCommands.get(this.currentRegion)
-    const flagObjs = method.allParams.map((param) =>
-      this.generateFlagObj(param)
-    )
-    const subCommand = new SubCommand(commandName, flagObjs)
-    if (subCommands !== undefined) {
-      subCommands.push(subCommand)
-    } else {
-      this.regionToSubCommands.set(this.currentRegion, [subCommand])
-    }
-    const flags = method.allParams
-      .map((param) => this.generateFlag(param))
-      .join('\n')
-    return `
-var ${commandName} = &cobra.Command{
-  Use:   "${use}",
-  Short: "${method.summary}",
-  Long: \`${this.replaceAll(method.description, '`', "'")}\`,
-  Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("${use} called")
-    ${flags}
-  },
-}`
-  }
-
-  generateFlag(param: IParameter) {
-    return `
-    _${param.name}, _ := cmd.Flags().Get${this.getMappedType(param.type)}("${
-      param.name
-    }")
-    fmt.Println("${param.name} set to", _${param.name})`
-  }
-
-  generateFlagObj(param: IParameter) {
-    return new Flag(
-      param.name,
-      param.description,
-      param.required,
-      this.getMappedType(param.type)
-    )
-  }
-
   replaceAll(str: string, find: string, replace: string) {
     return str.replace(new RegExp(find, 'g'), replace)
   }
 
-  replaceAt(str: string, index: number, replacement: string) {
-    return (
-      str.substr(0, index) +
-      replacement +
-      str.substr(index + replacement.length)
+  // capitalize(str: string): string {
+  //   return str.charAt(0).toUpperCase() + str.slice(1)
+  // }
+
+  // toCamelCaseCap(str: string): string {
+  //   return this.capitalize(
+  //     str.replace(/([-_][a-z])/g, (group) =>
+  //       group.toUpperCase().replace('-', '').replace('_', '')
+  //     )
+  //   )
+  // }
+
+  toCamelCase(str: string): string {
+    return str.replace(/([-_][a-z])/g, (group) =>
+      group.toUpperCase().replace('-', '').replace('_', '')
     )
-  }
-
-  getAllIndexes(str: string, val: string) {
-    const indexes = []
-    let i
-    for (i = 0; i < str.length; i++) if (str[i] === val) indexes.push(i)
-    return indexes
-  }
-
-  declareParameter(_indent: string, _method: IMethod, _param: IParameter) {
-    return ''
-  }
-
-  declareProperty(_indent: string, _property: IProperty) {
-    return ''
-  }
-
-  encodePathParams(_indent: string, _method: IMethod) {
-    return ''
-  }
-
-  methodSignature(_indent: string, _method: IMethod) {
-    return ''
-  }
-
-  methodsEpilogue(indent: string) {
-    const addCommands = Array.from(this.regionToSubCommands)
-      .map(([key, subCommands]) => {
-        const mainCommand = key
-        const subCommandsString = subCommands
-          .map((subCommand) => {
-            const flags = subCommand.flags
-              .map((flag) => {
-                let requiredText = ''
-                if (flag.required) {
-                  requiredText = `cobra.MarkFlagRequired(${subCommand.name}.Flags(), "${flag.name}")`
-                }
-                return `
-              ${subCommand.name}.Flags().${flag.type}("${
-                  flag.name
-                }", ${flag.defaultValue()}, "${flag.description}")
-              ${requiredText}
-              `
-              })
-              .join('\n')
-            return `
-            ${indent}${mainCommand}.AddCommand(${subCommand.name})
-            ${flags}
-            `
-          })
-          .join('\n')
-        return `\n${subCommandsString}\n${indent}rootCmd.AddCommand(${mainCommand})`
-      })
-      .join('')
-
-    return `
-func init() {
-${addCommands}
-}`
-  }
-
-  methodsPrologue(_indent: string) {
-    return `
-package cmd
-
-import (
-  "fmt"
-
-  "github.com/spf13/cobra"
-)`
-  }
-
-  modelsEpilogue(_indent: string) {
-    return ''
-  }
-
-  modelsPrologue(_indent: string) {
-    return ''
-  }
-
-  summary(_indent: string, _text: string) {
-    return ''
-  }
-
-  commentHeader(
-    _indent: string,
-    _text: string | undefined,
-    _commentStr = ' * '
-  ) {
-    return ''
-  }
-
-  typeSignature(_indent: string, _type: IType) {
-    return ''
   }
 }
 
@@ -308,13 +314,9 @@ class Flag {
     type: string
   ) {
     this.name = name
-    this.description = this.replaceAll(description, '"', '\\"')
+    this.description = description
     this.required = required
     this.type = type
-  }
-
-  replaceAll(str: string, find: string, replace: string) {
-    return str.replace(new RegExp(find, 'g'), replace)
   }
 
   defaultValue() {
