@@ -73,6 +73,7 @@ export class CliGen extends CodeGen {
   commandToSubCommands = new Map<string, Array<SubCommand>>()
   currentCommand = ''
   usedCommands = new Set<string>([])
+  dedupe = 0
 
   constructor(public api: ApiModel, public versions?: IVersionInfo) {
     super(api, versions)
@@ -97,11 +98,17 @@ export class CliGen extends CodeGen {
   beginRegion(_indent: string, description: string): string {
     const [name, desc] = description.split(':').map((str) => str.trim())
     this.currentCommand = this.getUnusedCommandName(this.toCamelCase(name))
-    return `var ${this.currentCommand} = &cobra.Command{
-  Use:   "${name}",
-  Short: "${desc}",
-  Long: "${desc}",
-}`
+    return this.declareCobraCommand(this.currentCommand, name, desc)
+  }
+
+  declareCobraCommand(command: string, name: string, desc: string) {
+    return [
+      `var ${command} = &cobra.Command{`,
+      `  Use:   "${name}",`,
+      `  Short: "${desc}",`,
+      `  Long:  "${desc}",`,
+      `}`,
+    ].join('\n')
   }
 
   endRegion(_indent: string, _description: string): string {
@@ -132,35 +139,55 @@ export class CliGen extends CodeGen {
       .map((param) => this.declareParameter(indent, method, param))
       .join('\n')
 
-    return `
-var ${commandName} = &cobra.Command{
-  Use:   "${name}",
-  Short: "${method.summary}",
-  Long: \`${this.replaceAll(method.description, '`', "'")}\`,
-  Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("${name} called")
-    ${flagsCode}
-  },
-}`
+    return this.declareRunnableCobraCommand(
+      commandName,
+      name,
+      method.summary,
+      this.replaceAll(method.description, '`', "'"),
+      flagsCode
+    )
   }
 
   declareParameter(_indent: string, _method: IMethod, param: IParameter) {
-    return `
-    ${this.reserve(param.name)}, _ := cmd.Flags().Get${this.getPFlag(
-      param.type
-    )}("${param.name}")
-    fmt.Println("${param.name} set to", ${this.reserve(param.name)})`
+    return [
+      `    ${this.reserve(param.name)}, _ := cmd.Flags().Get${this.getPFlag(
+        param.type
+      )}("${param.name}")`,
+      `    fmt.Println("${param.name} set to", ${this.reserve(param.name)})`,
+    ].join('\n')
+  }
+
+  declareRunnableCobraCommand(
+    command: string,
+    name: string,
+    short: string,
+    long: string,
+    flags: string
+  ) {
+    return [
+      `var ${command} = &cobra.Command{`,
+      `  Use:   "${name}",`,
+      `  Short: "${short}",`,
+      `  Long: \`${long}\`,`,
+      `  Run: func(cmd *cobra.Command, args []string) {`,
+      `    fmt.Println("${name} called")`,
+      `${flags}`,
+      `  },`,
+      `}`,
+    ].join('\n')
   }
 
   methodsPrologue(_indent: string) {
-    return `package cmd
-
-import (
-  "fmt"
-
-  "github.com/spf13/cobra"
-)
-`
+    return [
+      `package cmd`,
+      ``,
+      `import (`,
+      `  "fmt"`,
+      ``,
+      `  "github.com/spf13/cobra"`,
+      `)`,
+      ``,
+    ].join('\n')
   }
 
   methodsEpilogue(_indent: string) {
@@ -171,32 +198,51 @@ import (
             const flagsCode = subCommand.flags
               .map((flag) => {
                 if (flag.required) {
-                  return `  ${subCommand.name}.Flags().${flag.type}("${
-                    flag.name
-                  }", ${flag.defaultValue()}, "${flag.description}")
-  cobra.MarkFlagRequired(${subCommand.name}.Flags(), "${flag.name}")
-`
+                  return this.declareRequiredCobraFlag(subCommand, flag)
                 } else {
-                  return `  ${subCommand.name}.Flags().${flag.type}("${
-                    flag.name
-                  }", ${flag.defaultValue()}, "${flag.description}")
-`
+                  return this.declareCobraFlag(subCommand, flag)
                 }
               })
-              .join('')
-            return `  ${mainCommand}.AddCommand(${subCommand.name})
-${flagsCode}`
+              .join('\n')
+            if (flagsCode === '') {
+              return [
+                `  ${mainCommand}.AddCommand(${subCommand.name})`,
+                ``,
+              ].join('\n')
+            } else {
+              return [
+                `  ${mainCommand}.AddCommand(${subCommand.name})`,
+                `${flagsCode}`,
+                ``,
+              ].join('\n')
+            }
           })
           .join('')
-        return `${subCommandsString}  rootCmd.AddCommand(${mainCommand})
-`
+        return [
+          `${subCommandsString}  rootCmd.AddCommand(${mainCommand})`,
+          ``,
+        ].join('\n')
       })
       .join('')
 
-    return `
-func init() {
-${addCommandsCode}}
-`
+    return [``, `func init() {`, `${addCommandsCode}}`, ``].join('\n')
+  }
+
+  declareCobraFlag(subCommand: SubCommand, flag: Flag) {
+    return [
+      `  ${subCommand.name}.Flags().${flag.type}("${
+        flag.name
+      }", ${flag.defaultValue()}, "${flag.description}")`,
+    ].join('\n')
+  }
+
+  declareRequiredCobraFlag(subCommand: SubCommand, flag: Flag) {
+    return [
+      `  ${subCommand.name}.Flags().${flag.type}("${
+        flag.name
+      }", ${flag.defaultValue()}, "${flag.description}")`,
+      `  cobra.MarkFlagRequired(${subCommand.name}.Flags(), "${flag.name}")`,
+    ].join('\n')
   }
 
   declareProperty(_indent: string, _property: IProperty) {
@@ -230,13 +276,10 @@ ${addCommandsCode}}
   getUnusedCommandName(command: string) {
     command = `${command}Cmd`
     if (this.usedCommands.has(command)) {
-      command = `${command}${this.getRandomInt(10000)}`
+      command = `${command}${this.dedupe++}`
     }
+    this.usedCommands.add(command)
     return command
-  }
-
-  getRandomInt(max: number) {
-    return Math.floor(Math.random() * max)
   }
 
   getPFlag(type: IType): string {
