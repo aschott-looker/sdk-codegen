@@ -212,7 +212,7 @@ export class APIMethods implements IAPIMethods {
   set apiPath(value: string) {
     if (this._apiPath) {
       throw new Error(
-        `API Path is set to"${this._apiPath}" and cannot be reassigned`
+        `API Path is set to "${this._apiPath}" and cannot be reassigned`
       )
     }
     this._apiPath = value
@@ -226,7 +226,7 @@ export class APIMethods implements IAPIMethods {
     // API version can only be set once for the instance
     if (this._apiVersion) {
       throw new Error(
-        `API Version is set to"${this._apiVersion}" and cannot be reassigned`
+        `API Version is set to "${this._apiVersion}" and cannot be reassigned`
       )
     }
     this._apiVersion = value
