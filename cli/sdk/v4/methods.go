@@ -26,9 +26,17 @@
 package cmd
 
 import (
+  "encoding/json"
   "fmt"
+  "strings"
 
+  "github.com/aschott-looker/looker-cli/api"
+  v4 "github.com/looker-open-source/sdk-codegen/go/sdk/v4"
   "github.com/spf13/cobra"
+)
+
+var (
+  sdk = api.InitSdk()
 )
 
 var AlertCmd = &cobra.Command{
@@ -43,7 +51,6 @@ var searchAlertsCmd = &cobra.Command{
   Long: `### Search Alerts
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("searchAlerts called")
     limit, _ := cmd.Flags().GetInt64("limit")
     fmt.Println("limit set to", limit)
     offset, _ := cmd.Flags().GetInt64("offset")
@@ -64,6 +71,7 @@ var searchAlertsCmd = &cobra.Command{
     fmt.Println("last_run_end set to", last_run_end)
     all_owners, _ := cmd.Flags().GetBool("all_owners")
     fmt.Println("all_owners set to", all_owners)
+
   },
 }
 
@@ -73,9 +81,9 @@ var getAlertCmd = &cobra.Command{
   Long: `### Get an alert by a given alert ID
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("getAlert called")
     alert_id, _ := cmd.Flags().GetInt64("alert_id")
     fmt.Println("alert_id set to", alert_id)
+
   },
 }
 
@@ -87,11 +95,11 @@ var updateAlertCmd = &cobra.Command{
 #
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("updateAlert called")
     alert_id, _ := cmd.Flags().GetInt64("alert_id")
     fmt.Println("alert_id set to", alert_id)
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
+
   },
 }
 
@@ -103,11 +111,11 @@ var updateAlertFieldCmd = &cobra.Command{
 #
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("updateAlertField called")
     alert_id, _ := cmd.Flags().GetInt64("alert_id")
     fmt.Println("alert_id set to", alert_id)
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
+
   },
 }
 
@@ -117,9 +125,9 @@ var deleteAlertCmd = &cobra.Command{
   Long: `### Delete an alert by a given alert ID
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("deleteAlert called")
     alert_id, _ := cmd.Flags().GetInt64("alert_id")
     fmt.Println("alert_id set to", alert_id)
+
   },
 }
 
@@ -163,9 +171,9 @@ Run alert on dashboard element '103' at 5am every day. Send an email to 'test@te
 '''
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("createAlert called")
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
+
   },
 }
 
@@ -175,11 +183,11 @@ var enqueueAlertCmd = &cobra.Command{
   Long: `### Enqueue an Alert by ID
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("enqueueAlert called")
     alert_id, _ := cmd.Flags().GetInt64("alert_id")
     fmt.Println("alert_id set to", alert_id)
     force, _ := cmd.Flags().GetBool("force")
     fmt.Println("force set to", force)
+
   },
 }
 
@@ -224,11 +232,11 @@ Always pass credentials in body params. Pass credentials in URL query params **o
 For more information and detailed examples of Looker API authorization, see [How to Authenticate to Looker API3](https://github.com/looker/looker-sdk-ruby/blob/master/authentication.md).
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("login called")
     client_id, _ := cmd.Flags().GetString("client_id")
     fmt.Println("client_id set to", client_id)
     client_secret, _ := cmd.Flags().GetString("client_secret")
     fmt.Println("client_secret set to", client_secret)
+
   },
 }
 
@@ -253,11 +261,11 @@ each of those API calls.
 See 'login' for more detail on the access token and how to use it.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("loginUser called")
     user_id, _ := cmd.Flags().GetInt64("user_id")
     fmt.Println("user_id set to", user_id)
     associative, _ := cmd.Flags().GetBool("associative")
     fmt.Println("associative set to", associative)
+
   },
 }
 
@@ -267,7 +275,7 @@ var logoutCmd = &cobra.Command{
   Long: `### Logout of the API and invalidate the current access token.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("logout called")
+
 
   },
 }
@@ -288,9 +296,9 @@ var createEmbedSecretCmd = &cobra.Command{
 The value of the 'secret' field will be set by Looker and returned.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("createEmbedSecret called")
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
+
   },
 }
 
@@ -300,9 +308,9 @@ var deleteEmbedSecretCmd = &cobra.Command{
   Long: `### Delete an embed secret.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("deleteEmbedSecret called")
     embed_secret_id, _ := cmd.Flags().GetInt64("embed_secret_id")
     fmt.Println("embed_secret_id set to", embed_secret_id)
+
   },
 }
 
@@ -345,9 +353,9 @@ it to disk, do not pass it to a third party, and only pass it through a secure H
 encrypted transport.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("createSsoEmbedUrl called")
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
+
   },
 }
 
@@ -381,9 +389,9 @@ it to disk, do not pass it to a third party, and only pass it through a secure H
 encrypted transport.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("createEmbedUrlAsMe called")
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
+
   },
 }
 
@@ -408,7 +416,7 @@ Looker will never return an **auth_password** field. That value can be set, but 
 See the [Looker LDAP docs](https://www.looker.com/docs/r/api/ldap_setup) for additional information.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("ldapConfig called")
+
 
   },
 }
@@ -429,9 +437,9 @@ It is **highly** recommended that any LDAP setting changes be tested using the A
 See the [Looker LDAP docs](https://www.looker.com/docs/r/api/ldap_setup) for additional information.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("updateLdapConfig called")
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
+
   },
 }
 
@@ -458,9 +466,9 @@ No authentication to the LDAP server is attempted.
 The active LDAP settings are not modified.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("testLdapConfigConnection called")
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
+
   },
 }
 
@@ -490,9 +498,9 @@ The active LDAP settings are not modified.
 
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("testLdapConfigAuth called")
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
+
   },
 }
 
@@ -511,9 +519,9 @@ The active LDAP settings are not modified.
 
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("testLdapConfigUserInfo called")
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
+
   },
 }
 
@@ -532,9 +540,9 @@ The active LDAP settings are not modified.
 
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("testLdapConfigUserAuth called")
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
+
   },
 }
 
@@ -550,9 +558,9 @@ Results are filtered to include only the apps that the caller (current user)
 has permission to see.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("allOauthClientApps called")
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -564,11 +572,11 @@ var oauthClientAppCmd = &cobra.Command{
 Returns the registered app client with matching client_guid.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("oauthClientApp called")
     client_guid, _ := cmd.Flags().GetString("client_guid")
     fmt.Println("client_guid set to", client_guid)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -583,13 +591,13 @@ in OAuth login requests. If the client_guid and redirect_uri parameters in the l
 the app details registered with the Looker instance, the request is assumed to be a forgery and is rejected.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("registerOauthClientApp called")
     client_guid, _ := cmd.Flags().GetString("client_guid")
     fmt.Println("client_guid set to", client_guid)
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -601,13 +609,13 @@ var updateOauthClientAppCmd = &cobra.Command{
 Modifies the details a previously registered OAuth2 login client app.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("updateOauthClientApp called")
     client_guid, _ := cmd.Flags().GetString("client_guid")
     fmt.Println("client_guid set to", client_guid)
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -622,9 +630,9 @@ All active sessions and tokens issued for this app will immediately become inval
 ### Note: this deletion cannot be undone.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("deleteOauthClientApp called")
     client_guid, _ := cmd.Flags().GetString("client_guid")
     fmt.Println("client_guid set to", client_guid)
+
   },
 }
 
@@ -637,9 +645,9 @@ Immediately invalidates all auth codes, sessions, access tokens and refresh toke
 this app for ALL USERS of this app.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("invalidateTokens called")
     client_guid, _ := cmd.Flags().GetString("client_guid")
     fmt.Println("client_guid set to", client_guid)
+
   },
 }
 
@@ -655,13 +663,13 @@ the app to use their Looker account.
 Activating a user for an app that the user is already activated with returns a success response.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("activateAppUser called")
     client_guid, _ := cmd.Flags().GetString("client_guid")
     fmt.Println("client_guid set to", client_guid)
     user_id, _ := cmd.Flags().GetInt64("user_id")
     fmt.Println("user_id set to", user_id)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -680,13 +688,13 @@ As with most REST DELETE operations, this endpoint does not return an error if t
 resource (app or user) does not exist or has already been deactivated.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("deactivateAppUser called")
     client_guid, _ := cmd.Flags().GetString("client_guid")
     fmt.Println("client_guid set to", client_guid)
     user_id, _ := cmd.Flags().GetInt64("user_id")
     fmt.Println("user_id set to", user_id)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -707,7 +715,7 @@ Looker maintains a single OIDC configuation. It can be read and updated.       U
 OIDC is enabled or disabled for Looker using the **enabled** field.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("oidcConfig called")
+
 
   },
 }
@@ -726,9 +734,9 @@ OIDC is enabled or disabled for Looker using the **enabled** field.
 It is **highly** recommended that any OIDC setting changes be tested using the APIs below before being set globally.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("updateOidcConfig called")
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
+
   },
 }
 
@@ -738,9 +746,9 @@ var oidcTestConfigCmd = &cobra.Command{
   Long: `### Get a OIDC test configuration by test_slug.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("oidcTestConfig called")
     test_slug, _ := cmd.Flags().GetString("test_slug")
     fmt.Println("test_slug set to", test_slug)
+
   },
 }
 
@@ -750,9 +758,9 @@ var deleteOidcTestConfigCmd = &cobra.Command{
   Long: `### Delete a OIDC test configuration.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("deleteOidcTestConfig called")
     test_slug, _ := cmd.Flags().GetString("test_slug")
     fmt.Println("test_slug set to", test_slug)
+
   },
 }
 
@@ -762,9 +770,9 @@ var createOidcTestConfigCmd = &cobra.Command{
   Long: `### Create a OIDC test configuration.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("createOidcTestConfig called")
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
+
   },
 }
 
@@ -774,7 +782,7 @@ var passwordConfigCmd = &cobra.Command{
   Long: `### Get password config.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("passwordConfig called")
+
 
   },
 }
@@ -785,9 +793,9 @@ var updatePasswordConfigCmd = &cobra.Command{
   Long: `### Update password config.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("updatePasswordConfig called")
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
+
   },
 }
 
@@ -797,7 +805,7 @@ var forcePasswordResetAtNextLoginForAllUsersCmd = &cobra.Command{
   Long: `### Force all credentials_email users to reset their login passwords upon their next login.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("forcePasswordResetAtNextLoginForAllUsers called")
+
 
   },
 }
@@ -819,7 +827,7 @@ Looker maintains a single SAML configuation. It can be read and updated.       U
 SAML is enabled or disabled for Looker using the **enabled** field.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("samlConfig called")
+
 
   },
 }
@@ -838,9 +846,9 @@ SAML is enabled or disabled for Looker using the **enabled** field.
 It is **highly** recommended that any SAML setting changes be tested using the APIs below before being set globally.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("updateSamlConfig called")
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
+
   },
 }
 
@@ -850,9 +858,9 @@ var samlTestConfigCmd = &cobra.Command{
   Long: `### Get a SAML test configuration by test_slug.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("samlTestConfig called")
     test_slug, _ := cmd.Flags().GetString("test_slug")
     fmt.Println("test_slug set to", test_slug)
+
   },
 }
 
@@ -862,9 +870,9 @@ var deleteSamlTestConfigCmd = &cobra.Command{
   Long: `### Delete a SAML test configuration.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("deleteSamlTestConfig called")
     test_slug, _ := cmd.Flags().GetString("test_slug")
     fmt.Println("test_slug set to", test_slug)
+
   },
 }
 
@@ -874,9 +882,9 @@ var createSamlTestConfigCmd = &cobra.Command{
   Long: `### Create a SAML test configuration.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("createSamlTestConfig called")
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
+
   },
 }
 
@@ -886,9 +894,9 @@ var parseSamlIdpMetadataCmd = &cobra.Command{
   Long: `### Parse the given xml as a SAML IdP metadata document and return the result.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("parseSamlIdpMetadata called")
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
+
   },
 }
 
@@ -900,9 +908,9 @@ Note that this requires that the url be public or at least at a location where t
 can fetch it without requiring any special authentication.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("fetchAndParseSamlIdpMetadata called")
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
+
   },
 }
 
@@ -912,7 +920,7 @@ var sessionConfigCmd = &cobra.Command{
   Long: `### Get session config.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("sessionConfig called")
+
 
   },
 }
@@ -923,9 +931,9 @@ var updateSessionConfigCmd = &cobra.Command{
   Long: `### Update session config.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("updateSessionConfig called")
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
+
   },
 }
 
@@ -935,9 +943,9 @@ var allUserLoginLockoutsCmd = &cobra.Command{
   Long: `### Get currently locked-out users.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("allUserLoginLockouts called")
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -947,7 +955,6 @@ var searchUserLoginLockoutsCmd = &cobra.Command{
   Long: `### Search currently locked-out users.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("searchUserLoginLockouts called")
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
     page, _ := cmd.Flags().GetInt64("page")
@@ -966,6 +973,7 @@ var searchUserLoginLockoutsCmd = &cobra.Command{
     fmt.Println("remote_id set to", remote_id)
     filter_or, _ := cmd.Flags().GetBool("filter_or")
     fmt.Println("filter_or set to", filter_or)
+
   },
 }
 
@@ -975,9 +983,9 @@ var deleteUserLoginLockoutCmd = &cobra.Command{
   Long: `### Removes login lockout for the associated user.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("deleteUserLoginLockout called")
     key, _ := cmd.Flags().GetString("key")
     fmt.Println("key set to", key)
+
   },
 }
 
@@ -995,9 +1003,9 @@ var allBoardsCmd = &cobra.Command{
   Long: `### Get information about all boards.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("allBoards called")
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -1007,11 +1015,11 @@ var createBoardCmd = &cobra.Command{
   Long: `### Create a new board.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("createBoard called")
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -1043,7 +1051,6 @@ Boolean search params accept only "true" and "false" as values.
 
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("searchBoards called")
     title, _ := cmd.Flags().GetString("title")
     fmt.Println("title set to", title)
     created_at, _ := cmd.Flags().GetString("created_at")
@@ -1070,6 +1077,7 @@ Boolean search params accept only "true" and "false" as values.
     fmt.Println("limit set to", limit)
     filter_or, _ := cmd.Flags().GetBool("filter_or")
     fmt.Println("filter_or set to", filter_or)
+
   },
 }
 
@@ -1079,11 +1087,11 @@ var boardCmd = &cobra.Command{
   Long: `### Get information about a board.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("board called")
     board_id, _ := cmd.Flags().GetInt64("board_id")
     fmt.Println("board_id set to", board_id)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -1093,13 +1101,13 @@ var updateBoardCmd = &cobra.Command{
   Long: `### Update a board definition.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("updateBoard called")
     board_id, _ := cmd.Flags().GetInt64("board_id")
     fmt.Println("board_id set to", board_id)
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -1109,9 +1117,9 @@ var deleteBoardCmd = &cobra.Command{
   Long: `### Delete a board.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("deleteBoard called")
     board_id, _ := cmd.Flags().GetInt64("board_id")
     fmt.Println("board_id set to", board_id)
+
   },
 }
 
@@ -1121,13 +1129,13 @@ var allBoardItemsCmd = &cobra.Command{
   Long: `### Get information about all board items.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("allBoardItems called")
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
     sorts, _ := cmd.Flags().GetString("sorts")
     fmt.Println("sorts set to", sorts)
     board_section_id, _ := cmd.Flags().GetString("board_section_id")
     fmt.Println("board_section_id set to", board_section_id)
+
   },
 }
 
@@ -1137,11 +1145,11 @@ var createBoardItemCmd = &cobra.Command{
   Long: `### Create a new board item.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("createBoardItem called")
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -1151,11 +1159,11 @@ var boardItemCmd = &cobra.Command{
   Long: `### Get information about a board item.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("boardItem called")
     board_item_id, _ := cmd.Flags().GetInt64("board_item_id")
     fmt.Println("board_item_id set to", board_item_id)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -1165,13 +1173,13 @@ var updateBoardItemCmd = &cobra.Command{
   Long: `### Update a board item definition.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("updateBoardItem called")
     board_item_id, _ := cmd.Flags().GetInt64("board_item_id")
     fmt.Println("board_item_id set to", board_item_id)
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -1181,9 +1189,9 @@ var deleteBoardItemCmd = &cobra.Command{
   Long: `### Delete a board item.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("deleteBoardItem called")
     board_item_id, _ := cmd.Flags().GetInt64("board_item_id")
     fmt.Println("board_item_id set to", board_item_id)
+
   },
 }
 
@@ -1193,11 +1201,11 @@ var allBoardSectionsCmd = &cobra.Command{
   Long: `### Get information about all board sections.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("allBoardSections called")
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
     sorts, _ := cmd.Flags().GetString("sorts")
     fmt.Println("sorts set to", sorts)
+
   },
 }
 
@@ -1207,11 +1215,11 @@ var createBoardSectionCmd = &cobra.Command{
   Long: `### Create a new board section.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("createBoardSection called")
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -1221,11 +1229,11 @@ var boardSectionCmd = &cobra.Command{
   Long: `### Get information about a board section.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("boardSection called")
     board_section_id, _ := cmd.Flags().GetInt64("board_section_id")
     fmt.Println("board_section_id set to", board_section_id)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -1235,13 +1243,13 @@ var updateBoardSectionCmd = &cobra.Command{
   Long: `### Update a board section definition.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("updateBoardSection called")
     board_section_id, _ := cmd.Flags().GetInt64("board_section_id")
     fmt.Println("board_section_id set to", board_section_id)
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -1251,9 +1259,9 @@ var deleteBoardSectionCmd = &cobra.Command{
   Long: `### Delete a board section.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("deleteBoardSection called")
     board_section_id, _ := cmd.Flags().GetInt64("board_section_id")
     fmt.Println("board_section_id set to", board_section_id)
+
   },
 }
 
@@ -1279,9 +1287,9 @@ Get all **custom** color collections with [ColorCollection](#!/ColorCollection/c
 
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("allColorCollections called")
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -1300,9 +1308,9 @@ Creates a new custom color collection object, returning the details, including t
 
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("createColorCollection called")
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
+
   },
 }
 
@@ -1318,9 +1326,9 @@ Get all **standard** color collections with [ColorCollection](#!/ColorCollection
 
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("colorCollectionsCustom called")
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -1336,9 +1344,9 @@ Get all **custom** color collections with [ColorCollection](#!/ColorCollection/c
 
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("colorCollectionsStandard called")
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -1352,7 +1360,7 @@ Use this to retrieve the default Color Collection.
 Set the default color collection with [ColorCollection](#!/ColorCollection/set_default_color_collection)
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("defaultColorCollection called")
+
 
   },
 }
@@ -1367,9 +1375,9 @@ Returns the new specified default Color Collection object.
 
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("setDefaultColorCollection called")
     collection_id, _ := cmd.Flags().GetString("collection_id")
     fmt.Println("collection_id set to", collection_id)
+
   },
 }
 
@@ -1389,11 +1397,11 @@ Get all **custom** color collections with [ColorCollection](#!/ColorCollection/c
 
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("colorCollection called")
     collection_id, _ := cmd.Flags().GetString("collection_id")
     fmt.Println("collection_id set to", collection_id)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -1405,11 +1413,11 @@ var updateColorCollectionCmd = &cobra.Command{
 
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("updateColorCollection called")
     collection_id, _ := cmd.Flags().GetString("collection_id")
     fmt.Println("collection_id set to", collection_id)
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
+
   },
 }
 
@@ -1427,9 +1435,9 @@ Because multiple color collections can have the same label, they must be deleted
 
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("deleteColorCollection called")
     collection_id, _ := cmd.Flags().GetString("collection_id")
     fmt.Println("collection_id set to", collection_id)
+
   },
 }
 
@@ -1447,13 +1455,13 @@ var getAllCommandsCmd = &cobra.Command{
   Long: `### Get All Commands.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("getAllCommands called")
     content_id, _ := cmd.Flags().GetString("content_id")
     fmt.Println("content_id set to", content_id)
     content_type, _ := cmd.Flags().GetString("content_type")
     fmt.Println("content_type set to", content_type)
     limit, _ := cmd.Flags().GetInt64("limit")
     fmt.Println("limit set to", limit)
+
   },
 }
 
@@ -1466,9 +1474,9 @@ var createCommandCmd = &cobra.Command{
 #
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("createCommand called")
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
+
   },
 }
 
@@ -1480,11 +1488,11 @@ var updateCommandCmd = &cobra.Command{
 #
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("updateCommand called")
     command_id, _ := cmd.Flags().GetInt64("command_id")
     fmt.Println("command_id set to", command_id)
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
+
   },
 }
 
@@ -1494,9 +1502,9 @@ var deleteCommandCmd = &cobra.Command{
   Long: `### Delete an existing custom command.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("deleteCommand called")
     command_id, _ := cmd.Flags().GetInt64("command_id")
     fmt.Println("command_id set to", command_id)
+
   },
 }
 
@@ -1514,7 +1522,7 @@ var cloudStorageConfigurationCmd = &cobra.Command{
   Long: `Get the current Cloud Storage Configuration.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("cloudStorageConfiguration called")
+
 
   },
 }
@@ -1525,9 +1533,9 @@ var updateCloudStorageConfigurationCmd = &cobra.Command{
   Long: `Update the current Cloud Storage Configuration.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("updateCloudStorageConfiguration called")
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
+
   },
 }
 
@@ -1537,7 +1545,7 @@ var customWelcomeEmailCmd = &cobra.Command{
   Long: `### Get the current status and content of custom welcome emails
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("customWelcomeEmail called")
+
 
   },
 }
@@ -1548,11 +1556,11 @@ var updateCustomWelcomeEmailCmd = &cobra.Command{
   Long: `Update custom welcome email setting and values. Optionally send a test email with the new content to the currently logged in user.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("updateCustomWelcomeEmail called")
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
     send_test_welcome_email, _ := cmd.Flags().GetBool("send_test_welcome_email")
     fmt.Println("send_test_welcome_email set to", send_test_welcome_email)
+
   },
 }
 
@@ -1562,9 +1570,9 @@ var updateCustomWelcomeEmailTestCmd = &cobra.Command{
   Long: `Requests to this endpoint will send a welcome email with the custom content provided in the body to the currently logged in user.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("updateCustomWelcomeEmailTest called")
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
+
   },
 }
 
@@ -1574,7 +1582,7 @@ var digestEmailsEnabledCmd = &cobra.Command{
   Long: `### Retrieve the value for whether or not digest emails is enabled
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("digestEmailsEnabled called")
+
 
   },
 }
@@ -1585,9 +1593,9 @@ var updateDigestEmailsEnabledCmd = &cobra.Command{
   Long: `### Update the setting for enabling/disabling digest emails
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("updateDigestEmailsEnabled called")
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
+
   },
 }
 
@@ -1598,7 +1606,7 @@ var createDigestEmailSendCmd = &cobra.Command{
 any actual emails, it generates records containing content which may be of interest for users who have become inactive.
 Emails will be sent at a later time from Looker's internal system if the Digest Emails feature is enabled in settings.`,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("createDigestEmailSend called")
+
 
   },
 }
@@ -1609,7 +1617,7 @@ var internalHelpResourcesContentCmd = &cobra.Command{
   Long: `### Set the menu item name and content for internal help resources
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("internalHelpResourcesContent called")
+
 
   },
 }
@@ -1620,9 +1628,9 @@ var updateInternalHelpResourcesContentCmd = &cobra.Command{
   Long: `Update internal help resources content
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("updateInternalHelpResourcesContent called")
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
+
   },
 }
 
@@ -1632,7 +1640,7 @@ var internalHelpResourcesCmd = &cobra.Command{
   Long: `### Get and set the options for internal help resources
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("internalHelpResources called")
+
 
   },
 }
@@ -1643,9 +1651,9 @@ var updateInternalHelpResourcesCmd = &cobra.Command{
   Long: `Update internal help resources settings
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("updateInternalHelpResources called")
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
+
   },
 }
 
@@ -1655,7 +1663,7 @@ var allLegacyFeaturesCmd = &cobra.Command{
   Long: `### Get all legacy features.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("allLegacyFeatures called")
+
 
   },
 }
@@ -1666,9 +1674,9 @@ var legacyFeatureCmd = &cobra.Command{
   Long: `### Get information about the legacy feature with a specific id.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("legacyFeature called")
     legacy_feature_id, _ := cmd.Flags().GetString("legacy_feature_id")
     fmt.Println("legacy_feature_id set to", legacy_feature_id)
+
   },
 }
 
@@ -1678,11 +1686,11 @@ var updateLegacyFeatureCmd = &cobra.Command{
   Long: `### Update information about the legacy feature with a specific id.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("updateLegacyFeature called")
     legacy_feature_id, _ := cmd.Flags().GetString("legacy_feature_id")
     fmt.Println("legacy_feature_id set to", legacy_feature_id)
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
+
   },
 }
 
@@ -1692,7 +1700,7 @@ var allLocalesCmd = &cobra.Command{
   Long: `### Get a list of locales that Looker supports.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("allLocales called")
+
 
   },
 }
@@ -1703,7 +1711,7 @@ var mobileSettingsCmd = &cobra.Command{
   Long: `### Get all mobile settings.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("mobileSettings called")
+
 
   },
 }
@@ -1722,9 +1730,9 @@ Available settings are:
 
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("getSetting called")
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -1743,11 +1751,11 @@ Available settings are:
 See the 'Setting' type for more information on the specific values that can be configured.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("setSetting called")
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -1757,7 +1765,7 @@ var allTimezonesCmd = &cobra.Command{
   Long: `### Get a list of timezones that Looker supports (e.g. useful for scheduling tasks).
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("allTimezones called")
+
 
   },
 }
@@ -1768,9 +1776,9 @@ var versionsCmd = &cobra.Command{
   Long: `### Get information about all API versions supported by this Looker instance.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("versions called")
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -1782,11 +1790,11 @@ var apiSpecCmd = &cobra.Command{
 The specification is returned as a JSON document in Swagger 2.x format
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("apiSpec called")
     api_version, _ := cmd.Flags().GetString("api_version")
     fmt.Println("api_version set to", api_version)
     specification, _ := cmd.Flags().GetString("specification")
     fmt.Println("specification set to", specification)
+
   },
 }
 
@@ -1797,9 +1805,9 @@ var whitelabelConfigurationCmd = &cobra.Command{
 ### Gets the whitelabel configuration, which includes hiding documentation links, custom favicon uploading, etc.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("whitelabelConfiguration called")
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -1809,9 +1817,9 @@ var updateWhitelabelConfigurationCmd = &cobra.Command{
   Long: `### Update the whitelabel configuration
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("updateWhitelabelConfiguration called")
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
+
   },
 }
 
@@ -1829,9 +1837,9 @@ var allConnectionsCmd = &cobra.Command{
   Long: `### Get information about all connections.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("allConnections called")
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -1841,9 +1849,9 @@ var createConnectionCmd = &cobra.Command{
   Long: `### Create a connection using the specified configuration.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("createConnection called")
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
+
   },
 }
 
@@ -1853,11 +1861,11 @@ var connectionCmd = &cobra.Command{
   Long: `### Get information about a connection.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("connection called")
     connection_name, _ := cmd.Flags().GetString("connection_name")
     fmt.Println("connection_name set to", connection_name)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -1867,11 +1875,11 @@ var updateConnectionCmd = &cobra.Command{
   Long: `### Update a connection using the specified configuration.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("updateConnection called")
     connection_name, _ := cmd.Flags().GetString("connection_name")
     fmt.Println("connection_name set to", connection_name)
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
+
   },
 }
 
@@ -1881,9 +1889,9 @@ var deleteConnectionCmd = &cobra.Command{
   Long: `### Delete a connection.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("deleteConnection called")
     connection_name, _ := cmd.Flags().GetString("connection_name")
     fmt.Println("connection_name set to", connection_name)
+
   },
 }
 
@@ -1893,11 +1901,11 @@ var deleteConnectionOverrideCmd = &cobra.Command{
   Long: `### Delete a connection override.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("deleteConnectionOverride called")
     connection_name, _ := cmd.Flags().GetString("connection_name")
     fmt.Println("connection_name set to", connection_name)
     override_context, _ := cmd.Flags().GetString("override_context")
     fmt.Println("override_context set to", override_context)
+
   },
 }
 
@@ -1914,11 +1922,11 @@ This API is rate limited.
 Unsupported tests in the request will be ignored.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("testConnection called")
     connection_name, _ := cmd.Flags().GetString("connection_name")
     fmt.Println("connection_name set to", connection_name)
     tests, _ := cmd.Flags().GetString("tests")
     fmt.Println("tests set to", tests)
+
   },
 }
 
@@ -1935,11 +1943,11 @@ This API is rate limited.
 Unsupported tests in the request will be ignored.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("testConnectionConfig called")
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
     tests, _ := cmd.Flags().GetString("tests")
     fmt.Println("tests set to", tests)
+
   },
 }
 
@@ -1949,9 +1957,9 @@ var allDialectInfosCmd = &cobra.Command{
   Long: `### Get information about all dialects.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("allDialectInfos called")
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -1963,11 +1971,11 @@ var allExternalOauthApplicationsCmd = &cobra.Command{
 This is an OAuth Application which Looker uses to access external systems.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("allExternalOauthApplications called")
     name, _ := cmd.Flags().GetString("name")
     fmt.Println("name set to", name)
     client_id, _ := cmd.Flags().GetString("client_id")
     fmt.Println("client_id set to", client_id)
+
   },
 }
 
@@ -1979,9 +1987,9 @@ var createExternalOauthApplicationCmd = &cobra.Command{
 This is an OAuth Application which Looker uses to access external systems.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("createExternalOauthApplication called")
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
+
   },
 }
 
@@ -1991,9 +1999,9 @@ var createOauthApplicationUserStateCmd = &cobra.Command{
   Long: `### Create OAuth User state.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("createOauthApplicationUserState called")
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
+
   },
 }
 
@@ -2003,9 +2011,9 @@ var allSshServersCmd = &cobra.Command{
   Long: `### Get information about all SSH Servers.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("allSshServers called")
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -2015,9 +2023,9 @@ var createSshServerCmd = &cobra.Command{
   Long: `### Create an SSH Server.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("createSshServer called")
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
+
   },
 }
 
@@ -2027,9 +2035,9 @@ var sshServerCmd = &cobra.Command{
   Long: `### Get information about an SSH Server.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("sshServer called")
     ssh_server_id, _ := cmd.Flags().GetString("ssh_server_id")
     fmt.Println("ssh_server_id set to", ssh_server_id)
+
   },
 }
 
@@ -2039,11 +2047,11 @@ var updateSshServerCmd = &cobra.Command{
   Long: `### Update an SSH Server.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("updateSshServer called")
     ssh_server_id, _ := cmd.Flags().GetString("ssh_server_id")
     fmt.Println("ssh_server_id set to", ssh_server_id)
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
+
   },
 }
 
@@ -2053,9 +2061,9 @@ var deleteSshServerCmd = &cobra.Command{
   Long: `### Delete an SSH Server.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("deleteSshServer called")
     ssh_server_id, _ := cmd.Flags().GetString("ssh_server_id")
     fmt.Println("ssh_server_id set to", ssh_server_id)
+
   },
 }
 
@@ -2065,9 +2073,9 @@ var testSshServerCmd = &cobra.Command{
   Long: `### Test the SSH Server
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("testSshServer called")
     ssh_server_id, _ := cmd.Flags().GetString("ssh_server_id")
     fmt.Println("ssh_server_id set to", ssh_server_id)
+
   },
 }
 
@@ -2077,9 +2085,9 @@ var allSshTunnelsCmd = &cobra.Command{
   Long: `### Get information about all SSH Tunnels.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("allSshTunnels called")
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -2089,9 +2097,9 @@ var createSshTunnelCmd = &cobra.Command{
   Long: `### Create an SSH Tunnel
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("createSshTunnel called")
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
+
   },
 }
 
@@ -2101,9 +2109,9 @@ var sshTunnelCmd = &cobra.Command{
   Long: `### Get information about an SSH Tunnel.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("sshTunnel called")
     ssh_tunnel_id, _ := cmd.Flags().GetString("ssh_tunnel_id")
     fmt.Println("ssh_tunnel_id set to", ssh_tunnel_id)
+
   },
 }
 
@@ -2113,11 +2121,11 @@ var updateSshTunnelCmd = &cobra.Command{
   Long: `### Update an SSH Tunnel
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("updateSshTunnel called")
     ssh_tunnel_id, _ := cmd.Flags().GetString("ssh_tunnel_id")
     fmt.Println("ssh_tunnel_id set to", ssh_tunnel_id)
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
+
   },
 }
 
@@ -2127,9 +2135,9 @@ var deleteSshTunnelCmd = &cobra.Command{
   Long: `### Delete an SSH Tunnel
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("deleteSshTunnel called")
     ssh_tunnel_id, _ := cmd.Flags().GetString("ssh_tunnel_id")
     fmt.Println("ssh_tunnel_id set to", ssh_tunnel_id)
+
   },
 }
 
@@ -2139,9 +2147,9 @@ var testSshTunnelCmd = &cobra.Command{
   Long: `### Test the SSH Tunnel
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("testSshTunnel called")
     ssh_tunnel_id, _ := cmd.Flags().GetString("ssh_tunnel_id")
     fmt.Println("ssh_tunnel_id set to", ssh_tunnel_id)
+
   },
 }
 
@@ -2153,7 +2161,7 @@ var sshPublicKeyCmd = &cobra.Command{
 Get the public key created for this instance to identify itself to a remote SSH server.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("sshPublicKey called")
+
 
   },
 }
@@ -2194,7 +2202,6 @@ Boolean search params accept only "true" and "false" as values.
 
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("searchContentFavorites called")
     id, _ := cmd.Flags().GetInt64("id")
     fmt.Println("id set to", id)
     user_id, _ := cmd.Flags().GetString("user_id")
@@ -2217,6 +2224,7 @@ Boolean search params accept only "true" and "false" as values.
     fmt.Println("fields set to", fields)
     filter_or, _ := cmd.Flags().GetBool("filter_or")
     fmt.Println("filter_or set to", filter_or)
+
   },
 }
 
@@ -2225,11 +2233,11 @@ var contentFavoriteCmd = &cobra.Command{
   Short: "Get Favorite Content",
   Long: `### Get favorite content by its id`,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("contentFavorite called")
     content_favorite_id, _ := cmd.Flags().GetInt64("content_favorite_id")
     fmt.Println("content_favorite_id set to", content_favorite_id)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -2238,9 +2246,9 @@ var deleteContentFavoriteCmd = &cobra.Command{
   Short: "Delete Favorite Content",
   Long: `### Delete favorite content`,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("deleteContentFavorite called")
     content_favorite_id, _ := cmd.Flags().GetInt64("content_favorite_id")
     fmt.Println("content_favorite_id set to", content_favorite_id)
+
   },
 }
 
@@ -2249,9 +2257,9 @@ var createContentFavoriteCmd = &cobra.Command{
   Short: "Create Favorite Content",
   Long: `### Create favorite content`,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("createContentFavorite called")
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
+
   },
 }
 
@@ -2261,11 +2269,11 @@ var allContentMetadatasCmd = &cobra.Command{
   Long: `### Get information about all content metadata in a space.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("allContentMetadatas called")
     parent_id, _ := cmd.Flags().GetInt64("parent_id")
     fmt.Println("parent_id set to", parent_id)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -2275,11 +2283,11 @@ var contentMetadataCmd = &cobra.Command{
   Long: `### Get information about an individual content metadata record.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("contentMetadata called")
     content_metadata_id, _ := cmd.Flags().GetInt64("content_metadata_id")
     fmt.Println("content_metadata_id set to", content_metadata_id)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -2289,11 +2297,11 @@ var updateContentMetadataCmd = &cobra.Command{
   Long: `### Move a piece of content.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("updateContentMetadata called")
     content_metadata_id, _ := cmd.Flags().GetInt64("content_metadata_id")
     fmt.Println("content_metadata_id set to", content_metadata_id)
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
+
   },
 }
 
@@ -2303,11 +2311,11 @@ var allContentMetadataAccessesCmd = &cobra.Command{
   Long: `### All content metadata access records for a content metadata item.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("allContentMetadataAccesses called")
     content_metadata_id, _ := cmd.Flags().GetInt64("content_metadata_id")
     fmt.Println("content_metadata_id set to", content_metadata_id)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -2317,11 +2325,11 @@ var createContentMetadataAccessCmd = &cobra.Command{
   Long: `### Create content metadata access.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("createContentMetadataAccess called")
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
     send_boards_notification_email, _ := cmd.Flags().GetBool("send_boards_notification_email")
     fmt.Println("send_boards_notification_email set to", send_boards_notification_email)
+
   },
 }
 
@@ -2331,11 +2339,11 @@ var updateContentMetadataAccessCmd = &cobra.Command{
   Long: `### Update type of access for content metadata.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("updateContentMetadataAccess called")
     content_metadata_access_id, _ := cmd.Flags().GetString("content_metadata_access_id")
     fmt.Println("content_metadata_access_id set to", content_metadata_access_id)
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
+
   },
 }
 
@@ -2345,9 +2353,9 @@ var deleteContentMetadataAccessCmd = &cobra.Command{
   Long: `### Remove content metadata access.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("deleteContentMetadataAccess called")
     content_metadata_access_id, _ := cmd.Flags().GetInt64("content_metadata_access_id")
     fmt.Println("content_metadata_access_id set to", content_metadata_access_id)
+
   },
 }
 
@@ -2360,7 +2368,6 @@ The returned thumbnail is an abstract representation of the contents of a dashbo
 reflect the actual data displayed in the respective visualizations.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("contentThumbnail called")
     _type, _ := cmd.Flags().GetString("type")
     fmt.Println("type set to", _type)
     resource_id, _ := cmd.Flags().GetString("resource_id")
@@ -2373,6 +2380,7 @@ reflect the actual data displayed in the respective visualizations.
     fmt.Println("width set to", width)
     height, _ := cmd.Flags().GetInt64("height")
     fmt.Println("height set to", height)
+
   },
 }
 
@@ -2385,9 +2393,9 @@ Performs validation of all looks and dashboards
 Returns a list of errors found as well as metadata about the content validation run.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("contentValidation called")
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -2419,7 +2427,6 @@ Boolean search params accept only "true" and "false" as values.
 
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("searchContentViews called")
     view_count, _ := cmd.Flags().GetString("view_count")
     fmt.Println("view_count set to", view_count)
     group_id, _ := cmd.Flags().GetString("group_id")
@@ -2446,6 +2453,7 @@ Boolean search params accept only "true" and "false" as values.
     fmt.Println("sorts set to", sorts)
     filter_or, _ := cmd.Flags().GetBool("filter_or")
     fmt.Println("filter_or set to", filter_or)
+
   },
 }
 
@@ -2460,13 +2468,13 @@ The returned thumbnail is an abstract representation of the contents of a dashbo
 reflect the actual data displayed in the respective visualizations.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("vectorThumbnail called")
     _type, _ := cmd.Flags().GetString("type")
     fmt.Println("type set to", _type)
     resource_id, _ := cmd.Flags().GetString("resource_id")
     fmt.Println("resource_id set to", resource_id)
     reload, _ := cmd.Flags().GetString("reload")
     fmt.Println("reload set to", reload)
+
   },
 }
 
@@ -2490,9 +2498,9 @@ Get the **full details** of a specific dashboard by id with [dashboard()](#!/Das
 Find **deleted dashboards** with [search_dashboards()](#!/Dashboard/search_dashboards)
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("allDashboards called")
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -2515,9 +2523,9 @@ You can **update** an existing dashboard with [update_dashboard()](#!/Dashboard/
 You can **permanently delete** an existing dashboard with [delete_dashboard()](#!/Dashboard/delete_dashboard)
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("createDashboard called")
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
+
   },
 }
 
@@ -2555,7 +2563,6 @@ The parameters 'limit', and 'offset' are recommended for fetching results in pag
 Get a **single dashboard** by id with [dashboard()](#!/Dashboard/dashboard)
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("searchDashboards called")
     id, _ := cmd.Flags().GetString("id")
     fmt.Println("id set to", id)
     slug, _ := cmd.Flags().GetString("slug")
@@ -2594,6 +2601,7 @@ Get a **single dashboard** by id with [dashboard()](#!/Dashboard/dashboard)
     fmt.Println("sorts set to", sorts)
     filter_or, _ := cmd.Flags().GetBool("filter_or")
     fmt.Println("filter_or set to", filter_or)
+
   },
 }
 
@@ -2614,7 +2622,6 @@ create content in the space the dashboard is being imported to.
 **Unlink** a linked UDD by setting lookml_link_id to null with [update_dashboard()](#!/Dashboard/update_dashboard)
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("importLookmlDashboard called")
     lookml_dashboard_id, _ := cmd.Flags().GetString("lookml_dashboard_id")
     fmt.Println("lookml_dashboard_id set to", lookml_dashboard_id)
     space_id, _ := cmd.Flags().GetString("space_id")
@@ -2623,6 +2630,7 @@ create content in the space the dashboard is being imported to.
     fmt.Println("body set to", body)
     raw_locale, _ := cmd.Flags().GetBool("raw_locale")
     fmt.Println("raw_locale set to", raw_locale)
+
   },
 }
 
@@ -2640,13 +2648,13 @@ that the user has permission to update will be synced.
 To **link** or **unlink** a UDD set the 'lookml_link_id' property with [update_dashboard()](#!/Dashboard/update_dashboard)
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("syncLookmlDashboard called")
     lookml_dashboard_id, _ := cmd.Flags().GetString("lookml_dashboard_id")
     fmt.Println("lookml_dashboard_id set to", lookml_dashboard_id)
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
     raw_locale, _ := cmd.Flags().GetBool("raw_locale")
     fmt.Println("raw_locale set to", raw_locale)
+
   },
 }
 
@@ -2662,11 +2670,11 @@ Get a **summary list** of all active dashboards with [all_dashboards()](#!/Dashb
 You can **Search** for dashboards with [search_dashboards()](#!/Dashboard/search_dashboards)
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("dashboard called")
     dashboard_id, _ := cmd.Flags().GetString("dashboard_id")
     fmt.Println("dashboard_id set to", dashboard_id)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -2685,11 +2693,11 @@ If you receive a 422 error response when updating a dashboard, be sure to look a
 response body for information about exactly which fields are missing or contain invalid data.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("updateDashboard called")
     dashboard_id, _ := cmd.Flags().GetString("dashboard_id")
     fmt.Println("dashboard_id set to", dashboard_id)
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
+
   },
 }
 
@@ -2705,9 +2713,9 @@ Permanently **deletes** a dashboard. (The dashboard cannot be recovered after th
 Note: When a dashboard is deleted in the UI, it is soft deleted. Use this API call to permanently remove it, if desired.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("deleteDashboard called")
     dashboard_id, _ := cmd.Flags().GetString("dashboard_id")
     fmt.Println("dashboard_id set to", dashboard_id)
+
   },
 }
 
@@ -2720,9 +2728,9 @@ Returns a JSON object that contains the dashboard id and Aggregate Table lookml
 
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("dashboardAggregateTableLookml called")
     dashboard_id, _ := cmd.Flags().GetString("dashboard_id")
     fmt.Println("dashboard_id set to", dashboard_id)
+
   },
 }
 
@@ -2735,9 +2743,9 @@ Returns a JSON object that contains the dashboard id and the full lookml
 
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("dashboardLookml called")
     dashboard_id, _ := cmd.Flags().GetString("dashboard_id")
     fmt.Println("dashboard_id set to", dashboard_id)
+
   },
 }
 
@@ -2752,11 +2760,11 @@ Moves a dashboard to a specified folder, and returns the moved dashboard.
 'dashboard_id' and 'folder_id' must already exist, and 'folder_id' must be different from the current 'folder_id' of the dashboard.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("moveDashboard called")
     dashboard_id, _ := cmd.Flags().GetString("dashboard_id")
     fmt.Println("dashboard_id set to", dashboard_id)
     folder_id, _ := cmd.Flags().GetString("folder_id")
     fmt.Println("folder_id set to", folder_id)
+
   },
 }
 
@@ -2774,11 +2782,11 @@ If a dashboard with the same title already exists in the target folder, the copy
   or '(copy <# of copies>)' appended.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("copyDashboard called")
     dashboard_id, _ := cmd.Flags().GetString("dashboard_id")
     fmt.Println("dashboard_id set to", dashboard_id)
     folder_id, _ := cmd.Flags().GetString("folder_id")
     fmt.Println("folder_id set to", folder_id)
+
   },
 }
 
@@ -2812,7 +2820,6 @@ Boolean search params accept only "true" and "false" as values.
 
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("searchDashboardElements called")
     dashboard_id, _ := cmd.Flags().GetInt64("dashboard_id")
     fmt.Println("dashboard_id set to", dashboard_id)
     look_id, _ := cmd.Flags().GetInt64("look_id")
@@ -2827,6 +2834,7 @@ Boolean search params accept only "true" and "false" as values.
     fmt.Println("filter_or set to", filter_or)
     sorts, _ := cmd.Flags().GetString("sorts")
     fmt.Println("sorts set to", sorts)
+
   },
 }
 
@@ -2835,11 +2843,11 @@ var dashboardElementCmd = &cobra.Command{
   Short: "Get DashboardElement",
   Long: `### Get information about the dashboard element with a specific id.`,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("dashboardElement called")
     dashboard_element_id, _ := cmd.Flags().GetString("dashboard_element_id")
     fmt.Println("dashboard_element_id set to", dashboard_element_id)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -2848,13 +2856,13 @@ var updateDashboardElementCmd = &cobra.Command{
   Short: "Update DashboardElement",
   Long: `### Update the dashboard element with a specific id.`,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("updateDashboardElement called")
     dashboard_element_id, _ := cmd.Flags().GetString("dashboard_element_id")
     fmt.Println("dashboard_element_id set to", dashboard_element_id)
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -2863,9 +2871,9 @@ var deleteDashboardElementCmd = &cobra.Command{
   Short: "Delete DashboardElement",
   Long: `### Delete a dashboard element with a specific id.`,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("deleteDashboardElement called")
     dashboard_element_id, _ := cmd.Flags().GetString("dashboard_element_id")
     fmt.Println("dashboard_element_id set to", dashboard_element_id)
+
   },
 }
 
@@ -2874,11 +2882,11 @@ var dashboardDashboardElementsCmd = &cobra.Command{
   Short: "Get All DashboardElements",
   Long: `### Get information about all the dashboard elements on a dashboard with a specific id.`,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("dashboardDashboardElements called")
     dashboard_id, _ := cmd.Flags().GetString("dashboard_id")
     fmt.Println("dashboard_id set to", dashboard_id)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -2887,11 +2895,11 @@ var createDashboardElementCmd = &cobra.Command{
   Short: "Create DashboardElement",
   Long: `### Create a dashboard element on the dashboard with a specific id.`,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("createDashboardElement called")
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -2900,11 +2908,11 @@ var dashboardFilterCmd = &cobra.Command{
   Short: "Get Dashboard Filter",
   Long: `### Get information about the dashboard filters with a specific id.`,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("dashboardFilter called")
     dashboard_filter_id, _ := cmd.Flags().GetString("dashboard_filter_id")
     fmt.Println("dashboard_filter_id set to", dashboard_filter_id)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -2913,13 +2921,13 @@ var updateDashboardFilterCmd = &cobra.Command{
   Short: "Update Dashboard Filter",
   Long: `### Update the dashboard filter with a specific id.`,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("updateDashboardFilter called")
     dashboard_filter_id, _ := cmd.Flags().GetString("dashboard_filter_id")
     fmt.Println("dashboard_filter_id set to", dashboard_filter_id)
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -2928,9 +2936,9 @@ var deleteDashboardFilterCmd = &cobra.Command{
   Short: "Delete Dashboard Filter",
   Long: `### Delete a dashboard filter with a specific id.`,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("deleteDashboardFilter called")
     dashboard_filter_id, _ := cmd.Flags().GetString("dashboard_filter_id")
     fmt.Println("dashboard_filter_id set to", dashboard_filter_id)
+
   },
 }
 
@@ -2939,11 +2947,11 @@ var dashboardDashboardFiltersCmd = &cobra.Command{
   Short: "Get All Dashboard Filters",
   Long: `### Get information about all the dashboard filters on a dashboard with a specific id.`,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("dashboardDashboardFilters called")
     dashboard_id, _ := cmd.Flags().GetString("dashboard_id")
     fmt.Println("dashboard_id set to", dashboard_id)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -2952,11 +2960,11 @@ var createDashboardFilterCmd = &cobra.Command{
   Short: "Create Dashboard Filter",
   Long: `### Create a dashboard filter on the dashboard with a specific id.`,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("createDashboardFilter called")
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -2965,11 +2973,11 @@ var dashboardLayoutComponentCmd = &cobra.Command{
   Short: "Get DashboardLayoutComponent",
   Long: `### Get information about the dashboard elements with a specific id.`,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("dashboardLayoutComponent called")
     dashboard_layout_component_id, _ := cmd.Flags().GetString("dashboard_layout_component_id")
     fmt.Println("dashboard_layout_component_id set to", dashboard_layout_component_id)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -2978,13 +2986,13 @@ var updateDashboardLayoutComponentCmd = &cobra.Command{
   Short: "Update DashboardLayoutComponent",
   Long: `### Update the dashboard element with a specific id.`,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("updateDashboardLayoutComponent called")
     dashboard_layout_component_id, _ := cmd.Flags().GetString("dashboard_layout_component_id")
     fmt.Println("dashboard_layout_component_id set to", dashboard_layout_component_id)
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -2993,11 +3001,11 @@ var dashboardLayoutDashboardLayoutComponentsCmd = &cobra.Command{
   Short: "Get All DashboardLayoutComponents",
   Long: `### Get information about all the dashboard layout components for a dashboard layout with a specific id.`,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("dashboardLayoutDashboardLayoutComponents called")
     dashboard_layout_id, _ := cmd.Flags().GetString("dashboard_layout_id")
     fmt.Println("dashboard_layout_id set to", dashboard_layout_id)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -3006,11 +3014,11 @@ var dashboardLayoutCmd = &cobra.Command{
   Short: "Get DashboardLayout",
   Long: `### Get information about the dashboard layouts with a specific id.`,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("dashboardLayout called")
     dashboard_layout_id, _ := cmd.Flags().GetString("dashboard_layout_id")
     fmt.Println("dashboard_layout_id set to", dashboard_layout_id)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -3019,13 +3027,13 @@ var updateDashboardLayoutCmd = &cobra.Command{
   Short: "Update DashboardLayout",
   Long: `### Update the dashboard layout with a specific id.`,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("updateDashboardLayout called")
     dashboard_layout_id, _ := cmd.Flags().GetString("dashboard_layout_id")
     fmt.Println("dashboard_layout_id set to", dashboard_layout_id)
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -3034,9 +3042,9 @@ var deleteDashboardLayoutCmd = &cobra.Command{
   Short: "Delete DashboardLayout",
   Long: `### Delete a dashboard layout with a specific id.`,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("deleteDashboardLayout called")
     dashboard_layout_id, _ := cmd.Flags().GetString("dashboard_layout_id")
     fmt.Println("dashboard_layout_id set to", dashboard_layout_id)
+
   },
 }
 
@@ -3045,11 +3053,11 @@ var dashboardDashboardLayoutsCmd = &cobra.Command{
   Short: "Get All DashboardLayouts",
   Long: `### Get information about all the dashboard elements on a dashboard with a specific id.`,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("dashboardDashboardLayouts called")
     dashboard_id, _ := cmd.Flags().GetString("dashboard_id")
     fmt.Println("dashboard_id set to", dashboard_id)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -3058,11 +3066,11 @@ var createDashboardLayoutCmd = &cobra.Command{
   Short: "Create DashboardLayout",
   Long: `### Create a dashboard layout on the dashboard with a specific id.`,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("createDashboardLayout called")
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -3079,9 +3087,9 @@ var performDataActionCmd = &cobra.Command{
   Short: "Send a Data Action",
   Long: `Perform a data action. The data action object can be obtained from query results, and used to perform an arbitrary action.`,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("performDataAction called")
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
+
   },
 }
 
@@ -3090,9 +3098,9 @@ var fetchRemoteDataActionFormCmd = &cobra.Command{
   Short: "Fetch Remote Data Action Form",
   Long: `For some data actions, the remote server may supply a form requesting further user input. This endpoint takes a data action, asks the remote server to generate a form for it, and returns that form to you for presentation to the user.`,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("fetchRemoteDataActionForm called")
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
+
   },
 }
 
@@ -3110,7 +3118,7 @@ var allDatagroupsCmd = &cobra.Command{
   Long: `### Get information about all datagroups.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("allDatagroups called")
+
 
   },
 }
@@ -3121,9 +3129,9 @@ var datagroupCmd = &cobra.Command{
   Long: `### Get information about a datagroup.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("datagroup called")
     datagroup_id, _ := cmd.Flags().GetInt64("datagroup_id")
     fmt.Println("datagroup_id set to", datagroup_id)
+
   },
 }
 
@@ -3133,11 +3141,11 @@ var updateDatagroupCmd = &cobra.Command{
   Long: `### Update a datagroup using the specified params.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("updateDatagroup called")
     datagroup_id, _ := cmd.Flags().GetInt64("datagroup_id")
     fmt.Println("datagroup_id set to", datagroup_id)
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
+
   },
 }
 
@@ -3155,13 +3163,13 @@ var graphDerivedTablesForModelCmd = &cobra.Command{
   Long: `### Discover information about derived tables
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("graphDerivedTablesForModel called")
     model, _ := cmd.Flags().GetString("model")
     fmt.Println("model set to", model)
     format, _ := cmd.Flags().GetString("format")
     fmt.Println("format set to", format)
     color, _ := cmd.Flags().GetString("color")
     fmt.Println("color set to", color)
+
   },
 }
 
@@ -3171,13 +3179,13 @@ var graphDerivedTablesForViewCmd = &cobra.Command{
   Long: `### Get the subgraph representing this derived table and its dependencies.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("graphDerivedTablesForView called")
     view, _ := cmd.Flags().GetString("view")
     fmt.Println("view set to", view)
     models, _ := cmd.Flags().GetString("models")
     fmt.Println("models set to", models)
     workspace, _ := cmd.Flags().GetString("workspace")
     fmt.Println("workspace set to", workspace)
+
   },
 }
 
@@ -3194,7 +3202,6 @@ var searchFoldersCmd = &cobra.Command{
   Short: "Search Folders",
   Long: `Search for folders by creator id, parent id, name, etc`,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("searchFolders called")
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
     page, _ := cmd.Flags().GetInt64("page")
@@ -3219,6 +3226,7 @@ var searchFoldersCmd = &cobra.Command{
     fmt.Println("filter_or set to", filter_or)
     is_shared_root, _ := cmd.Flags().GetBool("is_shared_root")
     fmt.Println("is_shared_root set to", is_shared_root)
+
   },
 }
 
@@ -3227,11 +3235,11 @@ var folderCmd = &cobra.Command{
   Short: "Get Folder",
   Long: `### Get information about the folder with a specific id.`,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("folder called")
     folder_id, _ := cmd.Flags().GetString("folder_id")
     fmt.Println("folder_id set to", folder_id)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -3240,11 +3248,11 @@ var updateFolderCmd = &cobra.Command{
   Short: "Update Folder",
   Long: `### Update the folder with a specific id.`,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("updateFolder called")
     folder_id, _ := cmd.Flags().GetString("folder_id")
     fmt.Println("folder_id set to", folder_id)
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
+
   },
 }
 
@@ -3255,9 +3263,9 @@ var deleteFolderCmd = &cobra.Command{
 **DANGER** this will delete all looks and dashboards in the folder.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("deleteFolder called")
     folder_id, _ := cmd.Flags().GetString("folder_id")
     fmt.Println("folder_id set to", folder_id)
+
   },
 }
 
@@ -3271,9 +3279,9 @@ In API 4.0+, all personal folders will be returned.
 
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("allFolders called")
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -3286,9 +3294,9 @@ Caller must have permission to edit the parent folder and to create folders, oth
 returns 404 Not Found.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("createFolder called")
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
+
   },
 }
 
@@ -3297,7 +3305,6 @@ var folderChildrenCmd = &cobra.Command{
   Short: "Get Folder Children",
   Long: `### Get the children of a folder.`,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("folderChildren called")
     folder_id, _ := cmd.Flags().GetString("folder_id")
     fmt.Println("folder_id set to", folder_id)
     fields, _ := cmd.Flags().GetString("fields")
@@ -3308,6 +3315,7 @@ var folderChildrenCmd = &cobra.Command{
     fmt.Println("per_page set to", per_page)
     sorts, _ := cmd.Flags().GetString("sorts")
     fmt.Println("sorts set to", sorts)
+
   },
 }
 
@@ -3316,7 +3324,6 @@ var folderChildrenSearchCmd = &cobra.Command{
   Short: "Search Folder Children",
   Long: `### Search the children of a folder`,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("folderChildrenSearch called")
     folder_id, _ := cmd.Flags().GetString("folder_id")
     fmt.Println("folder_id set to", folder_id)
     fields, _ := cmd.Flags().GetString("fields")
@@ -3325,6 +3332,7 @@ var folderChildrenSearchCmd = &cobra.Command{
     fmt.Println("sorts set to", sorts)
     name, _ := cmd.Flags().GetString("name")
     fmt.Println("name set to", name)
+
   },
 }
 
@@ -3333,11 +3341,11 @@ var folderParentCmd = &cobra.Command{
   Short: "Get Folder Parent",
   Long: `### Get the parent of a folder`,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("folderParent called")
     folder_id, _ := cmd.Flags().GetString("folder_id")
     fmt.Println("folder_id set to", folder_id)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -3346,11 +3354,11 @@ var folderAncestorsCmd = &cobra.Command{
   Short: "Get Folder Ancestors",
   Long: `### Get the ancestors of a folder`,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("folderAncestors called")
     folder_id, _ := cmd.Flags().GetString("folder_id")
     fmt.Println("folder_id set to", folder_id)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -3362,11 +3370,11 @@ In API 3.x, this will return all looks in a folder, including looks in the trash
 In API 4.0+, all looks in a folder will be returned, excluding looks in the trash.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("folderLooks called")
     folder_id, _ := cmd.Flags().GetString("folder_id")
     fmt.Println("folder_id set to", folder_id)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -3375,11 +3383,11 @@ var folderDashboardsCmd = &cobra.Command{
   Short: "Get Folder Dashboards",
   Long: `### Get the dashboards in a folder`,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("folderDashboards called")
     folder_id, _ := cmd.Flags().GetString("folder_id")
     fmt.Println("folder_id set to", folder_id)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -3397,7 +3405,6 @@ var allGroupsCmd = &cobra.Command{
   Long: `### Get information about all groups.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("allGroups called")
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
     page, _ := cmd.Flags().GetInt64("page")
@@ -3412,6 +3419,7 @@ var allGroupsCmd = &cobra.Command{
     fmt.Println("content_metadata_id set to", content_metadata_id)
     can_add_to_content_metadata, _ := cmd.Flags().GetBool("can_add_to_content_metadata")
     fmt.Println("can_add_to_content_metadata set to", can_add_to_content_metadata)
+
   },
 }
 
@@ -3421,11 +3429,11 @@ var createGroupCmd = &cobra.Command{
   Long: `### Creates a new group (admin only).
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("createGroup called")
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -3459,7 +3467,6 @@ Boolean search params accept only "true" and "false" as values.
 
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("searchGroups called")
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
     limit, _ := cmd.Flags().GetInt64("limit")
@@ -3480,6 +3487,7 @@ Boolean search params accept only "true" and "false" as values.
     fmt.Println("externally_managed set to", externally_managed)
     externally_orphaned, _ := cmd.Flags().GetBool("externally_orphaned")
     fmt.Println("externally_orphaned set to", externally_orphaned)
+
   },
 }
 
@@ -3513,7 +3521,6 @@ Boolean search params accept only "true" and "false" as values.
 
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("searchGroupsWithRoles called")
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
     limit, _ := cmd.Flags().GetInt64("limit")
@@ -3534,6 +3541,7 @@ Boolean search params accept only "true" and "false" as values.
     fmt.Println("externally_managed set to", externally_managed)
     externally_orphaned, _ := cmd.Flags().GetBool("externally_orphaned")
     fmt.Println("externally_orphaned set to", externally_orphaned)
+
   },
 }
 
@@ -3568,7 +3576,6 @@ Boolean search params accept only "true" and "false" as values.
 
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("searchGroupsWithHierarchy called")
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
     limit, _ := cmd.Flags().GetInt64("limit")
@@ -3589,6 +3596,7 @@ Boolean search params accept only "true" and "false" as values.
     fmt.Println("externally_managed set to", externally_managed)
     externally_orphaned, _ := cmd.Flags().GetBool("externally_orphaned")
     fmt.Println("externally_orphaned set to", externally_orphaned)
+
   },
 }
 
@@ -3598,11 +3606,11 @@ var groupCmd = &cobra.Command{
   Long: `### Get information about a group.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("group called")
     group_id, _ := cmd.Flags().GetInt64("group_id")
     fmt.Println("group_id set to", group_id)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -3611,13 +3619,13 @@ var updateGroupCmd = &cobra.Command{
   Short: "Update Group",
   Long: `### Updates the a group (admin only).`,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("updateGroup called")
     group_id, _ := cmd.Flags().GetInt64("group_id")
     fmt.Println("group_id set to", group_id)
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -3627,9 +3635,9 @@ var deleteGroupCmd = &cobra.Command{
   Long: `### Deletes a group (admin only).
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("deleteGroup called")
     group_id, _ := cmd.Flags().GetInt64("group_id")
     fmt.Println("group_id set to", group_id)
+
   },
 }
 
@@ -3639,11 +3647,11 @@ var allGroupGroupsCmd = &cobra.Command{
   Long: `### Get information about all the groups in a group
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("allGroupGroups called")
     group_id, _ := cmd.Flags().GetInt64("group_id")
     fmt.Println("group_id set to", group_id)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -3653,11 +3661,11 @@ var addGroupGroupCmd = &cobra.Command{
   Long: `### Adds a new group to a group.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("addGroupGroup called")
     group_id, _ := cmd.Flags().GetInt64("group_id")
     fmt.Println("group_id set to", group_id)
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
+
   },
 }
 
@@ -3667,7 +3675,6 @@ var allGroupUsersCmd = &cobra.Command{
   Long: `### Get information about all the users directly included in a group.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("allGroupUsers called")
     group_id, _ := cmd.Flags().GetInt64("group_id")
     fmt.Println("group_id set to", group_id)
     fields, _ := cmd.Flags().GetString("fields")
@@ -3678,6 +3685,7 @@ var allGroupUsersCmd = &cobra.Command{
     fmt.Println("per_page set to", per_page)
     sorts, _ := cmd.Flags().GetString("sorts")
     fmt.Println("sorts set to", sorts)
+
   },
 }
 
@@ -3687,11 +3695,11 @@ var addGroupUserCmd = &cobra.Command{
   Long: `### Adds a new user to a group.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("addGroupUser called")
     group_id, _ := cmd.Flags().GetInt64("group_id")
     fmt.Println("group_id set to", group_id)
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
+
   },
 }
 
@@ -3701,11 +3709,11 @@ var deleteGroupUserCmd = &cobra.Command{
   Long: `### Removes a user from a group.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("deleteGroupUser called")
     group_id, _ := cmd.Flags().GetInt64("group_id")
     fmt.Println("group_id set to", group_id)
     user_id, _ := cmd.Flags().GetInt64("user_id")
     fmt.Println("user_id set to", user_id)
+
   },
 }
 
@@ -3715,11 +3723,11 @@ var deleteGroupFromGroupCmd = &cobra.Command{
   Long: `### Removes a group from a group.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("deleteGroupFromGroup called")
     group_id, _ := cmd.Flags().GetInt64("group_id")
     fmt.Println("group_id set to", group_id)
     deleting_group_id, _ := cmd.Flags().GetInt64("deleting_group_id")
     fmt.Println("deleting_group_id set to", deleting_group_id)
+
   },
 }
 
@@ -3731,13 +3739,13 @@ var updateUserAttributeGroupValueCmd = &cobra.Command{
 For information about how user attribute values are calculated, see [Set User Attribute Group Values](#!/UserAttribute/set_user_attribute_group_values).
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("updateUserAttributeGroupValue called")
     group_id, _ := cmd.Flags().GetInt64("group_id")
     fmt.Println("group_id set to", group_id)
     user_attribute_id, _ := cmd.Flags().GetInt64("user_attribute_id")
     fmt.Println("user_attribute_id set to", user_attribute_id)
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
+
   },
 }
 
@@ -3747,11 +3755,11 @@ var deleteUserAttributeGroupValueCmd = &cobra.Command{
   Long: `### Remove a user attribute value from a group.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("deleteUserAttributeGroupValue called")
     group_id, _ := cmd.Flags().GetInt64("group_id")
     fmt.Println("group_id set to", group_id)
     user_attribute_id, _ := cmd.Flags().GetInt64("user_attribute_id")
     fmt.Println("user_attribute_id set to", user_attribute_id)
+
   },
 }
 
@@ -3769,9 +3777,9 @@ var allPrimaryHomepageSectionsCmd = &cobra.Command{
   Long: `### Get information about the primary homepage's sections.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("allPrimaryHomepageSections called")
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -3789,9 +3797,9 @@ var allIntegrationHubsCmd = &cobra.Command{
   Long: `### Get information about all Integration Hubs.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("allIntegrationHubs called")
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -3803,11 +3811,11 @@ var createIntegrationHubCmd = &cobra.Command{
 This API is rate limited to prevent it from being used for SSRF attacks
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("createIntegrationHub called")
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -3817,11 +3825,11 @@ var integrationHubCmd = &cobra.Command{
   Long: `### Get information about a Integration Hub.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("integrationHub called")
     integration_hub_id, _ := cmd.Flags().GetInt64("integration_hub_id")
     fmt.Println("integration_hub_id set to", integration_hub_id)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -3833,13 +3841,13 @@ var updateIntegrationHubCmd = &cobra.Command{
 This API is rate limited to prevent it from being used for SSRF attacks
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("updateIntegrationHub called")
     integration_hub_id, _ := cmd.Flags().GetInt64("integration_hub_id")
     fmt.Println("integration_hub_id set to", integration_hub_id)
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -3849,9 +3857,9 @@ var deleteIntegrationHubCmd = &cobra.Command{
   Long: `### Delete a Integration Hub.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("deleteIntegrationHub called")
     integration_hub_id, _ := cmd.Flags().GetInt64("integration_hub_id")
     fmt.Println("integration_hub_id set to", integration_hub_id)
+
   },
 }
 
@@ -3860,9 +3868,9 @@ var acceptIntegrationHubLegalAgreementCmd = &cobra.Command{
   Short: "Accept Integration Hub Legal Agreement",
   Long: `Accepts the legal agreement for a given integration hub. This only works for integration hubs that have legal_agreement_required set to true and legal_agreement_signed set to false.`,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("acceptIntegrationHubLegalAgreement called")
     integration_hub_id, _ := cmd.Flags().GetInt64("integration_hub_id")
     fmt.Println("integration_hub_id set to", integration_hub_id)
+
   },
 }
 
@@ -3872,11 +3880,11 @@ var allIntegrationsCmd = &cobra.Command{
   Long: `### Get information about all Integrations.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("allIntegrations called")
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
     integration_hub_id, _ := cmd.Flags().GetString("integration_hub_id")
     fmt.Println("integration_hub_id set to", integration_hub_id)
+
   },
 }
 
@@ -3886,11 +3894,11 @@ var integrationCmd = &cobra.Command{
   Long: `### Get information about a Integration.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("integration called")
     integration_id, _ := cmd.Flags().GetString("integration_id")
     fmt.Println("integration_id set to", integration_id)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -3900,13 +3908,13 @@ var updateIntegrationCmd = &cobra.Command{
   Long: `### Update parameters on a Integration.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("updateIntegration called")
     integration_id, _ := cmd.Flags().GetString("integration_id")
     fmt.Println("integration_id set to", integration_id)
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -3915,11 +3923,11 @@ var fetchIntegrationFormCmd = &cobra.Command{
   Short: "Fetch Remote Integration Form",
   Long: `Returns the Integration form for presentation to the user.`,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("fetchIntegrationForm called")
     integration_id, _ := cmd.Flags().GetString("integration_id")
     fmt.Println("integration_id set to", integration_id)
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
+
   },
 }
 
@@ -3928,9 +3936,9 @@ var testIntegrationCmd = &cobra.Command{
   Short: "Test integration",
   Long: `Tests the integration to make sure all the settings are working.`,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("testIntegration called")
     integration_id, _ := cmd.Flags().GetString("integration_id")
     fmt.Println("integration_id set to", integration_id)
+
   },
 }
 
@@ -3954,9 +3962,9 @@ Get the **full details** of a specific look by id with [look(id)](#!/Look/look)
 Find **soft-deleted looks** with [search_looks()](#!/Look/search_looks)
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("allLooks called")
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -3972,11 +3980,11 @@ To place the look into a particular space, assign the space's id to the 'space_i
 in the call to 'create_look()'.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("createLook called")
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -4012,7 +4020,6 @@ Boolean search params accept only "true" and "false" as values.
 Get a **single look** by id with [look(id)](#!/Look/look)
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("searchLooks called")
     id, _ := cmd.Flags().GetString("id")
     fmt.Println("id set to", id)
     title, _ := cmd.Flags().GetString("title")
@@ -4049,6 +4056,7 @@ Get a **single look** by id with [look(id)](#!/Look/look)
     fmt.Println("sorts set to", sorts)
     filter_or, _ := cmd.Flags().GetBool("filter_or")
     fmt.Println("filter_or set to", filter_or)
+
   },
 }
 
@@ -4061,11 +4069,11 @@ Returns detailed information about a Look and its associated Query.
 
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("look called")
     look_id, _ := cmd.Flags().GetString("look_id")
     fmt.Println("look_id set to", look_id)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -4094,13 +4102,13 @@ NOTE: [delete_look()](#!/Look/delete_look) performs a "hard delete" - the look d
 database and destroyed. There is no "undo" for 'delete_look()'.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("updateLook called")
     look_id, _ := cmd.Flags().GetString("look_id")
     fmt.Println("look_id set to", look_id)
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -4116,9 +4124,9 @@ NOTE: There is no "undo" for this kind of delete.
 For information about soft-delete (which can be undone) see [update_look()](#!/Look/update_look).
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("deleteLook called")
     look_id, _ := cmd.Flags().GetString("look_id")
     fmt.Println("look_id set to", look_id)
+
   },
 }
 
@@ -4147,7 +4155,6 @@ Supported formats:
 
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("runLook called")
     look_id, _ := cmd.Flags().GetString("look_id")
     fmt.Println("look_id set to", look_id)
     result_format, _ := cmd.Flags().GetString("result_format")
@@ -4176,6 +4183,7 @@ Supported formats:
     fmt.Println("rebuild_pdts set to", rebuild_pdts)
     server_table_calcs, _ := cmd.Flags().GetBool("server_table_calcs")
     fmt.Println("server_table_calcs set to", server_table_calcs)
+
   },
 }
 
@@ -4191,11 +4199,11 @@ Creates a copy of an existing look, in a specified folder, and returns the copie
 'look_id' and 'folder_id' must already exist, and 'folder_id' must be different from the current 'folder_id' of the dashboard.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("copyLook called")
     look_id, _ := cmd.Flags().GetString("look_id")
     fmt.Println("look_id set to", look_id)
     folder_id, _ := cmd.Flags().GetString("folder_id")
     fmt.Println("folder_id set to", folder_id)
+
   },
 }
 
@@ -4210,11 +4218,11 @@ Moves a look to a specified folder, and returns the moved look.
 'look_id' and 'folder_id' must already exist, and 'folder_id' must be different from the current 'folder_id' of the dashboard.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("moveLook called")
     look_id, _ := cmd.Flags().GetString("look_id")
     fmt.Println("look_id set to", look_id)
     folder_id, _ := cmd.Flags().GetString("folder_id")
     fmt.Println("folder_id set to", folder_id)
+
   },
 }
 
@@ -4232,13 +4240,13 @@ var allLookmlModelsCmd = &cobra.Command{
   Long: `### Get information about all lookml models.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("allLookmlModels called")
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
     limit, _ := cmd.Flags().GetInt64("limit")
     fmt.Println("limit set to", limit)
     offset, _ := cmd.Flags().GetInt64("offset")
     fmt.Println("offset set to", offset)
+
   },
 }
 
@@ -4248,9 +4256,9 @@ var createLookmlModelCmd = &cobra.Command{
   Long: `### Create a lookml model using the specified configuration.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("createLookmlModel called")
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
+
   },
 }
 
@@ -4260,11 +4268,11 @@ var lookmlModelCmd = &cobra.Command{
   Long: `### Get information about a lookml model.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("lookmlModel called")
     lookml_model_name, _ := cmd.Flags().GetString("lookml_model_name")
     fmt.Println("lookml_model_name set to", lookml_model_name)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -4274,11 +4282,11 @@ var updateLookmlModelCmd = &cobra.Command{
   Long: `### Update a lookml model using the specified configuration.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("updateLookmlModel called")
     lookml_model_name, _ := cmd.Flags().GetString("lookml_model_name")
     fmt.Println("lookml_model_name set to", lookml_model_name)
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
+
   },
 }
 
@@ -4288,9 +4296,9 @@ var deleteLookmlModelCmd = &cobra.Command{
   Long: `### Delete a lookml model.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("deleteLookmlModel called")
     lookml_model_name, _ := cmd.Flags().GetString("lookml_model_name")
     fmt.Println("lookml_model_name set to", lookml_model_name)
+
   },
 }
 
@@ -4300,13 +4308,13 @@ var lookmlModelExploreCmd = &cobra.Command{
   Long: `### Get information about a lookml model explore.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("lookmlModelExplore called")
     lookml_model_name, _ := cmd.Flags().GetString("lookml_model_name")
     fmt.Println("lookml_model_name set to", lookml_model_name)
     explore_name, _ := cmd.Flags().GetString("explore_name")
     fmt.Println("explore_name set to", explore_name)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -4325,7 +4333,6 @@ var modelFieldnameSuggestionsCmd = &cobra.Command{
 
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("modelFieldnameSuggestions called")
     model_name, _ := cmd.Flags().GetString("model_name")
     fmt.Println("model_name set to", model_name)
     view_name, _ := cmd.Flags().GetString("view_name")
@@ -4336,6 +4343,7 @@ var modelFieldnameSuggestionsCmd = &cobra.Command{
     fmt.Println("term set to", term)
     filters, _ := cmd.Flags().GetString("filters")
     fmt.Println("filters set to", filters)
+
   },
 }
 
@@ -4346,9 +4354,9 @@ var getModelCmd = &cobra.Command{
 
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("getModel called")
     model_name, _ := cmd.Flags().GetString("model_name")
     fmt.Println("model_name set to", model_name)
+
   },
 }
 
@@ -4366,9 +4374,9 @@ Connections using dialects that do not support multiple databases will return an
 multiple databases.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("connectionDatabases called")
     connection_name, _ := cmd.Flags().GetString("connection_name")
     fmt.Println("connection_name set to", connection_name)
+
   },
 }
 
@@ -4381,11 +4389,11 @@ Returns a list of feature names with 'true' (available) or 'false' (not availabl
 
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("connectionFeatures called")
     connection_name, _ := cmd.Flags().GetString("connection_name")
     fmt.Println("connection_name set to", connection_name)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -4396,7 +4404,6 @@ var connectionSchemasCmd = &cobra.Command{
 
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("connectionSchemas called")
     connection_name, _ := cmd.Flags().GetString("connection_name")
     fmt.Println("connection_name set to", connection_name)
     database, _ := cmd.Flags().GetString("database")
@@ -4405,6 +4412,7 @@ var connectionSchemasCmd = &cobra.Command{
     fmt.Println("cache set to", cache)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -4419,7 +4427,6 @@ database for the connection will be used.
 For dialects that do **not** support multiple databases, **do not use** the database parameter
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("connectionTables called")
     connection_name, _ := cmd.Flags().GetString("connection_name")
     fmt.Println("connection_name set to", connection_name)
     database, _ := cmd.Flags().GetString("database")
@@ -4430,6 +4437,7 @@ For dialects that do **not** support multiple databases, **do not use** the data
     fmt.Println("cache set to", cache)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -4440,7 +4448,6 @@ var connectionColumnsCmd = &cobra.Command{
 
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("connectionColumns called")
     connection_name, _ := cmd.Flags().GetString("connection_name")
     fmt.Println("connection_name set to", connection_name)
     database, _ := cmd.Flags().GetString("database")
@@ -4455,6 +4462,7 @@ var connectionColumnsCmd = &cobra.Command{
     fmt.Println("table_names set to", table_names)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -4466,13 +4474,13 @@ var connectionSearchColumnsCmd = &cobra.Command{
 **Note**: 'column_name' must be a valid column name. It is not a search pattern.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("connectionSearchColumns called")
     connection_name, _ := cmd.Flags().GetString("connection_name")
     fmt.Println("connection_name set to", connection_name)
     column_name, _ := cmd.Flags().GetString("column_name")
     fmt.Println("column_name set to", column_name)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -4486,13 +4494,13 @@ Assign a 'sql' statement to the body of the request. e.g., for Ruby, '{sql: 'sel
 **Note**: If the connection's dialect has no support for cost estimates, an error will be returned
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("connectionCostEstimate called")
     connection_name, _ := cmd.Flags().GetString("connection_name")
     fmt.Println("connection_name set to", connection_name)
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -4517,11 +4525,11 @@ var lockAllCmd = &cobra.Command{
 
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("lockAll called")
     project_id, _ := cmd.Flags().GetString("project_id")
     fmt.Println("project_id set to", project_id)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -4533,9 +4541,9 @@ var allGitBranchesCmd = &cobra.Command{
 Returns a list of git branches in the project repository
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("allGitBranches called")
     project_id, _ := cmd.Flags().GetString("project_id")
     fmt.Println("project_id set to", project_id)
+
   },
 }
 
@@ -4547,9 +4555,9 @@ var gitBranchCmd = &cobra.Command{
 Returns the git branch currently checked out in the given project repository
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("gitBranch called")
     project_id, _ := cmd.Flags().GetString("project_id")
     fmt.Println("project_id set to", project_id)
+
   },
 }
 
@@ -4568,11 +4576,11 @@ Optionally specify a branch name, tag name or commit SHA to which the branch sho
 
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("updateGitBranch called")
     project_id, _ := cmd.Flags().GetString("project_id")
     fmt.Println("project_id set to", project_id)
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
+
   },
 }
 
@@ -4590,11 +4598,11 @@ Optionally specify a branch name, tag name or commit SHA as the start point in t
 
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("createGitBranch called")
     project_id, _ := cmd.Flags().GetString("project_id")
     fmt.Println("project_id set to", project_id)
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
+
   },
 }
 
@@ -4606,11 +4614,11 @@ var findGitBranchCmd = &cobra.Command{
 Returns the git branch specified in branch_name path param if it exists in the given project repository
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("findGitBranch called")
     project_id, _ := cmd.Flags().GetString("project_id")
     fmt.Println("project_id set to", project_id)
     branch_name, _ := cmd.Flags().GetString("branch_name")
     fmt.Println("branch_name set to", branch_name)
+
   },
 }
 
@@ -4622,11 +4630,11 @@ var deleteGitBranchCmd = &cobra.Command{
 Delete git branch specified in branch_name path param from local and remote of specified project repository
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("deleteGitBranch called")
     project_id, _ := cmd.Flags().GetString("project_id")
     fmt.Println("project_id set to", project_id)
     branch_name, _ := cmd.Flags().GetString("branch_name")
     fmt.Println("branch_name set to", branch_name)
+
   },
 }
 
@@ -4645,13 +4653,13 @@ Can only specify either a branch or a ref.
 
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("deployRefToProduction called")
     project_id, _ := cmd.Flags().GetString("project_id")
     fmt.Println("project_id set to", project_id)
     branch, _ := cmd.Flags().GetString("branch")
     fmt.Println("branch set to", branch)
     ref, _ := cmd.Flags().GetString("ref")
     fmt.Println("ref set to", ref)
+
   },
 }
 
@@ -4673,9 +4681,9 @@ Deploy is a two / three step process:
 
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("deployToProduction called")
     project_id, _ := cmd.Flags().GetString("project_id")
     fmt.Println("project_id set to", project_id)
+
   },
 }
 
@@ -4687,9 +4695,9 @@ var resetProjectToProductionCmd = &cobra.Command{
 **DANGER** this will delete any changes that have not been pushed to a remote repository.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("resetProjectToProduction called")
     project_id, _ := cmd.Flags().GetString("project_id")
     fmt.Println("project_id set to", project_id)
+
   },
 }
 
@@ -4701,9 +4709,9 @@ var resetProjectToRemoteCmd = &cobra.Command{
 **DANGER** this will delete any changes that have not been pushed to a remote repository.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("resetProjectToRemote called")
     project_id, _ := cmd.Flags().GetString("project_id")
     fmt.Println("project_id set to", project_id)
+
   },
 }
 
@@ -4715,9 +4723,9 @@ var allProjectsCmd = &cobra.Command{
 Returns all projects visible to the current user
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("allProjects called")
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -4734,9 +4742,9 @@ dev mode required.
 
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("createProject called")
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
+
   },
 }
 
@@ -4748,11 +4756,11 @@ var projectCmd = &cobra.Command{
 Returns the project with the given project id
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("project called")
     project_id, _ := cmd.Flags().GetString("project_id")
     fmt.Println("project_id set to", project_id)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -4784,13 +4792,13 @@ To set up a Looker project with a git repository residing on the Looker server (
 
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("updateProject called")
     project_id, _ := cmd.Flags().GetString("project_id")
     fmt.Println("project_id set to", project_id)
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -4802,9 +4810,9 @@ var manifestCmd = &cobra.Command{
 Returns the project with the given project id
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("manifest called")
     project_id, _ := cmd.Flags().GetString("project_id")
     fmt.Println("project_id set to", project_id)
+
   },
 }
 
@@ -4816,9 +4824,9 @@ var gitDeployKeyCmd = &cobra.Command{
 Returns the ssh public key previously created for a project's git repository.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("gitDeployKey called")
     project_id, _ := cmd.Flags().GetString("project_id")
     fmt.Println("project_id set to", project_id)
+
   },
 }
 
@@ -4836,9 +4844,9 @@ Copy this public key to your remote git repository's ssh keys configuration so t
 validate and accept git requests from the Looker server.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("createGitDeployKey called")
     project_id, _ := cmd.Flags().GetString("project_id")
     fmt.Println("project_id set to", project_id)
+
   },
 }
 
@@ -4859,11 +4867,11 @@ the cached validation results were computed. The cached validation results may n
 reflect the current state of the project.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("projectValidationResults called")
     project_id, _ := cmd.Flags().GetString("project_id")
     fmt.Println("project_id set to", project_id)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -4881,11 +4889,11 @@ when you really want to recompute project validation. To quickly display the res
 the most recent project validation (without recomputing), use 'project_validation_results(project_id)'
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("validateProject called")
     project_id, _ := cmd.Flags().GetString("project_id")
     fmt.Println("project_id set to", project_id)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -4897,11 +4905,11 @@ var projectWorkspaceCmd = &cobra.Command{
 Returns information about the state of the project files in the currently selected workspace
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("projectWorkspace called")
     project_id, _ := cmd.Flags().GetString("project_id")
     fmt.Println("project_id set to", project_id)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -4913,11 +4921,11 @@ var allProjectFilesCmd = &cobra.Command{
 Returns a list of the files in the project
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("allProjectFiles called")
     project_id, _ := cmd.Flags().GetString("project_id")
     fmt.Println("project_id set to", project_id)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -4929,13 +4937,13 @@ var projectFileCmd = &cobra.Command{
 Returns information about a file in the project
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("projectFile called")
     project_id, _ := cmd.Flags().GetString("project_id")
     fmt.Println("project_id set to", project_id)
     file_id, _ := cmd.Flags().GetString("file_id")
     fmt.Println("file_id set to", file_id)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -4954,11 +4962,11 @@ Tests are ordered by increasing specificity. Tests should be run in the order re
 For example, a late-stage test for write access is meaningless if connecting to the git server (an early test) is failing.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("allGitConnectionTests called")
     project_id, _ := cmd.Flags().GetString("project_id")
     fmt.Println("project_id set to", project_id)
     remote_url, _ := cmd.Flags().GetString("remote_url")
     fmt.Println("remote_url set to", remote_url)
+
   },
 }
 
@@ -4974,7 +4982,6 @@ more helpful information about why a git url is not working with Looker.
 Tests should be run in the order they are returned by [Get All Git Connection Tests](#!/Project/all_git_connection_tests).
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("runGitConnectionTest called")
     project_id, _ := cmd.Flags().GetString("project_id")
     fmt.Println("project_id set to", project_id)
     test_id, _ := cmd.Flags().GetString("test_id")
@@ -4983,6 +4990,7 @@ Tests should be run in the order they are returned by [Get All Git Connection Te
     fmt.Println("remote_url set to", remote_url)
     use_production, _ := cmd.Flags().GetString("use_production")
     fmt.Println("use_production set to", use_production)
+
   },
 }
 
@@ -4996,11 +5004,11 @@ optionally filtered by the file id.
 Call [Run LookML Test](#!/Project/run_lookml_test) to execute tests.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("allLookmlTests called")
     project_id, _ := cmd.Flags().GetString("project_id")
     fmt.Println("project_id set to", project_id)
     file_id, _ := cmd.Flags().GetString("file_id")
     fmt.Println("file_id set to", file_id)
+
   },
 }
 
@@ -5012,7 +5020,6 @@ var runLookmlTestCmd = &cobra.Command{
 Runs all tests in the project, optionally filtered by file, test, and/or model.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("runLookmlTest called")
     project_id, _ := cmd.Flags().GetString("project_id")
     fmt.Println("project_id set to", project_id)
     file_id, _ := cmd.Flags().GetString("file_id")
@@ -5021,6 +5028,7 @@ Runs all tests in the project, optionally filtered by file, test, and/or model.
     fmt.Println("test set to", test)
     model, _ := cmd.Flags().GetString("model")
     fmt.Println("model set to", model)
+
   },
 }
 
@@ -5032,7 +5040,6 @@ var tagRefCmd = &cobra.Command{
 This is an internal-only, undocumented route.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("tagRef called")
     project_id, _ := cmd.Flags().GetString("project_id")
     fmt.Println("project_id set to", project_id)
     body, _ := cmd.Flags().GetString("body")
@@ -5043,6 +5050,7 @@ This is an internal-only, undocumented route.
     fmt.Println("tag_name set to", tag_name)
     tag_message, _ := cmd.Flags().GetString("tag_message")
     fmt.Println("tag_message set to", tag_message)
+
   },
 }
 
@@ -5058,13 +5066,13 @@ Admin required.
 
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("updateRepositoryCredential called")
     root_project_id, _ := cmd.Flags().GetString("root_project_id")
     fmt.Println("root_project_id set to", root_project_id)
     credential_id, _ := cmd.Flags().GetString("credential_id")
     fmt.Println("credential_id set to", credential_id)
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
+
   },
 }
 
@@ -5079,11 +5087,11 @@ Admin required.
 'credential_id' is required.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("deleteRepositoryCredential called")
     root_project_id, _ := cmd.Flags().GetString("root_project_id")
     fmt.Println("root_project_id set to", root_project_id)
     credential_id, _ := cmd.Flags().GetString("credential_id")
     fmt.Println("credential_id set to", credential_id)
+
   },
 }
 
@@ -5095,9 +5103,9 @@ var getAllRepositoryCredentialsCmd = &cobra.Command{
 'root_project_id' is required.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("getAllRepositoryCredentials called")
     root_project_id, _ := cmd.Flags().GetString("root_project_id")
     fmt.Println("root_project_id set to", root_project_id)
+
   },
 }
 
@@ -5120,7 +5128,6 @@ Use [query_task(query_task_id)](#!/Query/query_task) to check the execution stat
 After the query task status reaches "Complete", use [query_task_results(query_task_id)](#!/Query/query_task_results) to fetch the results of the query.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("createQueryTask called")
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
     limit, _ := cmd.Flags().GetInt64("limit")
@@ -5149,6 +5156,7 @@ After the query task status reaches "Complete", use [query_task_results(query_ta
     fmt.Println("server_table_calcs set to", server_table_calcs)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -5164,9 +5172,9 @@ Query Tasks whose results have expired will have a status of 'expired'.
 If the user making the API request does not have sufficient privileges to view a Query Task result, the result will have a status of 'missing'
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("queryTaskMultiResults called")
     query_task_ids, _ := cmd.Flags().GetString("query_task_ids")
     fmt.Println("query_task_ids set to", query_task_ids)
+
   },
 }
 
@@ -5182,11 +5190,11 @@ retrieve the results of the query.
 Use [create_query_task()](#!/Query/create_query_task) to create an async query task.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("queryTask called")
     query_task_id, _ := cmd.Flags().GetString("query_task_id")
     fmt.Println("query_task_id set to", query_task_id)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -5218,9 +5226,9 @@ will be in the message of the 400 error response, but not as detailed as express
 These data formats can only carry row data, and error info is not row data.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("queryTaskResults called")
     query_task_id, _ := cmd.Flags().GetString("query_task_id")
     fmt.Println("query_task_id set to", query_task_id)
+
   },
 }
 
@@ -5247,11 +5255,11 @@ creating new queries and can usually just be ignored.
 
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("query called")
     query_id, _ := cmd.Flags().GetInt64("query_id")
     fmt.Println("query_id set to", query_id)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -5277,11 +5285,11 @@ This will also work with slugs from Looker explore urls like
 'aogBgL6o3cKK1jN3RoZl5s' is the slug.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("queryForSlug called")
     slug, _ := cmd.Flags().GetString("slug")
     fmt.Println("slug set to", slug)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -5299,11 +5307,11 @@ The query parameters are passed as json in the body of the request.
 
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("createQuery called")
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -5335,7 +5343,6 @@ Supported formats:
 
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("runQuery called")
     query_id, _ := cmd.Flags().GetInt64("query_id")
     fmt.Println("query_id set to", query_id)
     result_format, _ := cmd.Flags().GetString("result_format")
@@ -5366,6 +5373,7 @@ Supported formats:
     fmt.Println("server_table_calcs set to", server_table_calcs)
     source, _ := cmd.Flags().GetString("source")
     fmt.Println("source set to", source)
+
   },
 }
 
@@ -5426,7 +5434,6 @@ Supported formats:
 
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("runInlineQuery called")
     result_format, _ := cmd.Flags().GetString("result_format")
     fmt.Println("result_format set to", result_format)
     body, _ := cmd.Flags().GetString("body")
@@ -5455,6 +5462,7 @@ Supported formats:
     fmt.Println("rebuild_pdts set to", rebuild_pdts)
     server_table_calcs, _ := cmd.Flags().GetBool("server_table_calcs")
     fmt.Println("server_table_calcs set to", server_table_calcs)
+
   },
 }
 
@@ -5517,13 +5525,13 @@ Supported formats:
 
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("runUrlEncodedQuery called")
     model_name, _ := cmd.Flags().GetString("model_name")
     fmt.Println("model_name set to", model_name)
     view_name, _ := cmd.Flags().GetString("view_name")
     fmt.Println("view_name set to", view_name)
     result_format, _ := cmd.Flags().GetString("result_format")
     fmt.Println("result_format set to", result_format)
+
   },
 }
 
@@ -5535,11 +5543,11 @@ var mergeQueryCmd = &cobra.Command{
 Returns a merge query object given its id.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("mergeQuery called")
     merge_query_id, _ := cmd.Flags().GetString("merge_query_id")
     fmt.Println("merge_query_id set to", merge_query_id)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -5565,11 +5573,11 @@ the existing merge query will be returned instead of creating a duplicate. Conve
 change to the contents of a merge query will produce a new object with a new id.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("createMergeQuery called")
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -5579,7 +5587,7 @@ var allRunningQueriesCmd = &cobra.Command{
   Long: `Get information about all running queries.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("allRunningQueries called")
+
 
   },
 }
@@ -5590,9 +5598,9 @@ var killQueryCmd = &cobra.Command{
   Long: `Kill a query with a specific query_task_id.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("killQuery called")
     query_task_id, _ := cmd.Flags().GetString("query_task_id")
     fmt.Println("query_task_id set to", query_task_id)
+
   },
 }
 
@@ -5601,9 +5609,9 @@ var sqlQueryCmd = &cobra.Command{
   Short: "Get SQL Runner Query",
   Long: `Get a SQL Runner query.`,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("sqlQuery called")
     slug, _ := cmd.Flags().GetString("slug")
     fmt.Println("slug set to", slug)
+
   },
 }
 
@@ -5615,9 +5623,9 @@ var createSqlQueryCmd = &cobra.Command{
 Either the 'connection_name' or 'model_name' parameter MUST be provided.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("createSqlQuery called")
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
+
   },
 }
 
@@ -5626,13 +5634,13 @@ var runSqlQueryCmd = &cobra.Command{
   Short: "Run SQL Runner Query",
   Long: `Execute a SQL Runner query in a given result_format.`,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("runSqlQuery called")
     slug, _ := cmd.Flags().GetString("slug")
     fmt.Println("slug set to", slug)
     result_format, _ := cmd.Flags().GetString("result_format")
     fmt.Println("result_format set to", result_format)
     download, _ := cmd.Flags().GetString("download")
     fmt.Println("download set to", download)
+
   },
 }
 
@@ -5655,7 +5663,6 @@ Once the render task is complete, you can download the resulting document or ima
 
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("createLookRenderTask called")
     look_id, _ := cmd.Flags().GetInt64("look_id")
     fmt.Println("look_id set to", look_id)
     result_format, _ := cmd.Flags().GetString("result_format")
@@ -5666,6 +5673,7 @@ Once the render task is complete, you can download the resulting document or ima
     fmt.Println("height set to", height)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -5680,7 +5688,6 @@ Once the render task is complete, you can download the resulting document or ima
 
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("createQueryRenderTask called")
     query_id, _ := cmd.Flags().GetInt64("query_id")
     fmt.Println("query_id set to", query_id)
     result_format, _ := cmd.Flags().GetString("result_format")
@@ -5691,6 +5698,7 @@ Once the render task is complete, you can download the resulting document or ima
     fmt.Println("height set to", height)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -5705,7 +5713,6 @@ Once the render task is complete, you can download the resulting document or ima
 
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("createDashboardRenderTask called")
     dashboard_id, _ := cmd.Flags().GetString("dashboard_id")
     fmt.Println("dashboard_id set to", dashboard_id)
     result_format, _ := cmd.Flags().GetString("result_format")
@@ -5724,6 +5731,7 @@ Once the render task is complete, you can download the resulting document or ima
     fmt.Println("pdf_landscape set to", pdf_landscape)
     long_tables, _ := cmd.Flags().GetBool("long_tables")
     fmt.Println("long_tables set to", long_tables)
+
   },
 }
 
@@ -5738,11 +5746,11 @@ Once the render task is complete, you can download the resulting document or ima
 
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("renderTask called")
     render_task_id, _ := cmd.Flags().GetString("render_task_id")
     fmt.Println("render_task_id set to", render_task_id)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -5768,9 +5776,9 @@ Polling loops waiting for completion of a render task would be better served by 
 the task status reaches completion (or error) instead of polling **render_task_results(id)** alone.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("renderTaskResults called")
     render_task_id, _ := cmd.Flags().GetString("render_task_id")
     fmt.Println("render_task_id set to", render_task_id)
+
   },
 }
 
@@ -5810,7 +5818,6 @@ Boolean search params accept only "true" and "false" as values.
 
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("searchModelSets called")
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
     limit, _ := cmd.Flags().GetInt64("limit")
@@ -5829,6 +5836,7 @@ Boolean search params accept only "true" and "false" as values.
     fmt.Println("built_in set to", built_in)
     filter_or, _ := cmd.Flags().GetBool("filter_or")
     fmt.Println("filter_or set to", filter_or)
+
   },
 }
 
@@ -5838,11 +5846,11 @@ var modelSetCmd = &cobra.Command{
   Long: `### Get information about the model set with a specific id.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("modelSet called")
     model_set_id, _ := cmd.Flags().GetInt64("model_set_id")
     fmt.Println("model_set_id set to", model_set_id)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -5852,11 +5860,11 @@ var updateModelSetCmd = &cobra.Command{
   Long: `### Update information about the model set with a specific id.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("updateModelSet called")
     model_set_id, _ := cmd.Flags().GetInt64("model_set_id")
     fmt.Println("model_set_id set to", model_set_id)
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
+
   },
 }
 
@@ -5866,9 +5874,9 @@ var deleteModelSetCmd = &cobra.Command{
   Long: `### Delete the model set with a specific id.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("deleteModelSet called")
     model_set_id, _ := cmd.Flags().GetInt64("model_set_id")
     fmt.Println("model_set_id set to", model_set_id)
+
   },
 }
 
@@ -5878,9 +5886,9 @@ var allModelSetsCmd = &cobra.Command{
   Long: `### Get information about all model sets.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("allModelSets called")
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -5890,9 +5898,9 @@ var createModelSetCmd = &cobra.Command{
   Long: `### Create a model set with the specified information. Model sets are used by Roles.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("createModelSet called")
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
+
   },
 }
 
@@ -5902,7 +5910,7 @@ var allPermissionsCmd = &cobra.Command{
   Long: `### Get all supported permissions.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("allPermissions called")
+
 
   },
 }
@@ -5935,7 +5943,6 @@ Boolean search params accept only "true" and "false" as values.
 
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("searchPermissionSets called")
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
     limit, _ := cmd.Flags().GetInt64("limit")
@@ -5954,6 +5961,7 @@ Boolean search params accept only "true" and "false" as values.
     fmt.Println("built_in set to", built_in)
     filter_or, _ := cmd.Flags().GetBool("filter_or")
     fmt.Println("filter_or set to", filter_or)
+
   },
 }
 
@@ -5963,11 +5971,11 @@ var permissionSetCmd = &cobra.Command{
   Long: `### Get information about the permission set with a specific id.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("permissionSet called")
     permission_set_id, _ := cmd.Flags().GetInt64("permission_set_id")
     fmt.Println("permission_set_id set to", permission_set_id)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -5977,11 +5985,11 @@ var updatePermissionSetCmd = &cobra.Command{
   Long: `### Update information about the permission set with a specific id.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("updatePermissionSet called")
     permission_set_id, _ := cmd.Flags().GetInt64("permission_set_id")
     fmt.Println("permission_set_id set to", permission_set_id)
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
+
   },
 }
 
@@ -5991,9 +5999,9 @@ var deletePermissionSetCmd = &cobra.Command{
   Long: `### Delete the permission set with a specific id.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("deletePermissionSet called")
     permission_set_id, _ := cmd.Flags().GetInt64("permission_set_id")
     fmt.Println("permission_set_id set to", permission_set_id)
+
   },
 }
 
@@ -6003,9 +6011,9 @@ var allPermissionSetsCmd = &cobra.Command{
   Long: `### Get information about all permission sets.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("allPermissionSets called")
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -6015,9 +6023,9 @@ var createPermissionSetCmd = &cobra.Command{
   Long: `### Create a permission set with the specified information. Permission sets are used by Roles.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("createPermissionSet called")
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
+
   },
 }
 
@@ -6027,11 +6035,11 @@ var allRolesCmd = &cobra.Command{
   Long: `### Get information about all roles.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("allRoles called")
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
     ids, _ := cmd.Flags().GetString("ids")
     fmt.Println("ids set to", ids)
+
   },
 }
 
@@ -6041,9 +6049,9 @@ var createRoleCmd = &cobra.Command{
   Long: `### Create a role with the specified information.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("createRole called")
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
+
   },
 }
 
@@ -6077,7 +6085,6 @@ Boolean search params accept only "true" and "false" as values.
 
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("searchRoles called")
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
     limit, _ := cmd.Flags().GetInt64("limit")
@@ -6094,6 +6101,7 @@ Boolean search params accept only "true" and "false" as values.
     fmt.Println("built_in set to", built_in)
     filter_or, _ := cmd.Flags().GetBool("filter_or")
     fmt.Println("filter_or set to", filter_or)
+
   },
 }
 
@@ -6128,7 +6136,6 @@ Boolean search params accept only "true" and "false" as values.
 
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("searchRolesWithUserCount called")
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
     limit, _ := cmd.Flags().GetInt64("limit")
@@ -6145,6 +6152,7 @@ Boolean search params accept only "true" and "false" as values.
     fmt.Println("built_in set to", built_in)
     filter_or, _ := cmd.Flags().GetBool("filter_or")
     fmt.Println("filter_or set to", filter_or)
+
   },
 }
 
@@ -6154,9 +6162,9 @@ var roleCmd = &cobra.Command{
   Long: `### Get information about the role with a specific id.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("role called")
     role_id, _ := cmd.Flags().GetInt64("role_id")
     fmt.Println("role_id set to", role_id)
+
   },
 }
 
@@ -6166,11 +6174,11 @@ var updateRoleCmd = &cobra.Command{
   Long: `### Update information about the role with a specific id.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("updateRole called")
     role_id, _ := cmd.Flags().GetInt64("role_id")
     fmt.Println("role_id set to", role_id)
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
+
   },
 }
 
@@ -6180,9 +6188,9 @@ var deleteRoleCmd = &cobra.Command{
   Long: `### Delete the role with a specific id.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("deleteRole called")
     role_id, _ := cmd.Flags().GetInt64("role_id")
     fmt.Println("role_id set to", role_id)
+
   },
 }
 
@@ -6192,11 +6200,11 @@ var roleGroupsCmd = &cobra.Command{
   Long: `### Get information about all the groups with the role that has a specific id.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("roleGroups called")
     role_id, _ := cmd.Flags().GetInt64("role_id")
     fmt.Println("role_id set to", role_id)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -6206,11 +6214,11 @@ var setRoleGroupsCmd = &cobra.Command{
   Long: `### Set all groups for a role, removing all existing group associations from that role.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("setRoleGroups called")
     role_id, _ := cmd.Flags().GetInt64("role_id")
     fmt.Println("role_id set to", role_id)
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
+
   },
 }
 
@@ -6220,13 +6228,13 @@ var roleUsersCmd = &cobra.Command{
   Long: `### Get information about all the users with the role that has a specific id.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("roleUsers called")
     role_id, _ := cmd.Flags().GetInt64("role_id")
     fmt.Println("role_id set to", role_id)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
     direct_association_only, _ := cmd.Flags().GetBool("direct_association_only")
     fmt.Println("direct_association_only set to", direct_association_only)
+
   },
 }
 
@@ -6236,11 +6244,11 @@ var setRoleUsersCmd = &cobra.Command{
   Long: `### Set all the users of the role with a specific id.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("setRoleUsers called")
     role_id, _ := cmd.Flags().GetInt64("role_id")
     fmt.Println("role_id set to", role_id)
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
+
   },
 }
 
@@ -6260,11 +6268,11 @@ var scheduledPlansForSpaceCmd = &cobra.Command{
 Returns scheduled plans owned by the caller for a given space id.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("scheduledPlansForSpace called")
     space_id, _ := cmd.Flags().GetInt64("space_id")
     fmt.Println("space_id set to", space_id)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -6276,11 +6284,11 @@ var scheduledPlanCmd = &cobra.Command{
 Admins can fetch information about other users' Scheduled Plans.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("scheduledPlan called")
     scheduled_plan_id, _ := cmd.Flags().GetInt64("scheduled_plan_id")
     fmt.Println("scheduled_plan_id set to", scheduled_plan_id)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -6333,11 +6341,11 @@ Valid formats vary by destination type and source object. 'wysiwyg_pdf' is only 
 
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("updateScheduledPlan called")
     scheduled_plan_id, _ := cmd.Flags().GetInt64("scheduled_plan_id")
     fmt.Println("scheduled_plan_id set to", scheduled_plan_id)
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
+
   },
 }
 
@@ -6351,9 +6359,9 @@ Admins can delete other users' scheduled plans.
 This delete cannot be undone.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("deleteScheduledPlan called")
     scheduled_plan_id, _ := cmd.Flags().GetInt64("scheduled_plan_id")
     fmt.Println("scheduled_plan_id set to", scheduled_plan_id)
+
   },
 }
 
@@ -6375,13 +6383,13 @@ The caller must have 'see_schedules' permission to see other users' scheduled pl
 
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("allScheduledPlans called")
     user_id, _ := cmd.Flags().GetInt64("user_id")
     fmt.Println("user_id set to", user_id)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
     all_users, _ := cmd.Flags().GetBool("all_users")
     fmt.Println("all_users set to", all_users)
+
   },
 }
 
@@ -6450,9 +6458,9 @@ Valid formats vary by destination type and source object. 'wysiwyg_pdf' is only 
 
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("createScheduledPlan called")
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
+
   },
 }
 
@@ -6500,9 +6508,9 @@ Valid formats vary by destination type and source object. 'wysiwyg_pdf' is only 
 
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("scheduledPlanRunOnce called")
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
+
   },
 }
 
@@ -6524,7 +6532,6 @@ The caller must have 'see_schedules' permission to see other users' scheduled pl
 
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("scheduledPlansForLook called")
     look_id, _ := cmd.Flags().GetInt64("look_id")
     fmt.Println("look_id set to", look_id)
     user_id, _ := cmd.Flags().GetInt64("user_id")
@@ -6533,6 +6540,7 @@ The caller must have 'see_schedules' permission to see other users' scheduled pl
     fmt.Println("fields set to", fields)
     all_users, _ := cmd.Flags().GetBool("all_users")
     fmt.Println("all_users set to", all_users)
+
   },
 }
 
@@ -6554,7 +6562,6 @@ The caller must have 'see_schedules' permission to see other users' scheduled pl
 
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("scheduledPlansForDashboard called")
     dashboard_id, _ := cmd.Flags().GetInt64("dashboard_id")
     fmt.Println("dashboard_id set to", dashboard_id)
     user_id, _ := cmd.Flags().GetInt64("user_id")
@@ -6563,6 +6570,7 @@ The caller must have 'see_schedules' permission to see other users' scheduled pl
     fmt.Println("all_users set to", all_users)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -6584,7 +6592,6 @@ The caller must have 'see_schedules' permission to see other users' scheduled pl
 
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("scheduledPlansForLookmlDashboard called")
     lookml_dashboard_id, _ := cmd.Flags().GetString("lookml_dashboard_id")
     fmt.Println("lookml_dashboard_id set to", lookml_dashboard_id)
     user_id, _ := cmd.Flags().GetInt64("user_id")
@@ -6593,6 +6600,7 @@ The caller must have 'see_schedules' permission to see other users' scheduled pl
     fmt.Println("fields set to", fields)
     all_users, _ := cmd.Flags().GetBool("all_users")
     fmt.Println("all_users set to", all_users)
+
   },
 }
 
@@ -6649,11 +6657,11 @@ This API is rate limited to prevent it from being used for relay spam or DoS att
 
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("scheduledPlanRunOnceById called")
     scheduled_plan_id, _ := cmd.Flags().GetInt64("scheduled_plan_id")
     fmt.Println("scheduled_plan_id set to", scheduled_plan_id)
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
+
   },
 }
 
@@ -6673,7 +6681,7 @@ var sessionCmd = &cobra.Command{
 Returns information about the current API session, such as which workspace is selected for the session.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("session called")
+
 
   },
 }
@@ -6703,9 +6711,9 @@ If your Looker API client application needs to work in a dev workspace across mu
 API sessions, be sure to select the dev workspace after each login.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("updateSession called")
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
+
   },
 }
 
@@ -6730,9 +6738,9 @@ This method returns an array of all existing themes. The active time for the the
 
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("allThemes called")
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -6757,9 +6765,9 @@ For more information, see [Creating and Applying Themes](https://looker.com/docs
 
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("createTheme called")
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
+
   },
 }
 
@@ -6807,7 +6815,6 @@ Get a **single theme** by id with [Theme](#!/Theme/theme)
 
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("searchThemes called")
     id, _ := cmd.Flags().GetInt64("id")
     fmt.Println("id set to", id)
     name, _ := cmd.Flags().GetString("name")
@@ -6826,6 +6833,7 @@ Get a **single theme** by id with [Theme](#!/Theme/theme)
     fmt.Println("fields set to", fields)
     filter_or, _ := cmd.Flags().GetBool("filter_or")
     fmt.Println("filter_or set to", filter_or)
+
   },
 }
 
@@ -6841,9 +6849,9 @@ The **default** theme name can be set in the UI on the Admin|Theme UI page
 The optional 'ts' parameter can specify a different timestamp than "now." If specified, it returns the default theme at the time indicated.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("defaultTheme called")
     ts, _ := cmd.Flags().GetString("ts")
     fmt.Println("ts set to", ts)
+
   },
 }
 
@@ -6864,9 +6872,9 @@ Returns the new specified default theme object.
 
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("setDefaultTheme called")
     name, _ := cmd.Flags().GetString("name")
     fmt.Println("name set to", name)
+
   },
 }
 
@@ -6886,13 +6894,13 @@ The optional 'ts' parameter can specify a different timestamp than "now."
 
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("activeThemes called")
     name, _ := cmd.Flags().GetString("name")
     fmt.Println("name set to", name)
     ts, _ := cmd.Flags().GetString("ts")
     fmt.Println("ts set to", ts)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -6908,11 +6916,11 @@ Note: API users with 'show' ability can call this function
 
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("themeOrDefault called")
     name, _ := cmd.Flags().GetString("name")
     fmt.Println("name set to", name)
     ts, _ := cmd.Flags().GetString("ts")
     fmt.Println("ts set to", ts)
+
   },
 }
 
@@ -6929,9 +6937,9 @@ See [Create Theme](#!/Theme/create_theme) for constraints
 
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("validateTheme called")
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
+
   },
 }
 
@@ -6946,11 +6954,11 @@ Use this to retrieve a specific theme, whether or not it's currently active.
 
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("theme called")
     theme_id, _ := cmd.Flags().GetInt64("theme_id")
     fmt.Println("theme_id set to", theme_id)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -6963,11 +6971,11 @@ var updateThemeCmd = &cobra.Command{
 
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("updateTheme called")
     theme_id, _ := cmd.Flags().GetInt64("theme_id")
     fmt.Println("theme_id set to", theme_id)
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
+
   },
 }
 
@@ -6986,9 +6994,9 @@ All IDs associated with a theme name can be retrieved by searching for the theme
 
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("deleteTheme called")
     theme_id, _ := cmd.Flags().GetString("theme_id")
     fmt.Println("theme_id set to", theme_id)
+
   },
 }
 
@@ -7030,7 +7038,6 @@ Boolean search params accept only "true" and "false" as values.
 
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("searchCredentialsEmail called")
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
     limit, _ := cmd.Flags().GetInt64("limit")
@@ -7047,6 +7054,7 @@ Boolean search params accept only "true" and "false" as values.
     fmt.Println("emails set to", emails)
     filter_or, _ := cmd.Flags().GetBool("filter_or")
     fmt.Println("filter_or set to", filter_or)
+
   },
 }
 
@@ -7056,9 +7064,9 @@ var meCmd = &cobra.Command{
   Long: `### Get information about the current user; i.e. the user account currently calling the API.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("me called")
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -7068,7 +7076,6 @@ var allUsersCmd = &cobra.Command{
   Long: `### Get information about all users.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("allUsers called")
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
     page, _ := cmd.Flags().GetInt64("page")
@@ -7083,6 +7090,17 @@ var allUsersCmd = &cobra.Command{
     fmt.Println("sorts set to", sorts)
     ids, _ := cmd.Flags().GetString("ids")
     fmt.Println("ids set to", ids)
+    var request v4.RequestAllUsers
+    formattedInput := fmt.Sprintf(`{"Fields": "%s", "Page": %d, "PerPage": %d, "Limit": %d, "Offset": %d, "Sorts": "%s"}`, fields, page, per_page, limit, offset, sorts)
+    err := json.NewDecoder(strings.NewReader(formattedInput)).Decode(&request)
+    if err != nil {
+      fmt.Println("Failure to marshal input into model\n", err)
+      return
+    }
+
+    response, err := sdk.AllUsers(request, nil)
+    res, _ := json.MarshalIndent(response, "", "  ")
+    fmt.Println(string(res))
   },
 }
 
@@ -7092,11 +7110,22 @@ var createUserCmd = &cobra.Command{
   Long: `### Create a user with the specified information.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("createUser called")
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+    var request v4.WriteUser
+    err := json.NewDecoder(strings.NewReader(body)).Decode(&request)
+    if err != nil {
+      fmt.Println("Error when decoding json")
+    }
+    response, err := sdk.CreateUser(request, fields, nil)
+    if err != nil {
+      fmt.Println("SDK failure:", err)
+      return
+    }
+    res, _ := json.MarshalIndent(response, "", "  ")
+    fmt.Println(string(res))
   },
 }
 
@@ -7136,7 +7165,6 @@ names of other users who are members of the same group as the user.
 
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("searchUsers called")
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
     page, _ := cmd.Flags().GetInt64("page")
@@ -7169,6 +7197,7 @@ names of other users who are members of the same group as the user.
     fmt.Println("content_metadata_id set to", content_metadata_id)
     group_id, _ := cmd.Flags().GetString("group_id")
     fmt.Println("group_id set to", group_id)
+
   },
 }
 
@@ -7183,7 +7212,6 @@ The pattern can contain '%' and '_' wildcards as in SQL LIKE expressions.
 Any additional search params will be combined into a logical AND expression.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("searchUsersNames called")
     pattern, _ := cmd.Flags().GetString("pattern")
     fmt.Println("pattern set to", pattern)
     fields, _ := cmd.Flags().GetString("fields")
@@ -7210,6 +7238,7 @@ Any additional search params will be combined into a logical AND expression.
     fmt.Println("email set to", email)
     is_disabled, _ := cmd.Flags().GetBool("is_disabled")
     fmt.Println("is_disabled set to", is_disabled)
+
   },
 }
 
@@ -7223,11 +7252,16 @@ be returned. Otherwise, a minimal 'public' variant of the user information will 
 The user name and avatar url, but no sensitive information.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("user called")
     user_id, _ := cmd.Flags().GetInt64("user_id")
     fmt.Println("user_id set to", user_id)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+    response, err := sdk.User(user_id ,fields ,nil)
+    if err != nil {
+      fmt.Println("Error while calling API: ", err)
+    }
+    res, _ := json.MarshalIndent(response, "", "  ")
+    fmt.Println(string(res))
   },
 }
 
@@ -7237,13 +7271,13 @@ var updateUserCmd = &cobra.Command{
   Long: `### Update information about the user with a specific id.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("updateUser called")
     user_id, _ := cmd.Flags().GetInt64("user_id")
     fmt.Println("user_id set to", user_id)
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -7255,9 +7289,14 @@ var deleteUserCmd = &cobra.Command{
 **DANGER** this will delete the user and all looks and other information owned by the user.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("deleteUser called")
     user_id, _ := cmd.Flags().GetInt64("user_id")
     fmt.Println("user_id set to", user_id)
+    response, err := sdk.DeleteUser(user_id ,nil)
+    if err != nil {
+      fmt.Println("Error while calling API: ", err)
+    }
+    res, _ := json.MarshalIndent(response, "", "  ")
+    fmt.Println(string(res))
   },
 }
 
@@ -7295,13 +7334,13 @@ which field in the given credential type is actually searched when finding a use
 
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("userForCredential called")
     credential_type, _ := cmd.Flags().GetString("credential_type")
     fmt.Println("credential_type set to", credential_type)
     credential_id, _ := cmd.Flags().GetString("credential_id")
     fmt.Println("credential_id set to", credential_id)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -7310,11 +7349,11 @@ var userCredentialsEmailCmd = &cobra.Command{
   Short: "Get Email/Password Credential",
   Long: `### Email/password login information for the specified user.`,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("userCredentialsEmail called")
     user_id, _ := cmd.Flags().GetInt64("user_id")
     fmt.Println("user_id set to", user_id)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -7323,13 +7362,13 @@ var createUserCredentialsEmailCmd = &cobra.Command{
   Short: "Create Email/Password Credential",
   Long: `### Email/password login information for the specified user.`,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("createUserCredentialsEmail called")
     user_id, _ := cmd.Flags().GetInt64("user_id")
     fmt.Println("user_id set to", user_id)
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -7338,13 +7377,13 @@ var updateUserCredentialsEmailCmd = &cobra.Command{
   Short: "Update Email/Password Credential",
   Long: `### Email/password login information for the specified user.`,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("updateUserCredentialsEmail called")
     user_id, _ := cmd.Flags().GetInt64("user_id")
     fmt.Println("user_id set to", user_id)
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -7353,9 +7392,9 @@ var deleteUserCredentialsEmailCmd = &cobra.Command{
   Short: "Delete Email/Password Credential",
   Long: `### Email/password login information for the specified user.`,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("deleteUserCredentialsEmail called")
     user_id, _ := cmd.Flags().GetInt64("user_id")
     fmt.Println("user_id set to", user_id)
+
   },
 }
 
@@ -7364,11 +7403,11 @@ var userCredentialsTotpCmd = &cobra.Command{
   Short: "Get Two-Factor Credential",
   Long: `### Two-factor login information for the specified user.`,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("userCredentialsTotp called")
     user_id, _ := cmd.Flags().GetInt64("user_id")
     fmt.Println("user_id set to", user_id)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -7377,13 +7416,13 @@ var createUserCredentialsTotpCmd = &cobra.Command{
   Short: "Create Two-Factor Credential",
   Long: `### Two-factor login information for the specified user.`,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("createUserCredentialsTotp called")
     user_id, _ := cmd.Flags().GetInt64("user_id")
     fmt.Println("user_id set to", user_id)
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -7392,9 +7431,9 @@ var deleteUserCredentialsTotpCmd = &cobra.Command{
   Short: "Delete Two-Factor Credential",
   Long: `### Two-factor login information for the specified user.`,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("deleteUserCredentialsTotp called")
     user_id, _ := cmd.Flags().GetInt64("user_id")
     fmt.Println("user_id set to", user_id)
+
   },
 }
 
@@ -7403,11 +7442,11 @@ var userCredentialsLdapCmd = &cobra.Command{
   Short: "Get LDAP Credential",
   Long: `### LDAP login information for the specified user.`,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("userCredentialsLdap called")
     user_id, _ := cmd.Flags().GetInt64("user_id")
     fmt.Println("user_id set to", user_id)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -7416,9 +7455,9 @@ var deleteUserCredentialsLdapCmd = &cobra.Command{
   Short: "Delete LDAP Credential",
   Long: `### LDAP login information for the specified user.`,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("deleteUserCredentialsLdap called")
     user_id, _ := cmd.Flags().GetInt64("user_id")
     fmt.Println("user_id set to", user_id)
+
   },
 }
 
@@ -7427,11 +7466,11 @@ var userCredentialsGoogleCmd = &cobra.Command{
   Short: "Get Google Auth Credential",
   Long: `### Google authentication login information for the specified user.`,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("userCredentialsGoogle called")
     user_id, _ := cmd.Flags().GetInt64("user_id")
     fmt.Println("user_id set to", user_id)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -7440,9 +7479,9 @@ var deleteUserCredentialsGoogleCmd = &cobra.Command{
   Short: "Delete Google Auth Credential",
   Long: `### Google authentication login information for the specified user.`,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("deleteUserCredentialsGoogle called")
     user_id, _ := cmd.Flags().GetInt64("user_id")
     fmt.Println("user_id set to", user_id)
+
   },
 }
 
@@ -7451,11 +7490,11 @@ var userCredentialsSamlCmd = &cobra.Command{
   Short: "Get Saml Auth Credential",
   Long: `### Saml authentication login information for the specified user.`,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("userCredentialsSaml called")
     user_id, _ := cmd.Flags().GetInt64("user_id")
     fmt.Println("user_id set to", user_id)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -7464,9 +7503,9 @@ var deleteUserCredentialsSamlCmd = &cobra.Command{
   Short: "Delete Saml Auth Credential",
   Long: `### Saml authentication login information for the specified user.`,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("deleteUserCredentialsSaml called")
     user_id, _ := cmd.Flags().GetInt64("user_id")
     fmt.Println("user_id set to", user_id)
+
   },
 }
 
@@ -7475,11 +7514,11 @@ var userCredentialsOidcCmd = &cobra.Command{
   Short: "Get OIDC Auth Credential",
   Long: `### OpenID Connect (OIDC) authentication login information for the specified user.`,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("userCredentialsOidc called")
     user_id, _ := cmd.Flags().GetInt64("user_id")
     fmt.Println("user_id set to", user_id)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -7488,9 +7527,9 @@ var deleteUserCredentialsOidcCmd = &cobra.Command{
   Short: "Delete OIDC Auth Credential",
   Long: `### OpenID Connect (OIDC) authentication login information for the specified user.`,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("deleteUserCredentialsOidc called")
     user_id, _ := cmd.Flags().GetInt64("user_id")
     fmt.Println("user_id set to", user_id)
+
   },
 }
 
@@ -7499,13 +7538,13 @@ var userCredentialsApi3Cmd = &cobra.Command{
   Short: "Get API 3 Credential",
   Long: `### API 3 login information for the specified user. This is for the newer API keys that can be added for any user.`,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("userCredentialsApi3 called")
     user_id, _ := cmd.Flags().GetInt64("user_id")
     fmt.Println("user_id set to", user_id)
     credentials_api3_id, _ := cmd.Flags().GetInt64("credentials_api3_id")
     fmt.Println("credentials_api3_id set to", credentials_api3_id)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -7514,11 +7553,11 @@ var deleteUserCredentialsApi3Cmd = &cobra.Command{
   Short: "Delete API 3 Credential",
   Long: `### API 3 login information for the specified user. This is for the newer API keys that can be added for any user.`,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("deleteUserCredentialsApi3 called")
     user_id, _ := cmd.Flags().GetInt64("user_id")
     fmt.Println("user_id set to", user_id)
     credentials_api3_id, _ := cmd.Flags().GetInt64("credentials_api3_id")
     fmt.Println("credentials_api3_id set to", credentials_api3_id)
+
   },
 }
 
@@ -7527,11 +7566,11 @@ var allUserCredentialsApi3sCmd = &cobra.Command{
   Short: "Get All API 3 Credentials",
   Long: `### API 3 login information for the specified user. This is for the newer API keys that can be added for any user.`,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("allUserCredentialsApi3s called")
     user_id, _ := cmd.Flags().GetInt64("user_id")
     fmt.Println("user_id set to", user_id)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -7540,11 +7579,11 @@ var createUserCredentialsApi3Cmd = &cobra.Command{
   Short: "Create API 3 Credential",
   Long: `### API 3 login information for the specified user. This is for the newer API keys that can be added for any user.`,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("createUserCredentialsApi3 called")
     user_id, _ := cmd.Flags().GetInt64("user_id")
     fmt.Println("user_id set to", user_id)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -7553,13 +7592,13 @@ var userCredentialsEmbedCmd = &cobra.Command{
   Short: "Get Embedding Credential",
   Long: `### Embed login information for the specified user.`,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("userCredentialsEmbed called")
     user_id, _ := cmd.Flags().GetInt64("user_id")
     fmt.Println("user_id set to", user_id)
     credentials_embed_id, _ := cmd.Flags().GetInt64("credentials_embed_id")
     fmt.Println("credentials_embed_id set to", credentials_embed_id)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -7568,11 +7607,11 @@ var deleteUserCredentialsEmbedCmd = &cobra.Command{
   Short: "Delete Embedding Credential",
   Long: `### Embed login information for the specified user.`,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("deleteUserCredentialsEmbed called")
     user_id, _ := cmd.Flags().GetInt64("user_id")
     fmt.Println("user_id set to", user_id)
     credentials_embed_id, _ := cmd.Flags().GetInt64("credentials_embed_id")
     fmt.Println("credentials_embed_id set to", credentials_embed_id)
+
   },
 }
 
@@ -7581,11 +7620,11 @@ var allUserCredentialsEmbedsCmd = &cobra.Command{
   Short: "Get All Embedding Credentials",
   Long: `### Embed login information for the specified user.`,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("allUserCredentialsEmbeds called")
     user_id, _ := cmd.Flags().GetInt64("user_id")
     fmt.Println("user_id set to", user_id)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -7594,11 +7633,11 @@ var userCredentialsLookerOpenidCmd = &cobra.Command{
   Short: "Get Looker OpenId Credential",
   Long: `### Looker Openid login information for the specified user. Used by Looker Analysts.`,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("userCredentialsLookerOpenid called")
     user_id, _ := cmd.Flags().GetInt64("user_id")
     fmt.Println("user_id set to", user_id)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -7607,9 +7646,9 @@ var deleteUserCredentialsLookerOpenidCmd = &cobra.Command{
   Short: "Delete Looker OpenId Credential",
   Long: `### Looker Openid login information for the specified user. Used by Looker Analysts.`,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("deleteUserCredentialsLookerOpenid called")
     user_id, _ := cmd.Flags().GetInt64("user_id")
     fmt.Println("user_id set to", user_id)
+
   },
 }
 
@@ -7618,13 +7657,13 @@ var userSessionCmd = &cobra.Command{
   Short: "Get Web Login Session",
   Long: `### Web login session for the specified user.`,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("userSession called")
     user_id, _ := cmd.Flags().GetInt64("user_id")
     fmt.Println("user_id set to", user_id)
     session_id, _ := cmd.Flags().GetInt64("session_id")
     fmt.Println("session_id set to", session_id)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -7633,11 +7672,11 @@ var deleteUserSessionCmd = &cobra.Command{
   Short: "Delete Web Login Session",
   Long: `### Web login session for the specified user.`,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("deleteUserSession called")
     user_id, _ := cmd.Flags().GetInt64("user_id")
     fmt.Println("user_id set to", user_id)
     session_id, _ := cmd.Flags().GetInt64("session_id")
     fmt.Println("session_id set to", session_id)
+
   },
 }
 
@@ -7646,11 +7685,11 @@ var allUserSessionsCmd = &cobra.Command{
   Short: "Get All Web Login Sessions",
   Long: `### Web login session for the specified user.`,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("allUserSessions called")
     user_id, _ := cmd.Flags().GetInt64("user_id")
     fmt.Println("user_id set to", user_id)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -7668,13 +7707,13 @@ The expire period is always 60 minutes when expires is enabled.
 This method can be called with an empty body.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("createUserCredentialsEmailPasswordReset called")
     user_id, _ := cmd.Flags().GetInt64("user_id")
     fmt.Println("user_id set to", user_id)
     expires, _ := cmd.Flags().GetBool("expires")
     fmt.Println("expires set to", expires)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -7684,13 +7723,13 @@ var userRolesCmd = &cobra.Command{
   Long: `### Get information about roles of a given user
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("userRoles called")
     user_id, _ := cmd.Flags().GetInt64("user_id")
     fmt.Println("user_id set to", user_id)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
     direct_association_only, _ := cmd.Flags().GetBool("direct_association_only")
     fmt.Println("direct_association_only set to", direct_association_only)
+
   },
 }
 
@@ -7700,13 +7739,13 @@ var setUserRolesCmd = &cobra.Command{
   Long: `### Set roles of the user with a specific id.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("setUserRoles called")
     user_id, _ := cmd.Flags().GetInt64("user_id")
     fmt.Println("user_id set to", user_id)
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -7731,7 +7770,6 @@ empty records for user attributes with no value.
 The value of all hidden user attributes will be blank.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("userAttributeUserValues called")
     user_id, _ := cmd.Flags().GetInt64("user_id")
     fmt.Println("user_id set to", user_id)
     fields, _ := cmd.Flags().GetString("fields")
@@ -7742,6 +7780,7 @@ The value of all hidden user attributes will be blank.
     fmt.Println("all_values set to", all_values)
     include_unset, _ := cmd.Flags().GetBool("include_unset")
     fmt.Println("include_unset set to", include_unset)
+
   },
 }
 
@@ -7753,13 +7792,13 @@ var setUserAttributeUserValueCmd = &cobra.Command{
 Per-user user attribute values take precedence over group or default values.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("setUserAttributeUserValue called")
     user_id, _ := cmd.Flags().GetInt64("user_id")
     fmt.Println("user_id set to", user_id)
     user_attribute_id, _ := cmd.Flags().GetInt64("user_attribute_id")
     fmt.Println("user_attribute_id set to", user_attribute_id)
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
+
   },
 }
 
@@ -7774,11 +7813,11 @@ value of the user attribute. See [Get User Attribute Values](#!/User/user_attrib
 information about how user attribute values are resolved.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("deleteUserAttributeUserValue called")
     user_id, _ := cmd.Flags().GetInt64("user_id")
     fmt.Println("user_id set to", user_id)
     user_attribute_id, _ := cmd.Flags().GetInt64("user_attribute_id")
     fmt.Println("user_attribute_id set to", user_attribute_id)
+
   },
 }
 
@@ -7794,11 +7833,11 @@ Password reset URLs will expire in 60 minutes.
 This method can be called with an empty body.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("sendUserCredentialsEmailPasswordReset called")
     user_id, _ := cmd.Flags().GetInt64("user_id")
     fmt.Println("user_id set to", user_id)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -7813,13 +7852,13 @@ the value supplied in the 'email' body param.
 The user's 'is_disabled' status must be true.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("wipeoutUserEmails called")
     user_id, _ := cmd.Flags().GetInt64("user_id")
     fmt.Println("user_id set to", user_id)
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -7829,9 +7868,9 @@ var createEmbedUserCmd = &cobra.Command{
   Long: `Create an embed user from an external user ID
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("createEmbedUser called")
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
+
   },
 }
 
@@ -7849,11 +7888,11 @@ var allUserAttributesCmd = &cobra.Command{
   Long: `### Get information about all user attributes.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("allUserAttributes called")
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
     sorts, _ := cmd.Flags().GetString("sorts")
     fmt.Println("sorts set to", sorts)
+
   },
 }
 
@@ -7872,11 +7911,11 @@ Attempting to create a new user attribute with a name or label that duplicates a
 user attribute will fail with a 422 error.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("createUserAttribute called")
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -7886,11 +7925,11 @@ var userAttributeCmd = &cobra.Command{
   Long: `### Get information about a user attribute.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("userAttribute called")
     user_attribute_id, _ := cmd.Flags().GetInt64("user_attribute_id")
     fmt.Println("user_attribute_id set to", user_attribute_id)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -7900,13 +7939,13 @@ var updateUserAttributeCmd = &cobra.Command{
   Long: `### Update a user attribute definition.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("updateUserAttribute called")
     user_attribute_id, _ := cmd.Flags().GetInt64("user_attribute_id")
     fmt.Println("user_attribute_id set to", user_attribute_id)
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -7916,9 +7955,9 @@ var deleteUserAttributeCmd = &cobra.Command{
   Long: `### Delete a user attribute (admin only).
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("deleteUserAttribute called")
     user_attribute_id, _ := cmd.Flags().GetInt64("user_attribute_id")
     fmt.Println("user_attribute_id set to", user_attribute_id)
+
   },
 }
 
@@ -7934,11 +7973,11 @@ to a given user.  For more information, see [Set User Attribute Group Values](#!
 Results will only include groups that the caller's user account has permission to see.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("allUserAttributeGroupValues called")
     user_attribute_id, _ := cmd.Flags().GetInt64("user_attribute_id")
     fmt.Println("user_attribute_id set to", user_attribute_id)
     fields, _ := cmd.Flags().GetString("fields")
     fmt.Println("fields set to", fields)
+
   },
 }
 
@@ -7967,11 +8006,11 @@ rank value to every group-value object in the array.
 To set a user attribute value for all members of a group, see [Set User Attribute Group Value](#!/Group/update_user_attribute_group_value).
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("setUserAttributeGroupValues called")
     user_attribute_id, _ := cmd.Flags().GetInt64("user_attribute_id")
     fmt.Println("user_attribute_id set to", user_attribute_id)
     body, _ := cmd.Flags().GetString("body")
     fmt.Println("body set to", body)
+
   },
 }
 
@@ -7991,7 +8030,7 @@ var allWorkspacesCmd = &cobra.Command{
 Returns all workspaces available to the calling user.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("allWorkspaces called")
+
 
   },
 }
@@ -8030,9 +8069,9 @@ reside in a special user-specific directory on the Looker server and will still 
 later and use update_session(workspace_id: "dev") to select the dev workspace for the new API session.
 `,
   Run: func(cmd *cobra.Command, args []string) {
-    fmt.Println("workspace called")
     workspace_id, _ := cmd.Flags().GetString("workspace_id")
     fmt.Println("workspace_id set to", workspace_id)
+
   },
 }
 
