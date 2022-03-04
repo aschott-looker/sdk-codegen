@@ -232,11 +232,11 @@ export class CliGen extends CodeGen {
     if (requestType !== 'UpdateUser') {
       return ''
     }
-    const idName = 'user_id'
-    const allParamsExceptBody = method.allParams.filter(
+    const idName = method.allParams[0].name
+    const allParamsExceptBodyAndId = method.allParams.filter(
       (param) => param.name !== 'body' && param.name !== idName
     )
-    const paramsStr = allParamsExceptBody
+    const paramsStr = allParamsExceptBodyAndId
       .map((param) => {
         return `, ${this.reserve(param.name)}`
       })
@@ -358,7 +358,7 @@ export class CliGen extends CodeGen {
       `  "github.com/spf13/cobra"`,
       `)`,
       ``,
-      `var lookerIniPath = "../../../looker.ini"`,
+      `var lookerIniPath = "./looker.ini"`,
       `var cfg, _ = rtl.NewSettingsFromFile(lookerIniPath, nil)`,
       `var sdk = v4.NewLookerSDK(rtl.NewAuthSession(cfg))`,
       ``,
