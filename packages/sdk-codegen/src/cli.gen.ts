@@ -74,6 +74,13 @@ export class CliGen extends CodeGen {
   currentCommand = ''
   usedCommands = new Set<string>([])
   dedupe = 0
+  supportedRequestTypes = new Set<string>([
+    'CreateUser',
+    'UpdateUser',
+    'DeleteUser',
+    'AllUsers',
+    'User',
+  ])
 
   constructor(public api: ApiModel, public versions?: IVersionInfo) {
     super(api, versions)
@@ -93,6 +100,10 @@ export class CliGen extends CodeGen {
       return `_${name}`
     }
     return name
+  }
+
+  isSupported(requestType: string) {
+    return this.supportedRequestTypes.has(requestType)
   }
 
   beginRegion(_indent: string, description: string): string {
@@ -135,9 +146,18 @@ export class CliGen extends CodeGen {
       this.commandToSubCommands.set(this.currentCommand, [subCommand])
     }
 
-    const flagsCode = method.allParams
-      .map((param) => this.declareParameter(indent, method, param))
+    const requestType = this.toCamelCaseCap(method.name)
+
+    let flagsCode = method.allParams
+      .filter((param) => param.name !== 'ids')
+      .map((param) => {
+        return this.declareParameter(indent, method, param)
+      })
       .join('\n')
+
+    if (!this.isSupported(requestType)) {
+      flagsCode = ''
+    }
 
     return this.declareRunnableCobraCommand(
       commandName,
@@ -145,7 +165,7 @@ export class CliGen extends CodeGen {
       method.summary,
       this.replaceAll(method.description, '`', "'"),
       flagsCode,
-      this.declareSdkCall(method, this.toCamelCaseCap(method.name))
+      this.declareSdkCall(method, requestType)
     )
   }
 
@@ -154,7 +174,6 @@ export class CliGen extends CodeGen {
       `    ${this.reserve(param.name)}, _ := cmd.Flags().Get${this.getPFlag(
         param.type
       )}("${param.name}")`,
-      `    fmt.Println("${param.name} set to", ${this.reserve(param.name)})`,
     ].join('\n')
   }
 
@@ -180,6 +199,9 @@ export class CliGen extends CodeGen {
   }
 
   declareSdkCall(method: IMethod, requestType: string) {
+    if (!this.isSupported(requestType)) {
+      return ''
+    }
     switch (method.httpMethod) {
       case 'POST': {
         return this.declarePostSdkCall(method, requestType)
@@ -187,6 +209,7 @@ export class CliGen extends CodeGen {
       case 'DELETE': {
         return this.declareDeleteSdkCall(method, requestType)
       }
+      case 'PATCH':
       case 'PUT': {
         return this.declarePutSdkCall(method, requestType)
       }
@@ -201,9 +224,6 @@ export class CliGen extends CodeGen {
   }
 
   declarePostSdkCall(method: IMethod, requestType: string) {
-    if (requestType !== 'CreateUser') {
-      return ''
-    }
     const allParamsExceptBody = method.allParams.filter(
       (param) => param.name !== 'body'
     )
@@ -214,24 +234,14 @@ export class CliGen extends CodeGen {
       .join('')
     return [
       `    var request v4.Write${requestType.substring(6)}`,
-      `    err := json.NewDecoder(strings.NewReader(body)).Decode(&request)`,
-      `    if err != nil {`,
-      `      fmt.Println("Error when decoding json")`,
-      `    }`,
-      `    response, err := sdk.${requestType}(request${paramsStr}, nil)`,
-      `    if err != nil {`,
-      `      fmt.Println("SDK failure:", err)`,
-      `      return`,
-      `    }`,
-      `    res, _ := json.MarshalIndent(response, "", "  ")`,
-      `    fmt.Println(string(res))`,
+      `    json.NewDecoder(strings.NewReader(body)).Decode(&request)`,
+      `    response, _ := sdk.${requestType}(request${paramsStr}, nil)`,
+      `    jsonResponse, _ := json.MarshalIndent(response, "", "  ")`,
+      `    fmt.Println(string(jsonResponse))`,
     ].join('\n')
   }
 
   declarePutSdkCall(method: IMethod, requestType: string) {
-    if (requestType !== 'UpdateUser') {
-      return ''
-    }
     const idName = method.allParams[0].name
     const allParamsExceptBodyAndId = method.allParams.filter(
       (param) => param.name !== 'body' && param.name !== idName
@@ -243,62 +253,40 @@ export class CliGen extends CodeGen {
       .join('')
     return [
       `    var request v4.Write${requestType.substring(6)}`,
-      `    err := json.NewDecoder(strings.NewReader(body)).Decode(&request)`,
-      `    if err != nil {`,
-      `      fmt.Println("Error when decoding json")`,
-      `    }`,
-      ``,
-      `    response, err := sdk.${requestType}(${idName}, request${paramsStr}, nil)`,
-      `    if err != nil {`,
-      `      fmt.Println("Error while calling API: ", err)`,
-      `    }`,
-      `    res, _ := json.MarshalIndent(response, "", "  ")`,
-      `    fmt.Println(string(res))`,
+      `    json.NewDecoder(strings.NewReader(body)).Decode(&request)`,
+      `    response, _ := sdk.${requestType}(${idName}, request${paramsStr}, nil)`,
+      `    jsonResponse, _ := json.MarshalIndent(response, "", "  ")`,
+      `    fmt.Println(string(jsonResponse))`,
     ].join('\n')
   }
 
   declareDeleteSdkCall(method: IMethod, requestType: string) {
-    if (requestType !== 'DeleteUser') {
-      return ''
-    }
     const templateStr = method.allParams
       .map((param) => {
         return `${this.reserve(param.name)} ,`
       })
       .join('')
     return [
-      `    response, err := sdk.${requestType}(${templateStr}nil)`,
-      `    if err != nil {`,
-      `      fmt.Println("Error while calling API: ", err)`,
-      `    }`,
-      `    res, _ := json.MarshalIndent(response, "", "  ")`,
-      `    fmt.Println(string(res))`,
+      `    response, _ := sdk.${requestType}(${templateStr}nil)`,
+      `    jsonResponse, _ := json.MarshalIndent(response, "", "  ")`,
+      `    fmt.Println(string(jsonResponse))`,
     ].join('\n')
   }
 
   declareGetSdkCall(method: IMethod, requestType: string) {
-    if (requestType !== 'User') {
-      return ''
-    }
     const templateStr = method.allParams
       .map((param) => {
         return `${this.reserve(param.name)} ,`
       })
       .join('')
     return [
-      `    response, err := sdk.${requestType}(${templateStr}nil)`,
-      `    if err != nil {`,
-      `      fmt.Println("Error while calling API: ", err)`,
-      `    }`,
-      `    res, _ := json.MarshalIndent(response, "", "  ")`,
-      `    fmt.Println(string(res))`,
+      `    response, _ := sdk.${requestType}(${templateStr}nil)`,
+      `    jsonResponse, _ := json.MarshalIndent(response, "", "  ")`,
+      `    fmt.Println(string(jsonResponse))`,
     ].join('\n')
   }
 
   declareGetAllSdkCall(method: IMethod, requestType: string) {
-    if (requestType !== 'AllUsers') {
-      return ''
-    }
     const supportedParams = method.allParams.filter(
       (param) => param.name !== 'ids'
     )
@@ -317,15 +305,10 @@ export class CliGen extends CodeGen {
     return [
       `    var request v4.Request${requestType}`,
       `    formattedInput := fmt.Sprintf(\`{${templateStr}}\`, ${valuesStr})`,
-      `    err := json.NewDecoder(strings.NewReader(formattedInput)).Decode(&request)`,
-      `    if err != nil {`,
-      `      fmt.Println("Failure to marshal input into model\\n", err)`,
-      `      return`,
-      `    }`,
-      ``,
-      `    response, err := sdk.${requestType}(request, nil)`,
-      `    res, _ := json.MarshalIndent(response, "", "  ")`,
-      `    fmt.Println(string(res))`,
+      `    json.NewDecoder(strings.NewReader(formattedInput)).Decode(&request)`,
+      `    response, _ := sdk.${requestType}(request, nil)`,
+      `    jsonResponse, _ := json.MarshalIndent(response, "", "  ")`,
+      `    fmt.Println(string(jsonResponse))`,
     ].join('\n')
   }
 
