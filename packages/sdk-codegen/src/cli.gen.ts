@@ -233,6 +233,8 @@ export class CliGen extends CodeGen {
       })
       .join('')
     return [
+      `    var cfg, _ = rtl.NewSettingsFromFile(lookerIniPath, nil)`,
+      `    var sdk = v4.NewLookerSDK(rtl.NewAuthSession(cfg))`,
       `    var request v4.Write${requestType.substring(6)}`,
       `    json.NewDecoder(strings.NewReader(body)).Decode(&request)`,
       `    response, _ := sdk.${requestType}(request${paramsStr}, nil)`,
@@ -252,6 +254,8 @@ export class CliGen extends CodeGen {
       })
       .join('')
     return [
+      `    var cfg, _ = rtl.NewSettingsFromFile(lookerIniPath, nil)`,
+      `    var sdk = v4.NewLookerSDK(rtl.NewAuthSession(cfg))`,
       `    var request v4.Write${requestType.substring(6)}`,
       `    json.NewDecoder(strings.NewReader(body)).Decode(&request)`,
       `    response, _ := sdk.${requestType}(${idName}, request${paramsStr}, nil)`,
@@ -267,6 +271,8 @@ export class CliGen extends CodeGen {
       })
       .join('')
     return [
+      `    var cfg, _ = rtl.NewSettingsFromFile(lookerIniPath, nil)`,
+      `    var sdk = v4.NewLookerSDK(rtl.NewAuthSession(cfg))`,
       `    response, _ := sdk.${requestType}(${templateStr}nil)`,
       `    jsonResponse, _ := json.MarshalIndent(response, "", "  ")`,
       `    fmt.Println(string(jsonResponse))`,
@@ -280,6 +286,8 @@ export class CliGen extends CodeGen {
       })
       .join('')
     return [
+      `    var cfg, _ = rtl.NewSettingsFromFile(lookerIniPath, nil)`,
+      `    var sdk = v4.NewLookerSDK(rtl.NewAuthSession(cfg))`,
       `    response, _ := sdk.${requestType}(${templateStr}nil)`,
       `    jsonResponse, _ := json.MarshalIndent(response, "", "  ")`,
       `    fmt.Println(string(jsonResponse))`,
@@ -303,6 +311,8 @@ export class CliGen extends CodeGen {
       })
       .join(', ')
     return [
+      `    var cfg, _ = rtl.NewSettingsFromFile(lookerIniPath, nil)`,
+      `    var sdk = v4.NewLookerSDK(rtl.NewAuthSession(cfg))`,
       `    var request v4.Request${requestType}`,
       `    formattedInput := fmt.Sprintf(\`{${templateStr}}\`, ${valuesStr})`,
       `    json.NewDecoder(strings.NewReader(formattedInput)).Decode(&request)`,
@@ -335,20 +345,78 @@ export class CliGen extends CodeGen {
       `  "os"`,
       `  "fmt"`,
       `  "strings"`,
+      `  "strconv"`,
+      `  "bufio"`,
       ``,
       `  "github.com/looker-open-source/sdk-codegen/go/rtl"`,
       `  v4 "github.com/looker-open-source/sdk-codegen/go/sdk/v4"`,
       `  "github.com/spf13/cobra"`,
       `)`,
       ``,
+      `const (`,
+      `  apiVersionKey   = "api_versions"`,
+      `  baseUrlKey      = "base_url"`,
+      `  clientIdKey     = "client_id`,
+      `  clientSecretKey = "client_secret`,
+      `  verifySslKey    = "verify_ssl`,
+      `  timeoutKey      = "timeout"`,
+      `)`,
+      ``,
       `var lookerIniPath = "./looker.ini"`,
-      `var cfg, _ = rtl.NewSettingsFromFile(lookerIniPath, nil)`,
-      `var sdk = v4.NewLookerSDK(rtl.NewAuthSession(cfg))`,
       ``,
       `var rootCmd = &cobra.Command{`,
       `  Use:   "looker-cli",`,
       `  Short: "Command line interface for interacting with a Looker instance.",`,
       `  Long:  "Command line interface for interacting with a Looker instance.",`,
+      `}`,
+      ``,
+      `var lookerInitCmd = &cobra.Command {`,
+      `  Use: "init",`,
+      `  Short: "Command line prompts to generate looker.ini."`,
+      `  Long: "Command line prompts to generate looker.ini.  Will overwrite existing files."`,
+      `  Run: func(cmd *cobra.Command, args []string) {`,
+      `    file := getFile(lookerIniPath)`,
+      `    defer file.Close()`,
+      `    `,
+      `    reader := bufio.NewReader(os.Stdin)`,
+      `    apiV := prompt(reader, apiVersionKey, "3.1,4.0")`,
+      `    baseUrl := prompt(reader, baseUrlKey, "")`,
+      `    clientId := prompt(reader, clientIdKey, "")`,
+      `    clientSecret := prompt(reader, clientSecretKey, "")`,
+      `    verifySsl, _ := strconv.ParseBool(prompt(reader, clientIdKey, ""))`,
+      `    timeout, _ := strconv.Atoi(prompt(reader, clientIdKey, ""))`,
+      `    `,
+      `    fileContent := fmt.Sprintf("[Looker]\n%s=%s\n%s=%s\n%s=%s\n%s=%s\n%s=%t\n%s=%d", apiVersionKey, apiV, baseUrlKey, baseUrl, clientIdKey, clientId, clientSecretKey, clientSecret, verifySslKey, verifySsl, timeoutKey, timeout)`,
+      `    file.WriteString(fileContent)`,
+      `    file.Sync()`,
+      `  },`,
+      `}`,
+      ``,
+      `func prompt(reader *bufio.Reader, text string, defaultValue string) string {`,
+      `  defaultMessage := " (no default value, required)"`,
+      `  if defaultValue != "" {`,
+      `    defaultMessage = fmt.Sprintf(" (leave empty for default %s)", defaultValue)`,
+      `  }`,
+      `  fmt.Printf(text + defaultMessage + ":")`,
+      `  value, _ := reader.ReadString('\\n')`,
+      `  value = strings.TrimSpace(value)`,
+      `  if value == "" {`,
+      `    return defaultValue`,
+      `  }`,
+      `  return value`,
+      `}`,
+      ``,
+      `func getFile(fileName string) *os.File {`,
+      `  if _, err := os.Stat(fileName); err != nil {`,
+      `    file, _ := os.Create(fileName)`,
+      `    return file`,
+      `  } else {`,
+      `    file, err := os.OpenFile(fileName, os.O_WRONLY, 0644)`,
+      `    if err != nil {`,
+      `      panic(any(err))`,
+      `    }`,
+      `    return file`,
+      `  }`,
       `}`,
       ``,
       `func Execute() {`,
@@ -433,7 +501,7 @@ export class CliGen extends CodeGen {
   }
 
   modelsPrologue(_indent: string) {
-    return ''
+    return '//go:build ignore'
   }
 
   summary(_indent: string, _text: string) {
