@@ -26,9 +26,11 @@
 package cmd
 
 import (
+	"bufio"
 	"encoding/json"
 	"fmt"
 	"os"
+	"strconv"
 	"strings"
 
 	"github.com/looker-open-source/sdk-codegen/go/rtl"
@@ -36,14 +38,70 @@ import (
 	"github.com/spf13/cobra"
 )
 
+const (
+	apiVersionKey   = "api_versions"
+	baseUrlKey      = "base_url"
+	clientIdKey     = "client_id"
+	clientSecretKey = "client_secret"
+	verifySslKey    = "verify_ssl"
+	timeoutKey      = "timeout"
+)
+
 var lookerIniPath = "./looker.ini"
-var cfg, _ = rtl.NewSettingsFromFile(lookerIniPath, nil)
-var sdk = v4.NewLookerSDK(rtl.NewAuthSession(cfg))
 
 var rootCmd = &cobra.Command{
 	Use:   "looker-cli",
 	Short: "Command line interface for interacting with a Looker instance.",
 	Long:  "Command line interface for interacting with a Looker instance.",
+}
+
+var lookerInitCmd = &cobra.Command{
+	Use:   "init",
+	Short: "Command line prompts to generate looker.ini.",
+	Long:  "Command line prompts to generate looker.ini.  Will overwrite existing files.",
+	Run: func(cmd *cobra.Command, args []string) {
+		file := getFile(lookerIniPath)
+		defer file.Close()
+
+		reader := bufio.NewReader(os.Stdin)
+		apiV := prompt(reader, apiVersionKey, "3.1,4.0")
+		baseUrl := prompt(reader, baseUrlKey, "")
+		clientId := prompt(reader, clientIdKey, "")
+		clientSecret := prompt(reader, clientSecretKey, "")
+		verifySsl, _ := strconv.ParseBool(prompt(reader, verifySslKey, "true"))
+		timeout, _ := strconv.Atoi(prompt(reader, timeoutKey, "120"))
+
+		fileContent := fmt.Sprintf("[Looker]\n%s=%s\n%s=%s\n%s=%s\n%s=%s\n%s=%t\n%s=%d", apiVersionKey, apiV, baseUrlKey, baseUrl, clientIdKey, clientId, clientSecretKey, clientSecret, verifySslKey, verifySsl, timeoutKey, timeout)
+		file.WriteString(fileContent)
+		file.Sync()
+	},
+}
+
+func prompt(reader *bufio.Reader, text string, defaultValue string) string {
+	defaultMessage := " (no default value, required)"
+	if defaultValue != "" {
+		defaultMessage = fmt.Sprintf(" (leave empty for default %s)", defaultValue)
+	}
+	fmt.Printf(text + defaultMessage + ":")
+	value, _ := reader.ReadString('\n')
+	value = strings.TrimSpace(value)
+	if value == "" {
+		return defaultValue
+	}
+	return value
+}
+
+func getFile(fileName string) *os.File {
+	if _, err := os.Stat(fileName); err != nil {
+		file, _ := os.Create(fileName)
+		return file
+	} else {
+		file, err := os.OpenFile(fileName, os.O_WRONLY, 0644)
+		if err != nil {
+			panic(any(err))
+		}
+		return file
+	}
 }
 
 func Execute() {
@@ -5397,6 +5455,8 @@ var allUsersCmd = &cobra.Command{
 		limit, _ := cmd.Flags().GetInt64("limit")
 		offset, _ := cmd.Flags().GetInt64("offset")
 		sorts, _ := cmd.Flags().GetString("sorts")
+		var cfg, _ = rtl.NewSettingsFromFile(lookerIniPath, nil)
+		var sdk = v4.NewLookerSDK(rtl.NewAuthSession(cfg))
 		var request v4.RequestAllUsers
 		formattedInput := fmt.Sprintf(`{"Fields": "%s", "Page": %d, "PerPage": %d, "Limit": %d, "Offset": %d, "Sorts": "%s"}`, fields, page, per_page, limit, offset, sorts)
 		json.NewDecoder(strings.NewReader(formattedInput)).Decode(&request)
@@ -5414,6 +5474,8 @@ var createUserCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		body, _ := cmd.Flags().GetString("body")
 		fields, _ := cmd.Flags().GetString("fields")
+		var cfg, _ = rtl.NewSettingsFromFile(lookerIniPath, nil)
+		var sdk = v4.NewLookerSDK(rtl.NewAuthSession(cfg))
 		var request v4.WriteUser
 		json.NewDecoder(strings.NewReader(body)).Decode(&request)
 		response, _ := sdk.CreateUser(request, fields, nil)
@@ -5489,6 +5551,8 @@ The user name and avatar url, but no sensitive information.
 	Run: func(cmd *cobra.Command, args []string) {
 		user_id, _ := cmd.Flags().GetInt64("user_id")
 		fields, _ := cmd.Flags().GetString("fields")
+		var cfg, _ = rtl.NewSettingsFromFile(lookerIniPath, nil)
+		var sdk = v4.NewLookerSDK(rtl.NewAuthSession(cfg))
 		response, _ := sdk.User(user_id, fields, nil)
 		jsonResponse, _ := json.MarshalIndent(response, "", "  ")
 		fmt.Println(string(jsonResponse))
@@ -5504,6 +5568,8 @@ var updateUserCmd = &cobra.Command{
 		user_id, _ := cmd.Flags().GetInt64("user_id")
 		body, _ := cmd.Flags().GetString("body")
 		fields, _ := cmd.Flags().GetString("fields")
+		var cfg, _ = rtl.NewSettingsFromFile(lookerIniPath, nil)
+		var sdk = v4.NewLookerSDK(rtl.NewAuthSession(cfg))
 		var request v4.WriteUser
 		json.NewDecoder(strings.NewReader(body)).Decode(&request)
 		response, _ := sdk.UpdateUser(user_id, request, fields, nil)
@@ -5521,6 +5587,8 @@ var deleteUserCmd = &cobra.Command{
 `,
 	Run: func(cmd *cobra.Command, args []string) {
 		user_id, _ := cmd.Flags().GetInt64("user_id")
+		var cfg, _ = rtl.NewSettingsFromFile(lookerIniPath, nil)
+		var sdk = v4.NewLookerSDK(rtl.NewAuthSession(cfg))
 		response, _ := sdk.DeleteUser(user_id, nil)
 		jsonResponse, _ := json.MarshalIndent(response, "", "  ")
 		fmt.Println(string(jsonResponse))
@@ -6106,6 +6174,7 @@ later and use update_session(workspace_id: "dev") to select the dev workspace fo
 }
 
 func init() {
+	rootCmd.AddCommand(lookerInitCmd)
 	AlertCmd.AddCommand(searchAlertsCmd)
 	searchAlertsCmd.Flags().Int64("limit", 0, "(Optional) Number of results to return (used with `offset`).")
 	searchAlertsCmd.Flags().Int64("offset", 0, "(Optional) Number of results to skip before returning any (used with `limit`).")
