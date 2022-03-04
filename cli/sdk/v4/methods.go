@@ -36,7 +36,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var lookerIniPath = "../../../looker.ini"
+var lookerIniPath = "./looker.ini"
 var cfg, _ = rtl.NewSettingsFromFile(lookerIniPath, nil)
 var sdk = v4.NewLookerSDK(rtl.NewAuthSession(cfg))
 
