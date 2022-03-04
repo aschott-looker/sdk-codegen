@@ -464,7 +464,13 @@ export class CliGen extends CodeGen {
       })
       .join('')
 
-    return [``, `func init() {`, `${addCommandsCode}}`, ``].join('\n')
+    return [
+      ``,
+      `func init() {`,
+      `  rootCmd.AddCommand(lookerInitCmd)`,
+      `${addCommandsCode}}`,
+      ``,
+    ].join('\n')
   }
 
   declareCobraFlag(subCommand: SubCommand, flag: Flag) {
